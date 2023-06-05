@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap");
+
+:root {
+  /* 品牌色 */
+  --brand-color: #ff6600;
+
+  --Primary: #0062ff;
+  --Secondary: #6c757d;
+  --Success: #3dd598;
+  --Warning: #ffc542;
+  --Error: #fc5a5a;
+
+  /* 輔助色 */
+  --orange: #ff974a;
+  --sky-blue: #50b5ff;
+  --lime-green: #82c43c;
+  --purple: #a461d8;
+  --pink: #ff9ad5;
+
+  /* 灰階色*/
+  --gray-900: #171725;
+  --gray-800: #44444f;
+  --gray-700: #696974;
+  --gray-600: #92929d;
+  --gray-500: #b5b5be;
+  --gray-400: #d5d5dc;
+  --gray-300: #e2e2ea;
+  --gray-200: #f1f1f5;
+  --gray-100: #fafafb;
+  --white: #ffffff;
+
+  /* 內文字體大小定義 */
+  --font-size-small: 12px;
+  --font-size-medium: 14px;
+  --font-size-large: 16px;
+
+  --main-font-family: "Noto Sans TC", "Montserrat", sans-serif;
+}
+
+body {
+  background-color: var(--white);
+  color: var(--gray-900);
+  font-family: var(--main-font-family);
+  font-size: var(--font-size-large);
+}
+
+h1.Bold {
+  font-size: 68px;
+  font-weight: 700;
+}
+h2.Bold {
+  font-size: 42px;
+  font-weight: 700;
+}
+h3.Bold {
+  font-size: 28px;
+  font-weight: 700;
+}
+h4.Bold {
+  font-size: 24px;
+  font-weight: 700;
+}
+h5.Bold {
+  font-size: 18px;
+  font-weight: 700;
+}
