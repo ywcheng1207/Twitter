@@ -2,7 +2,7 @@ import styles from './DefaultInputItem.module.scss'
 import clsx from 'clsx'
 
 const DefaultInputItem = ({ label, value, placeholder, type, onChange }) => {
-  const isError = false
+  const isError = true
   return (
     <>
       <div className={`${styles.defaultInputContainer} ${clsx({ [styles.error]: isError })}`} >
@@ -21,7 +21,7 @@ const DefaultInputItem = ({ label, value, placeholder, type, onChange }) => {
           <div className={styles.errorState}>
             帳號不存在
             </div>
-          <div className={styles.lengthRule}>{value.length}/50</div>
+          <div className={styles.lengthRule}>{value.length}/10</div>
         </div>
         }
 

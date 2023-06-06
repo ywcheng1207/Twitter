@@ -4,7 +4,7 @@
     margin-top: 2px;
     padding-left: 16px;
     font-size: 14px;
-    color: #696974;
+    color: var(--gray-700);
     height: 22px;
   }
   background-color: #f5f8fa;
@@ -18,11 +18,11 @@
   }
   .defaultInput:focus {
     outline: none;
-    border-color: #50b5ff;
+    border-color: var(--sky-blue);
   }
   &:hover {
     .defaultInput {
-      border-color: #50b5ff;
+      border-color: var(--sky-blue);
     }
   }
 }
@@ -32,7 +32,7 @@
   font-size: 12px;
   display: flex;
   width: 100%;
-  background-color: white;
+  background-color: var(--white);
   .errorState {
     width: 50%;
     color: red;

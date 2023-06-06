@@ -14,10 +14,10 @@
     align-items: center;
     cursor: pointer;
     &:hover {
-      border-bottom: 2px solid #ff6600;
+      border-bottom: 2px solid var(--brand-color);
     }
   }
   .active {
-    border-bottom: 2px solid #ff6600;
+    border-bottom: 2px solid var(--brand-color);
   }
 }
