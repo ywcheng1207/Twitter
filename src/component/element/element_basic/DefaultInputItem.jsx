@@ -3,9 +3,10 @@ import clsx from 'clsx'
 
 const DefaultInputItem = ({ label, value, placeholder, type, onChange }) => {
   const isError = true
+  const { defaultInputContainer, error, lengthRule, tooMuchWord } = styles
   return (
     <>
-      <div className={`${styles.defaultInputContainer} ${clsx({ [styles.error]: isError })}`} >
+      <div className={clsx(defaultInputContainer, { [error]: isError })} >
         <p className={styles.defaultInputLabel}>{label}</p>
         <input
           className={`${styles.defaultInput} `}
@@ -18,11 +19,15 @@ const DefaultInputItem = ({ label, value, placeholder, type, onChange }) => {
         />
         {value.length !== 0 &&
           <div className={styles.inputNotice}>
-          <div className={styles.errorState}>
-            帳號不存在
+            { isError &&
+              <div className={styles.errorMessage}>
+                查無此帳號
+              </div>
+            }
+            <div className={clsx(lengthRule, { [tooMuchWord]: [value.length] > 10 })}>
+              {value.length}/10
             </div>
-          <div className={styles.lengthRule}>{value.length}/10</div>
-        </div>
+          </div>
         }
 
       </div>

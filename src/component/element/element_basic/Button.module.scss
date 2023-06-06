@@ -1,4 +1,12 @@
-.Button4 {
+.full {
+  background-color: var(--brand-color);
+  width: 100%;
+  height: 100%;
+  border: none;
+  color: var(--white);
+}
+
+.hole {
   background-color: var(--white);
   width: 100%;
   height: 100%;
