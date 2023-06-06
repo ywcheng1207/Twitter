@@ -7,25 +7,25 @@ const Button = ({ value, type }) => {
   if (type === 'fullPill') {
     return (
         <button className={`${full} rounded-pill`}>
-            {value}
+            <p>{value}</p>
         </button>
     )
   } else if (type === 'holePill') {
     return (
         <button className={`${hole} rounded-pill`} >
-            {value}
+            <p>{value}</p>
         </button>
     )
   } else if (type === 'fullSquare') {
     return (
         <button className={full} >
-            {value}
+            <p>{value}</p>
         </button>
     )
   } else {
     return (
-        <button className={hole} >
-            {value}
+        <button className={hole}>
+            <p>{value}</p>
         </button>
     )
   }

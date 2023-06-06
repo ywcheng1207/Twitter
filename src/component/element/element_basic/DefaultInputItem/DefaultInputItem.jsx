@@ -2,7 +2,7 @@ import styles from './DefaultInputItem.module.scss'
 import clsx from 'clsx'
 
 const DefaultInputItem = ({ label, value, placeholder, type, onChange }) => {
-  const isError = true
+  const isError = false
   const { defaultInputContainer, error, lengthRule, tooMuchWord } = styles
   return (
     <>
