@@ -1,11 +1,12 @@
 import './reset.css'
 import './App.css'
-import LoginPage from 'pages/LoginPage'
+// import LoginPage from 'pages/LoginPage'
+import Test from 'component/Test'
 
 function App () {
   return (
     <div className="App">
-     <LoginPage/>
+     <Test/>
     </div>
   )
 }
