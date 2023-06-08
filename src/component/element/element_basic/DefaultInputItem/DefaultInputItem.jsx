@@ -1,12 +1,14 @@
 import styles from './DefaultInputItem.module.scss'
 import clsx from 'clsx'
+import { useRef } from 'react'
 
 const DefaultInputItem = ({ label, value, placeholder, type, onChange, wordLimit }) => {
-  const isError = false
-  const { defaultInputContainer, error, lengthRule, tooMuchWord } = styles
+  const length = useRef(0)
+
+  const { defaultInputContainer, error, inputNotice, errorMessage, lengthRule } = styles
   return (
     <>
-      <div className={clsx(defaultInputContainer, { [error]: isError })} >
+      <div className={clsx(defaultInputContainer, { [error]: [length.current] > wordLimit })} >
         <p className={styles.defaultInputLabel}>{label}</p>
         <input
           className={`${styles.defaultInput} `}
@@ -14,22 +16,20 @@ const DefaultInputItem = ({ label, value, placeholder, type, onChange, wordLimit
           placeholder={placeholder}
           value={value}
           onChange={e => {
+            length.current = e.target.value.length
             onChange?.(e.target.value)
           }}
         />
         {value.length !== 0 &&
-          <div className={styles.inputNotice}>
-            { value.length > wordLimit &&
-              <div className={styles.errorMessage}>
-                字數超出上限！
-              </div>
-            }
-            <div className={clsx(lengthRule, { [tooMuchWord]: [value.length] > 10 })}>
-              {value.length}/{wordLimit || 10}
+          <div className={clsx(inputNotice, { [error]: [length.current] > wordLimit })} >
+            <div className={errorMessage}>
+              字數超過上限!
+            </div>
+            <div className={lengthRule}>
+              {value.length}/{wordLimit}
             </div>
           </div>
         }
-
       </div>
 
     </>
