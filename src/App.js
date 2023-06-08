@@ -1,10 +1,11 @@
 import './reset.css'
 import './App.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import LoginPage from 'pages/LoginPage'
+
 function App () {
   return (
     <div className="App">
-      <h3 className='Bold'>Twitter</h3>
+     <LoginPage/>
     </div>
   )
 }
