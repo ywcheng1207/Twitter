@@ -7,6 +7,7 @@ import AdminLoginPage from 'pages/AdminLoginPage/AdminLoginPage'
 import LoginPage from 'pages/LoginPage/LoginPage'
 import SignUpPage from 'pages/SignUpPage/SignUpPage'
 
+import 'bootstrap/dist/css/bootstrap.min.css'
 function App () {
   return (
     <div className="App">
