@@ -3,7 +3,7 @@ import Button from 'component/element/element_basic/Button/Button'
 import styles from './LoginPage.module.scss'
 import { ReactComponent as Logo } from 'assets/icons/logo.svg'
 import { useState } from 'react'
-import { login } from '../api/auth'
+import { login } from '../../api/auth'
 
 const LoginPage = () => {
   const [account, setAccount] = useState('')
@@ -47,7 +47,7 @@ const LoginPage = () => {
               label={'密碼'}
               placeholder={'請輸入密碼'}
               value={password}
-              type={password}
+              type={'password'}
               onChange={(value) => {
                 setPassword(value)
               }}

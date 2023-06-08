@@ -13,11 +13,16 @@
       }
     }
     .cardContainer {
+      width: 1000px;
       display: flex;
       flex-wrap: wrap;
       margin-right: 163px;
       padding: 16px;
       gap: 16px;
+      overflow-y: scroll;
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
   }
 }

@@ -1,6 +1,8 @@
 import styles from './AdminUserPage.module.scss'
 import AdminNav from 'component/element/element_basic/AdminNav/AdminNav'
-import UserListItem from 'component/element/element_mid/UserListItem'
+import UserListItem from 'component/admin/UserListItem/UserListItem'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const dummyData = [
   {
@@ -72,17 +74,37 @@ const dummyData = [
 ]
 
 const AdminUsersPage = () => {
+  const [status, setStatus] = useState('userList')
+
+  const navigate = useNavigate()
+
+  const handleTweetListClick = () => {
+    setStatus('tweetList')
+    navigate('/admin_main')
+  }
+  const handleUserListClick = () => {
+    setStatus('userList')
+  }
+  const handleLogoutClick = () => {
+    navigate('/admin')
+  }
+
   const { container, mainContainer, cardContainer } = styles
   return (
         <div className={container}>
-            <AdminNav />
+            <AdminNav
+                status={status}
+                tweetListClick={handleTweetListClick}
+                userListClick={handleUserListClick}
+                logoutClick={handleLogoutClick}
+            />
 
             <div className={mainContainer}>
                 <header>
                     <h4 className='Bold'>使用者列表</h4>
                 </header>
                 <main className={cardContainer}>
-            <UserListItem data={dummyData} />
+                  <UserListItem data={dummyData} />
                 </main>
             </div>
         </div>
