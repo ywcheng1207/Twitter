@@ -5,32 +5,28 @@ import { ReactComponent as AdminHomeActive } from 'assets/icons/adminHomeActive.
 import { ReactComponent as AdminUserList } from 'assets/icons/adminUserList.svg'
 import { ReactComponent as AdminUserListActive } from 'assets/icons/adminUserListActive.svg'
 import { ReactComponent as Logout } from 'assets/icons/logout.svg'
-import { useState } from 'react'
 
-const AdminNav = () => {
-  const [status, setStatus] = useState('tweetList')
-  const { navContainer, icon, logo, logout } = styles
-
-  const handleTweetListClick = () => {
-    setStatus('tweetList')
-  }
-  const handleUserListClick = () => {
-    setStatus('userList')
-  }
-
+const AdminNav = ({ tweetListClick, userListClick, status, logoutClick }) => {
+  const { navContainer, icon, logo, logout, iconUserlist } = styles
   return (
         <div className={navContainer}>
             <div>
                 <Logo className={logo}/>
             </div>
-            <div onClick={handleTweetListClick}>
+            <div onClick={() => {
+              tweetListClick()
+            }}>
                 {status === 'tweetList' ? <AdminHomeActive className={icon}/> : <AdminHome className={icon} />}
             </div>
-            <div onClick={handleUserListClick}>
-                {status === 'userList' ? <AdminUserListActive className={icon}/> : <AdminUserList className={icon}/>}
+            <div onClick={() => {
+              userListClick()
+            }}>
+                {status === 'userList' ? <AdminUserListActive className={iconUserlist}/> : <AdminUserList className={iconUserlist}/>}
             </div>
             <div>
-                <Logout className={logout}/>
+                <Logout className={`${logout} ${icon}`} onClick={() => {
+                  logoutClick()
+                }}/>
             </div>
         </div>
   )

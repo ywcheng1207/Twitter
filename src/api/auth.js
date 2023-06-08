@@ -8,6 +8,9 @@ export const register = async ({ account, name, email, password, checkPassword }
     const { status } = data
     if (status === 'success') {
       return { success: true, ...data }
+    } else if (status === 'error') {
+      const { message } = data
+      return { success: false, message, ...data }
     }
     return data
   } catch (error) {
@@ -26,5 +29,19 @@ export const login = async ({ account, password }) => {
     return data
   } catch (error) {
     console.error('[login failed]', error)
+  }
+}
+
+export const adminLogin = async ({ account, password }) => {
+  try {
+    const { data } = await axios.post(`${baseURL}/admin/login`, { account, password })
+    const { status } = data
+    const token = data.data.token
+    if (status === 'success') {
+      return { success: true, token, ...data }
+    }
+    return data
+  } catch (error) {
+    console.error('[adminLogin failed]', error)
   }
 }
