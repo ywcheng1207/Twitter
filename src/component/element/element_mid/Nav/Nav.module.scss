@@ -1,0 +1,45 @@
+.NavContainer {
+  width: 178px;
+  height: 100%;
+  // outline: 1px solid blue;
+  position: relative;
+  .logoContainer {
+    padding: 13px 125px 0px 13px;
+  }
+  .homeActiveContainer {
+    padding: 44.88px 86px 20px 16.9px;
+    cursor: pointer;
+  }
+  .personInfoContainer {
+    padding: 20px 50px 20px 19.65px;
+    cursor: pointer;
+  }
+  .settingContainer {
+    padding: 20px 86px 32px 17.62px;
+    cursor: pointer;
+  }
+  .postBtn {
+    background-color: var(--brand-color);
+    width: 178px;
+    height: 46px;
+    padding: 8px 16px;
+    border: 0;
+    border-radius: 50px;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: center;
+    color: var(--white);
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+  .logoutContainer {
+    margin-left: 19px;
+    margin-bottom: 16px;
+    position: absolute;
+    bottom: 0;
+    cursor: pointer;
+  }
+}
