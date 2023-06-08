@@ -1,0 +1,29 @@
+.registerContainer {
+  width: 356px;
+  height: 100%;
+  margin: 0 auto;
+  margin-top: 69px;
+  .logoContainer {
+    display: flex;
+    justify-content: center;
+  }
+  .title {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .inputContainer {
+    margin-top: 32px;
+  }
+  .buttonContainer {
+    margin-top: 32px;
+    height: 46px;
+    font-size: 20px;
+  }
+  .notice {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 22px;
+    font-size: var(--font-size-large);
+  }
+}

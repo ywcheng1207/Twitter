@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  margin-left: 130px;
+  .mainContainer {
+    width: 100%;
+    header {
+      height: 74px;
+      border-bottom: 1px solid #e6ecf0;
+      display: flex;
+      align-items: center;
+      h4 {
+        margin-left: 24px;
+      }
+    }
+    .cardContainer {
+      width: 1000px;
+      display: flex;
+      flex-wrap: wrap;
+      margin-right: 163px;
+      padding: 16px;
+      gap: 16px;
+      overflow-y: scroll;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+}

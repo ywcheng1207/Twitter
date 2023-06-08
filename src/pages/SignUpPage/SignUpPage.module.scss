@@ -26,3 +26,9 @@
     margin-top: 22px;
   }
 }
+
+.errorMessage {
+  margin-top: 4px;
+  font-size: var(--font-size-small);
+  color: var(--Error);
+}

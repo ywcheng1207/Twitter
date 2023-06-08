@@ -1,7 +1,7 @@
 import styles from './DefaultInputItem.module.scss'
 import clsx from 'clsx'
 
-const DefaultInputItem = ({ label, value, placeholder, type, onChange }) => {
+const DefaultInputItem = ({ label, value, placeholder, type, onChange, wordLimit }) => {
   const isError = false
   const { defaultInputContainer, error, lengthRule, tooMuchWord } = styles
   return (
@@ -19,13 +19,13 @@ const DefaultInputItem = ({ label, value, placeholder, type, onChange }) => {
         />
         {value.length !== 0 &&
           <div className={styles.inputNotice}>
-            { isError &&
+            { value.length > wordLimit &&
               <div className={styles.errorMessage}>
-                查無此帳號
+                字數超出上限！
               </div>
             }
             <div className={clsx(lengthRule, { [tooMuchWord]: [value.length] > 10 })}>
-              {value.length}/10
+              {value.length}/{wordLimit || 10}
             </div>
           </div>
         }

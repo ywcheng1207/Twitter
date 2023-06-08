@@ -1,0 +1,30 @@
+.navContainer {
+  width: 178px;
+  height: 1200px;
+  position: relative;
+  border-right: 1px solid #e6ecf0;
+  .logo {
+    margin-top: 13px;
+    margin-left: 13px;
+    margin-bottom: 29px;
+    width: 40px;
+    height: 40px;
+  }
+  .icon {
+    width: 112px;
+    height: 26px;
+    margin-bottom: 40px;
+    cursor: pointer;
+  }
+  .iconUserlist {
+    width: 130px;
+    height: 26px;
+    margin-bottom: 40px;
+    cursor: pointer;
+  }
+
+  .logout {
+    position: absolute;
+    bottom: 16px;
+  }
+}
