@@ -1,22 +1,26 @@
 {
   "files": {
-    "main.css": "/Twitter/static/css/main.99e4bb90.css",
-    "main.js": "/Twitter/static/js/main.7f6ea092.js",
+    "main.css": "/Twitter/static/css/main.d5cc3ecc.css",
+    "main.js": "/Twitter/static/js/main.6381123c.js",
+    "static/media/setting.svg": "/Twitter/static/media/setting.0d8eab4e5f25f8cbcbf9cf0976a1de00.svg",
     "static/media/adminUserList.svg": "/Twitter/static/media/adminUserList.bd5a7f30d33e607022adf5a7fe330af8.svg",
+    "static/media/personInfo.svg": "/Twitter/static/media/personInfo.d9d11a2aeb0cba2bcbc2291d6bab0437.svg",
     "static/media/adminUserListActive.svg": "/Twitter/static/media/adminUserListActive.ff927ca8041298c343a6728cabd33bd4.svg",
     "static/media/adminHome.svg": "/Twitter/static/media/adminHome.9e2d8473933f1bb74b9505d9a0c6161f.svg",
     "static/media/adminHomeActive.svg": "/Twitter/static/media/adminHomeActive.676e2a3ae978cb8d89134055244ecce2.svg",
     "static/media/logout.svg": "/Twitter/static/media/logout.92b925e9a68314b6dd5b1dcd8b1fb7c3.svg",
+    "static/media/homeActive.svg": "/Twitter/static/media/homeActive.391c4b56dc2d239ec2e8a5691d5946db.svg",
     "static/media/logo.svg": "/Twitter/static/media/logo.42fee296cc77726a67e1ceb4864261c0.svg",
+    "static/media/reply.svg": "/Twitter/static/media/reply.d4828a6b96872ac17b0c975c182e1c26.svg",
     "static/media/tweet.svg": "/Twitter/static/media/tweet.7426f6618d619d3dedd9d685897fa740.svg",
     "static/media/like.svg": "/Twitter/static/media/like.9a3a0c8638abe3bfe9dc1977d2f38272.svg",
     "static/media/iconX.svg": "/Twitter/static/media/iconX.c2283cfb082ce00efe5a08a17c9825e6.svg",
     "index.html": "/Twitter/index.html",
-    "main.99e4bb90.css.map": "/Twitter/static/css/main.99e4bb90.css.map",
-    "main.7f6ea092.js.map": "/Twitter/static/js/main.7f6ea092.js.map"
+    "main.d5cc3ecc.css.map": "/Twitter/static/css/main.d5cc3ecc.css.map",
+    "main.6381123c.js.map": "/Twitter/static/js/main.6381123c.js.map"
   },
   "entrypoints": [
-    "static/css/main.99e4bb90.css",
-    "static/js/main.7f6ea092.js"
+    "static/css/main.d5cc3ecc.css",
+    "static/js/main.6381123c.js"
   ]
 }
