@@ -3,7 +3,7 @@ import Button from 'component/element/element_basic/Button/Button'
 import styles from './SignUpPage.module.scss'
 import { ReactComponent as Logo } from 'assets/icons/logo.svg'
 import { useState } from 'react'
-import { register } from '../api/auth'
+import { register } from 'api/auth'
 
 const SignUpPage = () => {
   const [account, setAccount] = useState('')
@@ -43,16 +43,27 @@ const SignUpPage = () => {
                 setAccount(value)
               }}
             />
+            {account.length > 10 &&
+              <div className={styles.errorMessage}>
+                    字數超出上限！
+              </div>
+            }
           </div>
           <div className={styles.inputContainer}>
             <DefaultInputItem
               label={'名稱'}
               placeholder={'請輸入使用者名稱'}
               value={name}
+              wordLimit={50}
               onChange={(value) => {
                 setName(value)
               }}
             />
+            {name.length > 50 &&
+              <div className={styles.errorMessage}>
+                    字數超出上限！
+              </div>
+            }
           </div>
           <div className={styles.inputContainer}>
             <DefaultInputItem
@@ -63,6 +74,11 @@ const SignUpPage = () => {
                 setEmail(value)
               }}
             />
+            {email.length > 10 &&
+              <div className={styles.errorMessage}>
+                    字數超出上限！
+              </div>
+            }
           </div>
           <div className={styles.inputContainer}>
             <DefaultInputItem
@@ -74,6 +90,11 @@ const SignUpPage = () => {
                 setPassword(value)
               }}
             />
+            {password.length > 10 &&
+              <div className={styles.errorMessage}>
+                    字數超出上限！
+              </div>
+            }
           </div>
           <div className={styles.inputContainer}>
             <DefaultInputItem
@@ -85,6 +106,11 @@ const SignUpPage = () => {
                 setCheckPassword(value)
               }}
             />
+            {checkPassword.length > 10 &&
+              <div className={styles.errorMessage}>
+                    字數超出上限！
+              </div>
+            }
           </div>
           <div className={styles.buttonContainer} onClick={handleClick}>
             <Button type={'fullPill'} value={'註冊'} />
