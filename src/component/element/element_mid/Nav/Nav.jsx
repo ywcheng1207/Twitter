@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styles from './Nav.module.scss'
 // import Button from 'component/element/element_basic/Button/Button'
-
+import { Link } from 'react-router-dom'
 import { ReactComponent as Logo } from 'assets/icons/logo.svg'
 import { ReactComponent as HomeActive } from 'assets/icons/homeActive.svg'
 import { ReactComponent as PersonInfo } from 'assets/icons/personInfo.svg'
@@ -35,15 +35,24 @@ const Nav = () => {
       <div className={logoContainer}>
         <Logo />
       </div>
-      <div className={homeActiveContainer}>
-        <HomeActive />
-      </div>
-      <div className={personInfoContainer}>
-        <PersonInfo />
-      </div>
-      <div className={settingContainer}>
-        <Setting />
-      </div>
+
+      <Link to='/user/home/main'>
+        <div className={homeActiveContainer}>
+          <HomeActive />
+        </div>
+      </Link>
+
+      <Link to='/user/personalinfo/main'>
+        <div className={personInfoContainer}>
+          <PersonInfo />
+        </div>
+      </Link>
+
+      <Link to='/user/infosetting/main'>
+        <div className={settingContainer}>
+          <Setting />
+        </div>
+      </Link>
 
       <UserPostModal
         show={show}
@@ -56,10 +65,12 @@ const Nav = () => {
           推文
         </button>
       </UserPostModal>
+      <Link to='/login'>
+        <div className={logoutContainer}>
+          <Logout />
+        </div>
+      </Link>
 
-      <div className={logoutContainer}>
-        <Logout />
-      </div>
     </div>
   )
 }
