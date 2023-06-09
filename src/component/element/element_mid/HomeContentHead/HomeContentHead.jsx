@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import styles from './HomeContentHead.module.scss'
 import HeaderHome from 'component/element/element_basic/HeaderHome/HeaderHome'
-import homepageDummy from 'dummyData/homepageDummy'
 import UserPostModal from 'component/element/element_mid/UserPostModal/UserPostModal'
+const avatarUrl = 'https://loremflickr.com/320/240/people/?random=7.976051090916994&lock=999'
 
 const HomeContentHead = () => {
   const {
@@ -37,7 +37,7 @@ const HomeContentHead = () => {
         <div className={postInputContainer} onClick={handleShow}>
           <div className={postInputContent}>
             <div className={postInputHead}>
-              <img src={homepageDummy[0].userId.avatar} alt="Image"></img>
+              <img src={avatarUrl} alt="Image"></img>
             </div>
             <h4>有什麼新鮮事？</h4>
           </div>

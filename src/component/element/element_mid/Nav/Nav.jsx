@@ -29,6 +29,9 @@ const Nav = () => {
       setText(inputText)
     }
   }
+  const handleLogout = () => {
+    localStorage.removeItem('authToken')
+  }
 
   return (
     <div className={NavContainer}>
@@ -66,7 +69,7 @@ const Nav = () => {
         </button>
       </UserPostModal>
       <Link to='/login'>
-        <div className={logoutContainer}>
+        <div className={logoutContainer} onClick={handleLogout}>
           <Logout />
         </div>
       </Link>

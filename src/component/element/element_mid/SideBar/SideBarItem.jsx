@@ -1,6 +1,6 @@
 import styles from './SideBarItem.module.scss'
 import Button from 'component/element/element_basic/Button/Button'
-import homepageDummy from 'dummyData/homepageDummy'
+const avatarUrl = 'https://loremflickr.com/320/240/people/?random=7.976051090916994&lock=987'
 
 const SideBarItem = () => {
   const {
@@ -11,7 +11,7 @@ const SideBarItem = () => {
   return (
     <div className={ SideBarItem }>
       <div className={ SideBarItemHead }>
-         <img src={homepageDummy[0].userId.avatar} alt="Image"></img>
+         <img src={avatarUrl} alt="Image"></img>
       </div>
       <div className={ SideBarItemDescription }>
         <div className={ SideBarItemDescriptionName }>Pizza Hut</div>

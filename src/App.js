@@ -15,6 +15,7 @@ import InfoSetting from 'component/user/InfoSetting/InfoSetting'
 import Home from 'component/user/Home/Home'
 import PersonalInfo from 'component/user/PersonalInfo/PersonalInfo'
 import Other from 'component/user/Other/Other'
+import ReplyList from 'component/user/ReplyList/ReplyList'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 function Content () {
@@ -23,7 +24,7 @@ function Content () {
 
   useEffect(() => {
     if (page !== 'home' && page !== 'personalinfo' &&
-     page !== 'infosetting' && page !== 'other') {
+     page !== 'infosetting' && page !== 'replylist' && page !== 'other') {
       navigate('/user/home/main')
     }
   }, [page, navigate])
@@ -35,6 +36,8 @@ function Content () {
     content = <InfoSetting />
   } else if (page === 'personalinfo') {
     content = <PersonalInfo />
+  } else if (page === 'replylist') {
+    content = <ReplyList />
   } else if (page === 'other') {
     content = <Other />
   }

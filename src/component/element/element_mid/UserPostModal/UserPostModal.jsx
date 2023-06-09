@@ -1,6 +1,6 @@
 import Modal from 'react-bootstrap/Modal'
 import styles from './UserPostModal.module.scss'
-import homepageDummy from 'dummyData/homepageDummy'
+const avatarUrl = 'https://loremflickr.com/320/240/people/?random=7.976051090916994&lock=999'
 
 const TextWarning = ({ text }) => {
   if (text.length >= 140) {
@@ -21,7 +21,7 @@ function UserPostModal ({ children, show, onClose, onShow, text, onChange }) {
         <Modal.Body >
           <div className={styles.bodyContainer}>
             <div className={styles.postHead}>
-              <img src={homepageDummy[0].userId.avatar} alt="Image"></img>
+              <img src={avatarUrl} alt="Image"></img>
             </div>
             <textarea
               className={styles.postTextarea}
