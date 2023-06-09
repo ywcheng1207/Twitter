@@ -80,7 +80,7 @@ const AdminUsersPage = () => {
 
   const handleTweetListClick = () => {
     setStatus('tweetList')
-    navigate('/admin_main')
+    navigate('/admin/main')
   }
   const handleUserListClick = () => {
     setStatus('userList')

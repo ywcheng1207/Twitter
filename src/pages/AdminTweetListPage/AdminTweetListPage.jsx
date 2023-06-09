@@ -220,11 +220,11 @@ const AdminTweetListPage = () => {
 
   const handleTweetListClick = () => {
     setStatus('tweetList')
-    navigate('/admin_main')
+    navigate('/admin/main')
   }
   const handleUserListClick = () => {
     setStatus('userList')
-    navigate('/admin_users')
+    navigate('/admin/users')
   }
   const handleLogoutClick = () => {
     navigate('/admin')
