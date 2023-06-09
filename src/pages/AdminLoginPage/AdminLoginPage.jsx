@@ -19,7 +19,7 @@ const AdminLoginPage = () => {
     if (success) {
       console.log('登入成功')
       console.log(token)
-      navigate('/admin_main')
+      navigate('/admin/main')
     } else {
       console.log('登入失敗')
     }
