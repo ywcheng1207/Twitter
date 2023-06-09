@@ -26,7 +26,7 @@ const DefaultInputItem = ({ label, value, placeholder, type, onChange, wordLimit
               字數超過上限!
             </div>
             <div className={lengthRule}>
-              {value.length}/{wordLimit}
+              {value.length}/{wordLimit || '10'}
             </div>
           </div>
         }

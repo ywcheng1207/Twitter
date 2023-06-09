@@ -11,7 +11,6 @@ const HomeContentItem = () => {
 
   return (
     <div className={HomeContentItemContainer}>
-
       <div className={HomeContentItemHead}>
         <img src={homepageDummy[0].userId.avatar} alt="Image"></img>
       </div>

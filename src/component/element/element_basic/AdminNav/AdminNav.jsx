@@ -24,7 +24,7 @@ const AdminNav = ({ tweetListClick, userListClick, status, logoutClick }) => {
                 {status === 'userList' ? <AdminUserListActive className={iconUserlist}/> : <AdminUserList className={iconUserlist}/>}
             </div>
             <div>
-                <Logout className={`${logout} ${icon}`} onClick={() => {
+                <Logout className={logout} onClick={() => {
                   logoutClick()
                 }}/>
             </div>

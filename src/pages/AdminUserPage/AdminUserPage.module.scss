@@ -1,8 +1,12 @@
 .container {
+  width: 1400px;
+  height: 1200px;
   display: flex;
-  margin-left: 130px;
+  margin: 0 auto;
   .mainContainer {
-    width: 100%;
+    width: 1076px;
+    height: 1200px;
+    border-left: 1px solid #e6ecf0;
     header {
       height: 74px;
       border-bottom: 1px solid #e6ecf0;
