@@ -7,9 +7,12 @@ import { ReactComponent as HomeActive } from 'assets/icons/homeActive.svg'
 import { ReactComponent as PersonInfo } from 'assets/icons/personInfo.svg'
 import { ReactComponent as Setting } from 'assets/icons/setting.svg'
 import { ReactComponent as Logout } from 'assets/icons/logout.svg'
+import { ReactComponent as Home } from 'assets/icons/home.svg'
+import { ReactComponent as PersonInfoActive } from 'assets/icons/personInfoActive.svg'
+import { ReactComponent as SettingActive } from 'assets/icons/settingActive.svg'
 import UserPostModal from 'component/element/element_mid/UserPostModal/UserPostModal'
 
-const Nav = () => {
+const Nav = ({ status, homeClick, personClick, settingClick }) => {
   const {
     NavContainer, logoContainer, homeActiveContainer,
     personInfoContainer, settingContainer, postBtn, logoutContainer
@@ -40,20 +43,20 @@ const Nav = () => {
       </div>
 
       <Link to='/user/home/main'>
-        <div className={homeActiveContainer}>
-          <HomeActive />
+        <div className={homeActiveContainer} onClick={() => homeClick()}>
+          {status === 'home' ? <HomeActive /> : <Home/>}
         </div>
       </Link>
 
       <Link to='/user/personalinfo/main'>
-        <div className={personInfoContainer}>
-          <PersonInfo />
+        <div className={personInfoContainer} onClick={() => personClick()}>
+          {status === 'person' ? <PersonInfoActive /> : <PersonInfo />}
         </div>
       </Link>
 
       <Link to='/user/infosetting/main'>
-        <div className={settingContainer}>
-          <Setting />
+        <div className={settingContainer} onClick={() => settingClick()}>
+          {status === 'setting' ? <SettingActive /> : <Setting />}
         </div>
       </Link>
 
