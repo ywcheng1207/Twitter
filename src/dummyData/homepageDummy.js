@@ -53,6 +53,39 @@ const homepageDummy = [
     tweetTime: '2023-06-06T18:02:16.000Z',
     replyCount: 3,
     likeCount: 0
+  },
+  {
+    tweetId: 56,
+    description: 'Minima reiciendis vel quo tempora sed architecto aut. Dolor quos consequuntur beatae quod blanditiis. Labore non repellendus officia. Et dol',
+    userId: 12,
+    name: 'user1',
+    avatar: 'https://loremflickr.com/320/240/people/?random=7.976051090916994&lock=777',
+    account: 'user1',
+    tweetTime: '2023-06-06T18:02:16.000Z',
+    replyCount: 3,
+    likeCount: 0
+  },
+  {
+    tweetId: 57,
+    description: 'Minima reiciendis vel quo tempora sed architecto aut. Dolor quos consequuntur beatae quod blanditiis. Labore non repellendus officia. Et dol',
+    userId: 12,
+    name: 'user1',
+    avatar: 'https://loremflickr.com/320/240/people/?random=7.976051090916994&lock=777',
+    account: 'user1',
+    tweetTime: '2023-06-06T18:02:16.000Z',
+    replyCount: 3,
+    likeCount: 0
+  },
+  {
+    tweetId: 58,
+    description: 'Minima reiciendis vel quo tempora sed architecto aut. Dolor quos consequuntur beatae quod blanditiis. Labore non repellendus officia. Et dol',
+    userId: 12,
+    name: 'user1',
+    avatar: 'https://loremflickr.com/320/240/people/?random=7.976051090916994&lock=777',
+    account: 'user1',
+    tweetTime: '2023-06-06T18:02:16.000Z',
+    replyCount: 3,
+    likeCount: 0
   }
 
 ]

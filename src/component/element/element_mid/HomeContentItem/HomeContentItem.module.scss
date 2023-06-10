@@ -1,5 +1,6 @@
 .HomeContentItemContainer {
   height: 168px;
+  width: 640px;
   display: flex;
   outline: 1px solid #e6ecf0;
   .HomeContentItemHead {
@@ -45,6 +46,7 @@
       height: 14px;
       width: 118.61px;
       display: flex;
+      cursor: pointer;
       .reply,
       .like {
         height: 100%;
@@ -58,7 +60,6 @@
         img {
           height: 100%;
           margin-right: 9.3px;
-          cursor: pointer;
         }
       }
     }

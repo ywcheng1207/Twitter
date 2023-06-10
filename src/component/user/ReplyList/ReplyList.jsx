@@ -4,14 +4,21 @@ import PostContentItem from 'component/element/element_mid/PostContentItem/PostC
 import styles from './ReplyList.module.scss'
 
 const ReplyList = () => {
-  const { HeaderTweetContainer } = styles
+  const { HeaderTweetContainer, PostContentList } = styles
   return (
     <div>
       <div className={HeaderTweetContainer}>
-          <HeaderTweet />
+        <HeaderTweet />
       </div>
       <PostContentHead />
-      <div>
+      <div className={PostContentList}>
+        <PostContentItem />
+        <PostContentItem />
+        <PostContentItem />
+        <PostContentItem />
+        <PostContentItem />
+        <PostContentItem />
+        <PostContentItem />
         <PostContentItem />
       </div>
     </div>

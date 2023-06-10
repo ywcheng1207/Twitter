@@ -1,20 +1,37 @@
 import styles from './HomeContentItem.module.scss'
 import replyIcon from 'assets/icons/reply.svg'
 import likeIcon from 'assets/icons/like.svg'
-// import homepageDummy from 'dummyData/homepageDummy'
+
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import UserReplyModal from 'component/element/element_mid/UserReplyModal/UserReplyModal'
 
 const HomeContentItem = ({ tweet }) => {
   const {
     HomeContentItemContainer, HomeContentItemHead, HomeContentItemDescreption,
     posterName, posterAccount, postDescription, postIcon, reply, like, likeCount
   } = styles
+  const [show, setShow] = useState(false)
+  const [text, setText] = useState('')
   const navigate = useNavigate()
 
   const handleReplyList = () => {
     navigate('/user/replylist/main')
     console.log(tweet)
   }
+  const handleClose = () => {
+    setShow(false)
+    setText('')
+  }
+  const handleShow = () => setShow(true)
+  const handleChange = value => {
+    const inputText = value
+    console.log(inputText.length)
+    if (inputText.length <= 1000) {
+      setText(inputText)
+    }
+  }
+
   return (
     <div className={HomeContentItemContainer}>
       <div className={HomeContentItemHead}>
@@ -30,12 +47,20 @@ const HomeContentItem = ({ tweet }) => {
         </p>
 
         <div className={postIcon}>
-          <div className={reply}>
-            <img src={replyIcon} alt="" />
-            <div>
-              {tweet.replyCount}
+          <UserReplyModal
+            show={show}
+            onClose={handleClose}
+            onShow={handleShow}
+            text={text}
+            onChange={handleChange}
+          >
+            <div className={reply} onClick={handleShow}>
+              <img src={replyIcon} alt="" />
+              <div>
+                {tweet.replyCount}
+              </div>
             </div>
-          </div>
+          </UserReplyModal>
           <div className={like}>
             <img src={likeIcon} alt="" />
             <div className={likeCount}>

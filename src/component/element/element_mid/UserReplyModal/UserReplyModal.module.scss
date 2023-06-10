@@ -1,0 +1,140 @@
+.replyModalHead {
+  max-width: 634px;
+  display: flex;
+  justify-content: flex-start;
+  color: var(--brand-color);
+  border-bottom: 1px solid #e6ecf0;
+}
+
+.closeBtn {
+  color: var(--brand-color);
+  cursor: pointer;
+  font-size: 30px;
+}
+
+.modalContainer {
+  width: 634px !important;
+  height: 500px !important;
+  border-radius: 14px !important;
+  background-color: var(--white) !important;
+  position: absolute !important;
+  top: 0% !important;
+  left: 28% !important;
+  transform: translate(-40%) !important;
+}
+
+.bodyContainer {
+  margin: 0;
+  .postHeadContainer {
+    height: 152px;
+    width: 100%;
+    display: flex;
+    .leftSide {
+      margin-right: 8px;
+      img {
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+      }
+      span {
+        display: block;
+        width: 2px;
+        height: 86px;
+        background: #b5b5be;
+        margin-left: 25px;
+        margin-top: 16px;
+      }
+    }
+    .rightSide {
+      width: 552px;
+      height: 100%;
+      .rightInfo {
+        span {
+          font-family: Noto Sans TC;
+          font-size: 16px;
+          font-weight: 700;
+          line-height: 26px;
+          letter-spacing: 0px;
+          text-align: left;
+          color: #171725;
+          margin-right: 8px;
+        }
+        a {
+          font-family: Noto Sans TC;
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 22px;
+          letter-spacing: 0px;
+          text-align: left;
+          color: #6c757d;
+        }
+      }
+      .rightDescription {
+        font-family: Noto Sans TC;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 26px;
+        letter-spacing: 0px;
+        text-align: left;
+        margin-top: 8px;
+      }
+      .rightPoster {
+        font-family: Noto Sans TC;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 22px;
+        letter-spacing: 0px;
+        text-align: left;
+        margin-top: 11px;
+        span {
+          color: #6c757d;
+          margin-right: 5px;
+        }
+        a {
+          color: #ff6600;
+        }
+      }
+    }
+  }
+  .postBodyContainer {
+    height: 185px;
+    margin-top: 16px;
+    display: flex;
+    img {
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+    .postTextarea {
+      resize: none;
+      border: 0;
+      margin-top: 12.5px;
+      &:focus,
+      &:active {
+        outline: none;
+      }
+    }
+  }
+}
+
+.postSubmitBtnContainer {
+  text-align: end;
+  margin-bottom: 16px;
+  button {
+    background-color: var(--brand-color);
+    width: 64px;
+    height: 40px;
+    border: 0;
+    border-radius: 50px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    color: var(--white);
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+}
