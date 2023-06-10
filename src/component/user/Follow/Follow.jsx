@@ -56,7 +56,7 @@ const dummyData = [
   }
 ]
 
-const Follower = () => {
+const Follow = () => {
   const { container, headerText, tweetsCount, headerName } = styles
   const [data, setData] = useState(dummyData)
   const [status, setStatus] = useState(0)
@@ -101,4 +101,4 @@ const Follower = () => {
   )
 }
 
-export default Follower
+export default Follow

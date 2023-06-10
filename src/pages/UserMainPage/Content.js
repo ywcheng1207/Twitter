@@ -5,7 +5,7 @@ import Home from 'component/user/Home/Home'
 import PersonalInfo from 'component/user/PersonalInfo/PersonalInfo'
 import Other from 'component/user/Other/Other'
 import ReplyList from 'component/user/ReplyList/ReplyList'
-import Follower from 'component/user/Follow/Follower'
+import Follow from 'component/user/Follow/Follow'
 
 export default function Content () {
   const { page } = useParams()
@@ -14,7 +14,7 @@ export default function Content () {
   useEffect(() => {
     if (page !== 'home' && page !== 'personalinfo' &&
      page !== 'infosetting' && page !== 'replylist' &&
-     page !== 'follower' && page !== 'other') {
+     page !== 'follow' && page !== 'other') {
       navigate('/user/home/main')
     }
   }, [page, navigate])
@@ -29,7 +29,7 @@ export default function Content () {
     return <ReplyList />
   } else if (page === 'other') {
     return <Other />
-  } else if (page === 'follower') {
-    return <Follower />
+  } else if (page === 'follow') {
+    return <Follow />
   }
 }

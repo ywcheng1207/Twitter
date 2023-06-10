@@ -1,6 +1,5 @@
 import styles from './PersonalInfoHead.module.scss'
 import Button from 'component/element/element_basic/Button/Button'
-// import { ReactComponent as LeftArrow } from 'assets/icons/leftArrow.svg'
 import arrow from 'assets/icons/leftArrow.svg'
 import { Link } from 'react-router-dom'
 import PersonInfoModal from '../PersonlInfoModal/PersonInfoModal'
@@ -57,10 +56,10 @@ const PersonalInfoHead = () => {
               <p className={description} >Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. </p>
               <div className={followContainer} >
                   <p className={following}>
-                    <Link to='/user/follower/main'>34個</Link> <span>追隨中</span>
+                    <Link to='/user/follow/main'>34個</Link> <span>追隨中</span>
                   </p>
                   <p className={follower}>
-                    <Link to='/user/follower/main' >59位</Link> <span>跟隨者</span>
+                    <Link to='/user/follow/main' >59位</Link> <span>跟隨者</span>
                   </p>
               </div>
             </div>

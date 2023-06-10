@@ -44,7 +44,7 @@ const PersonalInfo = () => {
   const { container, contentItemContainer, switchTab } = styles
   return (
     <div className={container}>
-      <PersonalInfoHead/>
+      <PersonalInfoHead />
       <TweetSwitchTab
         list={list}
         status={status}
