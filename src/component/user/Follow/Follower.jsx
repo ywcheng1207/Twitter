@@ -55,11 +55,32 @@ const dummyData = [
     isFollowed: false
   }
 ]
+const followingDummyData = [{
+  tweetId: 10,
+  name: 'ddd fie',
+  avatar: 'https://loremflickr.com/639/200/mountain/?random=61.42141615044277',
+  introduction: 'asdfasdfasdfasdfasdfasdf',
+  isFollowed: true
+},
+{
+  tweetId: 11,
+  name: 'ddd fie',
+  avatar: 'https://loremflickr.com/639/200/mountain/?random=61.42141615044277',
+  introduction: 'asdfasdfasdfasdfasdfasdf',
+  isFollowed: true
+},
+{
+  tweetId: 12,
+  name: 'ddd fie',
+  avatar: 'https://loremflickr.com/639/200/mountain/?random=61.42141615044277',
+  introduction: 'asdfasdfasdfasdfasdfasdf',
+  isFollowed: true
+}]
 
 const Follower = () => {
   const { container, headerText, tweetsCount, headerName } = styles
-  const [data, setData] = useState(dummyData)
   const [status, setStatus] = useState(0)
+  const [data, setData] = useState(dummyData)
 
   const handleClick = (id) => {
     setData(data.map(item => {
@@ -76,6 +97,11 @@ const Follower = () => {
 
   const handleSwitchClick = (index) => {
     setStatus(index)
+    if (index === 1) {
+      setData(followingDummyData)
+    } else if (index === 0) {
+      setData(dummyData)
+    }
   }
 
   return (
@@ -92,11 +118,13 @@ const Follower = () => {
         status = {status}
         onClick={handleSwitchClick}
       />
-      { data.map(item => {
+      {data.map(item => {
         return (
           <UserFollowItem key={item.tweetId} item={item} onClick={handleClick} />
         )
-      })}
+      })
+    }
+
     </div>
   )
 }

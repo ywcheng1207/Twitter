@@ -1,0 +1,15 @@
+main {
+  padding: 0 23px;
+  .inputContainer {
+    margin-bottom: 32px;
+  }
+  .btnContainer {
+    margin-top: 8px;
+    display: flex;
+    justify-content: flex-end;
+    .btn {
+      height: 46px;
+      width: 88px;
+    }
+  }
+}

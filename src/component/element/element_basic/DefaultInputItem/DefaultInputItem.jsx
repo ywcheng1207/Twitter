@@ -2,26 +2,27 @@ import styles from './DefaultInputItem.module.scss'
 import clsx from 'clsx'
 import { useRef } from 'react'
 
-const DefaultInputItem = ({ label, value, placeholder, type, onChange, wordLimit }) => {
-  const length = useRef(0)
+const DefaultInputItem = ({ label, value, placeholder, type, onChange, wordLimit, defaultValue, inputNotice, errorMessage, lengthRule }) => {
+  const targetLength = useRef(0)
 
-  const { defaultInputContainer, error, inputNotice, errorMessage, lengthRule } = styles
+  const { defaultInputContainer, error } = styles
   return (
     <>
-      <div className={clsx(defaultInputContainer, { [error]: [length.current] > wordLimit })} >
+      <div className={clsx(defaultInputContainer, { [error]: [targetLength.current] > wordLimit })} >
         <p className={styles.defaultInputLabel}>{label}</p>
         <input
           className={`${styles.defaultInput} `}
           type={type || 'text'}
           placeholder={placeholder}
           value={value}
+          defaultValue={defaultValue}
           onChange={e => {
-            length.current = e.target.value.length
+            targetLength.current = e.target.value.length
             onChange?.(e.target.value)
           }}
         />
-        {value.length !== 0 &&
-          <div className={clsx(inputNotice, { [error]: [length.current] > wordLimit })} >
+        {/* {targetLength !== 0 &&
+          <div className={clsx(inputNotice, { [error]: [targetLength.current] > wordLimit })} >
             <div className={errorMessage}>
               字數超過上限!
             </div>
@@ -29,7 +30,7 @@ const DefaultInputItem = ({ label, value, placeholder, type, onChange, wordLimit
               {value.length}/{wordLimit || '10'}
             </div>
           </div>
-        }
+        } */}
       </div>
 
     </>
