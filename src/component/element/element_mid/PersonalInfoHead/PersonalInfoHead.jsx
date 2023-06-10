@@ -6,7 +6,11 @@ import PersonInfoModal from '../PersonlInfoModal/PersonInfoModal'
 import { useState } from 'react'
 
 const PersonalInfoHead = () => {
-  const { container, headerText, selfInfoContainer, backgroundImg, btnContainer, selfInfo, avatar, name, account, description, followContainer, following, follower, tweetsCount, btnWidth } = styles
+  const {
+    container, headerText, selfInfoContainer, backgroundImg,
+    btnContainer, selfInfo, avatar, name, account, description,
+    followContainer, following, follower, tweetsCount, btnWidth
+  } = styles
 
   const [show, setShow] = useState(false)
   const [userName, setUserName] = useState('hoe dow')
@@ -26,7 +30,7 @@ const PersonalInfoHead = () => {
   }
 
   return (
-    <div calssName={container}>
+    <div className={container}>
         <header>
             <LeftArrow />
             <div className={headerText}>
@@ -51,7 +55,7 @@ const PersonalInfoHead = () => {
             <p className={description} >Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. </p>
             <div className={followContainer} >
                 <p className={following}>
-                    <Link to='/user/following/main'>34個</Link> <span>追隨中</span>
+                    <Link to='/user/follower/main'>34個</Link> <span>追隨中</span>
                 </p>
                 <p className={follower}>
                 <Link to='/user/follower/main' >59位</Link> <span>跟隨者</span>
