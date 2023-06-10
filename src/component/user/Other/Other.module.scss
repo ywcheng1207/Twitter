@@ -1,0 +1,12 @@
+.container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.contentItemContainer {
+  height: 675px;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

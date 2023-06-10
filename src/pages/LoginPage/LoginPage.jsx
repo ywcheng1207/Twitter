@@ -20,6 +20,7 @@ const LoginPage = () => {
       localStorage.setItem('authToken', token)
       console.log('登入成功')
       navigate('/user/home/main')
+      console.log(token)
     } else {
       console.log('登入失敗')
     }
