@@ -8,7 +8,6 @@ const TweetSwitchTab = ({ list, status, onClick }) => {
         <div className={styles.TweetSwitchTabContainer}>
             {list.map((item, index) => {
               return (
-                <>
                     <div
                       key={index}
                       className={clsx(switchBox, { [active]: status === index })}
@@ -18,8 +17,6 @@ const TweetSwitchTab = ({ list, status, onClick }) => {
                     }>
                         {item}
                     </div>
-                </>
-
               )
             })}
         </div>
