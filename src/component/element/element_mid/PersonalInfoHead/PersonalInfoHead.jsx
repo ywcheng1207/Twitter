@@ -1,15 +1,18 @@
 import styles from './PersonalInfoHead.module.scss'
 import Button from 'component/element/element_basic/Button/Button'
-import { ReactComponent as LeftArrow } from 'assets/icons/leftArrow.svg'
+// import { ReactComponent as LeftArrow } from 'assets/icons/leftArrow.svg'
+import arrow from 'assets/icons/leftArrow.svg'
 import { Link } from 'react-router-dom'
 import PersonInfoModal from '../PersonlInfoModal/PersonInfoModal'
 import { useState } from 'react'
+const avatarURL = 'https://loremflickr.com/320/240/people/?random=7.976051090916994&lock=87'
+const avatarURL1 = 'https://loremflickr.com/320/240/people/?random=7.976051090916994&lock=88'
 
 const PersonalInfoHead = () => {
   const {
     container, headerText, selfInfoContainer, backgroundImg,
     btnContainer, selfInfo, avatar, name, account, description,
-    followContainer, following, follower, tweetsCount, btnWidth
+    followContainer, following, follower, tweetsCount, btnWidth, header
   } = styles
 
   const [show, setShow] = useState(false)
@@ -31,36 +34,35 @@ const PersonalInfoHead = () => {
 
   return (
     <div className={container}>
-        <header>
-            <LeftArrow />
+        <div className={header}>
+            <img src={arrow} alt="" />
             <div className={headerText}>
-            <h4 className='Bold'>john dopw</h4>
-            <span className={tweetsCount}>25 推文</span>
+              <h4 className='Bold'>john dow</h4>
+              <span className={tweetsCount}>25 推文</span>
             </div>
-        </header>
+        </div>
         <div className={selfInfoContainer}>
             <div className={backgroundImg}>
-            <img src="https://loremflickr.com/639/200/mountain/?random=61.42141615044277" alt="" />
+              <img src={avatarURL} alt="" />
             </div>
             <div className={btnContainer} onClick={handleShow}>
-            <div className={btnWidth}>
+              <div className={btnWidth}>
                 <Button value={'編輯個人資料'} type={'holePill'}/>
+              </div>
             </div>
-
-            </div>
-            <img className={avatar} src="https://loremflickr.com/320/240/people/?random=0.2306345450590208" alt="avatar" />
+            <img className={avatar} src={avatarURL1} alt="avatar" />
             <div className={selfInfo} >
-            <p className={name}>jofn dow</p>
-            <p className={account}>@jeyjohn</p>
-            <p className={description} >Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. </p>
-            <div className={followContainer} >
-                <p className={following}>
+              <p className={name}>jofn dow</p>
+              <p className={account}>@jeyjohn</p>
+              <p className={description} >Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. </p>
+              <div className={followContainer} >
+                  <p className={following}>
                     <Link to='/user/follower/main'>34個</Link> <span>追隨中</span>
-                </p>
-                <p className={follower}>
-                <Link to='/user/follower/main' >59位</Link> <span>跟隨者</span>
-                </p>
-            </div>
+                  </p>
+                  <p className={follower}>
+                    <Link to='/user/follower/main' >59位</Link> <span>跟隨者</span>
+                  </p>
+              </div>
             </div>
         </div>
         <PersonInfoModal
