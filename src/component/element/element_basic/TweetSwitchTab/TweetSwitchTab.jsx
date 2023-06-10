@@ -1,26 +1,21 @@
 import styles from './TweetSwitchTab.module.scss'
-import { useState } from 'react'
 import clsx from 'clsx'
 
-const testArray = [
-  '推文',
-  '回覆',
-  '喜歡的內容'
-
-]
-
-const TweetSwitchTab = () => {
-  const [status, setStatus] = useState(0)
+const TweetSwitchTab = ({ list, status, onClick }) => {
   const { active, switchBox } = styles
 
   return (
         <div className={styles.TweetSwitchTabContainer}>
-            {testArray.map((item, index) => {
+            {list.map((item, index) => {
               return (
                 <>
-                    <div key={index} className={clsx(switchBox, { [active]: status === index })} onClick={() => {
-                      setStatus(index)
-                    }}>
+                    <div
+                      key={index}
+                      className={clsx(switchBox, { [active]: status === index })}
+                      onClick={() => {
+                        onClick?.(index, item)
+                      }
+                    }>
                         {item}
                     </div>
                 </>
