@@ -29,7 +29,6 @@ const PersonalInfo = () => {
           <HomeContentItem />
           <HomeContentItem />
           <HomeContentItem />
-
       </div>
     </div>
   )
