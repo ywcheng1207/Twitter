@@ -4,10 +4,13 @@ import styles from './LoginPage.module.scss'
 import { ReactComponent as Logo } from 'assets/icons/logo.svg'
 import { useState } from 'react'
 import { login } from '../../api/auth'
+import { useNavigate } from 'react-router-dom'
 
 const LoginPage = () => {
   const [account, setAccount] = useState('')
   const [password, setPassword] = useState('')
+
+  const navigate = useNavigate()
 
   const handleClick = async () => {
     if (account.length === 0 || password.length === 0) {
@@ -17,6 +20,7 @@ const LoginPage = () => {
     if (success) {
       console.log('登入成功')
       console.log(token)
+      navigate('/user/home/main')
     } else {
       console.log('登入失敗')
     }

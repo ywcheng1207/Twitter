@@ -16,6 +16,9 @@ const SignUpPage = () => {
     if (account.length === 0 || name.length === 0 || email.length === 0 || password.length === 0 || checkPassword.length === 0) {
       return
     }
+    if (account.length > 10 || name.length > 50 || email.length > 10 || password.length > 10 || checkPassword.length > 10) {
+      return
+    }
     const { success } = await register({ account, name, email, password, checkPassword })
     if (success) {
       console.log('註冊成功')
@@ -39,15 +42,11 @@ const SignUpPage = () => {
               label={'帳號'}
               placeholder={'請輸入帳號'}
               value={account}
+              wordLimit={10}
               onChange={(value) => {
                 setAccount(value)
               }}
             />
-            {account.length > 10 &&
-              <div className={styles.errorMessage}>
-                    字數超出上限！
-              </div>
-            }
           </div>
           <div className={styles.inputContainer}>
             <DefaultInputItem
@@ -59,26 +58,19 @@ const SignUpPage = () => {
                 setName(value)
               }}
             />
-            {name.length > 50 &&
-              <div className={styles.errorMessage}>
-                    字數超出上限！
-              </div>
-            }
+
           </div>
           <div className={styles.inputContainer}>
             <DefaultInputItem
               label={'Email'}
               placeholder={'請輸入 Email'}
               value={email}
+              wordLimit={10}
               onChange={(value) => {
                 setEmail(value)
               }}
             />
-            {email.length > 10 &&
-              <div className={styles.errorMessage}>
-                    字數超出上限！
-              </div>
-            }
+
           </div>
           <div className={styles.inputContainer}>
             <DefaultInputItem
@@ -86,15 +78,12 @@ const SignUpPage = () => {
               placeholder={'請設定密碼'}
               type={'password'}
               value={password}
+              wordLimit={10}
               onChange={(value) => {
                 setPassword(value)
               }}
             />
-            {password.length > 10 &&
-              <div className={styles.errorMessage}>
-                    字數超出上限！
-              </div>
-            }
+
           </div>
           <div className={styles.inputContainer}>
             <DefaultInputItem
@@ -102,15 +91,12 @@ const SignUpPage = () => {
               placeholder={'請再次輸入密碼'}
               type={'password'}
               value={checkPassword}
+              wordLimit={10}
               onChange={(value) => {
                 setCheckPassword(value)
               }}
             />
-            {checkPassword.length > 10 &&
-              <div className={styles.errorMessage}>
-                    字數超出上限！
-              </div>
-            }
+
           </div>
           <div className={styles.buttonContainer} onClick={handleClick}>
             <Button type={'fullPill'} value={'註冊'} />
