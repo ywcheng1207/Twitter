@@ -51,10 +51,10 @@ const PersonalInfoHead = () => {
             <p className={description} >Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. </p>
             <div className={followContainer} >
                 <p className={following}>
-                    <Link to >34個</Link> <span>追隨中</span>
+                    <Link to='/user/following/main'>34個</Link> <span>追隨中</span>
                 </p>
                 <p className={follower}>
-                <Link to >59位</Link> <span>跟隨者</span>
+                <Link to='/user/follower/main' >59位</Link> <span>跟隨者</span>
                 </p>
             </div>
             </div>

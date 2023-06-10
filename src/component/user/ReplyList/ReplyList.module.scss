@@ -1,0 +1,33 @@
+.HeaderTweetContainer {
+  height: 74px;
+  border-bottom: 1px solid #e6ecf0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.PostContentList {
+  // outline: 1px solid tomato;
+  overflow-y: scroll;
+  height: 773px;
+  width: 655px;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  scrollbar-track-color: transparent;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #c1c1c1;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #888888;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+}

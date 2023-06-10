@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom'
 const LoginPage = () => {
   const [account, setAccount] = useState('')
   const [password, setPassword] = useState('')
-
   const navigate = useNavigate()
 
   const handleClick = async () => {
@@ -18,9 +17,10 @@ const LoginPage = () => {
     }
     const { success, token } = await login({ account, password })
     if (success) {
+      localStorage.setItem('authToken', token)
       console.log('登入成功')
-      console.log(token)
       navigate('/user/home/main')
+      console.log(token)
     } else {
       console.log('登入失敗')
     }

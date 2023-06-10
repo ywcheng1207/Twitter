@@ -1,5 +1,5 @@
 import styles from './HeaderTweet.module.scss'
-import LeftArrow from '../../../assets/icons/leftArrow.svg'
+import LeftArrow from 'assets/icons/leftArrow.svg'
 
 const HeaderTweet = () => {
   return (

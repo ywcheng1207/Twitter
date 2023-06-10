@@ -1,5 +1,6 @@
 .HomeContentItemContainer {
   height: 168px;
+  width: 640px;
   display: flex;
   outline: 1px solid #e6ecf0;
   .HomeContentItemHead {
@@ -19,7 +20,7 @@
     margin-top: 16px;
     height: 168px;
     max-height: 89%;
-    width: 100%;
+    width: 528px;
     .posterName {
       font-size: 16px;
       font-weight: 700;
@@ -35,7 +36,6 @@
     }
     .postDescription {
       margin-top: 8px;
-
       font-weight: 400;
       font-size: 16px;
       line-height: 26px;
@@ -43,41 +43,23 @@
       cursor: pointer;
     }
     .postIcon {
+      height: 14px;
+      width: 118.61px;
       display: flex;
-      margin-bottom: 40px;
-      position: relative;
-      .reply {
-        position: absolute;
-        top: -5px;
-        left: 0;
-        display: flex;
-        align-items: center;
-        overflow: hidden;
-        cursor: pointer;
-        img {
-          width: 13.17px;
-          height: 20px;
-          margin-right: 9.44px;
-        }
-        .replyCount {
-          text-decoration: none;
-        }
-      }
+      cursor: pointer;
+      .reply,
       .like {
-        position: absolute;
-        top: -5px;
-        left: 70px;
+        height: 100%;
         display: flex;
         align-items: center;
-        overflow: hidden;
-        cursor: pointer;
+        margin-right: 41.3px;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 14px;
+        color: #6c757d;
         img {
-          width: 13.17px;
-          height: 20px;
-          margin-right: 9.44px;
-        }
-        .likeCount {
-          text-decoration: none;
+          height: 100%;
+          margin-right: 9.3px;
         }
       }
     }

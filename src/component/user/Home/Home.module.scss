@@ -5,14 +5,13 @@
   // outline: 1px solid #e6ecf0;
   .HomeContentItemList {
     height: 979px;
+    width: 655px;
     overflow-y: scroll;
 
-    /* 隱藏卷軸 */
     scrollbar-width: thin;
     scrollbar-color: transparent transparent;
     scrollbar-track-color: transparent;
 
-    /* Webkit (Safari, Chrome) */
     &::-webkit-scrollbar {
       width: 8px;
     }

@@ -1,6 +1,6 @@
 import styles from './PersonInfo.module.scss'
 import TweetSwitchTab from 'component/element/element_basic/TweetSwitchTab/TweetSwitchTab'
-import HomeContentItem from 'component/element/element_mid/HomeContentItem/HomeContentItem'
+// import HomeContentItem from 'component/element/element_mid/HomeContentItem/HomeContentItem'
 import PersonalInfoHead from 'component/element/element_mid/PersonalInfoHead/PersonalInfoHead'
 import { useState } from 'react'
 
@@ -24,11 +24,11 @@ const PersonalInfo = () => {
         render={render}
       />
       <div className={contentItemContainer}>
+          {/* <HomeContentItem />
           <HomeContentItem />
           <HomeContentItem />
           <HomeContentItem />
-          <HomeContentItem />
-          <HomeContentItem />
+          <HomeContentItem /> */}
       </div>
     </div>
   )

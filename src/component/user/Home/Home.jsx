@@ -1,27 +1,37 @@
 import styles from './Home.module.scss'
-// import Nav from 'component/element/element_mid/Nav/Nav'
 import HomeContentHead from 'component/element/element_mid/HomeContentHead/HomeContentHead'
 import HomeContentItem from 'component/element/element_mid/HomeContentItem/HomeContentItem'
-// import SideBar from 'component/element/element_mid/SideBar/SideBar'
+import homepageDummy from 'dummyData/homepageDummy'
+// import { useEffect } from 'react'
+// import { getTweets } from 'api/user'
 
 const Home = () => {
   const { contentContainer, HomeContentItemList } = styles
-  // const { contentContainer } = styles
+
+  // useEffect(() => {
+  //   const getUserDataAsync = async (authToken) => {
+  //     try {
+  //       const data = await getTweets(authToken)
+  //       console.log(data)
+  //     } catch (error) {
+  //       console.error(error)
+  //     }
+  //   }
+  //   console.log(localStorage.getItem('authToken'))
+  //   if (localStorage.getItem('authToken')) {
+  //     getUserDataAsync(localStorage.getItem('authToken'))
+  //   }
+  // }, [])
+
   return (
-    <>
-      <div className={contentContainer}>
-        <HomeContentHead />
+    <div className={contentContainer}>
+      <HomeContentHead />
         <div className={HomeContentItemList}>
-            <HomeContentItem />
-            <HomeContentItem />
-            <HomeContentItem />
-            <HomeContentItem />
-            <HomeContentItem />
-            <HomeContentItem />
-            <HomeContentItem />
+           {homepageDummy.map((item) => (
+              <HomeContentItem tweet={item} key={item.tweetId} />
+           ))}
         </div>
-      </div>
-    </>
+    </div>
   )
 }
 

@@ -10,11 +10,14 @@ import LoginPage from 'pages/LoginPage/LoginPage'
 import SignUpPage from 'pages/SignUpPage/SignUpPage'
 import UserMainPage from 'pages/UserMainPage/UserMainPage'
 import HomePage from 'pages/HomePage/HomePage'
+import Following from 'component/user/Follow/Following'
+import Follower from 'component/user/Follow/Follower'
 
 import InfoSetting from 'component/user/InfoSetting/InfoSetting'
 import Home from 'component/user/Home/Home'
 import PersonalInfo from 'component/user/PersonalInfo/PersonalInfo'
 import Other from 'component/user/Other/Other'
+import ReplyList from 'component/user/ReplyList/ReplyList'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 function Content () {
@@ -23,7 +26,8 @@ function Content () {
 
   useEffect(() => {
     if (page !== 'home' && page !== 'personalinfo' &&
-     page !== 'infosetting' && page !== 'other') {
+     page !== 'infosetting' && page !== 'replylist' && page !== 'following' &&
+      page !== 'follower' && page !== 'other') {
       navigate('/user/home/main')
     }
   }, [page, navigate])
@@ -35,8 +39,14 @@ function Content () {
     content = <InfoSetting />
   } else if (page === 'personalinfo') {
     content = <PersonalInfo />
+  } else if (page === 'replylist') {
+    content = <ReplyList />
   } else if (page === 'other') {
     content = <Other />
+  } else if (page === 'following') {
+    content = <Following />
+  } else if (page === 'follower') {
+    content = <Follower />
   }
   return content
 }
