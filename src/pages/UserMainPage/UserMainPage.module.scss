@@ -5,36 +5,16 @@
   display: flex;
   // outline: 1px solid black;
   .contentContainer {
-    width: 641px;
+    width: 639px;
     height: 100%;
     margin-left: 24px;
     outline: 1px solid #e6ecf0;
-    .HomeContentItemList {
-      height: 979px;
-      overflow-y: scroll;
-
-      /* 隱藏卷軸 */
-      scrollbar-width: thin;
-      scrollbar-color: transparent transparent;
-      scrollbar-track-color: transparent;
-
-      /* Webkit (Safari, Chrome) */
-      &::-webkit-scrollbar {
-        width: 8px;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background-color: #c1c1c1;
-        border-radius: 10px;
-      }
-
-      &::-webkit-scrollbar-thumb:hover {
-        background-color: #888888;
-      }
-
-      &::-webkit-scrollbar-track {
-        background-color: transparent;
-      }
-    }
+  }
+  .settingContentContainer {
+    width: 637px;
+    height: 100%;
+    margin-left: 24px;
+    border-left: 1px solid #e6ecf0;
+    border-right: 1px solid #e6ecf0;
   }
 }
