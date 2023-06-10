@@ -59,6 +59,7 @@ const dummyData = [
 const Follower = () => {
   const { container, headerText, tweetsCount, headerName } = styles
   const [data, setData] = useState(dummyData)
+  const [status, setStatus] = useState(0)
 
   const handleClick = (id) => {
     setData(data.map(item => {
@@ -73,6 +74,10 @@ const Follower = () => {
     }))
   }
 
+  const handleSwitchClick = (index) => {
+    setStatus(index)
+  }
+
   return (
     <div className={container}>
       <header>
@@ -84,6 +89,8 @@ const Follower = () => {
       </header>
       <TweetSwitchTab
         list={['追隨者', '正在追隨']}
+        status = {status}
+        onClick={handleSwitchClick}
       />
       { data.map(item => {
         return (
