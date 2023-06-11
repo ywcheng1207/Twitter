@@ -77,7 +77,7 @@ const followingDummyData = [{
   isFollowed: true
 }]
 
-const Follower = () => {
+const Follow = () => {
   const { container, headerText, tweetsCount, headerName } = styles
   const [status, setStatus] = useState(0)
   const [data, setData] = useState(dummyData)
@@ -129,4 +129,4 @@ const Follower = () => {
   )
 }
 
-export default Follower
+export default Follow

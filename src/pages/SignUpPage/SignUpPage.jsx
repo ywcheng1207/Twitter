@@ -4,6 +4,7 @@ import styles from './SignUpPage.module.scss'
 import { ReactComponent as Logo } from 'assets/icons/logo.svg'
 import { useState } from 'react'
 import { register } from 'api/auth'
+import { Link } from 'react-router-dom'
 
 const SignUpPage = () => {
   const [account, setAccount] = useState('')
@@ -101,7 +102,9 @@ const SignUpPage = () => {
           <div className={styles.buttonContainer} onClick={handleClick}>
             <Button type={'fullPill'} value={'註冊'} />
           </div>
-          <a href="" className={styles.cancel}>取消</a>
+          <Link to='/login'>
+            <a href="" className={styles.cancel}>取消</a>
+          </Link>
         </div>
   )
 }

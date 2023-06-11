@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import styles from './Nav.module.scss'
-// import Button from 'component/element/element_basic/Button/Button'
 import { Link } from 'react-router-dom'
 import { ReactComponent as Logo } from 'assets/icons/logo.svg'
 import { ReactComponent as HomeActive } from 'assets/icons/homeActive.svg'
@@ -12,14 +11,23 @@ import { ReactComponent as PersonInfoActive } from 'assets/icons/personInfoActiv
 import { ReactComponent as SettingActive } from 'assets/icons/settingActive.svg'
 import UserPostModal from 'component/element/element_mid/UserPostModal/UserPostModal'
 
-const Nav = ({ status, homeClick, personClick, settingClick }) => {
+const Nav = () => {
   const {
     NavContainer, logoContainer, homeActiveContainer,
     personInfoContainer, settingContainer, postBtn, logoutContainer
   } = styles
   const [show, setShow] = useState(false)
   const [text, setText] = useState('')
+  const [status, setStatus] = useState('home')
 
+  const handleSwitch = ({ page }) => {
+    console.log(page)
+    setStatus(page)
+  }
+  const handleLogout = () => {
+    localStorage.removeItem('authToken')
+  }
+  // modal handle
   const handleClose = () => {
     setShow(false)
     setText('')
@@ -32,9 +40,6 @@ const Nav = ({ status, homeClick, personClick, settingClick }) => {
       setText(inputText)
     }
   }
-  const handleLogout = () => {
-    localStorage.removeItem('authToken')
-  }
 
   return (
     <div className={NavContainer}>
@@ -43,19 +48,19 @@ const Nav = ({ status, homeClick, personClick, settingClick }) => {
       </div>
 
       <Link to='/user/home/main'>
-        <div className={homeActiveContainer} onClick={() => homeClick()}>
+        <div className={homeActiveContainer} onClick={() => handleSwitch({ page: 'home' })}>
           {status === 'home' ? <HomeActive /> : <Home/>}
         </div>
       </Link>
 
       <Link to='/user/personalinfo/main'>
-        <div className={personInfoContainer} onClick={() => personClick()}>
+        <div className={personInfoContainer} onClick={() => handleSwitch({ page: 'person' })}>
           {status === 'person' ? <PersonInfoActive /> : <PersonInfo />}
         </div>
       </Link>
 
       <Link to='/user/infosetting/main'>
-        <div className={settingContainer} onClick={() => settingClick()}>
+        <div className={settingContainer} onClick={() => handleSwitch({ page: 'setting' })}>
           {status === 'setting' ? <SettingActive /> : <Setting />}
         </div>
       </Link>

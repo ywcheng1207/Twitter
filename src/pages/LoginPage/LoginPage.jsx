@@ -4,7 +4,7 @@ import styles from './LoginPage.module.scss'
 import { ReactComponent as Logo } from 'assets/icons/logo.svg'
 import { useState } from 'react'
 import { login } from '../../api/auth'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 const LoginPage = () => {
   const [account, setAccount] = useState('')
@@ -62,9 +62,13 @@ const LoginPage = () => {
             <Button type={'fullPill'} value={'登入'} />
           </div>
           <div className={styles.notice}>
-            <a href="" className={styles.register}>註冊</a>
+            <Link to='/register'>
+              <a href="" className={styles.register}>註冊</a>
+            </Link>
             <p>．</p>
-            <a href="" className={styles.backend}>後台登入</a>
+            <Link to='/admin'>
+              <a href="" className={styles.backend}>後台登入</a>
+            </Link>
           </div>
 
         </div>
