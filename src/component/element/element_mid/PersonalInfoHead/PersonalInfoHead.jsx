@@ -1,9 +1,10 @@
 import styles from './PersonalInfoHead.module.scss'
 import Button from 'component/element/element_basic/Button/Button'
 import arrow from 'assets/icons/leftArrow.svg'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import PersonInfoModal from '../PersonlInfoModal/PersonInfoModal'
 import { useState } from 'react'
+
 const avatarURL = 'https://loremflickr.com/320/240/people/?random=7.976051090916994&lock=87'
 const avatarURL1 = 'https://loremflickr.com/320/240/people/?random=7.976051090916994&lock=88'
 
@@ -18,6 +19,8 @@ const PersonalInfoHead = () => {
   const [userName, setUserName] = useState('hoe dow')
   const [discription, setDiscription] = useState('12345687545')
 
+  const navigate = useNavigate()
+
   const handleClose = () => {
     setShow(false)
   }
@@ -31,10 +34,13 @@ const PersonalInfoHead = () => {
     setDiscription(value)
   }
 
+  const handleText = () => {
+    navigate(-1)
+  }
   return (
     <div className={container}>
         <div className={header}>
-            <img src={arrow} alt="" />
+            <img src={arrow} alt="" onClick={() => handleText()}/>
             <div className={headerText}>
               <h4 className='Bold'>john dow</h4>
               <span className={tweetsCount}>25 推文</span>

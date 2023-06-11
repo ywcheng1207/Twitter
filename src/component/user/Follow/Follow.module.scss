@@ -10,6 +10,9 @@ header {
   padding: 17px;
   align-items: center;
   border-bottom: 1px solid #e6ecf0;
+  .arrow {
+    cursor: pointer;
+  }
   .headerText {
     margin-left: 19px;
     // margin-top: 16px;
