@@ -5,6 +5,7 @@ import likeIconClick from 'assets/icons/likeClick.svg'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import UserReplyModal from 'component/element/element_mid/UserReplyModal/UserReplyModal'
+import HoursPassed from 'component/element/element_basic/HoursPassed/HoursPassed'
 
 const HomeContentItem = ({ tweet }) => {
   // --- style
@@ -16,7 +17,7 @@ const HomeContentItem = ({ tweet }) => {
   // --- state
   const [show, setShow] = useState(false)
   const [text, setText] = useState('')
-  const [isLike, setIsLike] = useState(false)
+  const [isLike, setIsLike] = useState(tweet.isLiked)
   const [tweetLikeCount, setTweetLikeCount] = useState(tweet.likeCount)
   const navigate = useNavigate()
 
@@ -36,7 +37,6 @@ const HomeContentItem = ({ tweet }) => {
   // 點擊切換至某一篇tweet，這邊要給那篇tweet的id，讓該篇文一進去就可以依照id去call api找資料
   const handleReplyList = () => {
     navigate('/user/replylist/main')
-    console.log(tweet)
   }
 
   // modal功能
@@ -56,12 +56,14 @@ const HomeContentItem = ({ tweet }) => {
   return (
     <div className={HomeContentItemContainer}>
       <div className={HomeContentItemHead}>
-        <img src={tweet.avatar} alt="Image"></img>
+        <img src={tweet.tweetOwnerAvatar} alt="Image"></img>
       </div>
       <div className={HomeContentItemDescreption}>
         <div>
-          <span className={posterName}>Apple</span>
-          <span className={posterAccount}>@apple ‧ 3小時</span>
+          <span className={posterName}>{tweet.tweetOwnerName}</span>
+          <span className={posterAccount}>@{tweet.tweetOwnerAccount}・
+              <HoursPassed item={tweet}/>
+          </span>
         </div>
         <p className={postDescription} onClick={() => handleReplyList?.()}>
           {tweet.description}
