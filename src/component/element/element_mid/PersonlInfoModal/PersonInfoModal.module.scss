@@ -50,6 +50,12 @@
       left: 279px;
       position: absolute;
       z-index: 999;
+      .photoContainer {
+        cursor: pointer;
+      }
+      .photoXContainer {
+        cursor: pointer;
+      }
     }
   }
   .avatarContainer {
@@ -80,6 +86,7 @@
       z-index: 999;
       top: 58px;
       left: 58px;
+      cursor: pointer;
     }
   }
 }
