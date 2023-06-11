@@ -53,6 +53,24 @@ const dummyData = [
     avatar: 'https://loremflickr.com/639/200/mountain/?random=61.42141615044277',
     introduction: 'asdfasdfasdfasdfasdfasdf',
     isFollowed: false
+  }, {
+    tweetId: 7,
+    name: 'ddd fie',
+    avatar: 'https://loremflickr.com/639/200/mountain/?random=61.42141615044277',
+    introduction: 'asdfasdfasdfasdfasdfasdf',
+    isFollowed: false
+  }, {
+    tweetId: 8,
+    name: 'ddd fie',
+    avatar: 'https://loremflickr.com/639/200/mountain/?random=61.42141615044277',
+    introduction: 'asdfasdfasdfasdfasdfasdf',
+    isFollowed: false
+  }, {
+    tweetId: 9,
+    name: 'ddd fie',
+    avatar: 'https://loremflickr.com/639/200/mountain/?random=61.42141615044277',
+    introduction: 'asdfasdfasdfasdfasdfasdf',
+    isFollowed: false
   }
 ]
 const followingDummyData = [{
@@ -78,7 +96,7 @@ const followingDummyData = [{
 }]
 
 const Follow = () => {
-  const { container, headerText, tweetsCount, headerName } = styles
+  const { container, headerText, tweetsCount, headerName, tweetsContainer } = styles
   const [status, setStatus] = useState(0)
   const [data, setData] = useState(dummyData)
 
@@ -118,12 +136,14 @@ const Follow = () => {
         status = {status}
         onClick={handleSwitchClick}
       />
-      {data.map(item => {
-        return (
-          <UserFollowItem key={item.tweetId} item={item} onClick={handleClick} />
-        )
-      })
-    }
+      <div className={tweetsContainer}>
+        {data.map(item => {
+          return (
+            <UserFollowItem key={item.tweetId} item={item} onClick={handleClick} />
+          )
+        })
+        }
+      </div>
 
     </div>
   )
