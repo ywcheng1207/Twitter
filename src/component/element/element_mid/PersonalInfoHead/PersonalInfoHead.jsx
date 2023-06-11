@@ -1,11 +1,12 @@
 import styles from './PersonalInfoHead.module.scss'
 import Button from 'component/element/element_basic/Button/Button'
 import arrow from 'assets/icons/leftArrow.svg'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import PersonInfoModal from '../PersonlInfoModal/PersonInfoModal'
 import { useState } from 'react'
 import defaultImg from 'assets/pngs/defaultBackground.png'
 import defaultAvatar from 'assets/pngs/defaultAvatar.png'
+
 
 const PersonalInfoHead = () => {
   const {
@@ -20,6 +21,8 @@ const PersonalInfoHead = () => {
   const [personalBGC, setPersonalBGC] = useState(defaultImg)
   const [personalAvatar, setPersonalAvatar] = useState(defaultAvatar)
 
+  const navigate = useNavigate()
+
   const handleClose = () => {
     setShow(false)
   }
@@ -33,15 +36,21 @@ const PersonalInfoHead = () => {
     setDiscription(value)
   }
 
+
   const handleBtnClick = (image, avatar) => {
     setPersonalBGC(image)
     setPersonalAvatar(avatar)
   }
 
+
+  const handleText = () => {
+    navigate(-1)
+  }
+
   return (
     <div className={container}>
         <div className={header}>
-            <img src={arrow} alt="" />
+            <img src={arrow} alt="" onClick={() => handleText()}/>
             <div className={headerText}>
               <h4 className='Bold'>john dow</h4>
               <span className={tweetsCount}>25 推文</span>

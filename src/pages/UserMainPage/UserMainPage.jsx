@@ -1,30 +1,38 @@
 import styles from './UserMainPage.module.scss'
 import Nav from 'component/element/element_mid/Nav/Nav'
 import SideBar from 'component/element/element_mid/SideBar/SideBar'
-import { Outlet, useParams } from 'react-router-dom'
+import { Outlet, useParams, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useNavSwitch } from 'contexts/NavContext'
 
 const UserMainPage = () => {
   const { UserMainPageContainer, contentContainer, settingContentContainer } = styles
+  const { status, onNavSwitch } = useNavSwitch()
   const { page } = useParams()
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    onNavSwitch(pathname.split('/')[2])
+  }, [pathname])
 
   if (page !== 'infosetting') {
     return (
-    <div className={UserMainPageContainer}>
-      <Nav />
-        <div className={contentContainer}>
-            <Outlet />
+        <div className={UserMainPageContainer}>
+          <Nav status={status} onNavSwitch={onNavSwitch}/>
+            <div className={contentContainer}>
+                <Outlet />
+            </div>
+          <SideBar />
         </div>
-      <SideBar />
-    </div>
     )
   } else {
     return (
-      <div className={UserMainPageContainer}>
-        <Nav />
-        <div className={settingContentContainer}>
-          <Outlet />
+        <div className={UserMainPageContainer}>
+          <Nav status={status} onNavSwitch={onNavSwitch}/>
+          <div className={settingContentContainer}>
+            <Outlet />
+          </div>
         </div>
-      </div>
     )
   }
 }
