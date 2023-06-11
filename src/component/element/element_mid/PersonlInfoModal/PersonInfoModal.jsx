@@ -1,22 +1,24 @@
 import Modal from 'react-bootstrap/Modal'
 import styles from './PersonInfoModal.module.scss'
-import homepageDummy from 'dummyData/homepageDummy'
 import Button from 'component/element/element_basic/Button/Button'
 import { ReactComponent as Photo } from 'assets/icons/photo.svg'
 import { ReactComponent as PhotoX } from 'assets/icons/photoX.svg'
 import { useState, useRef } from 'react'
 import defaultImg from 'assets/pngs/defaultBackground.png'
+import defaultAvatar from 'assets/pngs/defaultAvatar.png'
 
 function UserPostModal ({ show, onClose, onShow, onChange, userName, discription, onNameChange, onDiscriptionChange }) {
   const fileInputRef = useRef(defaultImg)
+  const AvatarInputRef = useRef(defaultAvatar)
   const [image, setImage] = useState(defaultImg)
+  const [avatar, setAvatar] = useState(defaultAvatar)
 
-  const handleSVGClick = (event) => {
+  const handleBackgroundSVGClick = (event) => {
     fileInputRef.current.click()
     const file = event.target.files
     console.log('上传文件:', file)
   }
-  const handleOnPreview = (event) => {
+  const handleBackgroundChange = (event) => {
     console.log(event.target.files)
     const file = event.target.files[0]
     const reader = new FileReader()
@@ -28,9 +30,27 @@ function UserPostModal ({ show, onClose, onShow, onChange, userName, discription
       reader.readAsDataURL(file)
     }
   }
-
   const handleXClick = () => {
     setImage(defaultImg)
+  }
+
+  const handleAvatarSVGClick = (event) => {
+    AvatarInputRef.current.click()
+    const file = event.target.files
+    console.log('上传文件:', file)
+  }
+
+  const handleAvatarChange = (event) => {
+    console.log(event.target.files)
+    const file = event.target.files[0]
+    const reader = new FileReader()
+    reader.addEventListener('load', function () {
+      setAvatar(reader.result)
+    }, false)
+
+    if (file) {
+      reader.readAsDataURL(file)
+    }
   }
 
   return (
@@ -52,18 +72,33 @@ function UserPostModal ({ show, onClose, onShow, onChange, userName, discription
           <div className={styles.bodyContainer}>
             <div className={styles.backGround}>
                 <div className={styles.iconPhoto}>
-                  <Photo onClick={handleSVGClick}/>
+                  <Photo onClick={handleBackgroundSVGClick}/>
                   <PhotoX onClick={handleXClick}/>
                   <input
                     ref={fileInputRef}
                     type="file"
                     style={{ display: 'none' }}
-                    onChange={handleOnPreview}
+                    onChange={handleBackgroundChange}
                   />
                 </div>
                 <img src={image} alt="imgBroken" className={styles.backGroundImg} />
             </div>
-            <img src={homepageDummy[0].userId.avatar} alt="Image" className={styles.avatar}></img>
+            <div className={styles.avatarContainer}>
+              <div className={styles.avatarBackgroundColor}>
+                <img src={avatar} alt="Image" className={styles.avatar}></img>
+                <div className={styles.iconPhoto}>
+                <Photo onClick={handleAvatarSVGClick}/>
+                <input
+                      ref={AvatarInputRef}
+                      type="file"
+                      style={{ display: 'none' }}
+                      onChange={handleAvatarChange}
+                  />
+              </div>
+            </div>
+
+            </div>
+
             <div className={styles.inputGroup}>
 
                 <div className={styles.nameInputContainer}>
