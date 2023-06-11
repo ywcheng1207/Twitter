@@ -4,7 +4,8 @@ import HomeContentItem from 'component/element/element_mid/HomeContentItem/HomeC
 import PersonalInfoHead from 'component/element/element_mid/PersonalInfoHead/PersonalInfoHead'
 import PostContentItem from 'component/element/element_mid/PostContentItem/PostContentItem'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import homepageDummy from 'dummyData/homepageDummy'
 
@@ -31,9 +32,12 @@ const ContentItem = ({ render }) => {
 }
 
 const PersonalInfo = () => {
+  const { container, contentItemContainer, switchTab } = styles
   const [status, setStatus] = useState(0)
   const [render, setRender] = useState('推文')
   const list = ['推文', '回覆', '喜歡的內容']
+  const location = useLocation()
+  const navigate = useNavigate()
 
   const handleClick = (index, item) => {
     setStatus(index)
@@ -41,7 +45,9 @@ const PersonalInfo = () => {
     console.log(item)
   }
 
-  const { container, contentItemContainer, switchTab } = styles
+  useEffect(() => {
+  }, [location.pathname, navigate])
+
   return (
     <div className={container}>
       <PersonalInfoHead />
