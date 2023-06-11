@@ -7,7 +7,6 @@ import { useState } from 'react'
 import defaultImg from 'assets/pngs/defaultBackground.png'
 import defaultAvatar from 'assets/pngs/defaultAvatar.png'
 
-
 const PersonalInfoHead = () => {
   const {
     container, headerText, selfInfoContainer, backgroundImg,
@@ -36,12 +35,10 @@ const PersonalInfoHead = () => {
     setDiscription(value)
   }
 
-
   const handleBtnClick = (image, avatar) => {
     setPersonalBGC(image)
     setPersonalAvatar(avatar)
   }
-
 
   const handleText = () => {
     navigate(-1)
