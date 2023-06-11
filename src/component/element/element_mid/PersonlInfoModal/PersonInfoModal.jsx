@@ -3,11 +3,11 @@ import styles from './PersonInfoModal.module.scss'
 import Button from 'component/element/element_basic/Button/Button'
 import { ReactComponent as Photo } from 'assets/icons/photo.svg'
 import { ReactComponent as PhotoX } from 'assets/icons/photoX.svg'
-import { useState, useRef } from 'react'
 import defaultImg from 'assets/pngs/defaultBackground.png'
 import defaultAvatar from 'assets/pngs/defaultAvatar.png'
+import { useState, useRef } from 'react'
 
-function UserPostModal ({ show, onClose, onShow, onChange, userName, discription, onNameChange, onDiscriptionChange }) {
+function UserPostModal ({ show, onClose, onShow, onChange, userName, discription, onNameChange, onDiscriptionChange, onBtnClick }) {
   const fileInputRef = useRef(defaultImg)
   const AvatarInputRef = useRef(defaultAvatar)
   const [image, setImage] = useState(defaultImg)
@@ -31,7 +31,7 @@ function UserPostModal ({ show, onClose, onShow, onChange, userName, discription
     }
   }
   const handleXClick = () => {
-    setImage(defaultImg)
+    setImage(fileInputRef)
   }
 
   const handleAvatarSVGClick = (event) => {
@@ -61,7 +61,9 @@ function UserPostModal ({ show, onClose, onShow, onChange, userName, discription
             &times;
           </div>
           <div className={styles.headerTitle}>編輯個人資料</div>
-          <div className={styles.postSubmitBtnContainer}>
+          <div className={styles.postSubmitBtnContainer} onClick={() => {
+            onBtnClick?.(image, avatar)
+          }}>
             <Button
                 value='儲存'
                 type='fullPill'
@@ -72,8 +74,12 @@ function UserPostModal ({ show, onClose, onShow, onChange, userName, discription
           <div className={styles.bodyContainer}>
             <div className={styles.backGround}>
                 <div className={styles.iconPhoto}>
-                  <Photo onClick={handleBackgroundSVGClick}/>
-                  <PhotoX onClick={handleXClick}/>
+                  <div className={styles.photoContainer}>
+                    <Photo onClick={handleBackgroundSVGClick}/>
+                  </div>
+                  <div className={styles.photoXContainer}>
+                    <PhotoX onClick={handleXClick}/>
+                  </div>
                   <input
                     ref={fileInputRef}
                     type="file"

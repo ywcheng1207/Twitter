@@ -4,9 +4,9 @@ import arrow from 'assets/icons/leftArrow.svg'
 import { Link, useNavigate } from 'react-router-dom'
 import PersonInfoModal from '../PersonlInfoModal/PersonInfoModal'
 import { useState } from 'react'
+import defaultImg from 'assets/pngs/defaultBackground.png'
+import defaultAvatar from 'assets/pngs/defaultAvatar.png'
 
-const avatarURL = 'https://loremflickr.com/320/240/people/?random=7.976051090916994&lock=87'
-const avatarURL1 = 'https://loremflickr.com/320/240/people/?random=7.976051090916994&lock=88'
 
 const PersonalInfoHead = () => {
   const {
@@ -18,6 +18,8 @@ const PersonalInfoHead = () => {
   const [show, setShow] = useState(false)
   const [userName, setUserName] = useState('hoe dow')
   const [discription, setDiscription] = useState('12345687545')
+  const [personalBGC, setPersonalBGC] = useState(defaultImg)
+  const [personalAvatar, setPersonalAvatar] = useState(defaultAvatar)
 
   const navigate = useNavigate()
 
@@ -34,9 +36,17 @@ const PersonalInfoHead = () => {
     setDiscription(value)
   }
 
+
+  const handleBtnClick = (image, avatar) => {
+    setPersonalBGC(image)
+    setPersonalAvatar(avatar)
+  }
+
+
   const handleText = () => {
     navigate(-1)
   }
+
   return (
     <div className={container}>
         <div className={header}>
@@ -48,14 +58,14 @@ const PersonalInfoHead = () => {
         </div>
         <div className={selfInfoContainer}>
             <div className={backgroundImg}>
-              <img src={avatarURL} alt="" />
+              <img src={personalBGC} alt="" />
             </div>
             <div className={btnContainer} onClick={handleShow}>
               <div className={btnWidth}>
                 <Button value={'編輯個人資料'} type={'holePill'}/>
               </div>
             </div>
-            <img className={avatar} src={avatarURL1} alt="avatar" />
+            <img className={avatar} src={personalAvatar} alt="avatar" />
             <div className={selfInfo} >
               <p className={name}>jofn dow</p>
               <p className={account}>@jeyjohn</p>
@@ -78,6 +88,7 @@ const PersonalInfoHead = () => {
              discription={discription}
              onNameChange={handleNameChange}
              onDiscriptionChange={handleDiscriptionChange}
+             onBtnClick={handleBtnClick}
         />
 
     </div>
