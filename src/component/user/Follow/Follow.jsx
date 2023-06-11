@@ -3,7 +3,7 @@ import styles from './Follow.module.scss'
 import { ReactComponent as LeftArrow } from 'assets/icons/leftArrow.svg'
 import TweetSwitchTab from 'component/element/element_basic/TweetSwitchTab/TweetSwitchTab'
 import { useState } from 'react'
-
+import { useNavigate } from 'react-router-dom'
 const dummyData = [
   {
     tweetId: 7,
@@ -96,9 +96,10 @@ const followingDummyData = [{
 }]
 
 const Follow = () => {
-  const { container, headerText, tweetsCount, headerName, tweetsContainer } = styles
+  const { container, headerText, tweetsCount, headerName, tweetsContainer, arrow } = styles
   const [status, setStatus] = useState(0)
   const [data, setData] = useState(dummyData)
+  const navigate = useNavigate()
 
   const handleClick = (id) => {
     setData(data.map(item => {
@@ -125,7 +126,7 @@ const Follow = () => {
   return (
     <div className={container}>
       <header>
-        <LeftArrow />
+        <LeftArrow className={arrow} onClick={() => navigate(-1)}/>
         <div className={headerText}>
         <h4 className={headerName}>john dopw</h4>
         <span className={tweetsCount}>25 推文</span>
