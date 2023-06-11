@@ -31,10 +31,25 @@
 
   .backGround {
     padding: 0;
+    width: 100%;
+    height: 200px;
+    background-color: rgba(23, 23, 37, 0.5);
+    position: relative;
     img {
       width: 100%;
       height: 200px;
       object-fit: cover;
+      opacity: 0.5;
+    }
+    .iconPhoto {
+      width: 80px;
+      height: 24px;
+      display: flex;
+      justify-content: space-between;
+      top: 90px;
+      left: 279px;
+      position: absolute;
+      z-index: 999;
     }
   }
   .avatar {
@@ -56,6 +71,7 @@
   margin-top: 64px;
   .nameInputContainer {
     background-color: #f5f8fa;
+    padding-top: 2px;
     p {
       margin-top: 2px;
       padding-left: 16px;
@@ -82,6 +98,7 @@
   }
   .discriptionInputContainer {
     background-color: #f5f8fa;
+    padding-top: 2px;
     p {
       margin-top: 2px;
       padding-left: 16px;
