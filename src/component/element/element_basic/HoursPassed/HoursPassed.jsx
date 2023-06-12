@@ -1,5 +1,5 @@
 const HoursPassed = ({ item }) => {
-  const pastTime = new Date(item.tweetTime)
+  const pastTime = new Date(item)
   const currentTime = new Date()
 
   const timeDiff = Math.abs(currentTime - pastTime)

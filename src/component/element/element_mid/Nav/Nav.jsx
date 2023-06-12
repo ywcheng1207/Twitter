@@ -21,6 +21,7 @@ const Nav = ({ status, onNavSwitch }) => {
 
   const handleLogout = () => {
     localStorage.removeItem('authToken')
+    localStorage.removeItem('id')
   }
 
   // modal handle
