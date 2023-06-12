@@ -4,6 +4,7 @@ import TweetListCard from 'component/admin/TweetListCard/TweetListCard'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getTweets } from 'api/user'
+import { deleteTweet } from 'api/admin'
 
 const AdminTweetListPage = () => {
   const [tweetList, setTweetList] = useState([])
@@ -34,11 +35,19 @@ const AdminTweetListPage = () => {
     navigate('/admin/users')
   }
   const handleLogoutClick = () => {
+    localStorage.removeItem('authToken')
     navigate('/admin')
   }
 
-  const handleDelete = (id) => {
-    setTweetList(tweetList.filter(item => item.tweetId !== id))
+  const handleDelete = async (id) => {
+    try {
+      const authToken = localStorage.getItem('authToken')
+      await deleteTweet(id, authToken)
+      console.log('刪除成功')
+      setTweetList(tweetList.filter(item => item.TweetId !== id))
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   const { container, mainContainer, tweetListContainer } = styles

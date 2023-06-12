@@ -23,8 +23,9 @@ export const login = async ({ account, password }) => {
     const { data } = await axios.post(`${baseURL}/users/signin`, { account, password })
     const { status } = data
     const token = data.data.token
+    const id = data.data.user.id
     if (status === 'success') {
-      return { success: true, token, ...data }
+      return { success: true, token, id, ...data }
     }
     return data
   } catch (error) {
