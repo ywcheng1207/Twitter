@@ -35,8 +35,7 @@ export const getUserTweets = async (authToken, id) => {
 // -- 個人資料頁底下的喜歡串
 
 // -- 設定頁取得使用者 帳號 密碼 Email
-export const getAccountInfo = async (authToken) => {
-  const id = localStorage.getItem('id')
+export const getAccountInfo = async (authToken, id) => {
   try {
     const { data } = await axios.get(`${baseURL}/users/${id}`, { headers: { Authorization: 'Bearer ' + authToken } })
     return data
