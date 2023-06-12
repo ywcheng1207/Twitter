@@ -6,8 +6,14 @@ import { getAccountInfo, putAccountInfo } from 'api/user'
 
 const InfoSetting = () => {
   const { container, inputContainer, btnContainer, btn } = styles
+  const [userInfo, setUserInfo] = useState({
+    account: '',
+    name: '',
+    email: '',
+    password: '',
+    checkPassword: ''
+  })
 
-  const [userInfo, setUserInfo] = useState('')
   const handleAccountChange = (value) => {
     setUserInfo({
       ...userInfo,
@@ -45,6 +51,14 @@ const InfoSetting = () => {
       const id = localStorage.getItem('id')
       await putAccountInfo(id, authToken, userInfo)
       console.log('儲存成功')
+      const data = await putAccountInfo(authToken, id, userInfo)
+      console.log(data.message)
+      alert('修改完成')
+      setUserInfo({
+        ...userInfo,
+        password: '',
+        checkPassword: ''
+      })
     } catch (error) {
       console.error(error)
     }
@@ -56,8 +70,13 @@ const InfoSetting = () => {
         const authToken = localStorage.getItem('authToken')
         const id = localStorage.getItem('id')
         const data = await getAccountInfo(authToken, id)
+        const { account, name, email } = data
         console.log('成功取得使用者資料')
-        setUserInfo(data)
+        setUserInfo({
+          account,
+          name,
+          email
+        })
       } catch (error) {
         console.error(error)
       }
@@ -74,21 +93,21 @@ const InfoSetting = () => {
         <div className={inputContainer}>
           <DefaultInputItem
             label={'帳號'}
-            value={userInfo.account}
+            defaultValue={userInfo.account}
             onChange={handleAccountChange}
           />
         </div>
         <div className={inputContainer}>
           <DefaultInputItem
             label={'名稱'}
-            value={userInfo.name}
+            defaultValue={userInfo.name}
             onChange={handleNameChange}
           />
         </div>
         <div className={inputContainer}>
           <DefaultInputItem
             label={'Email'}
-            value={userInfo.email}
+            defaultValue={userInfo.email}
             onChange={handleEmailChange}
           />
         </div>
@@ -97,7 +116,7 @@ const InfoSetting = () => {
             label={'密碼'}
               type={'password'}
               placeholder={'請設定密碼'}
-              value={''}
+              defaultValue={userInfo.password}
               onChange={handlePasswordChange}
             />
         </div>
@@ -106,11 +125,11 @@ const InfoSetting = () => {
             label={'密碼再確認'}
               type={'password'}
               placeholder={'請再次輸入密碼'}
-              value={''}
+              defaultValue={userInfo.checkPassword}
               onChange={handlePasswordCheckChange}
             />
         </div>
-        <div className={btnContainer} onSave={handleSave}>
+        <div className={btnContainer} onClick={handleSave}>
           <div className={btn}>
             <Button
               type={'fullPill'}

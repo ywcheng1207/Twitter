@@ -3,15 +3,15 @@ import styles from './PersonInfoModal.module.scss'
 import Button from 'component/element/element_basic/Button/Button'
 import { ReactComponent as Photo } from 'assets/icons/photo.svg'
 import { ReactComponent as PhotoX } from 'assets/icons/photoX.svg'
-import defaultImg from 'assets/pngs/defaultBackground.png'
-import defaultAvatar from 'assets/pngs/defaultAvatar.png'
+// import defaultImg from 'assets/pngs/defaultBackground.png'
+// import defaultAvatar from 'assets/pngs/defaultAvatar.png'
 import { useState, useRef } from 'react'
 
-function UserPostModal ({ show, onClose, onShow, onChange, userName, discription, onNameChange, onDiscriptionChange, onBtnClick }) {
-  const fileInputRef = useRef(defaultImg)
-  const AvatarInputRef = useRef(defaultAvatar)
-  const [image, setImage] = useState(defaultImg)
-  const [avatar, setAvatar] = useState(defaultAvatar)
+function PersonInfoModal ({ show, onClose, userHead, onShow, onNameChange, onIntroductionChange, onBtnClick }) {
+  const fileInputRef = useRef(userHead.cover)
+  const AvatarInputRef = useRef(userHead.avatar)
+  const [image, setImage] = useState(fileInputRef.current)
+  const [avatar, setAvatar] = useState(AvatarInputRef.current)
 
   const handleBackgroundSVGClick = (event) => {
     fileInputRef.current.click()
@@ -111,16 +111,16 @@ function UserPostModal ({ show, onClose, onShow, onChange, userName, discription
                     <p>名稱</p>
                     <input
                         className={styles.nameInput}
-                        defaultValue={userName}
+                        defaultValue={userHead.name}
                         onChange={(event) => onNameChange?.(event.target.value)}
                     />
-                    {userName.length !== 0 &&
+                    {/* {userHead.name.length !== 0 &&
                         <div className={styles.inputNotice} >
                             <div className={styles.lengthRule}>
-                                {userName.length}/50
+                                {userHead.name.length}/50
                             </div>
                         </div>
-                    }
+                    } */}
 
                 </div>
                 <div className={styles.discriptionInputContainer}>
@@ -130,16 +130,16 @@ function UserPostModal ({ show, onClose, onShow, onChange, userName, discription
                         cols="65"
                         rows="5"
                         placeholder='有什麼新鮮事？'
-                        defaultValue={discription}
-                        onChange={(event) => onDiscriptionChange?.(event.target.value)}
+                        defaultValue={userHead.introduction}
+                        onChange={(event) => onIntroductionChange?.(event.target.value)}
                     />
-                    {discription.length !== 0 &&
+                    {/* {userHead.introductionn.length !== 0 &&
                         <div className={styles.inputNotice} >
                             <div className={styles.lengthRule}>
-                                {discription.length}/160
+                                {userHead.introduction.length}/160
                             </div>
                         </div>
-                    }
+                    } */}
 
                 </div>
             </div>
@@ -151,4 +151,4 @@ function UserPostModal ({ show, onClose, onShow, onChange, userName, discription
   )
 }
 
-export default UserPostModal
+export default PersonInfoModal

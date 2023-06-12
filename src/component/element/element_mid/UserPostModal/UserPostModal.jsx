@@ -8,7 +8,7 @@ const TextWarning = ({ text }) => {
   }
 }
 
-function UserPostModal ({ children, show, onClose, onShow, text, onChange }) {
+function UserPostModal ({ children, show, onClose, onShow, text, onChange, onAddHomeList }) {
   return (
     <>
       { children }
@@ -35,7 +35,13 @@ function UserPostModal ({ children, show, onClose, onShow, text, onChange }) {
           </div>
           <div className={styles.postSubmitBtnContainer}>
             <TextWarning text={text} />
-            <button className={styles.postSubmitBtn}>
+            <button
+              className={styles.postSubmitBtn}
+              onClick={() => {
+                onAddHomeList(text)
+                text.length > 0 && onClose()
+              }}
+            >
               推文
             </button>
           </div>

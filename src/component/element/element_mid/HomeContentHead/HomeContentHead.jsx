@@ -4,7 +4,7 @@ import HeaderHome from 'component/element/element_basic/HeaderHome/HeaderHome'
 import UserPostModal from 'component/element/element_mid/UserPostModal/UserPostModal'
 const avatarUrl = 'https://loremflickr.com/320/240/people/?random=7.976051090916994&lock=999'
 
-const HomeContentHead = () => {
+const HomeContentHead = ({ onAddHomeList }) => {
   const {
     HomeContentHeadContainer, postInputContainer, postInputContent,
     postInputHead, postBtnContainer, postBtn
@@ -33,6 +33,7 @@ const HomeContentHead = () => {
           onShow={handleShow}
           text={text}
           onChange={handleChange}
+          onAddHomeList={onAddHomeList}
       >
         <div className={postInputContainer} onClick={handleShow}>
           <div className={postInputContent}>
