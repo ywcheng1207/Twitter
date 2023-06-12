@@ -15,9 +15,10 @@ const LoginPage = () => {
     if (account.length === 0 || password.length === 0) {
       return
     }
-    const { success, token } = await login({ account, password })
+    const { success, token, id } = await login({ account, password })
     if (success) {
       localStorage.setItem('authToken', token)
+      localStorage.setItem('id', id)
       console.log('登入成功')
       navigate('/user/home/main')
       console.log(token)
@@ -63,11 +64,11 @@ const LoginPage = () => {
           </div>
           <div className={styles.notice}>
             <Link to='/register'>
-              <a href="" className={styles.register}>註冊</a>
+              <p className={styles.register}>註冊</p>
             </Link>
             <p>．</p>
             <Link to='/admin'>
-              <a href="" className={styles.backend}>後台登入</a>
+              <p className={styles.backend}>後台登入</p>
             </Link>
           </div>
 

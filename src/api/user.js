@@ -20,3 +20,14 @@ export const createTweets = async (payload) => {
     console.error('[Create Tweets failed]: ', error)
   }
 }
+
+// -- 設定頁取得使用者 帳號 密碼 Email
+export const getAccountInfo = async (authToken) => {
+  const id = localStorage.getItem('id')
+  try {
+    const { data } = await axios.get(`${baseURL}/users/${id}`, { headers: { Authorization: 'Bearer ' + authToken } })
+    return data
+  } catch (error) {
+    console.error('[getAccountInfo failed]', error)
+  }
+}

@@ -7,16 +7,16 @@ const TweetListCard = ({ data, onDelete }) => {
   return (
     data.map(item => {
       return (
-              <div className={cardContainer} key={item.tweetId}>
+              <div className={cardContainer} key={item.TweetId}>
                   <div className={avatatContainer}>
-                      <img src={item.userId.avatar} alt="avatar" className={avatar} />
+                      <img src={item.tweetOwnerAvatar} alt="avatar" className={avatar} />
                   </div>
                   <div className={cardInfoContainer}>
                       <div>
-                            <span className={name}>{item.userId.name}</span>
+                            <span className={name}>{item.tweetOwnerName}</span>
                             <span className={account}>
-                                @{item.userId.account}．
-                                <HoursPassed item={item}/>
+                                @{item.tweetOwnerAccount}．
+                                <HoursPassed item={item.tweetTime}/>
                             </span>
 
                       </div>
@@ -25,7 +25,7 @@ const TweetListCard = ({ data, onDelete }) => {
                       </div>
                   </div>
                   <X className={iconX} onClick={() => {
-                    onDelete?.(item.tweetId)
+                    onDelete?.(item.TweetId)
                   }} />
               </div>
       )
