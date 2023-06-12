@@ -11,15 +11,33 @@ export const getTweets = async (authToken) => {
   }
 }
 
-// export const createTweets = async (payload) => {
-//   const { description } = payload
-//   try {
-//     const res = await axios.post(`${baseURL}/tweets`, { description })
-//     return res.data
-//   } catch (error) {
-//     console.error('[Create Tweets failed]: ', error)
-//   }
-// }
+export const createTweets = async (payload) => {
+  const { description } = payload
+  try {
+    const res = await axios.post(`${baseURL}/tweets`, { description })
+    return res.data
+  } catch (error) {
+    console.error('[Create Tweets failed]: ', error)
+  }
+}
+
+export const userLikeTweet = async ({ authToken, TweetId }) => {
+  try {
+    const res = await axios.post(`${baseURL}/tweets/${TweetId}/like/`, null, { headers: { Authorization: 'Bearer ' + authToken } })
+    return res.data
+  } catch (error) {
+    console.error('[LikeTweet failed]: ', error)
+  }
+}
+
+export const userUnLikeTweet = async ({ authToken, TweetId }) => {
+  try {
+    const res = await axios.post(`${baseURL}/tweets/${TweetId}/unlike`, null, { headers: { Authorization: 'Bearer ' + authToken } })
+    return res.data
+  } catch (error) {
+    console.error('[UnLikeTweet failed]: ', error)
+  }
+}
 
 // -- 個人資料頁底下的推文串
 export const getUserTweets = async (authToken, id) => {
@@ -27,7 +45,7 @@ export const getUserTweets = async (authToken, id) => {
     const res = await axios.get(`${baseURL}/users/${id}/tweets `, { headers: { Authorization: 'Bearer ' + authToken } })
     return res.data
   } catch (error) {
-    console.error('[Get Tweets failed]', error)
+    console.error('[Get UserTweets failed]', error)
   }
 }
 // -- 個人資料頁底下的回覆串
@@ -36,7 +54,7 @@ export const getUserReplyTweets = async (authToken, id) => {
     const res = await axios.get(`${baseURL}/users/${id}/replied_tweets `, { headers: { Authorization: 'Bearer ' + authToken } })
     return res.data
   } catch (error) {
-    console.error('[Get Tweets failed]', error)
+    console.error('[Get UserReplyTweets failed]', error)
   }
 }
 // -- 個人資料頁底下的喜歡串
@@ -45,7 +63,7 @@ export const getUserLikeTweets = async (authToken, id) => {
     const res = await axios.get(`${baseURL}/users/${id}/likes `, { headers: { Authorization: 'Bearer ' + authToken } })
     return res.data
   } catch (error) {
-    console.error('[Get Tweets failed]', error)
+    console.error('[Get UserLikeTweets failed]', error)
   }
 }
 // -- 設定頁 post 更改使用者帳號資料
