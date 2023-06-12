@@ -58,3 +58,20 @@ export const getAccountInfo = async (authToken, id) => {
     console.error('[getAccountInfo failed]', error)
   }
 }
+
+// -- 設定頁 post 更改使用者帳號資料
+export const putAccountInfo = async (payload, id, authToken) => {
+  try {
+    const { account, name, email, password, checkPassword } = payload
+    const res = await axios.post(`${baseURL}/users${id}`, { headers: { Authorization: 'Bearer ' + authToken } }, {
+      account,
+      name,
+      email,
+      password,
+      checkPassword
+    })
+    return res.data
+  } catch (error) {
+    console.error('[postAccountInfo failed]', error)
+  }
+}

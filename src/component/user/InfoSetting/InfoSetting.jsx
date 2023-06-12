@@ -2,7 +2,7 @@ import styles from './InfoSetting.module.scss'
 import DefaultInputItem from 'component/element/element_basic/DefaultInputItem/DefaultInputItem'
 import { useState, useEffect } from 'react'
 import Button from 'component/element/element_basic/Button/Button'
-import { getAccountInfo } from 'api/user'
+import { getAccountInfo, putAccountInfo } from 'api/user'
 
 const InfoSetting = () => {
   const { container, inputContainer, btnContainer, btn } = styles
@@ -37,6 +37,17 @@ const InfoSetting = () => {
       ...userInfo,
       checkPassword: value
     })
+  }
+
+  const handleSave = async () => {
+    try {
+      const authToken = localStorage.getItem('authToken')
+      const id = localStorage.getItem('id')
+      await putAccountInfo(id, authToken, userInfo)
+      console.log('儲存成功')
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   useEffect(() => {
@@ -99,7 +110,7 @@ const InfoSetting = () => {
               onChange={handlePasswordCheckChange}
             />
         </div>
-        <div className={btnContainer}>
+        <div className={btnContainer} onSave={handleSave}>
           <div className={btn}>
             <Button
               type={'fullPill'}
