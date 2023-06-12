@@ -1,7 +1,8 @@
 import styles from './PostContentItem.module.scss'
+import HoursPassed from 'component/element/element_basic/HoursPassed/HoursPassed'
 const avatarUrl = 'https://loremflickr.com/320/240/people/?random=7.976051090916994&lock=999'
 
-const PostContentItem = () => {
+const PostContentItem = ({ tweet }) => {
   const {
     PostContentItemContainer, postInfo, posterInfo,
     userName, postDescription
@@ -11,16 +12,15 @@ const PostContentItem = () => {
       <img src={avatarUrl} alt="" />
       <div className={postInfo}>
         <div className={posterInfo}>
-          <span>Devon Lane</span>
-          <a>@devon_lane・12 小時</a>
+          <span>user本人</span>
+          <a>@user本人的account ・ <HoursPassed item={tweet}/></a>
         </div>
         <div className={userName}>
           <span>回覆</span>
-          <a>@apple</a>
+          <a>@user回覆了哪個人</a>
         </div>
         <div className={postDescription}>
-          former apple engineer shares a simple DIY fix
-          to seal your surgical mask
+          user回覆的內容
         </div>
       </div>
     </div>

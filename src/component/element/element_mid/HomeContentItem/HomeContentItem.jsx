@@ -62,7 +62,7 @@ const HomeContentItem = ({ tweet }) => {
         <div>
           <span className={posterName}>{tweet.tweetOwnerName}</span>
           <span className={posterAccount}>@{tweet.tweetOwnerAccount}・
-              <HoursPassed item={tweet}/>
+              <HoursPassed item={tweet.createdAt}/>
           </span>
         </div>
         <p className={postDescription} onClick={() => handleReplyList?.()}>
