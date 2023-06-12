@@ -1,7 +1,7 @@
 import styles from './InfoSetting.module.scss'
 import DefaultInputItem from 'component/element/element_basic/DefaultInputItem/DefaultInputItem'
 import { useState } from 'react'
-import Button from 'component/element/element_basic/Button/Button'\
+import Button from 'component/element/element_basic/Button/Button'
 import { getAccountInfo } from 'api/user'
 
 const dummyData = {
