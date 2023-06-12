@@ -14,10 +14,8 @@ const DefaultInputItem = ({ label, value, placeholder, type, onChange, wordLimit
           className={`${styles.defaultInput} `}
           type={type || 'text'}
           placeholder={placeholder}
-          value={value}
           defaultValue={defaultValue}
           onChange={e => {
-            targetLength.current = e.target.value.length
             onChange?.(e.target.value)
           }}
         />

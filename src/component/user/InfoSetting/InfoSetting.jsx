@@ -63,21 +63,21 @@ const InfoSetting = () => {
         <div className={inputContainer}>
           <DefaultInputItem
             label={'帳號'}
-            value={userInfo.account}
+            defaultValue={userInfo.account}
             onChange={handleAccountChange}
           />
         </div>
         <div className={inputContainer}>
           <DefaultInputItem
             label={'名稱'}
-            value={userInfo.name}
+            defaultValue={userInfo.name}
             onChange={handleNameChange}
           />
         </div>
         <div className={inputContainer}>
           <DefaultInputItem
             label={'Email'}
-            value={userInfo.email}
+            defaultValue={userInfo.email}
             onChange={handleEmailChange}
           />
         </div>
@@ -86,7 +86,7 @@ const InfoSetting = () => {
             label={'密碼'}
               type={'password'}
               placeholder={'請設定密碼'}
-              value={''}
+              defaultValue={''}
               onChange={handlePasswordChange}
             />
         </div>
@@ -95,7 +95,7 @@ const InfoSetting = () => {
             label={'密碼再確認'}
               type={'password'}
               placeholder={'請再次輸入密碼'}
-              value={''}
+              defaultValue={''}
               onChange={handlePasswordCheckChange}
             />
         </div>
