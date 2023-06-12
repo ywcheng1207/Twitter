@@ -13,7 +13,7 @@ const Home = () => {
     const getUserDataAsync = async (authToken) => {
       try {
         const data = await getTweets(authToken)
-        console.log(data[0])
+        console.log('成功取得首頁資料')
         setHomeList(data)
       } catch (error) {
         console.error(error)
@@ -29,7 +29,7 @@ const Home = () => {
       <HomeContentHead />
         <div className={HomeContentItemList}>
            {homeList.map((item) => (
-              <HomeContentItem tweet={item} key={item.tweetId} />
+              <HomeContentItem tweet={item} key={item.TweetId} />
            ))}
         </div>
     </div>

@@ -4,8 +4,9 @@ import HomeContentItem from 'component/element/element_mid/HomeContentItem/HomeC
 import PersonalInfoHead from 'component/element/element_mid/PersonalInfoHead/PersonalInfoHead'
 import PostContentItem from 'component/element/element_mid/PostContentItem/PostContentItem'
 
-import { useState, useEffect } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+
+// import { getUserTweets } from 'api/user'
 
 import homepageDummy from 'dummyData/homepageDummy'
 
@@ -35,18 +36,29 @@ const PersonalInfo = () => {
   const { container, contentItemContainer, switchTab } = styles
   const [status, setStatus] = useState(0)
   const [render, setRender] = useState('推文')
+  // const [postList, setPostList] = useState([])
   const list = ['推文', '回覆', '喜歡的內容']
-  const location = useLocation()
-  const navigate = useNavigate()
 
   const handleClick = (index, item) => {
     setStatus(index)
     setRender(item)
-    console.log(item)
+    // console.log(item)
   }
 
-  useEffect(() => {
-  }, [location.pathname, navigate])
+  // useEffect(() => {
+  //   const getUserDataAsync = async (authToken, id) => {
+  //     try {
+  //       const data = await getUserTweets(authToken, id)
+  //       console.log(data[0])
+  //       setPostList(data)
+  //     } catch (error) {
+  //       console.error(error)
+  //     }
+  //   }
+  //   if (localStorage.getItem('authToken')) {
+  //     getUserDataAsync(localStorage.getItem('authToken'), id)
+  //   }
+  // }, [])
 
   return (
     <div className={container}>
