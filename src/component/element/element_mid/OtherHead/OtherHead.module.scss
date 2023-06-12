@@ -55,11 +55,14 @@
   .btnContainer {
     display: flex;
     justify-content: flex-end;
+    gap: 16px;
     margin-top: 16px;
     margin-right: 16px;
     font-weight: 400;
+    width: 100%;
+    height: 40px;
     .btnWidth {
-      width: 128px;
+      width: 64px;
     }
   }
   .userAvatar {
@@ -105,4 +108,7 @@
       }
     }
   }
+}
+.follow {
+  width: 96px !important;
 }

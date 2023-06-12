@@ -6,7 +6,7 @@ import PostContentItem from 'component/element/element_mid/PostContentItem/PostC
 
 import { useState, useEffect } from 'react'
 
-import { getUserTweets, getUserReplyTweets, getUserLikeTweets } from 'api/user'
+import { getUserTweets, getUserReplyTweets, getUserLikeTweets, getAccountInfo } from 'api/user'
 
 // import homepageDummy from 'dummyData/homepageDummy'
 
@@ -39,6 +39,7 @@ const PersonalInfo = () => {
   const [postList, setPostList] = useState([])
   const [replyList, setReplyList] = useState([])
   const [userLikeList, setUserLikeList] = useState([])
+  const [userHead, setUserHead] = useState('')
 
   const list = ['推文', '回覆', '喜歡的內容']
 
@@ -46,6 +47,20 @@ const PersonalInfo = () => {
     setStatus(index)
     setRender(item)
   }
+  useEffect(() => {
+    const getAccountInfoAsync = async () => {
+      try {
+        const authToken = localStorage.getItem('authToken')
+        const id = localStorage.getItem('id')
+        const data = await getAccountInfo(authToken, id)
+        console.log('成功取得使用者資料')
+        setUserHead(data)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    getAccountInfoAsync()
+  }, [])
 
   useEffect(() => {
     const getUserDataAsync = async (authToken, id) => {
@@ -71,7 +86,7 @@ const PersonalInfo = () => {
 
   return (
     <div className={container}>
-      <PersonalInfoHead />
+      <PersonalInfoHead userHead={userHead} setUserHead={setUserHead}/>
       <TweetSwitchTab
         list={list}
         status={status}

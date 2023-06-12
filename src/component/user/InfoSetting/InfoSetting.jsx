@@ -2,12 +2,18 @@ import styles from './InfoSetting.module.scss'
 import DefaultInputItem from 'component/element/element_basic/DefaultInputItem/DefaultInputItem'
 import { useState, useEffect } from 'react'
 import Button from 'component/element/element_basic/Button/Button'
-import { getAccountInfo } from 'api/user'
+import { getAccountInfo, putAccountInfo } from 'api/user'
 
 const InfoSetting = () => {
   const { container, inputContainer, btnContainer, btn } = styles
+  const [userInfo, setUserInfo] = useState({
+    account: '',
+    name: '',
+    email: '',
+    password: '',
+    checkPassword: ''
+  })
 
-  const [userInfo, setUserInfo] = useState('')
   const handleAccountChange = (value) => {
     setUserInfo({
       ...userInfo,
@@ -39,14 +45,36 @@ const InfoSetting = () => {
     })
   }
 
+  const handleSave = async () => {
+    try {
+      const authToken = localStorage.getItem('authToken')
+      const id = localStorage.getItem('id')
+      const data = await putAccountInfo(authToken, id, userInfo)
+      console.log(data.message)
+      alert('修改完成')
+      setUserInfo({
+        ...userInfo,
+        password: '',
+        checkPassword: ''
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   useEffect(() => {
     const getAccountInfoAsync = async () => {
       try {
         const authToken = localStorage.getItem('authToken')
         const id = localStorage.getItem('id')
         const data = await getAccountInfo(authToken, id)
+        const { account, name, email } = data
         console.log('成功取得使用者資料')
-        setUserInfo(data)
+        setUserInfo({
+          account,
+          name,
+          email
+        })
       } catch (error) {
         console.error(error)
       }
@@ -86,7 +114,7 @@ const InfoSetting = () => {
             label={'密碼'}
               type={'password'}
               placeholder={'請設定密碼'}
-              defaultValue={''}
+              defaultValue={userInfo.password}
               onChange={handlePasswordChange}
             />
         </div>
@@ -95,11 +123,11 @@ const InfoSetting = () => {
             label={'密碼再確認'}
               type={'password'}
               placeholder={'請再次輸入密碼'}
-              defaultValue={''}
+              defaultValue={userInfo.checkPassword}
               onChange={handlePasswordCheckChange}
             />
         </div>
-        <div className={btnContainer}>
+        <div className={btnContainer} onClick={handleSave}>
           <div className={btn}>
             <Button
               type={'fullPill'}
