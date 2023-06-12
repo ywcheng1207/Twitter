@@ -1,21 +1,13 @@
 import styles from './InfoSetting.module.scss'
 import DefaultInputItem from 'component/element/element_basic/DefaultInputItem/DefaultInputItem'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Button from 'component/element/element_basic/Button/Button'
 import { getAccountInfo } from 'api/user'
-
-const dummyData = {
-  account: 'rachen',
-  name: 'raychen',
-  email: 'rayray@gmail.com',
-  password: '12345678',
-  checkPassword: '12345678'
-}
 
 const InfoSetting = () => {
   const { container, inputContainer, btnContainer, btn } = styles
 
-  const [userInfo, setUserInfo] = useState(dummyData)
+  const [userInfo, setUserInfo] = useState('')
   const handleAccountChange = (value) => {
     setUserInfo({
       ...userInfo,
@@ -47,6 +39,21 @@ const InfoSetting = () => {
     })
   }
 
+  useEffect(() => {
+    const getAccountInfoAsync = async () => {
+      try {
+        const authToken = localStorage.getItem('authToken')
+        const id = localStorage.getItem('id')
+        const data = await getAccountInfo(authToken, id)
+        console.log('成功取得使用者資料')
+        setUserInfo(data)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    getAccountInfoAsync()
+  }, [])
+
   return (
     <div className={container}>
       <header>
@@ -56,21 +63,21 @@ const InfoSetting = () => {
         <div className={inputContainer}>
           <DefaultInputItem
             label={'帳號'}
-            defaultValue={userInfo.account}
+            value={userInfo.account}
             onChange={handleAccountChange}
           />
         </div>
         <div className={inputContainer}>
           <DefaultInputItem
             label={'名稱'}
-            defaultValue={userInfo.name}
+            value={userInfo.name}
             onChange={handleNameChange}
           />
         </div>
         <div className={inputContainer}>
           <DefaultInputItem
             label={'Email'}
-            defaultValue={userInfo.email}
+            value={userInfo.email}
             onChange={handleEmailChange}
           />
         </div>
@@ -79,7 +86,7 @@ const InfoSetting = () => {
             label={'密碼'}
               type={'password'}
               placeholder={'請設定密碼'}
-              defaultValue={''}
+              value={''}
               onChange={handlePasswordChange}
             />
         </div>
@@ -88,7 +95,7 @@ const InfoSetting = () => {
             label={'密碼再確認'}
               type={'password'}
               placeholder={'請再次輸入密碼'}
-              defaultValue={''}
+              value={''}
               onChange={handlePasswordCheckChange}
             />
         </div>
