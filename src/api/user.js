@@ -11,15 +11,15 @@ export const getTweets = async (authToken) => {
   }
 }
 
-// export const createTweets = async (payload) => {
-//   const { description } = payload
-//   try {
-//     const res = await axios.post(`${baseURL}/tweets`, { description })
-//     return res.data
-//   } catch (error) {
-//     console.error('[Create Tweets failed]: ', error)
-//   }
-// }
+export const createTweets = async (payload) => {
+  const { description } = payload
+  try {
+    const res = await axios.post(`${baseURL}/tweets`, { description })
+    return res.data
+  } catch (error) {
+    console.error('[Create Tweets failed]: ', error)
+  }
+}
 
 // -- 個人資料頁底下的推文串
 export const getUserTweets = async (authToken, id) => {

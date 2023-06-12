@@ -10,6 +10,7 @@ import { ReactComponent as Home } from 'assets/icons/home.svg'
 import { ReactComponent as PersonInfoActive } from 'assets/icons/personInfoActive.svg'
 import { ReactComponent as SettingActive } from 'assets/icons/settingActive.svg'
 import UserPostModal from 'component/element/element_mid/UserPostModal/UserPostModal'
+import { useUserPostModal } from 'contexts/UserMainPageContext'
 
 const Nav = ({ status, onNavSwitch }) => {
   const {
@@ -18,6 +19,7 @@ const Nav = ({ status, onNavSwitch }) => {
   } = styles
   const [show, setShow] = useState(false)
   const [text, setText] = useState('')
+  const { onAddHomeList } = useUserPostModal()
 
   const handleLogout = () => {
     localStorage.removeItem('authToken')
@@ -66,6 +68,7 @@ const Nav = ({ status, onNavSwitch }) => {
         onShow={handleShow}
         text={text}
         onChange={handleChange}
+        onAddHomeList={onAddHomeList}
       >
         <button className={postBtn} onClick={handleShow}>
           推文
