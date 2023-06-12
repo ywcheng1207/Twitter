@@ -4,29 +4,29 @@ import HomeContentItem from 'component/element/element_mid/HomeContentItem/HomeC
 import PersonalInfoHead from 'component/element/element_mid/PersonalInfoHead/PersonalInfoHead'
 import PostContentItem from 'component/element/element_mid/PostContentItem/PostContentItem'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
-// import { getUserTweets } from 'api/user'
+import { getUserTweets, getUserReplyTweets, getUserLikeTweets } from 'api/user'
 
-import homepageDummy from 'dummyData/homepageDummy'
+// import homepageDummy from 'dummyData/homepageDummy'
 
-const ContentItem = ({ render }) => {
+const ContentItem = ({ render, postList, replyList, userLikeList }) => {
   if (render === '推文') {
     return (
-      homepageDummy.map((item) => (
-        <HomeContentItem tweet={item} key={item.tweetId} />
+      postList.map((item) => (
+        <HomeContentItem tweet={item} key={item.TweetId} />
       ))
     )
   } else if (render === '回覆') {
     return (
-      homepageDummy.map((item) => (
-        <PostContentItem key={item.tweetId} />
+      replyList.map((item) => (
+        <PostContentItem key={item.reaplyId} />
       ))
     )
   } else if (render === '喜歡的內容') {
     return (
-      homepageDummy.map((item) => (
-        <HomeContentItem tweet={item} key={item.tweetId} />
+      userLikeList.map((item) => (
+        <HomeContentItem tweet={item} key={item.TweetId} />
       ))
     )
   }
@@ -36,29 +36,38 @@ const PersonalInfo = () => {
   const { container, contentItemContainer, switchTab } = styles
   const [status, setStatus] = useState(0)
   const [render, setRender] = useState('推文')
-  // const [postList, setPostList] = useState([])
+  const [postList, setPostList] = useState([])
+  const [replyList, setReplyList] = useState([])
+  const [userLikeList, setUserLikeList] = useState([])
+
   const list = ['推文', '回覆', '喜歡的內容']
 
   const handleClick = (index, item) => {
     setStatus(index)
     setRender(item)
-    // console.log(item)
   }
 
-  // useEffect(() => {
-  //   const getUserDataAsync = async (authToken, id) => {
-  //     try {
-  //       const data = await getUserTweets(authToken, id)
-  //       console.log(data[0])
-  //       setPostList(data)
-  //     } catch (error) {
-  //       console.error(error)
-  //     }
-  //   }
-  //   if (localStorage.getItem('authToken')) {
-  //     getUserDataAsync(localStorage.getItem('authToken'), id)
-  //   }
-  // }, [])
+  useEffect(() => {
+    const getUserDataAsync = async (authToken, id) => {
+      try {
+        const postListData = await getUserTweets(authToken, id)
+        const replyListData = await getUserReplyTweets(authToken, id)
+        const userLikeListData = await getUserLikeTweets(authToken, id)
+        console.log('成功取得個人資料頁的個人推文串')
+        console.log('成功取得個人資料頁的回覆推文串')
+        console.log('成功取得個人資料頁的Like推文串')
+
+        setPostList(postListData)
+        setReplyList(replyListData)
+        setUserLikeList(userLikeListData)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    if (localStorage.getItem('authToken')) {
+      getUserDataAsync(localStorage.getItem('authToken'), localStorage.getItem('id'))
+    }
+  }, [])
 
   return (
     <div className={container}>
@@ -71,7 +80,7 @@ const PersonalInfo = () => {
         className={switchTab}
       />
       <div className={contentItemContainer}>
-        <ContentItem render={render} />
+        <ContentItem render={render} postList={postList} replyList={replyList} userLikeList={userLikeList}/>
       </div>
     </div>
   )
