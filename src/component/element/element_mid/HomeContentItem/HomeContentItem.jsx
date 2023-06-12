@@ -6,8 +6,9 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import UserReplyModal from 'component/element/element_mid/UserReplyModal/UserReplyModal'
 import HoursPassed from 'component/element/element_basic/HoursPassed/HoursPassed'
+import { userLikeTweet, userUnLikeTweet } from 'api/user'
 
-const HomeContentItem = ({ tweet }) => {
+const HomeContentItem = ({ TweetId, tweet }) => {
   // --- style
   const {
     HomeContentItemContainer, HomeContentItemHead, HomeContentItemDescreption,
@@ -23,15 +24,20 @@ const HomeContentItem = ({ tweet }) => {
 
   // --- handle
   // like功能：這裡要call api更新該篇tweet的like數據
-  const handleLikeIcon = () => {
-    if (isLike === true) {
-      setIsLike(false)
-      setTweetLikeCount(tweetLikeCount - 1)
-      console.log(tweetLikeCount)
-    } else {
-      setIsLike(true)
-      setTweetLikeCount(tweetLikeCount + 1)
-      console.log(tweetLikeCount)
+  const handleLikeIcon = async (TweetId) => {
+    const authToken = localStorage.getItem('authToken')
+    try {
+      if (isLike === true) {
+        await userUnLikeTweet({ authToken, TweetId })
+        setIsLike(false)
+        setTweetLikeCount(tweetLikeCount - 1)
+      } else {
+        await userLikeTweet({ authToken, TweetId })
+        setIsLike(true)
+        setTweetLikeCount(tweetLikeCount + 1)
+      }
+    } catch (error) {
+      console.error(error)
     }
   }
   // 點擊切換至某一篇tweet，這邊要給那篇tweet的id，讓該篇文一進去就可以依照id去call api找資料
@@ -85,7 +91,7 @@ const HomeContentItem = ({ tweet }) => {
             </div>
           </UserReplyModal>
           <div className={like}>
-            <div onClick={handleLikeIcon}>
+            <div onClick={() => handleLikeIcon(TweetId)}>
                 {isLike ? <img src={likeIconClick} alt="" /> : <img src={likeIcon} alt="" />}
             </div>
             <div className={likeCount}>
@@ -93,7 +99,6 @@ const HomeContentItem = ({ tweet }) => {
             </div>
           </div>
         </div>
-
       </div>
     </div>
   )
