@@ -82,6 +82,7 @@ export const UserReplyModalContextProvider = ({ children }) => {
     try {
       await userReplyTweets({ TweetId, comment: text })
       navigate('/user/replylist/main')
+      localStorage.removeItem('replyListLength')
     } catch (error) {
       console.error(error)
     }

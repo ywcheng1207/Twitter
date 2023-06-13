@@ -71,7 +71,7 @@ const PostContentHead = () => {
     if (authToken) {
       getDataAsync({ authToken, TweetId })
     }
-  }, [])
+  }, [localStorage.getItem('replyListLength')])
 
   return (
     <div className={PostContentHeadContainer}>
