@@ -8,6 +8,7 @@ import UserReplyModal from 'component/element/element_mid/UserReplyModal/UserRep
 import HoursPassed from 'component/element/element_basic/HoursPassed/HoursPassed'
 import { userLikeTweet, userUnLikeTweet } from 'api/user'
 import { useOtherContext } from 'contexts/OtherContext'
+import { useReplyList } from 'contexts/RelyLIstContext'
 
 const HomeContentItem = ({ TweetId, tweet, id }) => {
   // --- style
@@ -22,6 +23,9 @@ const HomeContentItem = ({ TweetId, tweet, id }) => {
   const [isLike, setIsLike] = useState(tweet.isLiked)
   const [tweetLikeCount, setTweetLikeCount] = useState(tweet.likeCount)
   const navigate = useNavigate()
+
+  //
+  const { onTheTweetId } = useReplyList()
 
   // --- handle
   // like功能：這裡要call api更新該篇tweet的like數據
@@ -42,7 +46,7 @@ const HomeContentItem = ({ TweetId, tweet, id }) => {
     }
   }
   // 點擊切換至某一篇tweet，這邊要給那篇tweet的id，讓該篇文一進去就可以依照id去call api找資料
-  const handleReplyList = () => {
+  const handleGoReplyList = () => {
     navigate('/user/replylist/main')
   }
 
@@ -81,7 +85,11 @@ const HomeContentItem = ({ TweetId, tweet, id }) => {
               <HoursPassed item={tweet.createdAt}/>
           </span>
         </div>
-        <p className={postDescription} onClick={() => handleReplyList?.()}>
+        <p className={postDescription} onClick={() => {
+          handleGoReplyList()
+          onTheTweetId(TweetId)
+        }
+        }>
           {tweet.description}
         </p>
 
