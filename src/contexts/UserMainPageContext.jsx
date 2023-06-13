@@ -1,4 +1,5 @@
 import { createContext, useState, useContext } from 'react'
+import { userAddTweets } from 'api/user'
 
 const userPostModalContext = createContext('')
 
@@ -10,23 +11,26 @@ export const UserPostModalContextProvider = ({ children }) => {
   const handleHomeList = (data) => {
     setHomeList(data)
   }
-  const handleAddHomeList = (text) => {
+  const handleAddHomeList = async (text) => {
     if (text.length === 0) {
       return
     }
-    console.log(`送出${text}`)
+    const data = await userAddTweets({ description: text })
+    console.log(data)
+    // console.log(`送出${text}`)
+
     setHomeList((preHomeList) => {
       return [{
-        TweetId: Math.floor(Math.random() * 1000000000),
-        description: text,
-        isLiked: false,
-        likeCount: 0,
-        replyCount: 0,
-        tweetOwnerAccount: 'user1',
-        tweetOwnerAvatar: 'https://loremflickr.com/320/240/icon?lock=3',
-        tweetOwnerId: '204',
-        tweetOwnerName: 'user1',
-        tweetTime: new Date()
+        TweetId: data.TweetId,
+        description: data.description,
+        isLiked: data.isLiked,
+        likeCount: data.likeCount,
+        replyCount: data.replyCount,
+        tweetOwnerAccount: data.tweetOwnerAccount,
+        tweetOwnerAvatar: data.tweetOwnerAvatar,
+        tweetOwnerId: data.tweetOwnerId,
+        tweetOwnerName: data.tweetOwnerName,
+        createdAt: data.createdAt
       },
       ...preHomeList]
     })
