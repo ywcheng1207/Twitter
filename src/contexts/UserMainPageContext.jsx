@@ -11,13 +11,36 @@ export const UserPostModalContextProvider = ({ children }) => {
   const handleHomeList = (data) => {
     setHomeList(data)
   }
+
+  const handleLike = (TweetId) => {
+    setHomeList((pre) => {
+      return pre.map((item) => {
+        if (item.TweetId === TweetId) {
+          return { ...item, isLiked: true, likeCount: item.likeCount + 1 }
+        } else {
+          return item
+        }
+      })
+    })
+  }
+
+  const handleUnLike = (TweetId) => {
+    setHomeList((pre) => {
+      return pre.map((item) => {
+        if (item.TweetId === TweetId) {
+          return { ...item, isLiked: false, likeCount: item.likeCount - 1 }
+        } else {
+          return item
+        }
+      })
+    })
+  }
+
   const handleAddHomeList = async (text) => {
     if (text.length === 0) {
       return
     }
     const data = await userAddTweets({ description: text })
-    console.log(data)
-    // console.log(`送出${text}`)
 
     setHomeList((preHomeList) => {
       return [{
@@ -38,7 +61,9 @@ export const UserPostModalContextProvider = ({ children }) => {
   const value = {
     homeList,
     onHomeList: handleHomeList,
-    onAddHomeList: handleAddHomeList
+    onAddHomeList: handleAddHomeList,
+    onLike: handleLike,
+    onUnLike: handleUnLike
   }
   return (
     <userPostModalContext.Provider value={value} >
