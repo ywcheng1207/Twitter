@@ -100,7 +100,7 @@ const PersonalInfo = () => {
     if (localStorage.getItem('authToken')) {
       getUserDataAsync(localStorage.getItem('authToken'), localStorage.getItem('id'))
     }
-  }, [])
+  }, [render])
 
   return (
     <div className={container}>
