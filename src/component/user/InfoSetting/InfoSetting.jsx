@@ -2,7 +2,7 @@ import styles from './InfoSetting.module.scss'
 import DefaultInputItem from 'component/element/element_basic/DefaultInputItem/DefaultInputItem'
 import { useState, useEffect } from 'react'
 import Button from 'component/element/element_basic/Button/Button'
-import { getAccountInfo, putAccountInfo } from 'api/user'
+import { getAccountInfo, patchAccountInfo } from 'api/user'
 
 const InfoSetting = () => {
   const { container, inputContainer, btnContainer, btn } = styles
@@ -49,9 +49,7 @@ const InfoSetting = () => {
     try {
       const authToken = localStorage.getItem('authToken')
       const id = localStorage.getItem('id')
-      await putAccountInfo(id, authToken, userInfo)
-      console.log('儲存成功')
-      const data = await putAccountInfo(authToken, id, userInfo)
+      const data = await patchAccountInfo(authToken, id, userInfo)
       console.log(data.message)
       alert('修改完成')
       setUserInfo({

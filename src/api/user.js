@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-// const baseURL = 'https://arcane-mesa-58606.herokuapp.com/api'
-const baseURL = 'https://rocky-reef-54442.herokuapp.com/api'
+const baseURL = 'https://arcane-mesa-58606.herokuapp.com/api'
+// const baseURL = 'https://rocky-reef-54442.herokuapp.com/api'
 
 export const getTweets = async (authToken) => {
   try {
@@ -72,10 +72,10 @@ export const getUserLikeTweets = async (authToken, id) => {
 }
 
 // -- 設定頁 post 更改使用者帳號資料
-export const putAccountInfo = async (authToken, id, userInfo) => {
+export const patchAccountInfo = async (authToken, id, userInfo) => {
   try {
     const { account, name, email, password, checkPassword } = userInfo
-    const res = await axios.post(`${baseURL}/users/${id}`, {
+    const res = await axios.patch(`${baseURL}/users/${id}`, {
       account,
       name,
       email,
@@ -98,32 +98,41 @@ export const getAccountInfo = async (authToken, id) => {
   }
 }
 
-// -- Other頁面取得 Other 資料
+// -- follow 頁取得 follower 資料
+export const getUserFollowers = async (authToken, id) => {
+  try {
+    const { data } = await axios.get(`${baseURL}/users/${id}/followers`, { headers: { Authorization: 'Bearer ' + authToken } })
+    return data
+  } catch (error) {
+    console.error('[getUserFollowers failed]', error)
+  }
+}
 
-// // -- Other 頁底下的推文串
-// export const getOtherTweets = async (authToken, id) => {
-//   try {
-//     const res = await axios.get(`${baseURL}/users/${id}/tweets `, { headers: { Authorization: 'Bearer ' + authToken } })
-//     return res.data
-//   } catch (error) {
-//     console.error('[Get OtherTweets failed]', error)
-//   }
-// }
-// // -- Other 頁底下的回覆串
-// export const getOtherReplyTweets = async (authToken, id) => {
-//   try {
-//     const res = await axios.get(`${baseURL}/users/${id}/replied_tweets `, { headers: { Authorization: 'Bearer ' + authToken } })
-//     return res.data
-//   } catch (error) {
-//     console.error('[Get OtherTweets failed]', error)
-//   }
-// }
-// // -- Other 頁底下的喜歡串
-// export const getOtherLikeTweets = async (authToken, id) => {
-//   try {
-//     const res = await axios.get(`${baseURL}/users/${id}/likes `, { headers: { Authorization: 'Bearer ' + authToken } })
-//     return res.data
-//   } catch (error) {
-//     console.error('[Get OtherTweets failed]', error)
-//   }
-// }
+// -- follow 頁取得 following 資料
+export const getUserFollowing = async (authToken, id) => {
+  try {
+    const { data } = await axios.get(`${baseURL}/users/${id}/followings`, { headers: { Authorization: 'Bearer ' + authToken } })
+    return data
+  } catch (error) {
+    console.error('[getUserFollowings failed]', error)
+  }
+}
+
+// -- follow 頁點擊後追隨
+export const postUserFollow = async (authToken, id) => {
+  try {
+    const { data } = await axios.post(`${baseURL}/followships`, { id }, { headers: { Authorization: 'Bearer ' + authToken } })
+    return data
+  } catch (error) {
+    console.error('[postUserFollow failed]', error)
+  }
+}
+
+export const deleteUserFollow = async (authToken, id) => {
+  try {
+    const { data } = await axios.delete(`${baseURL}/followships/${id}`, { headers: { Authorization: 'Bearer ' + authToken } })
+    return data
+  } catch (error) {
+    console.error('[deleteUserFollow failed]', error)
+  }
+}
