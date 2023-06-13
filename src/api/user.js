@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const baseURL = 'https://arcane-mesa-58606.herokuapp.com/api'
+// const baseURL = 'https://arcane-mesa-58606.herokuapp.com/api'
+const baseURL = 'https://rocky-reef-54442.herokuapp.com/api'
 
 export const getTweets = async (authToken) => {
   try {
@@ -11,10 +12,11 @@ export const getTweets = async (authToken) => {
   }
 }
 
-export const createTweets = async (payload) => {
+export const userAddTweets = async (payload) => {
   const { description } = payload
+  const authToken = localStorage.getItem('authToken')
   try {
-    const res = await axios.post(`${baseURL}/tweets`, { description })
+    const res = await axios.post(`${baseURL}/tweets`, { description }, { headers: { Authorization: 'Bearer ' + authToken } })
     return res.data
   } catch (error) {
     console.error('[Create Tweets failed]: ', error)
