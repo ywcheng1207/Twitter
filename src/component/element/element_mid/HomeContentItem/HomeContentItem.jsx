@@ -9,7 +9,7 @@ import HoursPassed from 'component/element/element_basic/HoursPassed/HoursPassed
 import { userLikeTweet, userUnLikeTweet } from 'api/user'
 // import { useOtherContext } from 'contexts/OtherContext'
 import { useReplyList } from 'contexts/RelyLIstContext'
-import { useUserPostModal } from 'contexts/UserMainPageContext'
+import { useUserPostModal, useUserReplyModal } from 'contexts/UserMainPageContext'
 
 const HomeContentItem = ({ TweetId, tweet, id, onPostList, onUserLikeList }) => {
   // --- style
@@ -28,6 +28,7 @@ const HomeContentItem = ({ TweetId, tweet, id, onPostList, onUserLikeList }) => 
 
   // Reply頁面的context
   const { onTheTweetId } = useReplyList()
+  const { onUserReply } = useUserReplyModal()
 
   // --- handle
   // like功能：這裡要call api更新該篇tweet的like數據
@@ -62,7 +63,6 @@ const HomeContentItem = ({ TweetId, tweet, id, onPostList, onUserLikeList }) => 
   const handleShow = () => setShow(true)
   const handleChange = value => {
     const inputText = value
-    console.log(inputText.length)
     if (inputText.length <= 1000) {
       setText(inputText)
     }
@@ -106,7 +106,9 @@ const HomeContentItem = ({ TweetId, tweet, id, onPostList, onUserLikeList }) => 
             onClose={handleClose}
             onShow={handleShow}
             text={text}
+            tweet={tweet}
             onChange={handleChange}
+            onUserReply={onUserReply}
           >
             <div className={reply} onClick={handleShow}>
               <img src={replyIcon} alt="" />

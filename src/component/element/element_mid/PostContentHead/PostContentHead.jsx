@@ -5,7 +5,7 @@ import likeIcon from 'assets/icons/like.svg'
 import likeIconClick from 'assets/icons/likeClick.svg'
 import UserReplyModal from 'component/element/element_mid/UserReplyModal/UserReplyModal'
 import { getSingleTweetInfo, userLikeTweet, userUnLikeTweet } from 'api/user'
-import { useUserPostModal } from 'contexts/UserMainPageContext'
+import { useUserPostModal, useUserReplyModal } from 'contexts/UserMainPageContext'
 
 const PostContentHead = () => {
   const {
@@ -25,7 +25,6 @@ const PostContentHead = () => {
   const handleShow = () => setShow(true)
   const handleChange = value => {
     const inputText = value
-    console.log(inputText.length)
     if (inputText.length <= 1000) {
       setText(inputText)
     }
@@ -33,6 +32,7 @@ const PostContentHead = () => {
 
   // Home頁面的context
   const { onLike, onUnLike } = useUserPostModal()
+  const { onUserReply } = useUserReplyModal()
 
   //
   const handleLikeIcon = async () => {
@@ -105,6 +105,8 @@ const PostContentHead = () => {
           onShow={handleShow}
           text={text}
           onChange={handleChange}
+          tweet={tweetOwnerInfo}
+          onUserReply={onUserReply}
         >
           <img className={replyBtn} src={replyIcon} alt="" onClick={handleShow}/>
         </UserReplyModal>
