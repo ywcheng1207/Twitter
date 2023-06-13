@@ -20,7 +20,7 @@ const ContentItem = ({ render, postList, replyList, userLikeList }) => {
   } else if (render === '回覆') {
     return (
       replyList.map((item) => (
-        <PostContentItem key={item.reaplyId} />
+        <PostContentItem tweet={item} key={item.reaplyId} />
       ))
     )
   } else if (render === '喜歡的內容') {
