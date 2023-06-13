@@ -9,6 +9,7 @@ import HoursPassed from 'component/element/element_basic/HoursPassed/HoursPassed
 import { userLikeTweet, userUnLikeTweet } from 'api/user'
 import { useOtherContext } from 'contexts/OtherContext'
 import { useReplyList } from 'contexts/RelyLIstContext'
+import { useUserPostModal } from 'contexts/UserMainPageContext'
 
 const HomeContentItem = ({ TweetId, tweet, id }) => {
   // --- style
@@ -24,13 +25,24 @@ const HomeContentItem = ({ TweetId, tweet, id }) => {
   const [tweetLikeCount, setTweetLikeCount] = useState(tweet.likeCount)
   const navigate = useNavigate()
 
-  //
+  // Home頁面的context
+  const { homeList } = useUserPostModal()
+
+  // Reply頁面的context
   const { onTheTweetId } = useReplyList()
 
   // --- handle
   // like功能：這裡要call api更新該篇tweet的like數據
   const handleLikeIcon = async (TweetId) => {
     const authToken = localStorage.getItem('authToken')
+    // console.table(homeList)
+    const updatedHomeList = homeList.map((item) => {
+      if (item.TweetId === TweetId) {
+        console.log(item)
+      }
+      return item
+    })
+    console.log(updatedHomeList)
     try {
       if (isLike === true) {
         await userUnLikeTweet({ authToken, TweetId })
