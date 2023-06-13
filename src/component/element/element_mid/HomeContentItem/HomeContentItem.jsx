@@ -7,7 +7,7 @@ import { useState } from 'react'
 import UserReplyModal from 'component/element/element_mid/UserReplyModal/UserReplyModal'
 import HoursPassed from 'component/element/element_basic/HoursPassed/HoursPassed'
 import { userLikeTweet, userUnLikeTweet } from 'api/user'
-import { useOtherContext } from 'contexts/OtherContext'
+// import { useOtherContext } from 'contexts/OtherContext'
 import { useReplyList } from 'contexts/RelyLIstContext'
 import { useUserPostModal } from 'contexts/UserMainPageContext'
 
@@ -78,11 +78,16 @@ const HomeContentItem = ({ TweetId, tweet, id }) => {
 
   // Other ID context
 
-  const setId = useOtherContext().setOtherId
+  // const setId = useOtherContext().setOtherId
   const handleAvatarClick = (e) => {
     console.log(e.target.id)
-    setId(e.target.id)
-    navigate('/user/other/main')
+    const userId = localStorage.getItem('id')
+    if (e.target.id === userId) {
+      navigate('/user/personalinfo/main')
+    } else {
+      localStorage.setItem('otherId', e.target.id)
+      navigate('/user/other/main')
+    }
   }
 
   return (

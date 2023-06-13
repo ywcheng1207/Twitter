@@ -4,7 +4,7 @@ import HomeContentItem from 'component/element/element_mid/HomeContentItem/HomeC
 // import PostContentItem from 'component/element/element_mid/PostContentItem/PostContentItem'
 import OtherPostContent from 'component/element/element_mid/OtherPostContent/OtherPostContent'
 import OtherHead from 'component/element/element_mid/OtherHead/OtherHead'
-import { useOtherContext } from 'contexts/OtherContext'
+// import { useOtherContext } from 'contexts/OtherContext'
 
 import { useState, useEffect } from 'react'
 import { getAccountInfo, getUserTweets, getUserReplyTweets, getUserLikeTweets } from 'api/user'
@@ -52,8 +52,7 @@ const Other = () => {
   const [replyList, setReplyList] = useState([])
   const [userLikeList, setUserLikeList] = useState([])
   const [otherUser, setOtherUser] = useState([])
-  const otherUserId = useOtherContext().otherId
-  localStorage.setItem('storageOtherId', otherUserId)
+  const otherId = localStorage.getItem('otherId')
 
   const list = ['推文', '回覆', '喜歡的內容']
 
@@ -63,7 +62,6 @@ const Other = () => {
   }
 
   useEffect(() => {
-    const otherId = localStorage.getItem('storageOtherId')
     const getUserDataAsync = async (authToken, id) => {
       try {
         const postListData = await getUserTweets(authToken, id)
@@ -87,7 +85,6 @@ const Other = () => {
 
   // render 用戶資料
   useEffect(() => {
-    const otherId = localStorage.getItem('storageOtherId')
     const getAccountInfoAsync = async () => {
       try {
         const authToken = localStorage.getItem('authToken')
