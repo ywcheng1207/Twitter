@@ -23,19 +23,19 @@ const ContentItem = ({ render, onClick, followerData, followingData }) => {
       )
     }
   } else if (render === '正在追隨') {
-    if (Array.isArray(followingData) && followingData.length > 0) {
+    if (followingData.length === 0 || !Array.isArray(followingData)) {
+      return null
+    } else {
       return (
         followingData.map((item) => (
           <UserFollowItem
             key={item.UserId}
             item={item}
-            onClick={(id) => id}
+            onClick={(id) => onClick?.(id)}
             render={render}
           />
         ))
       )
-    } else {
-      return null
     }
   }
 }
@@ -50,16 +50,16 @@ const Follow = () => {
   const navigate = useNavigate()
 
   const changeUserFollowAsync = async (currentUser, id, authToken) => {
-    if (currentUser.isFollowed) {
-      try {
+    try {
+      if (currentUser.isFollowed) {
         const res = await deleteUserFollow(authToken, id)
         console.log(res)
-      } catch (error) {
-        console.error(error)
+      } else if (!currentUser.isFollowed) {
+        const res = await postUserFollow(authToken, id)
+        console.log(res)
       }
-    } else {
-      const res = await postUserFollow(authToken, id)
-      console.log(res)
+    } catch (error) {
+      console.error(error)
     }
   }
 
@@ -89,7 +89,7 @@ const Follow = () => {
           return item
         }
       }))
-      const currentUser = followerData.find(item => item.UserId === id)
+      const currentUser = followingData.find(item => item.UserId === id)
       changeUserFollowAsync(currentUser, id, authToken)
     }
   }
