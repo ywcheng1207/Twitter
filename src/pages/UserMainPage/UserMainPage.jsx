@@ -5,6 +5,7 @@ import { Outlet, useParams, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useNavSwitch } from 'contexts/NavContext'
 import { UserPostModalContextProvider } from 'contexts/UserMainPageContext'
+import { ReplyListContextProvider } from 'contexts/RelyLIstContext'
 
 const UserMainPage = () => {
   const { UserMainPageContainer, contentContainer, settingContentContainer } = styles
@@ -19,24 +20,28 @@ const UserMainPage = () => {
   if (page !== 'infosetting') {
     return (
       <UserPostModalContextProvider>
-        <div className={UserMainPageContainer}>
-          <Nav status={status} onNavSwitch={onNavSwitch}/>
-            <div className={contentContainer}>
-                <Outlet />
-            </div>
-          <SideBar />
-        </div>
+        <ReplyListContextProvider>
+          <div className={UserMainPageContainer}>
+            <Nav status={status} onNavSwitch={onNavSwitch}/>
+              <div className={contentContainer}>
+                  <Outlet />
+              </div>
+            <SideBar />
+          </div>
+        </ReplyListContextProvider>
       </UserPostModalContextProvider>
     )
   } else {
     return (
       <UserPostModalContextProvider>
+        <ReplyListContextProvider>
         <div className={UserMainPageContainer}>
           <Nav status={status} onNavSwitch={onNavSwitch}/>
           <div className={settingContentContainer}>
             <Outlet />
           </div>
         </div>
+        </ReplyListContextProvider>
       </UserPostModalContextProvider>
     )
   }

@@ -98,6 +98,26 @@ export const getAccountInfo = async (authToken, id) => {
   }
 }
 
+// -- 取得ReplyList頁面的回覆串
+export const getSingleTweet = async ({ authToken, TweetId }) => {
+  try {
+    const { data } = await axios.get(`${baseURL}/tweets/${TweetId}/replies`, { headers: { Authorization: 'Bearer ' + authToken } })
+    return data
+  } catch (error) {
+    console.error('[getAccountInfo failed]', error)
+  }
+}
+
+export const getSingleTweetInfo = async ({ authToken, TweetId }) => {
+  try {
+    const { data } = await axios.get(`${baseURL}/tweets/${TweetId}`, { headers: { Authorization: 'Bearer ' + authToken } })
+    return data
+  } catch (error) {
+    console.error('[getAccountInfo failed]', error)
+  }
+}
+
+// -- Other頁面取得 Other 資料
 // -- follow 頁取得 follower 資料
 export const getUserFollowers = async (authToken, id) => {
   try {
