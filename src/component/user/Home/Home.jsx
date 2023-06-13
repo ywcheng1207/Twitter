@@ -9,12 +9,9 @@ const Home = () => {
   const { contentContainer, HomeContentItemList } = styles
   const { homeList, onHomeList, onAddHomeList } = useUserPostModal()
   useEffect(() => {
-    // console.log('測試')
     const getUserDataAsync = async (authToken) => {
       try {
         const data = await getTweets(authToken)
-        // console.log('成功取得首頁資料')
-        // console.log(data)
         onHomeList(data)
       } catch (error) {
         console.error(error)

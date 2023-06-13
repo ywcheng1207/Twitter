@@ -11,7 +11,7 @@ import { userLikeTweet, userUnLikeTweet } from 'api/user'
 import { useReplyList } from 'contexts/RelyLIstContext'
 import { useUserPostModal } from 'contexts/UserMainPageContext'
 
-const HomeContentItem = ({ TweetId, tweet, id }) => {
+const HomeContentItem = ({ TweetId, tweet, id, onPostList, onUserLikeList }) => {
   // --- style
   const {
     HomeContentItemContainer, HomeContentItemHead, HomeContentItemDescreption,
@@ -21,12 +21,10 @@ const HomeContentItem = ({ TweetId, tweet, id }) => {
   // --- state
   const [show, setShow] = useState(false)
   const [text, setText] = useState('')
-  const [isLike, setIsLike] = useState(tweet.isLiked)
-  const [tweetLikeCount, setTweetLikeCount] = useState(tweet.likeCount)
   const navigate = useNavigate()
 
   // Home頁面的context
-  const { homeList } = useUserPostModal()
+  const { onLike, onUnLike } = useUserPostModal()
 
   // Reply頁面的context
   const { onTheTweetId } = useReplyList()
@@ -35,23 +33,17 @@ const HomeContentItem = ({ TweetId, tweet, id }) => {
   // like功能：這裡要call api更新該篇tweet的like數據
   const handleLikeIcon = async (TweetId) => {
     const authToken = localStorage.getItem('authToken')
-    // console.table(homeList)
-    const updatedHomeList = homeList.map((item) => {
-      if (item.TweetId === TweetId) {
-        console.log(item)
-      }
-      return item
-    })
-    console.log(updatedHomeList)
     try {
-      if (isLike === true) {
+      if (tweet.isLiked === true) {
         await userUnLikeTweet({ authToken, TweetId })
-        setIsLike(false)
-        setTweetLikeCount(tweetLikeCount - 1)
+        onUnLike(TweetId)
+        onPostList?.({ TweetId, count: -1 })
+        onUserLikeList?.({ TweetId, count: -1 })
       } else {
         await userLikeTweet({ authToken, TweetId })
-        setIsLike(true)
-        setTweetLikeCount(tweetLikeCount + 1)
+        onLike(TweetId)
+        onPostList?.({ TweetId, count: 1 })
+        onUserLikeList?.({ TweetId, count: 1 })
       }
     } catch (error) {
       console.error(error)
@@ -127,10 +119,10 @@ const HomeContentItem = ({ TweetId, tweet, id }) => {
           </UserReplyModal>
           <div className={like}>
             <div onClick={() => handleLikeIcon(TweetId)}>
-                {isLike ? <img src={likeIconClick} alt="" /> : <img src={likeIcon} alt="" />}
+                {tweet.isLiked ? <img src={likeIconClick} alt="" /> : <img src={likeIcon} alt="" />}
             </div>
             <div className={likeCount}>
-              {tweetLikeCount}
+              {tweet.likeCount}
             </div>
           </div>
         </div>
