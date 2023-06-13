@@ -148,11 +148,22 @@ export const postUserFollow = async (authToken, id) => {
   }
 }
 
+// -- follow 頁點擊後取消追蹤
 export const deleteUserFollow = async (authToken, id) => {
   try {
     const { data } = await axios.delete(`${baseURL}/followships/${id}`, { headers: { Authorization: 'Bearer ' + authToken } })
     return data
   } catch (error) {
     console.error('[deleteUserFollow failed]', error)
+  }
+}
+
+// -- sideBar 取得資料
+export const getSidebarData = async (authToken) => {
+  try {
+    const { data } = await axios.get(`${baseURL}/followships/top`, { headers: { Authorization: 'Bearer ' + authToken } })
+    return data
+  } catch (error) {
+    console.error('[getSidebarData failed]', error)
   }
 }
