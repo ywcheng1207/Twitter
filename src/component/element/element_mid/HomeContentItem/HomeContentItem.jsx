@@ -68,8 +68,6 @@ const HomeContentItem = ({ TweetId, tweet, id, onPostList, onUserLikeList }) => 
     }
   }
 
-  // Other ID context
-
   // const setId = useOtherContext().setOtherId
   const handleAvatarClick = (e) => {
     console.log(e.target.id)
