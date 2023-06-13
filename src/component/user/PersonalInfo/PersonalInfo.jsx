@@ -7,14 +7,13 @@ import PostContentItem from 'component/element/element_mid/PostContentItem/PostC
 import { useState, useEffect } from 'react'
 
 import { getUserTweets, getUserReplyTweets, getUserLikeTweets, getAccountInfo } from 'api/user'
-
 // import homepageDummy from 'dummyData/homepageDummy'
 
 const ContentItem = ({ render, postList, replyList, userLikeList }) => {
   if (render === '推文') {
     return (
       postList.map((item) => (
-        <HomeContentItem tweet={item} key={item.TweetId} />
+        <HomeContentItem tweet={item} key={item.TweetId} TweetId={item.TweetId}/>
       ))
     )
   } else if (render === '回覆') {
@@ -26,7 +25,7 @@ const ContentItem = ({ render, postList, replyList, userLikeList }) => {
   } else if (render === '喜歡的內容') {
     return (
       userLikeList.map((item) => (
-        <HomeContentItem tweet={item} key={item.TweetId} />
+        <HomeContentItem tweet={item} key={item.TweetId} TweetId={item.TweetId}/>
       ))
     )
   }
@@ -69,8 +68,8 @@ const PersonalInfo = () => {
         const replyListData = await getUserReplyTweets(authToken, id)
         const userLikeListData = await getUserLikeTweets(authToken, id)
         console.log('成功取得個人資料頁的個人推文串')
-        console.log('成功取得個人資料頁的回覆推文串')
-        console.log('成功取得個人資料頁的Like推文串')
+        // console.log('成功取得個人資料頁的回覆推文串')
+        // console.log('成功取得個人資料頁的Like推文串')
 
         setPostList(postListData)
         setReplyList(replyListData)
