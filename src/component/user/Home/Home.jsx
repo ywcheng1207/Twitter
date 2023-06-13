@@ -30,7 +30,7 @@ const Home = () => {
       <HomeContentHead onAddHomeList={onAddHomeList} />
         <div className={HomeContentItemList}>
            {homeList.map((item) => (
-              <HomeContentItem tweet={item} TweetId={item.TweetId} key={item.TweetId} />
+              <HomeContentItem tweet={item} TweetId={item.TweetId} key={item.TweetId} id={item.tweetOwnerId}/>
            ))}
         </div>
     </div>

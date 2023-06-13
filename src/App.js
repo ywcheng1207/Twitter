@@ -11,11 +11,13 @@ import UserMainPage from 'pages/UserMainPage/UserMainPage'
 import Content from 'pages/UserMainPage/Content'
 import HomePage from 'pages/HomePage/HomePage'
 import { SwitchCotextProvider } from 'contexts/NavContext'
+import { OtherProvider } from 'contexts/OtherContext'
 
 const basename = process.env.PUBLIC_URL
 function App () {
   return (
   <SwitchCotextProvider>
+    <OtherProvider>
       <div className="App">
         <BrowserRouter basename={basename}>
           <Routes>
@@ -35,6 +37,7 @@ function App () {
           </Routes>
         </BrowserRouter>
       </div>
+    </OtherProvider>
    </SwitchCotextProvider>
   )
 }

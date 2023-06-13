@@ -49,6 +49,8 @@ const InfoSetting = () => {
     try {
       const authToken = localStorage.getItem('authToken')
       const id = localStorage.getItem('id')
+      await putAccountInfo(id, authToken, userInfo)
+      console.log('儲存成功')
       const data = await putAccountInfo(authToken, id, userInfo)
       console.log(data.message)
       alert('修改完成')

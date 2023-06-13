@@ -7,8 +7,9 @@ import { useState } from 'react'
 import UserReplyModal from 'component/element/element_mid/UserReplyModal/UserReplyModal'
 import HoursPassed from 'component/element/element_basic/HoursPassed/HoursPassed'
 import { userLikeTweet, userUnLikeTweet } from 'api/user'
+import { useOtherContext } from 'contexts/OtherContext'
 
-const HomeContentItem = ({ TweetId, tweet }) => {
+const HomeContentItem = ({ TweetId, tweet, id }) => {
   // --- style
   const {
     HomeContentItemContainer, HomeContentItemHead, HomeContentItemDescreption,
@@ -59,10 +60,19 @@ const HomeContentItem = ({ TweetId, tweet }) => {
     }
   }
 
+  // Other ID context
+
+  const setId = useOtherContext().setOtherId
+  const handleAvatarClick = (e) => {
+    console.log(e.target.id)
+    setId(e.target.id)
+    navigate('/user/other/main')
+  }
+
   return (
     <div className={HomeContentItemContainer}>
       <div className={HomeContentItemHead}>
-        <img src={tweet.tweetOwnerAvatar} alt="Image"></img>
+        <img src={tweet.tweetOwnerAvatar} alt="Image" onClick={handleAvatarClick} id={id}></img>
       </div>
       <div className={HomeContentItemDescreption}>
         <div>

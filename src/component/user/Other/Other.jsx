@@ -3,8 +3,10 @@ import TweetSwitchTab from 'component/element/element_basic/TweetSwitchTab/Tweet
 // import HomeContentItem from 'component/element/element_mid/HomeContentItem/HomeContentItem'
 // import PostContentItem from 'component/element/element_mid/PostContentItem/PostContentItem'
 import OtherHead from 'component/element/element_mid/OtherHead/OtherHead'
+import { useOtherContext } from 'contexts/OtherContext'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { getAccountInfo } from 'api/user'
 
 // import { getUserTweets, getUserReplyTweets, getUserLikeTweets } from 'api/user'
 
@@ -86,9 +88,27 @@ const Other = () => {
   //   }
   // }, [])
 
+  // render 用戶資料
+  const [otherUser, setOtherUser] = useState([])
+  const otherUserId = useOtherContext().otherId
+  useEffect(() => {
+    const getAccountInfoAsync = async () => {
+      try {
+        const authToken = localStorage.getItem('authToken')
+        const data = await getAccountInfo(authToken, otherUserId)
+        console.log('用戶資料取得成功')
+        setOtherUser(data)
+        return data
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    getAccountInfoAsync()
+  }, [])
+
   return (
     <div className={container}>
-      <OtherHead/>
+      <OtherHead data={otherUser} />
       <TweetSwitchTab
         list={list}
         status={status}

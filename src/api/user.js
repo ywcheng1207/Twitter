@@ -48,6 +48,7 @@ export const getUserTweets = async (authToken, id) => {
     console.error('[Get UserTweets failed]', error)
   }
 }
+
 // -- 個人資料頁底下的回覆串
 export const getUserReplyTweets = async (authToken, id) => {
   try {
@@ -57,6 +58,7 @@ export const getUserReplyTweets = async (authToken, id) => {
     console.error('[Get UserReplyTweets failed]', error)
   }
 }
+
 // -- 個人資料頁底下的喜歡串
 export const getUserLikeTweets = async (authToken, id) => {
   try {
@@ -66,6 +68,7 @@ export const getUserLikeTweets = async (authToken, id) => {
     console.error('[Get UserLikeTweets failed]', error)
   }
 }
+
 // -- 設定頁 post 更改使用者帳號資料
 export const putAccountInfo = async (authToken, id, userInfo) => {
   try {
@@ -92,6 +95,8 @@ export const getAccountInfo = async (authToken, id) => {
     console.error('[getAccountInfo failed]', error)
   }
 }
+
+// -- Other頁面取得 Other 資料
 
 // // -- Other 頁底下的推文串
 // export const getOtherTweets = async (authToken, id) => {
