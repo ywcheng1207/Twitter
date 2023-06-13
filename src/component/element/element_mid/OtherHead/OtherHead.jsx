@@ -6,7 +6,7 @@ import { clsx } from 'clsx'
 import { ReactComponent as Bell } from 'assets/icons/bell.svg'
 import { ReactComponent as Mail } from 'assets/icons/mail.svg'
 
-const OtherHead = ({ data }) => {
+const OtherHead = ({ otherUser }) => {
   const {
     container, headerText, selfInfoContainer, backgroundImg,
     btnContainer, selfInfo, userAvatar, userName, account, description,
@@ -27,37 +27,37 @@ const OtherHead = ({ data }) => {
         <div className={header}>
             <img src={arrow} alt="" onClick={() => handleText()}/>
             <div className={headerText}>
-              <h4 className='Bold'>{data.name}</h4>
-              <span className={tweetsCount}>{data.tweetCount} 貼文</span>
+              <h4 className='Bold'>{otherUser.name}</h4>
+              <span className={tweetsCount}>{otherUser.tweetCount} 貼文</span>
             </div>
         </div>
         <div className={selfInfoContainer}>
             <div className={backgroundImg}>
-              <img src={data.cover} alt="" />
+              <img src={otherUser.cover} alt="" />
             </div>
             <div className={btnContainer} onClick={handleClick}>
                 <div className={btnContainer} onClick={handleClick} >
                     <Mail/>
                     <Bell />
-                    <div className={clsx(btnWidth, { [follow]: data.followed })}>
+                    <div className={clsx(btnWidth, { [follow]: otherUser.followed })}>
                         <Button
-                            value={ data.followed ? '正在跟隨' : '跟隨'}
-                            type={ data.followed ? 'fullPill' : 'holePill' }
+                            value={ otherUser.followed ? '正在跟隨' : '跟隨'}
+                            type={ otherUser.followed ? 'fullPill' : 'holePill' }
                         />
                     </div>
                 </div>
             </div>
-            <img className={userAvatar} src={data.avatar} alt="avatar" />
+            <img className={userAvatar} src={otherUser.avatar} alt="avatar" />
             <div className={selfInfo} >
-              <p className={userName}>{data.name}</p>
-              <p className={account}>{data.account}</p>
-              <p className={description} >{data.introduction}</p>
+              <p className={userName}>{otherUser.name}</p>
+              <p className={account}>{otherUser.account}</p>
+              <p className={description} >{otherUser.introduction}</p>
               <div className={followContainer} >
                   <p className={following}>
-                    <Link to='/user/follow/main'>{data.followingCount}個</Link> <span>追隨中</span>
+                    <Link to='/user/follow/main'>{otherUser.followingCount}個</Link> <span>追隨中</span>
                   </p>
                   <p className={follower}>
-                    <Link to='/user/follow/main' >{data.followerCount}位</Link> <span>跟隨者</span>
+                    <Link to='/user/follow/main' >{otherUser.followerCount}位</Link> <span>跟隨者</span>
                   </p>
               </div>
             </div>
