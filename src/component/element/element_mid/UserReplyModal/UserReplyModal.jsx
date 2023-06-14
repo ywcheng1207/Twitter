@@ -1,9 +1,15 @@
 import Modal from 'react-bootstrap/Modal'
 import styles from './UserReplyModal.module.scss'
 import HoursPassed from 'component/element/element_basic/HoursPassed/HoursPassed'
-const avatarUrl2 = 'https://loremflickr.com/320/240/people/?random=7.976051090916994&lock=878'
 
 function UserReplyModal ({ children, show, onClose, onShow, text, onChange, tweet, onUserReply }) {
+  let avatar
+  if (localStorage.getItem('avatar')) {
+    avatar = localStorage.getItem('avatar')
+  } else {
+    avatar = 'https://loremflickr.com/320/240/people/?random=7.976051090916994&lock=878'
+  }
+
   return (
     <>
       { children }
@@ -35,7 +41,7 @@ function UserReplyModal ({ children, show, onClose, onShow, text, onChange, twee
               </div>
             </div>
             <div className={styles.postBodyContainer}>
-              <img src={avatarUrl2} alt="" />
+              <img src={avatar} alt="" />
               <textarea
                 cols="60"
                 rows="2"
