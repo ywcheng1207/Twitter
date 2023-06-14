@@ -12,13 +12,14 @@ const ReplyListContent = () => {
   useEffect(() => {
     const authToken = localStorage.getItem('authToken')
     const TweetId = localStorage.getItem('TweetId')
-    console.log(TweetId)
+
     const getUserDataAsync = async ({ authToken, TweetId }) => {
       try {
         const data = await getSingleTweet({ authToken, TweetId })
         if (data.length > 0) {
           setReplyList(data)
         }
+        localStorage.setItem('replyListLength', data.length)
       } catch (error) {
         console.error(error)
       }
@@ -26,7 +27,7 @@ const ReplyListContent = () => {
     if (authToken) {
       getUserDataAsync({ authToken, TweetId })
     }
-  }, [])
+  }, [localStorage.getItem('replyListLength')])
 
   if (replyList.length > 0) {
     return replyList.map((item) => <PostContentItem key={item.replyId} tweet={item} reply='true' />)

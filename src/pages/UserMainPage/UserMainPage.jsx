@@ -4,7 +4,7 @@ import SideBar from 'component/element/element_mid/SideBar/SideBar'
 import { Outlet, useParams, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useNavSwitch } from 'contexts/NavContext'
-import { UserPostModalContextProvider } from 'contexts/UserMainPageContext'
+import { UserPostModalContextProvider, UserReplyModalContextProvider } from 'contexts/UserMainPageContext'
 import { ReplyListContextProvider } from 'contexts/RelyLIstContext'
 
 const UserMainPage = () => {
@@ -20,28 +20,32 @@ const UserMainPage = () => {
   if (page !== 'infosetting') {
     return (
       <UserPostModalContextProvider>
-        <ReplyListContextProvider>
-          <div className={UserMainPageContainer}>
-            <Nav status={status} onNavSwitch={onNavSwitch}/>
-              <div className={contentContainer}>
-                  <Outlet />
-              </div>
-            <SideBar />
-          </div>
-        </ReplyListContextProvider>
+        <UserReplyModalContextProvider>
+          <ReplyListContextProvider>
+            <div className={UserMainPageContainer}>
+              <Nav status={status} onNavSwitch={onNavSwitch}/>
+                <div className={contentContainer}>
+                    <Outlet />
+                </div>
+              <SideBar />
+            </div>
+          </ReplyListContextProvider>
+        </UserReplyModalContextProvider>
       </UserPostModalContextProvider>
     )
   } else {
     return (
       <UserPostModalContextProvider>
-        <ReplyListContextProvider>
-        <div className={UserMainPageContainer}>
-          <Nav status={status} onNavSwitch={onNavSwitch}/>
-          <div className={settingContentContainer}>
-            <Outlet />
+        <UserReplyModalContextProvider>
+          <ReplyListContextProvider>
+          <div className={UserMainPageContainer}>
+            <Nav status={status} onNavSwitch={onNavSwitch}/>
+            <div className={settingContentContainer}>
+              <Outlet />
+            </div>
           </div>
-        </div>
-        </ReplyListContextProvider>
+          </ReplyListContextProvider>
+        </UserReplyModalContextProvider>
       </UserPostModalContextProvider>
     )
   }

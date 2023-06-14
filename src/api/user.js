@@ -23,6 +23,17 @@ export const userAddTweets = async (payload) => {
   }
 }
 
+export const userReplyTweets = async (payload) => {
+  const { comment, TweetId } = payload
+  const authToken = localStorage.getItem('authToken')
+  try {
+    const res = await axios.post(`${baseURL}/tweets/${TweetId}/replies`, { comment }, { headers: { Authorization: 'Bearer ' + authToken } })
+    return res.data
+  } catch (error) {
+    console.error('[Create Tweets failed]: ', error)
+  }
+}
+
 export const userLikeTweet = async ({ authToken, TweetId }) => {
   try {
     const res = await axios.post(`${baseURL}/tweets/${TweetId}/like/`, null, { headers: { Authorization: 'Bearer ' + authToken } })

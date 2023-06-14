@@ -67,6 +67,7 @@ function PersonInfoModal ({ show, onClose, userHead, onShow, onNameChange, onInt
           <div className={styles.headerTitle}>編輯個人資料</div>
           <div className={styles.postSubmitBtnContainer} onClick={() => {
             onBtnClick?.(image, avatar)
+            onClose()
           }}>
             <Button
                 value='儲存'
