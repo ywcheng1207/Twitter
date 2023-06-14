@@ -28,14 +28,15 @@ function UserReplyModal ({ children, show, onClose, onShow, text, onChange, twee
               </div>
               <div className={styles.rightSide}>
                 <div className={styles.rightInfo}>
-                    <span>{tweet.tweetOwnerName}</span>
-                    <a>@{tweet.tweetOwnerAccount}・<HoursPassed item={tweet.createdAt}/></a>
+                    <span className={styles.ownerName}>{tweet.tweetOwnerName}</span>
+                    <a>@{tweet.tweetOwnerAccount}</a>
+                    <span className={styles.tweetCreateAt}>・<HoursPassed item={tweet.createdAt}/></span>
                 </div>
                 <div className={styles.rightDescription}>
                   {tweet.description}
                 </div>
                 <div className={styles.rightPoster}>
-                    <span className={styles.ownerName}>回覆給</span>
+                    <span>回覆給</span>
                     <a>@{tweet.tweetOwnerAccount}</a>
                 </div>
               </div>
