@@ -1,14 +1,19 @@
 import styles from './PersonalInfoHead.module.scss'
-import Button from 'component/element/element_basic/Button/Button'
+// import Button from 'component/element/element_basic/Button/Button'
 import arrow from 'assets/icons/leftArrow.svg'
 import { Link } from 'react-router-dom'
+import PersonInfoModal2 from 'component/element/element_mid/PersonlInfoModal/PersonalInfoModal2'
 // import PersonInfoModal from '../PersonlInfoModal/PersonInfoModal'
 
-const PersonalInfoHead = ({ userHead, inroduction, theUserName, followerCount, followingCount, show, setShow, onEditClick, onNameChange, onIntroductionChange, onBtnClick, formData, onTextClick }) => {
+const PersonalInfoHead = ({
+  userHead, inroduction, theUserName, followerCount,
+  followingCount, onEditClick, onTextClick, show, onShow,
+  onClose, imageSrc, onOnPreview, onDeletePreview
+}) => {
   const {
     container, headerText, selfInfoContainer, backgroundImg,
     btnContainer, selfInfo, userAvatar, account, description,
-    followContainer, following, follower, tweetsCount, btnWidth, header, userName
+    followContainer, following, follower, tweetsCount, header, userName
   } = styles
   // const navigate = useNavigate()
   // const handleClose = () => { setShow(false) }
@@ -29,9 +34,18 @@ const PersonalInfoHead = ({ userHead, inroduction, theUserName, followerCount, f
               <img src={userHead.cover} alt="" />
             </div>
             <div className={btnContainer} onClick={onEditClick}>
-              <div className={btnWidth}>
+              {/* <div className={btnWidth}>
                   <Button value={'編輯個人資料'} type={'holePill'}/>
-              </div>
+              </div> */}
+               <PersonInfoModal2
+                userHead={userHead}
+                show={show}
+                onClose={onClose}
+                onShow={onShow}
+                imageSrc={imageSrc}
+                onOnPreview={onOnPreview}
+                onDeletePreview={onDeletePreview}
+               />
             </div>
             <img className={userAvatar} src={userHead.avatar} alt="avatar" />
             <div className={selfInfo} >
@@ -57,7 +71,6 @@ const PersonalInfoHead = ({ userHead, inroduction, theUserName, followerCount, f
              onBtnClick={(image, avatar) => onBtnClick?.(image, avatar)}
              userHead={userHead}
              formData={formData}
-
         /> */}
 
     </div>
