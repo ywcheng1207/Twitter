@@ -19,6 +19,7 @@ const ReplyListContent = () => {
         if (data.length > 0) {
           setReplyList(data)
         }
+        localStorage.setItem('replyListLength', data.length)
       } catch (error) {
         console.error(error)
       }
@@ -26,7 +27,7 @@ const ReplyListContent = () => {
     if (authToken) {
       getUserDataAsync({ authToken, TweetId })
     }
-  }, [])
+  }, [localStorage.getItem('replyListLength')])
 
   if (replyList.length > 0) {
     return replyList.map((item) => <PostContentItem key={item.replyId} tweet={item} reply='true' />)

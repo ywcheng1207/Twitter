@@ -7,14 +7,14 @@ import PersonInfoModal from 'component/element/element_mid/PersonlInfoModal/Pers
 import { useState, useEffect } from 'react'
 import { getUserTweets, getUserReplyTweets, getUserLikeTweets, getAccountInfo, putPersonalInfo } from 'api/user'
 import { useNavigate } from 'react-router-dom'
+import { getUserTweets, getUserReplyTweets, getUserLikeTweets, getAccountInfo } from 'api/user'
 
-// import homepageDummy from 'dummyData/homepageDummy'
 
-const ContentItem = ({ render, postList, replyList, userLikeList }) => {
+const ContentItem = ({ render, postList, replyList, userLikeList, onPostList, onUserLikeList }) => {
   if (render === '推文') {
     return (
       postList.map((item) => (
-        <HomeContentItem tweet={item} key={item.TweetId} TweetId={item.TweetId}/>
+        <HomeContentItem tweet={item} key={item.TweetId} TweetId={item.TweetId} onPostList={onPostList} />
       ))
     )
   } else if (render === '回覆') {
@@ -26,7 +26,7 @@ const ContentItem = ({ render, postList, replyList, userLikeList }) => {
   } else if (render === '喜歡的內容') {
     return (
       userLikeList.map((item) => (
-        <HomeContentItem tweet={item} key={item.TweetId} TweetId={item.TweetId}/>
+        <HomeContentItem tweet={item} key={item.TweetId} TweetId={item.TweetId} onUserLikeList={onUserLikeList} />
       ))
     )
   }
@@ -96,6 +96,29 @@ const PersonalInfo = () => {
     navigate('/user/personalinfo/main')
   }
 
+  const handlePostList = ({ TweetId, count }) => {
+    setPostList(pre => {
+      return pre.map(item => {
+        if (item.TweetId === TweetId) {
+          console.log(item)
+          return { ...item, isLiked: !item.isLiked, likeCount: item.likeCount + count }
+        } else {
+          return item
+        }
+      })
+    })
+  }
+  const handleUserLikeList = ({ TweetId, count }) => {
+    setUserLikeList(pre => {
+      return pre.map(item => {
+        if (item.TweetId === TweetId) {
+          return { ...item, isLiked: !item.isLiked, likeCount: item.likeCount + count }
+        } else {
+          return item
+        }
+      })
+    })
+  }
   useEffect(() => {
     const getAccountInfoAsync = async () => {
       try {
@@ -121,9 +144,6 @@ const PersonalInfo = () => {
         const postListData = await getUserTweets(authToken, id)
         const replyListData = await getUserReplyTweets(authToken, id)
         const userLikeListData = await getUserLikeTweets(authToken, id)
-        console.log('成功取得個人資料頁的個人推文串')
-        // console.log('成功取得個人資料頁的回覆推文串')
-        // console.log('成功取得個人資料頁的Like推文串')
 
         setPostList(postListData)
         setReplyList(replyListData)
@@ -151,7 +171,14 @@ const PersonalInfo = () => {
         className={switchTab}
       />
       <div className={contentItemContainer}>
-        <ContentItem render={render} postList={postList} replyList={replyList} userLikeList={userLikeList}/>
+        <ContentItem
+          render={render}
+          postList={postList}
+          replyList={replyList}
+          userLikeList={userLikeList}
+          onPostList={handlePostList}
+          onUserLikeList={handleUserLikeList}
+        />
       </div>
       <PersonInfoModal
              show={show}

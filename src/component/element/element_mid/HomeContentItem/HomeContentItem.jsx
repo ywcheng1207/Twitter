@@ -9,8 +9,9 @@ import HoursPassed from 'component/element/element_basic/HoursPassed/HoursPassed
 import { userLikeTweet, userUnLikeTweet } from 'api/user'
 // import { useOtherContext } from 'contexts/OtherContext'
 import { useReplyList } from 'contexts/RelyLIstContext'
+import { useUserPostModal, useUserReplyModal } from 'contexts/UserMainPageContext'
 
-const HomeContentItem = ({ TweetId, tweet, id }) => {
+const HomeContentItem = ({ TweetId, tweet, id, onPostList, onUserLikeList }) => {
   // --- style
   const {
     HomeContentItemContainer, HomeContentItemHead, HomeContentItemDescreption,
@@ -20,26 +21,30 @@ const HomeContentItem = ({ TweetId, tweet, id }) => {
   // --- state
   const [show, setShow] = useState(false)
   const [text, setText] = useState('')
-  const [isLike, setIsLike] = useState(tweet.isLiked)
-  const [tweetLikeCount, setTweetLikeCount] = useState(tweet.likeCount)
   const navigate = useNavigate()
 
-  //
+  // Home頁面的context
+  const { onLike, onUnLike } = useUserPostModal()
+
+  // Reply頁面的context
   const { onTheTweetId } = useReplyList()
+  const { onUserReply } = useUserReplyModal()
 
   // --- handle
   // like功能：這裡要call api更新該篇tweet的like數據
   const handleLikeIcon = async (TweetId) => {
     const authToken = localStorage.getItem('authToken')
     try {
-      if (isLike === true) {
+      if (tweet.isLiked === true) {
         await userUnLikeTweet({ authToken, TweetId })
-        setIsLike(false)
-        setTweetLikeCount(tweetLikeCount - 1)
+        onUnLike(TweetId)
+        onPostList?.({ TweetId, count: -1 })
+        onUserLikeList?.({ TweetId, count: -1 })
       } else {
         await userLikeTweet({ authToken, TweetId })
-        setIsLike(true)
-        setTweetLikeCount(tweetLikeCount + 1)
+        onLike(TweetId)
+        onPostList?.({ TweetId, count: 1 })
+        onUserLikeList?.({ TweetId, count: 1 })
       }
     } catch (error) {
       console.error(error)
@@ -58,13 +63,10 @@ const HomeContentItem = ({ TweetId, tweet, id }) => {
   const handleShow = () => setShow(true)
   const handleChange = value => {
     const inputText = value
-    console.log(inputText.length)
     if (inputText.length <= 1000) {
       setText(inputText)
     }
   }
-
-  // Other ID context
 
   // const setId = useOtherContext().setOtherId
   const handleAvatarClick = (e) => {
@@ -104,7 +106,9 @@ const HomeContentItem = ({ TweetId, tweet, id }) => {
             onClose={handleClose}
             onShow={handleShow}
             text={text}
+            tweet={tweet}
             onChange={handleChange}
+            onUserReply={onUserReply}
           >
             <div className={reply} onClick={handleShow}>
               <img src={replyIcon} alt="" />
@@ -115,10 +119,10 @@ const HomeContentItem = ({ TweetId, tweet, id }) => {
           </UserReplyModal>
           <div className={like}>
             <div onClick={() => handleLikeIcon(TweetId)}>
-                {isLike ? <img src={likeIconClick} alt="" /> : <img src={likeIcon} alt="" />}
+                {tweet.isLiked ? <img src={likeIconClick} alt="" /> : <img src={likeIcon} alt="" />}
             </div>
             <div className={likeCount}>
-              {tweetLikeCount}
+              {tweet.likeCount}
             </div>
           </div>
         </div>
