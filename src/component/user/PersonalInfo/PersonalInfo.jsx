@@ -158,7 +158,7 @@ const PersonalInfo = () => {
              onClose={handleClose}
              onShow={handleShow}
              onNameChange={handleNameChange}
-             onIntroductionChange={(value) => handleIntroductionChange}
+             onIntroductionChange={handleIntroductionChange}
              onBtnClick={handleBtnClick}
              userHead={userHead}
              formData={formData}
