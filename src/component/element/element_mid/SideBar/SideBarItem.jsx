@@ -1,9 +1,9 @@
 import styles from './SideBarItem.module.scss'
 import Button from 'component/element/element_basic/Button/Button'
 import clsx from 'clsx'
-const avatarUrl = 'https://loremflickr.com/320/240/people/?random=7.976051090916994&lock=987'
+// const avatarUrl = 'https://loremflickr.com/320/240/people/?random=7.976051090916994&lock=987'
 
-const SideBarItem = ({ item, onClick }) => {
+const SideBarItem = ({ item, onClick, onImgClick }) => {
   const {
     SideBarItem, SideBarItemHead, SideBarItemDescription,
     SideBarItemBtn, SideBarItemDescriptionName, SideBarItemDescriptionAccount, follow, btnContainer
@@ -15,7 +15,9 @@ const SideBarItem = ({ item, onClick }) => {
   return (
     <div className={ SideBarItem }>
       <div className={ SideBarItemHead }>
-         <img src={avatarUrl} alt="Image"></img>
+         <img src={item.FollowingAvatar} alt="Image" onClick={() => {
+           onImgClick?.(id)
+         }}/>
       </div>
       <div className={ SideBarItemDescription }>
         <div className={ SideBarItemDescriptionName }>{item.FollowingName}</div>

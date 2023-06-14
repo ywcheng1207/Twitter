@@ -2,10 +2,12 @@ import styles from './SideBar.module.scss'
 import SideBarItem from './SideBarItem'
 import { getSidebarData, postUserFollow, deleteUserFollow } from 'api/user'
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const SideBar = () => {
   const { sideBarContainer, sideBarHead, sideBarList } = styles
   const [sidebarData, setSidebarData] = useState([])
+  const navigate = useNavigate()
 
   const postUserFollowAsync = async (authToken, id) => {
     try {
@@ -57,6 +59,16 @@ const SideBar = () => {
     }
   }
 
+  const handleImgClick = (id) => {
+    console.log(id)
+    localStorage.setItem('otherId', id)
+    if (id === localStorage.getItem('id')) {
+      navigate('/user/personalinfo/main')
+    } else {
+      navigate('/user/other/main')
+    }
+  }
+
   useEffect(() => {
     const getSidebarDataAsync = async () => {
       const authToken = localStorage.getItem('authToken')
@@ -73,7 +85,7 @@ const SideBar = () => {
         <h4 className='Bold'>推薦跟隨</h4>
       </div>
       <div className={sideBarList} >
-        {sidebarData.map(item => <SideBarItem item={item} key={item.FollowingId} onClick={handleClick}/>)}
+        {sidebarData.map(item => <SideBarItem item={item} key={item.FollowingId} onClick={handleClick} onImgClick={handleImgClick}/>)}
       </div>
     </div>
   )

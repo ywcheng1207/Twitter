@@ -81,7 +81,7 @@ const Other = () => {
     if (localStorage.getItem('authToken')) {
       getUserDataAsync(localStorage.getItem('authToken'), otherId)
     }
-  }, [])
+  }, [localStorage.getItem('otherId')])
 
   // render 用戶資料
   useEffect(() => {
@@ -97,7 +97,7 @@ const Other = () => {
       }
     }
     getAccountInfoAsync()
-  }, [])
+  }, [localStorage.getItem('otherId')])
 
   return (
     <div className={container}>
