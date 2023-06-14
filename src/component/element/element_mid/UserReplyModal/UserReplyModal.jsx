@@ -2,7 +2,27 @@ import Modal from 'react-bootstrap/Modal'
 import styles from './UserReplyModal.module.scss'
 import HoursPassed from 'component/element/element_basic/HoursPassed/HoursPassed'
 
-function UserReplyModal ({ children, show, onClose, onShow, text, onChange, tweet, onUserReply }) {
+const TextWarning = ({ userTextNothing }) => {
+  if (userTextNothing) {
+    return <span>內容不可空白</span>
+  }
+}
+const handleSubmit = ({ onUserReply, onClose, text, onUserTextWarning, tweet }) => {
+  if (text.length > 0) {
+    onUserReply?.({ TweetId: tweet.TweetId, text })
+    onClose()
+  }
+  if (text.length === 0) {
+    onUserTextWarning(true)
+  } else {
+    onUserTextWarning(false)
+  }
+}
+
+function UserReplyModal ({
+  children, show, onClose, onShow, text,
+  onChange, tweet, onUserReply, userTextNothing, onUserTextWarning
+}) {
   let avatar
   if (localStorage.getItem('avatar')) {
     avatar = localStorage.getItem('avatar')
@@ -13,7 +33,7 @@ function UserReplyModal ({ children, show, onClose, onShow, text, onChange, twee
   return (
     <>
       { children }
-      <Modal contentClassName={styles.modalContainer} show={show} onHide={onClose}>
+      <Modal contentClassName={styles.modalContainer} onShow={onShow} show={show} onHide={onClose}>
         <Modal.Header className={styles.replyModalHead} >
           <div onClick={onClose} className={styles.closeBtn}>
             &times;
@@ -54,11 +74,16 @@ function UserReplyModal ({ children, show, onClose, onShow, text, onChange, twee
               </textarea>
             </div>
             <div className={styles.postSubmitBtnContainer}>
+                <TextWarning text={text} userTextNothing={userTextNothing} />
                 <button
-                  onClick={() => {
-                    onUserReply?.({ TweetId: tweet.TweetId, text })
-                    onClose()
-                  }}
+                  onClick={() => handleSubmit({
+                    tweet,
+                    text,
+                    onUserReply,
+                    onClose,
+                    userTextNothing,
+                    onUserTextWarning
+                  })}
                 >
                   回覆
                 </button>

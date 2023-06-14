@@ -149,6 +149,13 @@
 .postSubmitBtnContainer {
   text-align: end;
   margin-bottom: 16px;
+  span {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 15px;
+    color: #fc5a5a;
+    margin-right: 20px;
+  }
   button {
     background-color: var(--brand-color);
     width: 64px;
