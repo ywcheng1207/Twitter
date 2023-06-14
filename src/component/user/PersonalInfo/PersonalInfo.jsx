@@ -5,11 +5,9 @@ import PersonalInfoHead from 'component/element/element_mid/PersonalInfoHead/Per
 import PostContentItem from 'component/element/element_mid/PostContentItem/PostContentItem'
 import PersonInfoModal from 'component/element/element_mid/PersonlInfoModal/PersonInfoModal'
 import { useState, useEffect } from 'react'
-import { getUserTweets, getUserReplyTweets, getUserLikeTweets, getAccountInfo, putPersonalInfo } from 'api/user'
-import { useNavigate } from 'react-router-dom'
 import { getUserTweets, getUserReplyTweets, getUserLikeTweets, getAccountInfo } from 'api/user'
-
-
+import { useNavigate } from 'react-router-dom'
+// putPersonalInfo
 const ContentItem = ({ render, postList, replyList, userLikeList, onPostList, onUserLikeList }) => {
   if (render === '推文') {
     return (
@@ -36,10 +34,17 @@ const PersonalInfo = () => {
   const { container, contentItemContainer, switchTab } = styles
   const [status, setStatus] = useState(0)
   const [render, setRender] = useState('推文')
+  // 資料
   const [postList, setPostList] = useState([])
   const [replyList, setReplyList] = useState([])
   const [userLikeList, setUserLikeList] = useState([])
+
+  // 編輯資料頭像狀態
   const [userHead, setUserHead] = useState({})
+  const [theUserName, setTheUserName] = useState('')
+  const [inroduction, setIntorduction] = useState('')
+
+  // show編輯資料modal
   const [show, setShow] = useState(false)
   const navigate = useNavigate()
   const formData = new FormData()
@@ -54,46 +59,53 @@ const PersonalInfo = () => {
     setRender(item)
   }
 
-  const handleNameChange = (value) => {
-    setUserHead({
-      ...userHead,
-      name: value
-    })
+  const handleNameChange = (username) => {
+    // setUserHead({
+    //   ...userHead,
+    //   name: value
+    // })
+    setTheUserName(username)
   }
 
-  const handleIntroductionChange = (value) => {
-    setUserHead({
-      ...userHead,
-      introduction: value
-    })
+  const handleIntroductionChange = (introduction) => {
+    setIntorduction(introduction)
   }
 
   const handleBtnClick = (image, avatar) => {
-    const id = localStorage.getItem('id')
-    const authToken = localStorage.getItem('authToken')
-    setUserHead({
-      ...userHead,
-      avatar,
-      cover: image
-    })
-    formData.append('name', userHead.name)
-    formData.append('introduction', userHead.introduction)
-    formData.append('avatar', userHead.avatar)
-    formData.append('cover', userHead.cover)
-
-    const putPersonalInfoAsync = async (authToken, id) => {
-      try {
-        const { success, data } = await putPersonalInfo(authToken, id, formData)
-        if (success) {
-          setUserHead(data)
-          console.log('修改完成')
-        }
-      } catch (error) {
-        console.error(error)
+    // const id = localStorage.getItem('id')
+    // const authToken = localStorage.getItem('authToken')
+    // setUserHead({
+    //   ...userHead,
+    //   avatar,
+    //   cover: image
+    // })
+    setUserHead(() => {
+      return {
+        ...userHead,
+        name: theUserName,
+        introduction: inroduction,
+        avatar,
+        cover: image
       }
-    }
-    putPersonalInfoAsync(authToken, id, formData)
-    navigate('/user/personalinfo/main')
+    })
+    // formData.append('name', userHead.name)
+    // formData.append('introduction', userHead.introduction)
+    // formData.append('avatar', userHead.avatar)
+    // formData.append('cover', userHead.cover)
+
+    // const putPersonalInfoAsync = async (authToken, id) => {
+    //   try {
+    //     const { success, data } = await putPersonalInfo(authToken, id, formData)
+    //     if (success) {
+    //       setUserHead(data)
+    //       console.log('修改完成')
+    //     }
+    //   } catch (error) {
+    //     console.error(error)
+    //   }
+    // }
+    // putPersonalInfoAsync(authToken, id, formData)
+    // navigate('/user/personalinfo/main')
   }
 
   const handlePostList = ({ TweetId, count }) => {
@@ -130,6 +142,7 @@ const PersonalInfo = () => {
         localStorage.setItem('modalCover', cover)
         localStorage.setItem('modalAvatar', avatar)
         setUserHead(data)
+        setIntorduction(data.introduction)
         console.log(userHead)
       } catch (error) {
         console.error(error)
@@ -161,7 +174,9 @@ const PersonalInfo = () => {
     <div className={container}>
       <PersonalInfoHead
         userHead={userHead}
-         onEditClick={handleShow}
+        theUserName={theUserName}
+        onEditClick={handleShow}
+        inroduction={inroduction}
       />
       <TweetSwitchTab
         list={list}
@@ -185,7 +200,7 @@ const PersonalInfo = () => {
              onClose={handleClose}
              onShow={handleShow}
              onNameChange={handleNameChange}
-             onIntroductionChange={(value) => handleIntroductionChange}
+             onIntroductionChange={handleIntroductionChange}
              onBtnClick={handleBtnClick}
              userHead={userHead}
              formData={formData}
