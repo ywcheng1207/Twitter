@@ -7,7 +7,7 @@ import { ReactComponent as PhotoX } from 'assets/icons/photoX.svg'
 // import defaultAvatar from 'assets/pngs/defaultAvatar.png'
 import { useState, useRef } from 'react'
 
-function PersonInfoModal ({ show, onClose, userHead, onShow, onNameChange, onIntroductionChange, onBtnClick, formData, setUserHead }) {
+function PersonInfoModal ({ show, onClose, userHead, onShow, onNameChange, onIntroductionChange, onBtnClick, formData }) {
   const modalAvatar = localStorage.getItem('modalAvatar')
   const modalCover = localStorage.getItem('modalCover')
   const fileInputRef = useRef(modalCover)
@@ -18,6 +18,7 @@ function PersonInfoModal ({ show, onClose, userHead, onShow, onNameChange, onInt
   const handleBackgroundSVGClick = (event) => {
     fileInputRef.current.click()
     const file = event.target.files
+    localStorage.setItem('modalCover', file)
     console.log('上传文件:', file)
   }
   const handleBackgroundChange = (event) => {
@@ -47,6 +48,7 @@ function PersonInfoModal ({ show, onClose, userHead, onShow, onNameChange, onInt
     console.log(event.target.files)
     const file = event.target.files[0]
     formData.append('avatar', file)
+    localStorage.setItem('modalAvatar', file)
     const reader = new FileReader()
     reader.addEventListener('load', function () {
       setAvatar(reader.result)
@@ -114,7 +116,9 @@ function PersonInfoModal ({ show, onClose, userHead, onShow, onNameChange, onInt
                     <input
                         className={styles.nameInput}
                         defaultValue={userHead.name}
-                        onChange={(event) => onNameChange?.(event.target.value)}
+                        onChange={(event) =>
+                          onNameChange?.(event.target.value)
+                        }
                     />
                     {/* {userHead.name.length !== 0 &&
                         <div className={styles.inputNotice} >

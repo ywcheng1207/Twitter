@@ -3,10 +3,12 @@ import Button from 'component/element/element_basic/Button/Button'
 import styles from './LoginPage.module.scss'
 import { ReactComponent as Logo } from 'assets/icons/logo.svg'
 import { useState } from 'react'
-import { login } from '../../api/auth'
+import { login } from 'api/auth'
 import { useNavigate, Link } from 'react-router-dom'
 
 const LoginPage = () => {
+  const [loginStatus, setLoginStatus] = useState('')
+  const [wrongMessage, setWrongMessage] = useState('')
   const [account, setAccount] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
@@ -23,9 +25,10 @@ const LoginPage = () => {
       console.log('登入成功')
       navigate('/user/home/main')
       console.log(token)
-    } else {
-      console.log('登入失敗')
     }
+    const { message, status } = await login({ account, password })
+    setLoginStatus(status)
+    setWrongMessage(message)
   }
 
   return (
@@ -47,6 +50,9 @@ const LoginPage = () => {
                 setAccount(value)
               }}
             />
+            {loginStatus === 'error' &&
+              <span className={styles.wrong}>{wrongMessage}</span>
+            }
           </div>
           <div className={styles.inputContainer}>
             <DefaultInputItem

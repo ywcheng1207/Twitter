@@ -4,7 +4,7 @@ import arrow from 'assets/icons/leftArrow.svg'
 import { Link } from 'react-router-dom'
 // import PersonInfoModal from '../PersonlInfoModal/PersonInfoModal'
 
-const PersonalInfoHead = ({ userHead, inroduction, theUserName, show, setShow, onEditClick, onNameChange, onIntroductionChange, onBtnClick, formData, onTextClick }) => {
+const PersonalInfoHead = ({ userHead, inroduction, theUserName, followerCount, followingCount, show, setShow, onEditClick, onNameChange, onIntroductionChange, onBtnClick, formData, onTextClick }) => {
   const {
     container, headerText, selfInfoContainer, backgroundImg,
     btnContainer, selfInfo, userAvatar, account, description,
@@ -18,7 +18,7 @@ const PersonalInfoHead = ({ userHead, inroduction, theUserName, show, setShow, o
   return (
     <div className={container}>
         <div className={header}>
-            <img src={arrow} alt="" onClick={() => onTextClick}/>
+            <img src={arrow} alt="" onClick={() => onTextClick()}/>
             <div className={headerText}>
               <h4 className='Bold'>{theUserName}</h4>
               <span className={tweetsCount}>{userHead.tweetCount} 貼文</span>
@@ -35,15 +35,15 @@ const PersonalInfoHead = ({ userHead, inroduction, theUserName, show, setShow, o
             </div>
             <img className={userAvatar} src={userHead.avatar} alt="avatar" />
             <div className={selfInfo} >
-              <p className={userName}>{userHead.name}</p>
+              <p className={userName}>{theUserName}</p>
               <p className={account}>{userHead.account}</p>
               <p className={description} >{inroduction}</p>
               <div className={followContainer} >
                   <p className={following}>
-                    <Link to='/user/follow/main'>{userHead.followingCount}個</Link> <span>追隨中</span>
+                    <Link to='/user/follow/main'>{followingCount}個</Link> <span>追隨中</span>
                   </p>
                   <p className={follower}>
-                    <Link to='/user/follow/main' >{userHead.followerCount}位</Link> <span>跟隨者</span>
+                    <Link to='/user/follow/main' >{followerCount}位</Link> <span>跟隨者</span>
                   </p>
               </div>
             </div>

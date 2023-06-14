@@ -5,7 +5,7 @@ import PersonalInfoHead from 'component/element/element_mid/PersonalInfoHead/Per
 import PostContentItem from 'component/element/element_mid/PostContentItem/PostContentItem'
 import PersonInfoModal from 'component/element/element_mid/PersonlInfoModal/PersonInfoModal'
 import { useState, useEffect } from 'react'
-import { getUserTweets, getUserReplyTweets, getUserLikeTweets, getAccountInfo } from 'api/user'
+import { getUserTweets, getUserReplyTweets, getUserLikeTweets, getAccountInfo, putPersonalInfo } from 'api/user'
 import { useNavigate } from 'react-router-dom'
 // putPersonalInfo
 const ContentItem = ({ render, postList, replyList, userLikeList, onPostList, onUserLikeList }) => {
@@ -43,6 +43,8 @@ const PersonalInfo = () => {
   const [userHead, setUserHead] = useState({})
   const [theUserName, setTheUserName] = useState('')
   const [inroduction, setIntorduction] = useState('')
+  const [followerCount, setFollowerCount] = useState('')
+  const [followingCount, setFollowingCount] = useState('')
 
   // show編輯資料modal
   const [show, setShow] = useState(false)
@@ -60,10 +62,6 @@ const PersonalInfo = () => {
   }
 
   const handleNameChange = (username) => {
-    // setUserHead({
-    //   ...userHead,
-    //   name: value
-    // })
     setTheUserName(username)
   }
 
@@ -72,13 +70,12 @@ const PersonalInfo = () => {
   }
 
   const handleBtnClick = (image, avatar) => {
-    // const id = localStorage.getItem('id')
-    // const authToken = localStorage.getItem('authToken')
-    // setUserHead({
-    //   ...userHead,
-    //   avatar,
-    //   cover: image
-    // })
+    const id = localStorage.getItem('id')
+    const authToken = localStorage.getItem('authToken')
+    formData.append('name', theUserName)
+    formData.append('introduction', inroduction)
+    formData.append('followerCount', followerCount)
+    formData.append('followingCount', followingCount)
     setUserHead(() => {
       return {
         ...userHead,
@@ -88,24 +85,17 @@ const PersonalInfo = () => {
         cover: image
       }
     })
-    // formData.append('name', userHead.name)
-    // formData.append('introduction', userHead.introduction)
-    // formData.append('avatar', userHead.avatar)
-    // formData.append('cover', userHead.cover)
+    putPersonalInfoAsync(authToken, id, formData)
+  }
 
-    // const putPersonalInfoAsync = async (authToken, id) => {
-    //   try {
-    //     const { success, data } = await putPersonalInfo(authToken, id, formData)
-    //     if (success) {
-    //       setUserHead(data)
-    //       console.log('修改完成')
-    //     }
-    //   } catch (error) {
-    //     console.error(error)
-    //   }
-    // }
-    // putPersonalInfoAsync(authToken, id, formData)
-    // navigate('/user/personalinfo/main')
+  const putPersonalInfoAsync = async (authToken, id, formData) => {
+    try {
+      const data = await putPersonalInfo(authToken, id, formData)
+      console.log('修改完成')
+      setUserHead(data)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   const handlePostList = ({ TweetId, count }) => {
@@ -142,8 +132,10 @@ const PersonalInfo = () => {
         localStorage.setItem('modalCover', cover)
         localStorage.setItem('modalAvatar', avatar)
         setUserHead(data)
+        setTheUserName(data.name)
         setIntorduction(data.introduction)
-        console.log(userHead)
+        setFollowerCount(data.followerCount)
+        setFollowingCount(data.followingCount)
       } catch (error) {
         console.error(error)
       }
@@ -177,6 +169,9 @@ const PersonalInfo = () => {
         theUserName={theUserName}
         onEditClick={handleShow}
         inroduction={inroduction}
+        followerCount={followerCount}
+        followingCount={followingCount}
+        onTextClick={handleText}
       />
       <TweetSwitchTab
         list={list}
