@@ -1,7 +1,7 @@
 import styles from './DefaultInputItem.module.scss'
 import clsx from 'clsx'
 
-const DefaultInputItem = ({ label, value, placeholder, type, onChange, wordLimit, defaultValue, inputNotice, errorMessage, lengthRule, status }) => {
+const DefaultInputItem = ({ label, value, placeholder, type, onChange, wordLimit, defaultValue, inputNotice, errorMessage, lengthRule, status, onFocus, onBlur, inputName }) => {
   const { defaultInputContainer, error } = styles
   return (
     <>
@@ -15,6 +15,8 @@ const DefaultInputItem = ({ label, value, placeholder, type, onChange, wordLimit
           onChange={e => {
             onChange?.(e.target.value)
           }}
+          onFocus={() => onFocus?.(inputName)}
+          onBlur={() => onBlur?.(inputName)}
         />
       </div>
 

@@ -14,7 +14,7 @@ export const register = async ({ account, name, email, password, checkPassword }
   } catch (error) {
     console.error(error)
     if (error.response) {
-      return (error.response)
+      return (error.response.data)
     }
   }
 }
