@@ -7,9 +7,11 @@ import { ReactComponent as PhotoX } from 'assets/icons/photoX.svg'
 // import defaultAvatar from 'assets/pngs/defaultAvatar.png'
 import { useState, useRef } from 'react'
 
-function PersonInfoModal ({ show, onClose, userHead, onShow, onNameChange, onIntroductionChange, onBtnClick }) {
-  const fileInputRef = useRef(userHead.cover)
-  const AvatarInputRef = useRef(userHead.avatar)
+function PersonInfoModal ({ show, onClose, userHead, onShow, onNameChange, onIntroductionChange, onBtnClick, formData, setUserHead }) {
+  const modalAvatar = localStorage.getItem('modalAvatar')
+  const modalCover = localStorage.getItem('modalCover')
+  const fileInputRef = useRef(modalCover)
+  const AvatarInputRef = useRef(modalAvatar)
   const [image, setImage] = useState(fileInputRef.current)
   const [avatar, setAvatar] = useState(AvatarInputRef.current)
 
@@ -21,6 +23,7 @@ function PersonInfoModal ({ show, onClose, userHead, onShow, onNameChange, onInt
   const handleBackgroundChange = (event) => {
     console.log(event.target.files)
     const file = event.target.files[0]
+    formData.append('cover', file)
     const reader = new FileReader()
     reader.addEventListener('load', function () {
       setImage(reader.result)
@@ -31,7 +34,7 @@ function PersonInfoModal ({ show, onClose, userHead, onShow, onNameChange, onInt
     }
   }
   const handleXClick = () => {
-    setImage(fileInputRef)
+    setImage(modalCover)
   }
 
   const handleAvatarSVGClick = (event) => {
@@ -43,6 +46,7 @@ function PersonInfoModal ({ show, onClose, userHead, onShow, onNameChange, onInt
   const handleAvatarChange = (event) => {
     console.log(event.target.files)
     const file = event.target.files[0]
+    formData.append('avatar', file)
     const reader = new FileReader()
     reader.addEventListener('load', function () {
       setAvatar(reader.result)
@@ -102,11 +106,8 @@ function PersonInfoModal ({ show, onClose, userHead, onShow, onNameChange, onInt
                   />
               </div>
             </div>
-
             </div>
-
             <div className={styles.inputGroup}>
-
                 <div className={styles.nameInputContainer}>
                     <p>名稱</p>
                     <input

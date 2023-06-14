@@ -1,74 +1,24 @@
 import styles from './PersonalInfoHead.module.scss'
 import Button from 'component/element/element_basic/Button/Button'
 import arrow from 'assets/icons/leftArrow.svg'
-import { Link, useNavigate } from 'react-router-dom'
-import PersonInfoModal from '../PersonlInfoModal/PersonInfoModal'
-import { useState } from 'react'
-// import defaultImg from 'assets/pngs/defaultBackground.png'
-// import defaultAvatar from 'assets/pngs/defaultAvatar.png'
+import { Link } from 'react-router-dom'
+// import PersonInfoModal from '../PersonlInfoModal/PersonInfoModal'
 
-// const dummyData = {
-//   id: 204,
-//   name: 'user1',
-//   account: 'user1',
-//   email: 'user1@example.com',
-//   avatar: 'https://loremflickr.com/320/240/icon?lock=3',
-//   cover: 'https://loremflickr.com/320/240/mountain?lock=3',
-//   role: 'user',
-//   introduction: '333',
-//   createdAt: '2023-06-12T04:26:56.000Z',
-//   updatedAt: '2023-06-12T12:33:15.000Z',
-//   tweetCount: 2,
-//   followerCount: 0,
-//   followingCount: 0
-// }
-
-const PersonalInfoHead = ({ userHead, setUserHead }) => {
+const PersonalInfoHead = ({ userHead, show, setShow, onEditClick, onNameChange, onIntroductionChange, onBtnClick, formData, onTextClick }) => {
   const {
     container, headerText, selfInfoContainer, backgroundImg,
     btnContainer, selfInfo, userAvatar, account, description,
     followContainer, following, follower, tweetsCount, btnWidth, header, userName
   } = styles
-  const [show, setShow] = useState(false)
-
-  const navigate = useNavigate()
-
-  const handleClose = () => {
-    setShow(false)
-  }
-
-  const handleShow = () => setShow(true)
-
-  const handleText = () => {
-    navigate(-1)
-  }
-
-  const handleNameChange = (value) => {
-    setUserHead({
-      ...userHead,
-      name: value
-    })
-  }
-
-  const handleIntroductionChange = (value) => {
-    setUserHead({
-      ...userHead,
-      introduction: value
-    })
-  }
-
-  const handleBtnClick = (image, avatar) => {
-    setUserHead({
-      ...userHead,
-      avatar,
-      cover: image
-    })
-  }
+  // const navigate = useNavigate()
+  // const handleClose = () => { setShow(false) }
+  // const handleShow = () => {setShow(true)}
+  // const handleText = () => { navigate(-1) }
 
   return (
     <div className={container}>
         <div className={header}>
-            <img src={arrow} alt="" onClick={() => handleText()}/>
+            <img src={arrow} alt="" onClick={() => onTextClick}/>
             <div className={headerText}>
               <h4 className='Bold'>{userHead.name}</h4>
               <span className={tweetsCount}>{userHead.tweetCount} 貼文</span>
@@ -78,7 +28,7 @@ const PersonalInfoHead = ({ userHead, setUserHead }) => {
             <div className={backgroundImg}>
               <img src={userHead.cover} alt="" />
             </div>
-            <div className={btnContainer} onClick={handleShow}>
+            <div className={btnContainer} onClick={onEditClick}>
               <div className={btnWidth}>
                   <Button value={'編輯個人資料'} type={'holePill'}/>
               </div>
@@ -98,16 +48,17 @@ const PersonalInfoHead = ({ userHead, setUserHead }) => {
               </div>
             </div>
         </div>
-        <PersonInfoModal
+        {/* <PersonInfoModal
              show={show}
              onClose={handleClose}
              onShow={handleShow}
-             onNameChange={handleNameChange}
-             onIntroductionChange={handleIntroductionChange}
-             onBtnClick={handleBtnClick}
+             onNameChange={(value) => onNameChange?.(value)}
+             onIntroductionChange={(value) => onIntroductionChange?.(value)}
+             onBtnClick={(image, avatar) => onBtnClick?.(image, avatar)}
              userHead={userHead}
+             formData={formData}
 
-        />
+        /> */}
 
     </div>
   )
