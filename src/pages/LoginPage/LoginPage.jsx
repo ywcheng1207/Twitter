@@ -7,11 +7,15 @@ import { login } from 'api/auth'
 import { useNavigate, Link } from 'react-router-dom'
 
 const LoginPage = () => {
-  const [loginStatus, setLoginStatus] = useState('')
-  const [wrongMessage, setWrongMessage] = useState('')
+  // const [loginStatus, setLoginStatus] = useState('')
+  // const [wrongMessage, setWrongMessage] = useState('')
   const [account, setAccount] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
+  // const [error, setError] = useState({
+  //   account: false,
+  //   password: false
+  // })
 
   const handleClick = async () => {
     if (account.length === 0 || password.length === 0) {
@@ -26,9 +30,10 @@ const LoginPage = () => {
       navigate('/user/home/main')
       console.log(token)
     }
-    const { message, status } = await login({ account, password })
-    setLoginStatus(status)
-    setWrongMessage(message)
+    // const { message, status } = await login({ account, password })
+    // setLoginStatus(status)
+    // setWrongMessage(message)
+    // const { data } = await login({ account, password })
   }
 
   return (
@@ -49,11 +54,11 @@ const LoginPage = () => {
               onChange={(value) => {
                 setAccount(value)
               }}
-              status={loginStatus}
+              // status={loginStatus}
             />
-            {loginStatus === 'error' &&
+            {/* {wrongMessage === '帳號輸入錯誤' &&
               <span className={styles.wrong}>{wrongMessage}</span>
-            }
+            } */}
           </div>
           <div className={styles.inputContainer}>
             <DefaultInputItem
@@ -64,7 +69,11 @@ const LoginPage = () => {
               onChange={(value) => {
                 setPassword(value)
               }}
+              // status={loginStatus}
             />
+            {/* {wrongMessage === '密碼輸入錯誤' &&
+              <span className={styles.wrong}>{wrongMessage}</span>
+            } */}
           </div>
 
           <div className={styles.buttonContainer} onClick={handleClick}>

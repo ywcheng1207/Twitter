@@ -28,5 +28,7 @@
   }
 }
 .wrong {
-  color: red;
+  margin-top: 4px;
+  font-size: var(--font-size-small);
+  color: var(--Error);
 }

@@ -14,7 +14,7 @@ export const register = async ({ account, name, email, password, checkPassword }
   } catch (error) {
     console.error(error)
     if (error.response) {
-      return (error.response.data)
+      return (error.response)
     }
   }
 }
@@ -32,6 +32,7 @@ export const login = async ({ account, password }) => {
     return data
   } catch (error) {
     if (error.response) {
+      console.error(error)
       return (error.response.data)
     }
   }
