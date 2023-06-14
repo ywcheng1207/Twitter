@@ -37,7 +37,7 @@ function UserReplyModal ({ children, show, onClose, onShow, text, onChange, twee
             <div className={styles.postBodyContainer}>
               <img src={avatarUrl2} alt="" />
               <textarea
-                cols="62"
+                cols="60"
                 rows="2"
                 className={styles.postTextarea}
                 placeholder='推你的回覆'
