@@ -10,25 +10,32 @@ const HomeContentHead = ({ onAddHomeList }) => {
   } else {
     avatar = 'https://loremflickr.com/320/240/people/?random=7.976051090916994&lock=878'
   }
+  // styles
   const {
     HomeContentHeadContainer, postInputContainer, postInputContent,
     postInputHead, postBtnContainer, postBtn
   } = styles
   const [show, setShow] = useState(false)
   const [text, setText] = useState('')
-
+  const [userTextNothing, setUserTextNoting] = useState(false)
+  // modal handle
   const handleClose = () => {
     setShow(false)
     setText('')
+    setUserTextNoting(false)
   }
   const handleShow = () => setShow(true)
-  const handleChange = value => {
-    const inputText = value
-    if (inputText.length <= 150) {
+  const handleChange = inputText => {
+    if (inputText.length < 143) {
       setText(inputText)
     }
+    if (inputText.length > 0) {
+      setUserTextNoting(false)
+    }
   }
-
+  const handleUserTextWarning = value => {
+    setUserTextNoting(value)
+  }
   return (
     <div className={HomeContentHeadContainer}>
       <HeaderHome />
@@ -39,6 +46,8 @@ const HomeContentHead = ({ onAddHomeList }) => {
           text={text}
           onChange={handleChange}
           onAddHomeList={onAddHomeList}
+          onUserTextWarning={handleUserTextWarning}
+          userTextNothing={userTextNothing}
       >
         <div className={postInputContainer} onClick={handleShow}>
           <div className={postInputContent}>
