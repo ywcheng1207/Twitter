@@ -3,10 +3,11 @@ import TweetSwitchTab from 'component/element/element_basic/TweetSwitchTab/Tweet
 import HomeContentItem from 'component/element/element_mid/HomeContentItem/HomeContentItem'
 import PersonalInfoHead from 'component/element/element_mid/PersonalInfoHead/PersonalInfoHead'
 import PostContentItem from 'component/element/element_mid/PostContentItem/PostContentItem'
-
+import PersonInfoModal from 'component/element/element_mid/PersonlInfoModal/PersonInfoModal'
 import { useState, useEffect } from 'react'
+import { getUserTweets, getUserReplyTweets, getUserLikeTweets, getAccountInfo, putPersonalInfo } from 'api/user'
+import { useNavigate } from 'react-router-dom'
 
-import { getUserTweets, getUserReplyTweets, getUserLikeTweets, getAccountInfo } from 'api/user'
 // import homepageDummy from 'dummyData/homepageDummy'
 
 const ContentItem = ({ render, postList, replyList, userLikeList }) => {
@@ -38,14 +39,63 @@ const PersonalInfo = () => {
   const [postList, setPostList] = useState([])
   const [replyList, setReplyList] = useState([])
   const [userLikeList, setUserLikeList] = useState([])
-  const [userHead, setUserHead] = useState('')
+  const [userHead, setUserHead] = useState({})
+  const [show, setShow] = useState(false)
+  const navigate = useNavigate()
+  const formData = new FormData()
 
   const list = ['推文', '回覆', '喜歡的內容']
+  const handleClose = () => { setShow(false) }
+  const handleShow = () => { setShow(true) }
+  const handleText = () => { navigate(-1) }
 
   const handleClick = (index, item) => {
     setStatus(index)
     setRender(item)
   }
+
+  const handleNameChange = (value) => {
+    setUserHead({
+      ...userHead,
+      name: value
+    })
+  }
+
+  const handleIntroductionChange = (value) => {
+    setUserHead({
+      ...userHead,
+      introduction: value
+    })
+  }
+
+  const handleBtnClick = (image, avatar) => {
+    const id = localStorage.getItem('id')
+    const authToken = localStorage.getItem('authToken')
+    setUserHead({
+      ...userHead,
+      avatar,
+      cover: image
+    })
+    formData.append('name', userHead.name)
+    formData.append('introduction', userHead.introduction)
+    formData.append('avatar', userHead.avatar)
+    formData.append('cover', userHead.cover)
+
+    const putPersonalInfoAsync = async (authToken, id) => {
+      try {
+        const { success, data } = await putPersonalInfo(authToken, id, formData)
+        if (success) {
+          setUserHead(data)
+          console.log('修改完成')
+        }
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    putPersonalInfoAsync(authToken, id, formData)
+    navigate('/user/personalinfo/main')
+  }
+
   useEffect(() => {
     const getAccountInfoAsync = async () => {
       try {
@@ -53,7 +103,11 @@ const PersonalInfo = () => {
         const id = localStorage.getItem('id')
         const data = await getAccountInfo(authToken, id)
         console.log('成功取得使用者資料')
+        const { cover, avatar } = data
+        localStorage.setItem('modalCover', cover)
+        localStorage.setItem('modalAvatar', avatar)
         setUserHead(data)
+        console.log(userHead)
       } catch (error) {
         console.error(error)
       }
@@ -81,11 +135,14 @@ const PersonalInfo = () => {
     if (localStorage.getItem('authToken')) {
       getUserDataAsync(localStorage.getItem('authToken'), localStorage.getItem('id'))
     }
-  }, [])
+  }, [render])
 
   return (
     <div className={container}>
-      <PersonalInfoHead userHead={userHead} setUserHead={setUserHead}/>
+      <PersonalInfoHead
+        userHead={userHead}
+         onEditClick={handleShow}
+      />
       <TweetSwitchTab
         list={list}
         status={status}
@@ -96,7 +153,20 @@ const PersonalInfo = () => {
       <div className={contentItemContainer}>
         <ContentItem render={render} postList={postList} replyList={replyList} userLikeList={userLikeList}/>
       </div>
+      <PersonInfoModal
+             show={show}
+             onClose={handleClose}
+             onShow={handleShow}
+             onNameChange={handleNameChange}
+             onIntroductionChange={(value) => handleIntroductionChange}
+             onBtnClick={handleBtnClick}
+             userHead={userHead}
+             formData={formData}
+             onTextClick={handleText}
+
+        />
     </div>
+
   )
 }
 

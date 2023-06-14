@@ -113,7 +113,7 @@ const Follow = () => {
     }
     getUserFollowersAsync()
     getUserFollowingAsync()
-  }, [])
+  }, [render])
 
   return (
     <div className={container}>
