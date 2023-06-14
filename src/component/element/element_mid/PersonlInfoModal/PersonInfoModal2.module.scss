@@ -1,0 +1,66 @@
+.modalContainer {
+  width: 639px !important;
+  height: 617px !important;
+  border-radius: 14px !important;
+  background-color: var(--white) !important;
+  position: absolute !important;
+  top: 0% !important;
+  left: 28% !important;
+  transform: translate(-40%) !important;
+}
+.modalHeaderContainer {
+  height: 57px;
+}
+.modalBodyContainer {
+  padding: 0;
+}
+.modalBody {
+  width: 639px;
+  height: 270px;
+  // outline: 1px solid tomato;
+  position: relative;
+  .bodyCover {
+    width: 100%;
+    height: 200px;
+    // outline: 1px solid tomato;
+    position: relative;
+    img {
+      width: 637px;
+      height: 100%;
+      object-fit: cover;
+    }
+    .coverInput {
+      display: none;
+    }
+    .defaultCover {
+    }
+    .selectCover {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 636.9px;
+    }
+    .photoIcon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+    }
+  }
+  .bodyAvatar {
+    position: absolute;
+    left: 16.13px;
+    bottom: 0;
+    img {
+      width: 141px;
+      height: 140px;
+      border-radius: 50%;
+      border: 2px solid var(--white);
+    }
+  }
+}
+.modalFooter {
+  height: 273px;
+  width: 639px;
+  margin-top: 16px;
+  outline: 1px solid tomato;
+}
