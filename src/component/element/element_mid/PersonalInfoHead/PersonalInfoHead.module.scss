@@ -10,18 +10,14 @@
   display: flex;
   padding: 17px 17px 17px 28px;
   align-items: center;
-  // outline: 1px solid tomato;
-  // margin-bottom: 12px;
   img {
     cursor: pointer;
   }
   .headerText {
     margin-left: 19px;
-    // margin-top: 16px;
     display: flex;
     flex-flow: column;
     justify-content: center;
-    // outline: 1px solid blue;
     h4 {
       font-family: Noto Sans TC;
       font-size: 18px;
@@ -30,7 +26,11 @@
       letter-spacing: 0px;
       text-align: left;
       margin-bottom: 0;
-      // outline: 1px solid tomato;
+
+      width: 130px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     .tweetsCount {
       line-height: 19px;
@@ -38,15 +38,12 @@
       font-weight: 500;
       margin: 0;
       color: #6c757d;
-      // outline: 1px solid tomato;
     }
   }
 }
 
 .selfInfoContainer {
-  // height: 446px;
   width: 100%;
-  // outline: 1px solid tomato;
   img {
     width: 100%;
     height: 200px;
@@ -79,16 +76,30 @@
       font-size: 18px;
       font-weight: 700;
       margin: 0;
+
+      width: 130px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     .account {
       font-size: 14px;
       line-height: 22px;
       margin-bottom: 6px;
       color: #6c757d;
+      width: 130px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     .description {
       font-weight: 400;
       font-size: 14px;
+
+      width: 604.73px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     .followContainer {
       display: flex;

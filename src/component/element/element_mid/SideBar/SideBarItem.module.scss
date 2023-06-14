@@ -20,6 +20,7 @@
     }
   }
   .SideBarItemDescription {
+    max-height: 50px;
     margin-right: 8px;
     width: 60px;
     .SideBarItemDescriptionName {
@@ -29,6 +30,9 @@
       color: #171725;
       width: 100%;
       margin-bottom: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     .SideBarItemDescriptionAccount {
       margin-top: 0;
@@ -36,6 +40,9 @@
       font-size: 14px;
       line-height: 22px;
       color: #92929d;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
   .btnContainer {

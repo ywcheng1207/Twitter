@@ -16,18 +16,22 @@ const PostContentHead = () => {
   const [show, setShow] = useState(false)
   const [text, setText] = useState('')
   const [tweetOwnerInfo, setTweetOwner] = useState([])
-
+  const [userTextNothing, setUserTextNoting] = useState(false)
   //
   const handleClose = () => {
     setShow(false)
     setText('')
+    setUserTextNoting(false)
   }
   const handleShow = () => setShow(true)
-  const handleChange = value => {
-    const inputText = value
-    if (inputText.length <= 1000) {
-      setText(inputText)
+  const handleChange = inputText => {
+    setText(inputText)
+    if (inputText.length > 0) {
+      setUserTextNoting(false)
     }
+  }
+  const handleUserTextWarning = value => {
+    setUserTextNoting(value)
   }
 
   // Home頁面的context
@@ -107,6 +111,8 @@ const PostContentHead = () => {
           onChange={handleChange}
           tweet={tweetOwnerInfo}
           onUserReply={onUserReply}
+          onUserTextWarning={handleUserTextWarning}
+          userTextNothing={userTextNothing}
         >
           <img className={replyBtn} src={replyIcon} alt="" onClick={handleShow}/>
         </UserReplyModal>

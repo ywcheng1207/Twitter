@@ -19,6 +19,12 @@
         line-height: 26px;
         color: #171725;
         margin-right: 8px;
+
+        display: inline-block;
+        width: 130px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
       a,
       .posterAccount {
@@ -26,6 +32,11 @@
         font-size: 14px;
         line-height: 22px;
         color: #6c757d;
+        display: inline-block;
+        max-width: 130px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
     }
     .userName {

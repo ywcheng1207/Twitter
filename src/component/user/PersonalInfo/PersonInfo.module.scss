@@ -6,11 +6,13 @@
 
 .contentItemContainer {
   height: 670px;
-  width: 655px;
+  width: 650px;
   overflow-y: scroll;
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
   scrollbar-track-color: transparent;
+  overflow-x: hidden;
+  
   &::-webkit-scrollbar {
     width: 8px;
   }

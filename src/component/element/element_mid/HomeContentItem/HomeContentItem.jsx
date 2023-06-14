@@ -15,13 +15,14 @@ const HomeContentItem = ({ TweetId, tweet, id, onPostList, onUserLikeList }) => 
   // --- style
   const {
     HomeContentItemContainer, HomeContentItemHead, HomeContentItemDescreption,
-    posterName, posterAccount, postDescription, postIcon, reply, like, likeCount
+    posterName, posterAccount, postDescription, postIcon, reply, like, likeCount, postTime
   } = styles
 
   // --- state
   const [show, setShow] = useState(false)
   const [text, setText] = useState('')
   const navigate = useNavigate()
+  const [userTextNothing, setUserTextNoting] = useState(false)
 
   // Home頁面的context
   const { onLike, onUnLike } = useUserPostModal()
@@ -59,13 +60,17 @@ const HomeContentItem = ({ TweetId, tweet, id, onPostList, onUserLikeList }) => 
   const handleClose = () => {
     setShow(false)
     setText('')
+    setUserTextNoting(false)
   }
   const handleShow = () => setShow(true)
-  const handleChange = value => {
-    const inputText = value
-    if (inputText.length <= 1000) {
-      setText(inputText)
+  const handleChange = inputText => {
+    setText(inputText)
+    if (inputText.length > 0) {
+      setUserTextNoting(false)
     }
+  }
+  const handleUserTextWarning = value => {
+    setUserTextNoting(value)
   }
 
   // const setId = useOtherContext().setOtherId
@@ -88,9 +93,8 @@ const HomeContentItem = ({ TweetId, tweet, id, onPostList, onUserLikeList }) => 
       <div className={HomeContentItemDescreption}>
         <div>
           <span className={posterName}>{tweet.tweetOwnerName}</span>
-          <span className={posterAccount}>@{tweet.tweetOwnerAccount}・
-              <HoursPassed item={tweet.createdAt}/>
-          </span>
+          <span className={posterAccount}>@{tweet.tweetOwnerAccount}</span>
+          <span className={postTime}>・<HoursPassed item={tweet.createdAt}/></span>
         </div>
         <p className={postDescription} onClick={() => {
           handleGoReplyList()
@@ -109,6 +113,8 @@ const HomeContentItem = ({ TweetId, tweet, id, onPostList, onUserLikeList }) => 
             tweet={tweet}
             onChange={handleChange}
             onUserReply={onUserReply}
+            onUserTextWarning={handleUserTextWarning}
+            userTextNothing={userTextNothing}
           >
             <div className={reply} onClick={handleShow}>
               <img src={replyIcon} alt="" />
