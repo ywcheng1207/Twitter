@@ -22,23 +22,38 @@
     height: 168px;
     max-height: 89%;
     width: 528px;
+    // outline: 1px solid tomato;
     .posterName {
       font-size: 16px;
       font-weight: 700;
       line-height: 26px;
       color: #171725;
       margin-right: 8px;
+      display: inline-block;
+      max-width: 100px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      // outline: 1px solid tomato;
     }
-    .posterAccount {
+    .posterAccount,
+    .postTime {
       font-size: 14px;
       font-weight: 400;
       line-height: 22px;
       color: #6c757d;
+      display: inline-block;
+      max-width: 130px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      // outline: 1px solid tomato;
     }
     .postDescription {
+      // outline: 1px solid tomato;
       height: 78px;
-      word-wrap: break-word;
-      margin-top: 8px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      overflow-wrap: break-word;
       font-weight: 400;
       font-size: 16px;
       line-height: 26px;
@@ -50,6 +65,7 @@
       }
     }
     .postIcon {
+      // outline: 1px solid tomato;
       height: 14px;
       width: 118.61px;
       display: flex;

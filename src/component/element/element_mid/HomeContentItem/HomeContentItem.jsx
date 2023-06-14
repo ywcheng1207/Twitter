@@ -15,7 +15,7 @@ const HomeContentItem = ({ TweetId, tweet, id, onPostList, onUserLikeList }) => 
   // --- style
   const {
     HomeContentItemContainer, HomeContentItemHead, HomeContentItemDescreption,
-    posterName, posterAccount, postDescription, postIcon, reply, like, likeCount
+    posterName, posterAccount, postDescription, postIcon, reply, like, likeCount, postTime
   } = styles
 
   // --- state
@@ -88,9 +88,8 @@ const HomeContentItem = ({ TweetId, tweet, id, onPostList, onUserLikeList }) => 
       <div className={HomeContentItemDescreption}>
         <div>
           <span className={posterName}>{tweet.tweetOwnerName}</span>
-          <span className={posterAccount}>@{tweet.tweetOwnerAccount}・
-              <HoursPassed item={tweet.createdAt}/>
-          </span>
+          <span className={posterAccount}>@{tweet.tweetOwnerAccount}</span>
+          <span className={postTime}>・<HoursPassed item={tweet.createdAt}/></span>
         </div>
         <p className={postDescription} onClick={() => {
           handleGoReplyList()
