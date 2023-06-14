@@ -95,12 +95,15 @@
       }
       .rightDescription {
         max-width: 528px;
+        height: 80px;
         font-family: Noto Sans TC;
         font-size: 16px;
         font-weight: 400;
         line-height: 26px;
         letter-spacing: 0px;
         text-align: left;
+        overflow: hidden;
+        text-overflow: ellipsis;
         word-wrap: break-word;
       }
       .rightPoster {
