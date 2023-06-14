@@ -3,9 +3,9 @@ import TweetSwitchTab from 'component/element/element_basic/TweetSwitchTab/Tweet
 import HomeContentItem from 'component/element/element_mid/HomeContentItem/HomeContentItem'
 import PersonalInfoHead from 'component/element/element_mid/PersonalInfoHead/PersonalInfoHead'
 import PostContentItem from 'component/element/element_mid/PostContentItem/PostContentItem'
-import PersonInfoModal from 'component/element/element_mid/PersonlInfoModal/PersonInfoModal'
+// import PersonInfoModal from 'component/element/element_mid/PersonlInfoModal/PersonInfoModal'
 import { useState, useEffect } from 'react'
-import { getUserTweets, getUserReplyTweets, getUserLikeTweets, getAccountInfo, putPersonalInfo } from 'api/user'
+import { getUserTweets, getUserReplyTweets, getUserLikeTweets, getAccountInfo } from 'api/user'
 import { useNavigate } from 'react-router-dom'
 // putPersonalInfo
 const ContentItem = ({ render, postList, replyList, userLikeList, onPostList, onUserLikeList }) => {
@@ -45,58 +45,80 @@ const PersonalInfo = () => {
   const [inroduction, setIntorduction] = useState('')
   const [followerCount, setFollowerCount] = useState('')
   const [followingCount, setFollowingCount] = useState('')
-
-  // show編輯資料modal
-  const [show, setShow] = useState(false)
   const navigate = useNavigate()
-  const formData = new FormData()
-
   const list = ['推文', '回覆', '喜歡的內容']
-  const handleClose = () => { setShow(false) }
-  const handleShow = () => { setShow(true) }
+  // head回到上一頁按鈕
   const handleText = () => { navigate(-1) }
-
+  // 個資頁面底下切換tab功能
   const handleClick = (index, item) => {
     setStatus(index)
     setRender(item)
   }
+  // 呼叫編輯modal
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
 
-  const handleNameChange = (username) => {
-    setTheUserName(username)
-  }
+  // 上傳照片功能
+  const [imageSrc, setImageSrc] = useState(userHead.cover)
+  const handleOnPreview = (event) => {
+    const file = event.target.files[0]
+    const reader = new FileReader()
+    reader.addEventListener('load', function () {
+      // convert image file to base64 string
+      setImageSrc(reader.result)
+    }, false)
 
-  const handleIntroductionChange = (introduction) => {
-    setIntorduction(introduction)
-  }
-
-  const handleBtnClick = (image, avatar) => {
-    const id = localStorage.getItem('id')
-    const authToken = localStorage.getItem('authToken')
-    formData.append('name', theUserName)
-    formData.append('introduction', inroduction)
-    formData.append('followerCount', followerCount)
-    formData.append('followingCount', followingCount)
-    setUserHead(() => {
-      return {
-        ...userHead,
-        name: theUserName,
-        introduction: inroduction,
-        avatar,
-        cover: image
-      }
-    })
-    putPersonalInfoAsync(authToken, id, formData)
-  }
-
-  const putPersonalInfoAsync = async (authToken, id, formData) => {
-    try {
-      const data = await putPersonalInfo(authToken, id, formData)
-      console.log('修改完成')
-      setUserHead(data)
-    } catch (error) {
-      console.error(error)
+    if (file) {
+      reader.readAsDataURL(file)
     }
   }
+  const handleDeletePreview = () => {
+    setImageSrc('')
+  }
+  // ----------------- OLD
+  // show編輯資料modal
+  // const [show, setShow] = useState(false)
+  // const formData = new FormData()
+  // const handleClose = () => { setShow(false) }
+  // const handleShow = () => { setShow(true) }
+  // const handleNameChange = (username) => {
+  //   setTheUserName(username)
+  // }
+
+  // const handleIntroductionChange = (introduction) => {
+  //   setIntorduction(introduction)
+  // }
+
+  // const handleBtnClick = (image, avatar) => {
+  //   const id = localStorage.getItem('id')
+  //   const authToken = localStorage.getItem('authToken')
+  //   formData.append('name', theUserName)
+  //   formData.append('introduction', inroduction)
+  //   formData.append('followerCount', followerCount)
+  //   formData.append('followingCount', followingCount)
+  //   setUserHead(() => {
+  //     return {
+  //       ...userHead,
+  //       name: theUserName,
+  //       introduction: inroduction,
+  //       avatar,
+  //       cover: image
+  //     }
+  //   })
+  //   putPersonalInfoAsync(authToken, id, formData)
+  // }
+
+  // const putPersonalInfoAsync = async (authToken, id, formData) => {
+  //   try {
+  //     const data = await putPersonalInfo(authToken, id, formData)
+  //     console.log('修改完成')
+  //     setUserHead(data)
+  //   } catch (error) {
+  //     console.error(error)
+  //   }
+  // }
+  // ----------------- OLD
 
   const handlePostList = ({ TweetId, count }) => {
     setPostList(pre => {
@@ -131,6 +153,7 @@ const PersonalInfo = () => {
         const { cover, avatar } = data
         localStorage.setItem('modalCover', cover)
         localStorage.setItem('modalAvatar', avatar)
+
         setUserHead(data)
         setTheUserName(data.name)
         setIntorduction(data.introduction)
@@ -167,11 +190,18 @@ const PersonalInfo = () => {
       <PersonalInfoHead
         userHead={userHead}
         theUserName={theUserName}
-        onEditClick={handleShow}
+        // onEditClick={handleShow}
         inroduction={inroduction}
         followerCount={followerCount}
         followingCount={followingCount}
         onTextClick={handleText}
+
+        show={show}
+        onClose={handleClose}
+        onShow={handleShow}
+        imageSrc={imageSrc}
+        onOnPreview={handleOnPreview}
+        onDeletePreview={handleDeletePreview}
       />
       <TweetSwitchTab
         list={list}
@@ -190,18 +220,17 @@ const PersonalInfo = () => {
           onUserLikeList={handleUserLikeList}
         />
       </div>
-      <PersonInfoModal
-             show={show}
-             onClose={handleClose}
-             onShow={handleShow}
-             onNameChange={handleNameChange}
-             onIntroductionChange={handleIntroductionChange}
-             onBtnClick={handleBtnClick}
-             userHead={userHead}
-             formData={formData}
-             onTextClick={handleText}
-
-        />
+      {/* <PersonInfoModal
+        show={show}
+        onClose={handleClose}
+        onShow={handleShow}
+        onNameChange={handleNameChange}
+        onIntroductionChange={handleIntroductionChange}
+        onBtnClick={handleBtnClick}
+        userHead={userHead}
+        formData={formData}
+        onTextClick={handleText}
+        /> */}
     </div>
 
   )
