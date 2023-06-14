@@ -13,33 +13,40 @@ import UserPostModal from 'component/element/element_mid/UserPostModal/UserPostM
 import { useUserPostModal } from 'contexts/UserMainPageContext'
 
 const Nav = ({ status, onNavSwitch }) => {
+  // styles
   const {
     NavContainer, logoContainer, homeActiveContainer,
     personInfoContainer, settingContainer, postBtn, logoutContainer
   } = styles
+  // state
   const [show, setShow] = useState(false)
   const [text, setText] = useState('')
+  const [userTextNothing, setUserTextNoting] = useState(false)
+  // context
   const { onAddHomeList } = useUserPostModal()
-
+  // handle
   const handleLogout = () => {
     localStorage.removeItem('authToken')
     localStorage.removeItem('id')
   }
-
   // modal handle
   const handleClose = () => {
     setShow(false)
     setText('')
+    setUserTextNoting(false)
   }
   const handleShow = () => setShow(true)
-  const handleChange = value => {
-    const inputText = value
-    console.log(inputText.length)
-    if (inputText.length <= 1000) {
+  const handleChange = inputText => {
+    if (inputText.length < 143) {
       setText(inputText)
     }
+    if (inputText.length > 0) {
+      setUserTextNoting(false)
+    }
   }
-
+  const handleUserTextWarning = value => {
+    setUserTextNoting(value)
+  }
   return (
     <div className={NavContainer}>
       <div className={logoContainer}>
@@ -69,6 +76,8 @@ const Nav = ({ status, onNavSwitch }) => {
         text={text}
         onChange={handleChange}
         onAddHomeList={onAddHomeList}
+        onUserTextWarning={handleUserTextWarning}
+        userTextNothing={userTextNothing}
       >
         <button className={postBtn} onClick={handleShow}>
           推文
