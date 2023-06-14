@@ -49,6 +49,7 @@ const LoginPage = () => {
               onChange={(value) => {
                 setAccount(value)
               }}
+              status={loginStatus}
             />
             {loginStatus === 'error' &&
               <span className={styles.wrong}>{wrongMessage}</span>
