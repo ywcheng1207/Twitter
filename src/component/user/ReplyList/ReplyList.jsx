@@ -12,7 +12,7 @@ const ReplyListContent = () => {
   useEffect(() => {
     const authToken = localStorage.getItem('authToken')
     const TweetId = localStorage.getItem('TweetId')
-    console.log(TweetId)
+
     const getUserDataAsync = async ({ authToken, TweetId }) => {
       try {
         const data = await getSingleTweet({ authToken, TweetId })

@@ -1,6 +1,5 @@
 import Modal from 'react-bootstrap/Modal'
 import styles from './UserPostModal.module.scss'
-const avatarUrl = 'https://loremflickr.com/320/240/people/?random=7.976051090916994&lock=999'
 
 const TextWarning = ({ text }) => {
   if (text.length >= 140) {
@@ -9,6 +8,13 @@ const TextWarning = ({ text }) => {
 }
 
 function UserPostModal ({ children, show, onClose, onShow, text, onChange, onAddHomeList }) {
+  let avatar
+  if (localStorage.getItem('avatar')) {
+    avatar = localStorage.getItem('avatar')
+  } else {
+    avatar = 'https://loremflickr.com/320/240/people/?random=7.976051090916994&lock=878'
+  }
+
   return (
     <>
       { children }
@@ -21,7 +27,7 @@ function UserPostModal ({ children, show, onClose, onShow, text, onChange, onAdd
         <Modal.Body >
           <div className={styles.bodyContainer}>
             <div className={styles.postHead}>
-              <img src={avatarUrl} alt="Image"></img>
+              <img src={avatar} alt="Image"></img>
             </div>
             <textarea
               className={styles.postTextarea}

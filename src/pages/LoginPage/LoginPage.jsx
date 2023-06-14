@@ -15,10 +15,11 @@ const LoginPage = () => {
     if (account.length === 0 || password.length === 0) {
       return
     }
-    const { success, token, id } = await login({ account, password })
+    const { success, token, id, avatar } = await login({ account, password })
     if (success) {
       localStorage.setItem('authToken', token)
       localStorage.setItem('id', id)
+      localStorage.setItem('avatar', avatar)
       console.log('登入成功')
       navigate('/user/home/main')
       console.log(token)

@@ -25,8 +25,9 @@ export const login = async ({ account, password }) => {
     const { status } = data
     const token = data.data.token
     const id = data.data.user.id
+    const avatar = data.data.user.avatar
     if (status === 'success') {
-      return { success: true, token, id, ...data }
+      return { success: true, token, id, avatar, ...data }
     }
     return data
   } catch (error) {
