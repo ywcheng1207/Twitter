@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-// const baseURL = 'https://arcane-mesa-58606.herokuapp.com/api'
-const baseURL = 'https://rocky-reef-54442.herokuapp.com/api'
+const baseURL = 'https://arcane-mesa-58606.herokuapp.com/api'
+// const baseURL = 'https://rocky-reef-54442.herokuapp.com/api'
 
 export const getTweets = async (authToken) => {
   try {
@@ -184,14 +184,13 @@ export const putPersonalInfo = async (authToken, id, formData) => {
   try {
     const { data } = await axios.put(`${baseURL}/users/${id}`, formData, {
       headers: {
-        'Content-Type': 'multipart/form-data',
-        Authorization: 'Bearer ' + authToken
+        Authorization: 'Bearer ' + authToken,
+        'Content-Type': 'multipart/form-data'
+
       }
     })
-    if (data) {
-      console.log(data)
-      return { success: true, ...data }
-    }
+    console.log(data)
+    return data
   } catch (error) {
     console.error('[putPersonalInfo failed]', error)
   }
