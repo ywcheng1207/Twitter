@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-// const baseURL = 'https://arcane-mesa-58606.herokuapp.com/api/admin/'
-const baseURL = 'https://rocky-reef-54442.herokuapp.com/apiadmin'
+const baseURL = 'https://arcane-mesa-58606.herokuapp.com/api/admin/'
+// const baseURL = 'https://rocky-reef-54442.herokuapp.com/apiadmin'
 
 export const deleteTweet = async (id, authToken) => {
   try {
