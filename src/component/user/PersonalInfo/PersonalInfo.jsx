@@ -171,6 +171,7 @@ const PersonalInfo = () => {
         inroduction={inroduction}
         followerCount={followerCount}
         followingCount={followingCount}
+        onTextClick={handleText}
       />
       <TweetSwitchTab
         list={list}

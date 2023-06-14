@@ -18,7 +18,7 @@ const PersonalInfoHead = ({ userHead, inroduction, theUserName, followerCount, f
   return (
     <div className={container}>
         <div className={header}>
-            <img src={arrow} alt="" onClick={() => onTextClick}/>
+            <img src={arrow} alt="" onClick={() => onTextClick()}/>
             <div className={headerText}>
               <h4 className='Bold'>{theUserName}</h4>
               <span className={tweetsCount}>{userHead.tweetCount} 貼文</span>
