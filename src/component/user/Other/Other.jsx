@@ -4,19 +4,20 @@ import HomeContentItem from 'component/element/element_mid/HomeContentItem/HomeC
 // import PostContentItem from 'component/element/element_mid/PostContentItem/PostContentItem'
 import OtherPostContent from 'component/element/element_mid/OtherPostContent/OtherPostContent'
 import OtherHead from 'component/element/element_mid/OtherHead/OtherHead'
+import { useNavigate } from 'react-router-dom'
 // import { useOtherContext } from 'contexts/OtherContext'
 
 import { useState, useEffect } from 'react'
 import { getAccountInfo, getUserTweets, getUserReplyTweets, getUserLikeTweets } from 'api/user'
 
-const ContentItem = ({ render, postList, replyList, userLikeList }) => {
+const ContentItem = ({ render, postList, replyList, userLikeList, onAvatarClick }) => {
   if (render === '推文') {
     if (postList.length === 0 || !Array.isArray(postList)) {
       return null
     } else {
       return (
         postList.map((item) => (
-          <HomeContentItem tweet={item} key={item.TweetId} />
+          <HomeContentItem tweet={item} key={item.TweetId} onAvatarClick={(clickId) => onAvatarClick?.(clickId)} />
         ))
       )
     }
@@ -37,7 +38,7 @@ const ContentItem = ({ render, postList, replyList, userLikeList }) => {
     } else {
       return (
         userLikeList.map((item) => (
-        <HomeContentItem tweet={item} key={item.TweetId} />
+        <HomeContentItem tweet={item} key={item.TweetId} onAvatarClick={(clickId) => onAvatarClick?.(clickId)} />
         ))
       )
     }
@@ -53,6 +54,7 @@ const Other = () => {
   const [userLikeList, setUserLikeList] = useState([])
   const [otherUser, setOtherUser] = useState([])
   const otherId = localStorage.getItem('otherId')
+  const navigate = useNavigate()
 
   const list = ['推文', '回覆', '喜歡的內容']
 
@@ -60,6 +62,19 @@ const Other = () => {
     setStatus(index)
     setRender(item)
   }
+
+  // 點擊 avatar 至 other 頁面
+  const handleAvatarClick = (clickId) => {
+    console.log(clickId)
+    const userId = localStorage.getItem('id')
+    if (Number(clickId) === Number(userId)) {
+      navigate('/user/personalinfo/main')
+    } else {
+      localStorage.setItem('otherId', clickId)
+      navigate('/user/other/main')
+    }
+  }
+
   // render 用戶資料
   useEffect(() => {
     const getAccountInfoAsync = async () => {
@@ -109,7 +124,7 @@ const Other = () => {
         className={switchTab}
       />
       <div className={contentItemContainer}>
-        <ContentItem render={render} postList={postList} replyList={replyList} userLikeList={userLikeList} />
+        <ContentItem render={render} postList={postList} replyList={replyList} userLikeList={userLikeList} onAvatarClick={handleAvatarClick} />
       </div>
     </div>
   )

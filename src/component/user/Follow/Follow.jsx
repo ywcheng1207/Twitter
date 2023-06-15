@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getUserFollowers, getUserFollowing, postUserFollow, deleteUserFollow } from 'api/user'
 
-const ContentItem = ({ render, onClick, followerData, followingData }) => {
+const ContentItem = ({ render, onClick, followerData, followingData, onAvatarClick }) => {
   if (render === '追隨者') {
     if (followerData.length === 0) {
       return null
@@ -16,8 +16,8 @@ const ContentItem = ({ render, onClick, followerData, followingData }) => {
           <UserFollowItem
             key={item.UserId}
             item={item}
-            onClick={(id) => onClick?.(id)}
             render={render}
+            onAvatarClick={(id) => onAvatarClick?.(id)}
           />
         ))
       )
@@ -33,6 +33,7 @@ const ContentItem = ({ render, onClick, followerData, followingData }) => {
             item={item}
             onClick={(id) => onClick?.(id)}
             render={render}
+            onAvatarClick={(id) => onAvatarClick?.(id)}
           />
         ))
       )
@@ -99,6 +100,13 @@ const Follow = () => {
     setRender(item)
   }
 
+  // 點擊頭像切換至 other
+  const handleAvatarClick = (id) => {
+    console.log(id)
+    localStorage.setItem('otherId', id)
+    navigate('/user/other/main')
+  }
+
   useEffect(() => {
     const authToken = localStorage.getItem('authToken')
     const id = localStorage.getItem('id')
@@ -146,6 +154,7 @@ const Follow = () => {
           onClick={handleClick}
           followerData={followerData}
           followingData={followingData}
+          onAvatarClick={handleAvatarClick}
         />
       </div>
 

@@ -2,13 +2,13 @@ import styles from './UserFollowItem.module.scss'
 import Button from 'component/element/element_basic/Button/Button'
 import clsx from 'clsx'
 
-const UserFollowItem = ({ item, onClick, render }) => {
+const UserFollowItem = ({ item, onClick, render, onAvatarClick }) => {
   const { followItemContainer, avatar, itemContent, nameAndBtn, name, btnContainer, tweet, follow } = styles
   const isFollowed = item.isFollowed
 
   return (
         <div className={followItemContainer}>
-            <img src={item.avatar} alt="avatar" className={avatar} />
+            <img src={item.avatar} alt="avatar" className={avatar} onClick={() => onAvatarClick?.(item.UserId)} />
             <div className={itemContent}>
                 <div className={nameAndBtn}>
                     <p className={name}>{item.name}</p>

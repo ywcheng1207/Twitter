@@ -32,6 +32,9 @@
       height: 78px;
       word-wrap: break-word;
       margin-top: 6px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
 }
