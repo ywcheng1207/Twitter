@@ -96,6 +96,10 @@ export const patchAccountInfo = async (authToken, id, userInfo) => {
     return res.data
   } catch (error) {
     console.error('[postAccountInfo failed]', error)
+    if (error.response) {
+      console.error(error)
+      return (error.response.data)
+    }
   }
 }
 

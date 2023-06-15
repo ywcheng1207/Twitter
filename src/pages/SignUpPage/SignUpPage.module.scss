@@ -32,3 +32,25 @@
   font-size: var(--font-size-small);
   color: var(--Error);
 }
+
+.messageContainer {
+  display: flex;
+  height: 1px;
+  span {
+    display: block;
+  }
+  .typeCount {
+    flex: 1;
+    text-align: end;
+    font-family: Noto Sans TC;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0px;
+    color: #696974;
+  }
+  .error {
+    flex: 1;
+    text-align: start;
+  }
+}

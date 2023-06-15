@@ -39,10 +39,21 @@ const SignUpPage = () => {
         }
       })
       setError(updatedErrors)
-      console.log(error)
     }
   }
+  const [activeStates, setActiveStates] = useState({
+    account: false,
+    name: false,
+    password: false,
+    checkPassword: false
+  })
+  const handleFocus = (inputName) => {
+    setActiveStates({ ...activeStates, [inputName]: true })
+  }
 
+  const handleBlur = (inputName) => {
+    setActiveStates({ ...activeStates, [inputName]: false })
+  }
   return (
         <div className={styles.registerContainer}>
           <div className={styles.logoContainer}>
@@ -60,11 +71,20 @@ const SignUpPage = () => {
               value={account}
               onChange={(value) => setAccount(value)}
               status={error.account ? 'error' : ''}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              inputName='account'
             />
           </div>
-          {error.account.error &&
-            <span className={styles.error}>{error.account.message}</span>
-          }
+          <div className={styles.messageContainer}>
+              {error.account.error &&
+                <span className={styles.error}>{error.account.message}</span>
+              }
+              {activeStates.account &&
+                <span className={styles.typeCount}>
+                  {account.length}/20
+              </span>}
+          </div>
           <div className={styles.inputContainer}>
             <DefaultInputItem
               label={'名稱'}
@@ -72,11 +92,19 @@ const SignUpPage = () => {
               value={name}
               onChange={(value) => setName(value)}
               status={error.name ? 'error' : ''}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              inputName='name'
             />
-            {error.name.error &&
-            <span className={styles.error}>{error.name.message}</span>
-            }
-
+            <div className={styles.messageContainer}>
+              {error.name.error &&
+                <span className={styles.error}>{error.name.message}</span>
+              }
+              {activeStates.name &&
+                <span className={styles.typeCount}>
+                  {name.length}/50
+                </span>}
+            </div>
           </div>
           <div className={styles.inputContainer}>
             <DefaultInputItem
@@ -88,8 +116,7 @@ const SignUpPage = () => {
             />
             {error.email.error &&
             <span className={styles.error}>{error.email.message}</span>
-          }
-
+            }
           </div>
           <div className={styles.inputContainer}>
             <DefaultInputItem
@@ -99,11 +126,19 @@ const SignUpPage = () => {
               value={password}
               onChange={(value) => setPassword(value)}
               status={error.password ? 'error' : ''}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              inputName='password'
             />
-            {error.password.error &&
-            <span className={styles.error}>{error.password.message}</span>
-          }
-
+            <div className={styles.messageContainer}>
+              {error.password.error &&
+                <span className={styles.error}>{error.password.message}</span>
+              }
+              {activeStates.password &&
+                <span className={styles.typeCount}>
+                  {password.length}/20
+                </span>}
+            </div>
           </div>
           <div className={styles.inputContainer}>
             <DefaultInputItem
@@ -114,11 +149,19 @@ const SignUpPage = () => {
               wordLimit={10}
               onChange={(value) => setCheckPassword(value)}
               status={error.checkPassword ? 'error' : ''}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              inputName='checkPassword'
             />
-            {error.checkPassword.error &&
-            <span className={styles.error}>{error.checkPassword.message}</span>
-          }
-
+            <div className={styles.messageContainer}>
+              {error.checkPassword.error &&
+                <span className={styles.error}>{error.checkPassword.message}</span>
+              }
+              {activeStates.checkPassword &&
+                <span className={styles.typeCount}>
+                  {checkPassword.length}/20
+              </span>}
+            </div>
           </div>
           <div className={styles.buttonContainer} onClick={handleClick}>
             <Button type={'fullPill'} value={'註冊'} />
