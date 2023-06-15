@@ -176,6 +176,11 @@ const InfoSetting = () => {
             defaultValue={userInfo.email}
             onChange={handleEmailChange}
           />
+          <div className={styles.messageContainer}>
+            {error.email.error &&
+               <span className={styles.error}>{error.email.message}</span>
+            }
+          </div>
         </div>
         <div className={inputContainer}>
           <DefaultInputItem
