@@ -8,11 +8,13 @@ const TextWarning = ({ userTextNothing }) => {
   }
 }
 const handleSubmit = ({ onUserReply, onClose, text, onUserTextWarning, tweet }) => {
-  if (text.length > 0) {
+  if (text.trim().length > 0) {
     onUserReply?.({ TweetId: tweet.TweetId, text })
     onClose()
   }
   if (text.length === 0) {
+    onUserTextWarning(true)
+  } else if (text.trim() === '') {
     onUserTextWarning(true)
   } else {
     onUserTextWarning(false)

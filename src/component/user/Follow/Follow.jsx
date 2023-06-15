@@ -18,6 +18,7 @@ const ContentItem = ({ render, onClick, followerData, followingData, onAvatarCli
             item={item}
             render={render}
             onAvatarClick={(id) => onAvatarClick?.(id)}
+            onClick={(id) => onClick?.(id)}
           />
         ))
       )
@@ -53,6 +54,7 @@ const Follow = () => {
   const tweetCount = localStorage.getItem('tweetCount')
   const userName = localStorage.getItem('userName')
 
+  // 更改 追蹤/取消追宗
   const changeUserFollowAsync = async (currentUser, id, authToken) => {
     try {
       if (currentUser.isFollowed) {
@@ -67,9 +69,11 @@ const Follow = () => {
     }
   }
 
+  // 點擊按鈕後觸發 追蹤/取消追蹤
   const handleClick = (id) => {
     const authToken = localStorage.getItem('authToken')
     if (render === '追隨者') {
+      console.log('123')
       setFollowerData(followerData.map(item => {
         if (item.UserId === id) {
           return {
@@ -93,6 +97,7 @@ const Follow = () => {
           return item
         }
       }))
+      console.log('123')
       const currentUser = followingData.find(item => item.UserId === id)
       changeUserFollowAsync(currentUser, id, authToken)
     }

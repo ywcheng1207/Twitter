@@ -5,10 +5,10 @@ import HomeContentItem from 'component/element/element_mid/HomeContentItem/HomeC
 import OtherPostContent from 'component/element/element_mid/OtherPostContent/OtherPostContent'
 import OtherHead from 'component/element/element_mid/OtherHead/OtherHead'
 import { useNavigate } from 'react-router-dom'
+import { getAccountInfo, getUserTweets, getUserReplyTweets, getUserLikeTweets, postUserFollow, deleteUserFollow } from 'api/user'
 // import { useOtherContext } from 'contexts/OtherContext'
 
 import { useState, useEffect } from 'react'
-import { getAccountInfo, getUserTweets, getUserReplyTweets, getUserLikeTweets } from 'api/user'
 
 const ContentItem = ({ render, postList, replyList, userLikeList, onAvatarClick }) => {
   if (render === '推文') {
@@ -75,6 +75,45 @@ const Other = () => {
     }
   }
 
+  // 點擊追蹤//取消追蹤
+  const handleFollowClick = () => {
+    const authToken = localStorage.getItem('authToken')
+    if (otherUser.followed) {
+      setOtherUser({
+        ...otherUser,
+        followed: !otherUser.followed
+      })
+      const data = deleteUserFollowAsync(authToken, otherUser.id)
+      console.log(data)
+    } else {
+      const data = postUserFollowAsync(authToken, otherUser.id)
+      setOtherUser({
+        ...otherUser,
+        followed: !otherUser.followed
+      })
+      console.log(data)
+    }
+  }
+
+  const postUserFollowAsync = async (authToken, id) => {
+    try {
+      const data = await postUserFollow(authToken, id)
+      console.log(data)
+      return data
+    } catch (error) {
+      console.error(error)
+    }
+  }
+  const deleteUserFollowAsync = async (authToken, id) => {
+    try {
+      const data = await deleteUserFollow(authToken, id)
+      console.log(data)
+      return data
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   // render 用戶資料
   useEffect(() => {
     const getAccountInfoAsync = async () => {
@@ -92,6 +131,7 @@ const Other = () => {
     }
     getAccountInfoAsync()
   }, [localStorage.getItem('otherId')])
+  //
 
   useEffect(() => {
     const getUserDataAsync = async (authToken, id) => {
@@ -114,10 +154,11 @@ const Other = () => {
       getUserDataAsync(localStorage.getItem('authToken'), otherId)
     }
   }, [localStorage.getItem('otherId')])
+  // localStorage.getItem('otherId')
 
   return (
     <div className={container}>
-      <OtherHead otherUser={otherUser} />
+      <OtherHead otherUser={otherUser} onFollowClick={handleFollowClick} />
       <TweetSwitchTab
         list={list}
         status={status}

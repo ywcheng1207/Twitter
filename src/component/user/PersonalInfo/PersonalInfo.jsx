@@ -18,7 +18,7 @@ const ContentItem = ({ render, postList, replyList, userLikeList, onPostList, on
   } else if (render === '回覆') {
     return (
       replyList.map((item) => (
-        <PostContentItem tweet={item} key={item.reaplyId} onAvatarClick={(clickId) => onAvatarClick?.(clickId)} />
+        <PostContentItem tweet={item} key={item.reaplyId} />
       ))
     )
   } else if (render === '喜歡的內容') {
@@ -68,7 +68,7 @@ const PersonalInfo = () => {
   const handleShow = () => setShow(true)
 
   // 上傳照片功能
-  const inputfileref = useRef()
+  const inputfileref = useRef(userCover)
   const handleOnClickUpload = () => {
     inputfileref.current.click()
   }
@@ -92,6 +92,7 @@ const PersonalInfo = () => {
     setImageSrc('')
     setCoverStatus(false)
     handleRemoveFile()
+    setUserCover(inputfileref.current)
   }
   const handleRemoveFile = () => {
     inputfileref.current.value = ''
@@ -247,6 +248,7 @@ const PersonalInfo = () => {
         setFollowerCount(data.followerCount)
         setFollowingCount(data.followingCount)
         setImageSrc(data.cover)
+        setUserCover(data.cover)
         setModalAvatar(data.avatar)
         localStorage.setItem('tweetCount', data.tweetCount)
         localStorage.setItem('userName', data.name)

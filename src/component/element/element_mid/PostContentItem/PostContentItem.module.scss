@@ -58,6 +58,9 @@
     .postDescription {
       width: 528px;
       height: 52px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
 }
