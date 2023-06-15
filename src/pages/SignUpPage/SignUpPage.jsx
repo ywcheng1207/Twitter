@@ -39,7 +39,6 @@ const SignUpPage = () => {
         }
       })
       setError(updatedErrors)
-      console.log(error)
     }
   }
   const [activeStates, setActiveStates] = useState({
@@ -103,8 +102,8 @@ const SignUpPage = () => {
               }
               {activeStates.name &&
                 <span className={styles.typeCount}>
-                  {name.length}/20
-              </span>}
+                  {name.length}/50
+                </span>}
             </div>
           </div>
           <div className={styles.inputContainer}>
@@ -138,7 +137,7 @@ const SignUpPage = () => {
               {activeStates.password &&
                 <span className={styles.typeCount}>
                   {password.length}/20
-              </span>}
+                </span>}
             </div>
           </div>
           <div className={styles.inputContainer}>
