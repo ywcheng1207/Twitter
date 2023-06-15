@@ -37,7 +37,7 @@ const Card = ({ item }) => {
                     <div className={styles.follower}>
                         <p>
                             <a href="">{item.follower}位</a>
-                            追隨者
+                            跟隨者
                         </p>
                     </div>
                 </div>

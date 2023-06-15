@@ -10,6 +10,10 @@ const AdminLoginPage = () => {
   const [account, setAccount] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
+  const [error, setError] = useState({
+    account: false,
+    password: false
+  })
 
   const handleClick = async () => {
     if (account.length === 0 || password.length === 0) {
@@ -18,11 +22,20 @@ const AdminLoginPage = () => {
     const { success, token } = await adminLogin({ account, password })
     if (success) {
       console.log('登入成功')
-      console.log(token)
       localStorage.setItem('authToken', token)
       navigate('/admin/main')
     } else {
-      console.log('登入失敗')
+      console.log('wrong')
+      const { message } = await adminLogin({ account, password })
+      const updatedErrors = { ...error }
+      message.forEach((errorMessage) => {
+        updatedErrors[errorMessage.path] = {
+          error: true,
+          message: errorMessage.msg
+        }
+      })
+      setError(updatedErrors)
+      console.log(error)
     }
   }
   const handleKeyDown = async (e) => {
@@ -60,7 +73,11 @@ const AdminLoginPage = () => {
               onChange={(value) => {
                 setAccount(value)
               }}
+              status={error.account ? 'error' : ''}
             />
+             {error.account.error &&
+            <span className={styles.error}>{error.account.message}</span>
+          }
           </div>
           <div className={styles.inputContainer}>
             <DefaultInputItem
@@ -72,7 +89,11 @@ const AdminLoginPage = () => {
               onChange={(value) => {
                 setPassword(value)
               }}
+              status={error.password ? 'error' : ''}
             />
+             {error.password.error &&
+            <span className={styles.error}>{error.password.message}</span>
+          }
           </div>
 
           <div className={styles.buttonContainer} onClick={handleClick} >

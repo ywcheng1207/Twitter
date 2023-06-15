@@ -6,7 +6,7 @@ import { clsx } from 'clsx'
 import { ReactComponent as Bell } from 'assets/icons/bell.svg'
 import { ReactComponent as Mail } from 'assets/icons/mail.svg'
 
-const OtherHead = ({ otherUser }) => {
+const OtherHead = ({ otherUser, onFollowClick }) => {
   const {
     container, headerText, selfInfoContainer, backgroundImg,
     btnContainer, selfInfo, userAvatar, userName, account, description,
@@ -19,9 +19,6 @@ const OtherHead = ({ otherUser }) => {
     navigate(-1)
   }
 
-  const handleClick = () => {
-
-  }
   return (
     <div className={container}>
         <div className={header}>
@@ -35,11 +32,11 @@ const OtherHead = ({ otherUser }) => {
             <div className={backgroundImg}>
               <img src={otherUser.cover} alt="" />
             </div>
-            <div className={btnContainer} onClick={handleClick}>
-                <div className={btnContainer} onClick={handleClick} >
+            <div className={btnContainer}>
+                <div className={btnContainer} >
                     <Mail/>
                     <Bell />
-                    <div className={clsx(btnWidth, { [follow]: otherUser.followed })}>
+                    <div className={clsx(btnWidth, { [follow]: otherUser.followed })} onClick={onFollowClick} >
                         <Button
                             value={ otherUser.followed ? '正在跟隨' : '跟隨'}
                             type={ otherUser.followed ? 'fullPill' : 'holePill' }

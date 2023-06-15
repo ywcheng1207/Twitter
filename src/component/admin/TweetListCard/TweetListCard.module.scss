@@ -6,6 +6,7 @@
   border-bottom: 1px solid #e6ecf0;
   margin-right: 163px;
   padding: 16px;
+  position: relative;
   .avatar {
     width: 50px;
     height: 50px;
@@ -13,7 +14,7 @@
     margin-right: 8px;
   }
   .cardInfoContainer {
-    width: 100%;
+    width: 825px;
     .name {
       font-weight: 700;
     }
@@ -26,9 +27,14 @@
   .tweetText {
     margin-top: 10px;
     line-height: 26px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .iconX {
     margin-right: 4px;
     cursor: pointer;
+    position: absolute;
+    right: 4.65px;
   }
 }

@@ -16,7 +16,7 @@ const TweetListCard = ({ data, onDelete }) => {
                             <span className={name}>{item.tweetOwnerName}</span>
                             <span className={account}>
                                 @{item.tweetOwnerAccount}．
-                                <HoursPassed item={item.tweetTime}/>
+                                <HoursPassed item={item.createdAt}/>
                             </span>
 
                       </div>
