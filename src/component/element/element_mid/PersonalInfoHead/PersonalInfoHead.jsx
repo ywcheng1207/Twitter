@@ -7,7 +7,7 @@ import PersonInfoModal2 from 'component/element/element_mid/PersonlInfoModal/Per
 
 const PersonalInfoHead = ({
   userHead, inroduction, theUserName, followerCount,
-  followingCount, onEditClick, onTextClick, show, onShow,
+  followingCount, onEditClick, onTextClick, show, onShow, onSaveInfo,
   onClose, imageSrc, onOnPreview, onDeletePreview, onNameChange, onIntroductionChange, onSaveClick, onOnAvatar, modalAvatar, avatarStatus, coverStatus, onClickUpload, inputfileref
 }) => {
   const {
@@ -25,7 +25,7 @@ const PersonalInfoHead = ({
         <div className={header}>
             <img src={arrow} alt="" onClick={() => onTextClick()}/>
             <div className={headerText}>
-              <h4 className='Bold'>{theUserName}</h4>
+              <h4 className='Bold'>{userHead.name}</h4>
               <span className={tweetsCount}>{userHead.tweetCount} 貼文</span>
             </div>
         </div>
@@ -47,20 +47,23 @@ const PersonalInfoHead = ({
                 onOnAvatar={onOnAvatar}
                 onDeletePreview={onDeletePreview}
                 onIntroductionChange={(changeIntroduction) => onIntroductionChange?.(changeIntroduction)}
-                onNameChange = {(changeName) => onNameChange?.(changeName)}
+                onNameChange = {onNameChange}
                 onSaveClick={onSaveClick}
                 modalAvatar={modalAvatar}
                 coverStatus={coverStatus}
                 avatarStatus={avatarStatus}
                 onClickUpload={onClickUpload}
                 inputfileref={inputfileref}
+                theUserName={theUserName}
+                inroduction={inroduction}
+                onSaveInfo={onSaveInfo}
                />
             </div>
             <img className={userAvatar} src={userHead.avatar} alt="avatar" />
             <div className={selfInfo} >
-              <p className={userName}>{theUserName}</p>
+              <p className={userName}>{userHead.name}</p>
               <p className={account}>{userHead.account}</p>
-              <p className={description} >{inroduction}</p>
+              <p className={description} >{userHead.introduction}</p>
               <div className={followContainer} >
                   <p className={following}>
                     <Link to='/user/follow/main'>{followingCount}個</Link> <span>追隨中</span>

@@ -9,7 +9,11 @@ const PasswordCount = ({ userInfo }) => {
     return <span>{userInfo.password.length}/20</span>
   }
 }
-
+const PasswordCount2 = ({ userInfo }) => {
+  if (typeof userInfo.checkPassword !== 'undefined') {
+    return <span>{userInfo.checkPassword.length}/20</span>
+  }
+}
 const InfoSetting = () => {
   const { container, inputContainer, btnContainer, btn } = styles
   const [userInfo, setUserInfo] = useState({
@@ -19,6 +23,7 @@ const InfoSetting = () => {
     password: '',
     checkPassword: ''
   })
+  // const inputRef = useRef(null)
   const [error, setError] = useState({
     account: false,
     name: false,
@@ -28,9 +33,11 @@ const InfoSetting = () => {
   })
 
   const handleAccountChange = (value) => {
-    setUserInfo({
-      ...userInfo,
-      account: value
+    setUserInfo(() => {
+      return {
+        ...userInfo,
+        account: value
+      }
     })
   }
   const handleNameChange = (value) => {
@@ -140,6 +147,7 @@ const InfoSetting = () => {
             onFocus={handleFocus}
             onBlur={handleBlur}
             inputName='account'
+            status={error.account ? 'error' : ''}
           />
           <div className={styles.messageContainer}>
               {error.account.error &&
@@ -159,6 +167,7 @@ const InfoSetting = () => {
             onFocus={handleFocus}
             onBlur={handleBlur}
             inputName='name'
+            status={error.name ? 'error' : ''}
           />
           <div className={styles.messageContainer}>
             {error.name.error &&
@@ -175,7 +184,13 @@ const InfoSetting = () => {
             label={'Email'}
             defaultValue={userInfo.email}
             onChange={handleEmailChange}
+            status={error.email ? 'error' : ''}
           />
+          <div className={styles.messageContainer}>
+            {error.email.error &&
+               <span className={styles.error}>{error.email.message}</span>
+            }
+          </div>
         </div>
         <div className={inputContainer}>
           <DefaultInputItem
@@ -187,6 +202,7 @@ const InfoSetting = () => {
               onFocus={handleFocus}
               onBlur={handleBlur}
               inputName='password'
+              status={error.password ? 'error' : ''}
             />
             <div className={styles.messageContainer}>
               {error.password.error &&
@@ -199,16 +215,29 @@ const InfoSetting = () => {
             </div>
         </div>
         <div className={inputContainer}>
-          <DefaultInputItem
-            label={'密碼再確認'}
+            <DefaultInputItem
+              label={'密碼再確認'}
               type={'password'}
               placeholder={'請再次輸入密碼'}
               defaultValue={userInfo.checkPassword}
               onChange={handlePasswordCheckChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              inputName='checkPassword'
+              status={error.checkPassword ? 'error' : ''}
             />
+            <div className={styles.messageContainer}>
+              {error.checkPassword.error &&
+                <span className={styles.error}>{error.checkPassword.message}</span>
+              }
+              {activeStates.checkPassword &&
+                <span className={styles.typeCount}>
+                  <PasswordCount2 userInfo={userInfo} />
+                </span>}
+            </div>
         </div>
-        <div className={btnContainer} onClick={handleSave}>
-          <div className={btn}>
+        <div className={btnContainer}>
+          <div className={btn} onClick={handleSave}>
             <Button
               type={'fullPill'}
               value={'儲存'}

@@ -7,7 +7,7 @@ import { ReactComponent as PhotoX } from 'assets/icons/photoX.svg'
 import clsx from 'clsx'
 
 function Example ({
-  userHead, show, onShow,
+  userHead, show, onShow, theUserName, inroduction, onSaveInfo,
   onClose, imageSrc, onOnPreview, onDeletePreview, onNameChange, onIntroductionChange, onSaveClick, onOnAvatar, modalAvatar, coverStatus, avatarStatus, onClickUpload, inputfileref
 }) {
   const { btn, closeBtn, headerTitle, saveBtn, defaultAvatar, upAvatar, defaultCover, overUpload, photoContainer, photoXContainer } = styles
@@ -24,6 +24,15 @@ function Example ({
     avatarRef.current.click()
   }
 
+  // const handleSaveInfo = () => {
+  //   if (theUserName.length > 0 &&
+  //     inroduction.length > 0 &&
+  //      theUserName.length <= 50 &&
+  //      inroduction.length <= 160) {
+  //     onSaveClick()
+  //     onClose()
+  //   }
+  // }
   return (
     <>
       {/* <Button variant="primary" onClick={onShow}>
@@ -34,10 +43,7 @@ function Example ({
         <Modal.Header className={styles.modalHeaderContainer} >
           <div onClick={onClose} className={closeBtn}>&times;</div>
           <div className={headerTitle}>編輯個人資料</div>
-          <button className={`rounded-pill ${saveBtn}`} onClick={() => {
-            onSaveClick()
-            onClose()
-          }} >儲存</button>
+          <button className={`rounded-pill ${saveBtn}`} onClick={onSaveInfo} >儲存</button>
         </Modal.Header>
         <Modal.Body className={styles.modalBodyContainer}>
           <div className={styles.modalBody}>
@@ -81,9 +87,13 @@ function Example ({
               <p>名稱</p>
                 <input
                   className={styles.nameInput}
-                  defaultValue={userHead.name}
+                  defaultValue={theUserName}
                   onChange={(event) => onNameChange?.(event.target.value)}
                   />
+            </div>
+            <div className={styles.descriptMessageContainer}>
+              {theUserName.length > 50 && <span className={styles.error}>字數超出上限！</span>}
+              <span className={styles.count}>{theUserName.length}/50</span>
             </div>
             <div className={styles.discriptionInputContainer}>
               <p>自我介紹</p>
@@ -92,9 +102,13 @@ function Example ({
                   cols="65"
                   rows="4"
                   placeholder='有什麼新鮮事？'
-                  defaultValue={userHead.introduction}
+                  defaultValue={inroduction}
                   onChange={(event) => onIntroductionChange?.(event.target.value)}
                 />
+            </div>
+            <div className={styles.descriptMessageContainer}>
+              {inroduction.length > 160 && <span className={styles.error}>字數超出上限！</span>}
+              <span className={styles.count}>{inroduction.length}/160</span>
             </div>
           </div>
         </Modal.Body>

@@ -64,8 +64,21 @@ const PersonalInfo = () => {
   }
   // 呼叫編輯modal
   const [show, setShow] = useState(false)
-  const handleClose = () => setShow(false)
+  const handleClose = () => {
+    setShow(false)
+    setIntorduction(userHead.introduction)
+    setTheUserName(userHead.name)
+  }
   const handleShow = () => setShow(true)
+  const handleSaveInfo = () => {
+    if (theUserName.length > 0 &&
+      inroduction.length > 0 &&
+       theUserName.length <= 50 &&
+       inroduction.length <= 160) {
+      handleSaveClick()
+      handleClose()
+    }
+  }
 
   // 上傳照片功能
   const inputfileref = useRef(userCover)
@@ -132,7 +145,7 @@ const PersonalInfo = () => {
     setUserHead({
       ...userHead,
       name: theUserName,
-      inroduction,
+      introduction: inroduction,
       cover: imageSrc,
       avatar: modalAvatar
     })
@@ -277,7 +290,6 @@ const PersonalInfo = () => {
       getUserDataAsync(localStorage.getItem('authToken'), localStorage.getItem('id'))
     }
   }, [render])
-
   return (
     <div className={container}>
       <PersonalInfoHead
@@ -304,6 +316,7 @@ const PersonalInfo = () => {
         coverStatus={coverStatus}
         onClickUpload={handleOnClickUpload}
         inputfileref={inputfileref}
+        onSaveInfo={handleSaveInfo}
       />
       <TweetSwitchTab
         list={list}

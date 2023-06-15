@@ -10,11 +10,11 @@ const TextWarning = ({ text, userTextNothing }) => {
   }
 }
 const handleSubmit = ({ onAddHomeList, onClose, text, onUserTextWarning }) => {
-  if (text.length > 0 && text.length <= 140) {
+  if (text.trim().length > 0 && text.length <= 140) {
     onAddHomeList(text)
     onClose()
   }
-  if (text.length === 0) {
+  if (text.trim().length === 0) {
     onUserTextWarning(true)
   } else {
     onUserTextWarning(false)
