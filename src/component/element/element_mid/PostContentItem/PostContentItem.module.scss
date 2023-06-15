@@ -21,7 +21,7 @@
         margin-right: 8px;
 
         display: inline-block;
-        width: 130px;
+        max-width: 130px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -58,6 +58,9 @@
     .postDescription {
       width: 528px;
       height: 52px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      overflow-wrap: break-word;
     }
   }
 }

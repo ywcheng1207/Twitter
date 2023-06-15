@@ -13,7 +13,6 @@ const InfoSetting = () => {
     password: '',
     checkPassword: ''
   })
-
   const handleAccountChange = (value) => {
     setUserInfo({
       ...userInfo,
@@ -59,6 +58,7 @@ const InfoSetting = () => {
       })
     } catch (error) {
       console.error(error)
+      return error.data
     }
   }
 
