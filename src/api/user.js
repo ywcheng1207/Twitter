@@ -156,7 +156,7 @@ export const getUserFollowing = async (authToken, id) => {
 // -- follow 頁點擊後追隨
 export const postUserFollow = async (authToken, id) => {
   try {
-    const { data } = await axios.post(`${baseURL}/followships`, { id }, { headers: { Authorization: 'Bearer ' + authToken } })
+    const { data } = await axios.post(`${baseURL}/followships/`, { id }, { headers: { Authorization: 'Bearer ' + authToken } })
     return data
   } catch (error) {
     console.error('[postUserFollow failed]', error)
