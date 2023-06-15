@@ -60,6 +60,21 @@ const Other = () => {
     setStatus(index)
     setRender(item)
   }
+  // render 用戶資料
+  useEffect(() => {
+    const getAccountInfoAsync = async () => {
+      try {
+        const authToken = localStorage.getItem('authToken')
+        const data = await getAccountInfo(authToken, otherId)
+        console.log('用戶資料取得成功')
+        setOtherUser(data)
+        return data
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    getAccountInfoAsync()
+  }, [localStorage.getItem('otherId')])
 
   useEffect(() => {
     const getUserDataAsync = async (authToken, id) => {
@@ -81,22 +96,6 @@ const Other = () => {
     if (localStorage.getItem('authToken')) {
       getUserDataAsync(localStorage.getItem('authToken'), otherId)
     }
-  }, [localStorage.getItem('otherId')])
-
-  // render 用戶資料
-  useEffect(() => {
-    const getAccountInfoAsync = async () => {
-      try {
-        const authToken = localStorage.getItem('authToken')
-        const data = await getAccountInfo(authToken, otherId)
-        console.log('用戶資料取得成功')
-        setOtherUser(data)
-        return data
-      } catch (error) {
-        console.error(error)
-      }
-    }
-    getAccountInfoAsync()
   }, [localStorage.getItem('otherId')])
 
   return (
