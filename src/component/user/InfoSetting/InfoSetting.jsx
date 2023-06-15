@@ -140,6 +140,7 @@ const InfoSetting = () => {
             onFocus={handleFocus}
             onBlur={handleBlur}
             inputName='account'
+            status={error.account ? 'error' : ''}
           />
           <div className={styles.messageContainer}>
               {error.account.error &&
@@ -159,6 +160,7 @@ const InfoSetting = () => {
             onFocus={handleFocus}
             onBlur={handleBlur}
             inputName='name'
+            status={error.name ? 'error' : ''}
           />
           <div className={styles.messageContainer}>
             {error.name.error &&
@@ -175,6 +177,7 @@ const InfoSetting = () => {
             label={'Email'}
             defaultValue={userInfo.email}
             onChange={handleEmailChange}
+            status={error.email ? 'error' : ''}
           />
           <div className={styles.messageContainer}>
             {error.email.error &&
@@ -192,6 +195,7 @@ const InfoSetting = () => {
               onFocus={handleFocus}
               onBlur={handleBlur}
               inputName='password'
+              status={error.password ? 'error' : ''}
             />
             <div className={styles.messageContainer}>
               {error.password.error &&
@@ -210,10 +214,11 @@ const InfoSetting = () => {
               placeholder={'請再次輸入密碼'}
               defaultValue={userInfo.checkPassword}
               onChange={handlePasswordCheckChange}
+              status={error.checkPassword ? 'error' : ''}
             />
         </div>
-        <div className={btnContainer} onClick={handleSave}>
-          <div className={btn}>
+        <div className={btnContainer}>
+          <div className={btn} onClick={handleSave}>
             <Button
               type={'fullPill'}
               value={'儲存'}

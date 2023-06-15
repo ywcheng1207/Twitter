@@ -55,6 +55,7 @@ const LoginPage = () => {
               onChange={(value) => {
                 setAccount(value)
               }}
+              status={error.account ? 'error' : ''}
             />
             <div className={styles.messageContainer}>
              {error.account.error &&
@@ -71,6 +72,7 @@ const LoginPage = () => {
               onChange={(value) => {
                 setPassword(value)
               }}
+              status={error.password ? 'error' : ''}
             />
             <div className={styles.messageContainer}>
               {error.password.error &&
