@@ -8,7 +8,7 @@ import PersonInfoModal2 from 'component/element/element_mid/PersonlInfoModal/Per
 const PersonalInfoHead = ({
   userHead, inroduction, theUserName, followerCount,
   followingCount, onEditClick, onTextClick, show, onShow,
-  onClose, imageSrc, onOnPreview, onDeletePreview
+  onClose, imageSrc, onOnPreview, onDeletePreview, onNameChange, onIntroductionChange, onSaveClick, onOnAvatar, modalAvatar, avatarStatus, coverStatus, onClickUpload, inputfileref
 }) => {
   const {
     container, headerText, selfInfoContainer, backgroundImg,
@@ -44,7 +44,16 @@ const PersonalInfoHead = ({
                 onShow={onShow}
                 imageSrc={imageSrc}
                 onOnPreview={onOnPreview}
+                onOnAvatar={onOnAvatar}
                 onDeletePreview={onDeletePreview}
+                onIntroductionChange={(changeIntroduction) => onIntroductionChange?.(changeIntroduction)}
+                onNameChange = {(changeName) => onNameChange?.(changeName)}
+                onSaveClick={onSaveClick}
+                modalAvatar={modalAvatar}
+                coverStatus={coverStatus}
+                avatarStatus={avatarStatus}
+                onClickUpload={onClickUpload}
+                inputfileref={inputfileref}
                />
             </div>
             <img className={userAvatar} src={userHead.avatar} alt="avatar" />

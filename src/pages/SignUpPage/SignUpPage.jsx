@@ -28,18 +28,19 @@ const SignUpPage = () => {
     if (success) {
       console.log('註冊成功')
       navigate('/login')
+    } else {
+      const { message } = await register({ account, password })
+      console.log(message)
+      const updatedErrors = { ...error }
+      message.forEach((errorMessage) => {
+        updatedErrors[errorMessage.path] = {
+          error: true,
+          message: errorMessage.msg
+        }
+      })
+      setError(updatedErrors)
+      console.log(error)
     }
-    const { errors } = await register({ account, password })
-    console.log(errors)
-    const updatedErrors = { ...error }
-    errors.forEach((errorMessage) => {
-      updatedErrors[errorMessage.path] = {
-        error: true,
-        message: errorMessage.msg
-      }
-    })
-    setError(updatedErrors)
-    console.log(error)
   }
 
   return (
