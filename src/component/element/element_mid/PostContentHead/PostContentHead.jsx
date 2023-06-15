@@ -17,6 +17,7 @@ const PostContentHead = () => {
   const [text, setText] = useState('')
   const [tweetOwnerInfo, setTweetOwner] = useState([])
   const [userTextNothing, setUserTextNoting] = useState(false)
+  const [creatTime, setCreatTime] = useState()
   //
   const handleClose = () => {
     setShow(false)
@@ -68,6 +69,7 @@ const PostContentHead = () => {
       try {
         const data = await getSingleTweetInfo({ authToken, TweetId })
         setTweetOwner(data)
+        setCreatTime(timeTrans(data.createdAt))
       } catch (error) {
         console.error(error)
       }
@@ -90,7 +92,7 @@ const PostContentHead = () => {
           {tweetOwnerInfo.description}
       </div>
       <div className={postTime}>
-        <span>{tweetOwnerInfo.createdAt}</span>
+        <span>{creatTime}</span>
       </div>
       <div className={postCount}>
         <div className={reply}>
@@ -126,3 +128,25 @@ const PostContentHead = () => {
   )
 }
 export default PostContentHead
+
+function timeTrans (value) {
+  const date = new Date(value)
+
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  const hours = date.getHours()
+  const minutes = date.getMinutes()
+
+  const formattedDate = `${year}年${month}月${day}日`
+
+  let formattedTime
+  if (hours < 12) {
+    formattedTime = `上午${hours}:${minutes.toString().padStart(2, '0')}`
+  } else {
+    formattedTime = `下午${(hours - 12)}:${minutes.toString().padStart(2, '0')}`
+  }
+
+  const formattedString = `${formattedTime}・${formattedDate}`
+  return formattedString
+}
