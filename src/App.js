@@ -24,17 +24,17 @@ function App () {
         <div className="App">
           <BrowserRouter basename={basename}>
             <Routes>
-              <Route path='login' element={<LoginPage />} />
-              <Route path='register' element={<SignUpPage />} />
+              <Route path='/login' element={<LoginPage />} />
+              <Route path='/register' element={<SignUpPage />} />
 
-              <Route path='user' element={<Navigate to="/user/Home/main" replace />} />
-              <Route path='user/:page' element={<UserMainPage />}>
-                  <Route path="main" element={<Content />}/>
+              <Route path='/user' element={<Navigate to="/user/Home/main" replace />} />
+              <Route path='/user/:page' element={<UserMainPage />}>
+                <Route path="main" element={<Content />} />
               </Route>
 
-              <Route path='admin' element={<AdminLoginPage />} />
-              <Route path='admin/main' element={<AdminTweetListPage />} />
-              <Route path='admin/users' element={<AdminUsersPage />} />
+              <Route path='/admin' element={<AdminLoginPage />} />
+              <Route path='/admin/main' element={<AdminTweetListPage />} />
+              <Route path='/admin/users' element={<AdminUsersPage />} />
 
               <Route path='*' element={<HomePage />} />
             </Routes>

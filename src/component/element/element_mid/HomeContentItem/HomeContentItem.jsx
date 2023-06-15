@@ -76,15 +76,15 @@ const HomeContentItem = ({ TweetId, tweet, id, onPostList, onUserLikeList }) => 
   // const setId = useOtherContext().setOtherId
   const handleAvatarClick = (e) => {
     console.log(e.target.id)
-    if (e.target.id === localStorage.getItem('otherId')) {
-      return
-    }
-    localStorage.setItem('otherId', e.target.id)
-    if (id === localStorage.getItem('id')) {
-      navigate('/user/personalinfo/main')
-    } else {
-      navigate('/user/other/main')
-    }
+    const clickId = e.target.id
+    localStorage.setItem('otherId', clickId)
+    navigate('/user/other/main')
+    // localStorage.setItem('otherId', e.target.id)
+    // if (id === localStorage.getItem('id')) {
+    //   navigate('/user/personalinfo/main')
+    // } else {
+    //   navigate('/user/other/main')
+    // }
   }
 
   return (

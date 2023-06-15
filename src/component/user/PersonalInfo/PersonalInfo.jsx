@@ -12,7 +12,7 @@ const ContentItem = ({ render, postList, replyList, userLikeList, onPostList, on
   if (render === '推文') {
     return (
       postList.map((item) => (
-        <HomeContentItem tweet={item} key={item.TweetId} TweetId={item.TweetId} onPostList={onPostList} />
+        <HomeContentItem tweet={item} key={item.TweetId} id={item.tweetOwnerId} TweetId={item.TweetId} onPostList={onPostList} />
       ))
     )
   } else if (render === '回覆') {
@@ -24,7 +24,7 @@ const ContentItem = ({ render, postList, replyList, userLikeList, onPostList, on
   } else if (render === '喜歡的內容') {
     return (
       userLikeList.map((item) => (
-        <HomeContentItem tweet={item} key={item.TweetId} TweetId={item.TweetId} onUserLikeList={onUserLikeList} />
+        <HomeContentItem tweet={item} key={item.TweetId} id={item.tweetOwnerId} TweetId={item.TweetId} onUserLikeList={onUserLikeList} />
       ))
     )
   }
