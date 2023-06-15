@@ -4,8 +4,8 @@ import HomeContentItem from 'component/element/element_mid/HomeContentItem/HomeC
 import PersonalInfoHead from 'component/element/element_mid/PersonalInfoHead/PersonalInfoHead'
 import PostContentItem from 'component/element/element_mid/PostContentItem/PostContentItem'
 // import PersonInfoModal from 'component/element/element_mid/PersonlInfoModal/PersonInfoModal'
-import { useState, useEffect } from 'react'
-import { getUserTweets, getUserReplyTweets, getUserLikeTweets, getAccountInfo } from 'api/user'
+import { useState, useEffect, useRef } from 'react'
+import { getUserTweets, getUserReplyTweets, getUserLikeTweets, getAccountInfo, putPersonalInfo } from 'api/user'
 import { useNavigate } from 'react-router-dom'
 // putPersonalInfo
 const ContentItem = ({ render, postList, replyList, userLikeList, onPostList, onUserLikeList }) => {
@@ -38,6 +38,7 @@ const PersonalInfo = () => {
   const [postList, setPostList] = useState([])
   const [replyList, setReplyList] = useState([])
   const [userLikeList, setUserLikeList] = useState([])
+  const formData = new FormData()
 
   // 編輯資料頭像狀態
   const [userHead, setUserHead] = useState({})
@@ -45,6 +46,13 @@ const PersonalInfo = () => {
   const [inroduction, setIntorduction] = useState('')
   const [followerCount, setFollowerCount] = useState('')
   const [followingCount, setFollowingCount] = useState('')
+  const [userAvatar, setUserAvatar] = useState('')
+  const [userCover, setUserCover] = useState('')
+
+  // 上傳照片狀態
+  const [coverStatus, setCoverStatus] = useState(false)
+  const [avatarStatus, setAvatarStatus] = useState(false)
+
   const navigate = useNavigate()
   const list = ['推文', '回覆', '喜歡的內容']
   // head回到上一頁按鈕
@@ -60,14 +68,21 @@ const PersonalInfo = () => {
   const handleShow = () => setShow(true)
 
   // 上傳照片功能
-  const [imageSrc, setImageSrc] = useState(userHead.cover)
+  const inputfileref = useRef()
+  const handleOnClickUpload = () => {
+    inputfileref.current.click()
+  }
+  const [imageSrc, setImageSrc] = useState('')
   const handleOnPreview = (event) => {
     const file = event.target.files[0]
+    setUserCover(file)
     const reader = new FileReader()
+
     reader.addEventListener('load', function () {
       // convert image file to base64 string
       setImageSrc(reader.result)
     }, false)
+    setCoverStatus(true)
 
     if (file) {
       reader.readAsDataURL(file)
@@ -75,7 +90,68 @@ const PersonalInfo = () => {
   }
   const handleDeletePreview = () => {
     setImageSrc('')
+    setCoverStatus(false)
+    handleRemoveFile()
   }
+  const handleRemoveFile = () => {
+    inputfileref.current.value = ''
+  }
+
+  // 上傳 avatar 功能
+  const [modalAvatar, setModalAvatar] = useState('')
+  const handleOnAvatar = (event) => {
+    const file = event.target.files[0]
+    setUserAvatar(file)
+    const reader = new FileReader()
+    reader.addEventListener('load', function () {
+      // convert image file to base64 string
+      setModalAvatar(reader.result)
+      setAvatarStatus(true)
+    }, false)
+
+    if (file) {
+      reader.readAsDataURL(file)
+    }
+  }
+
+  // modal 更換名字與介紹
+  const handleNameChange = (changeName) => {
+    setTheUserName(changeName)
+  }
+
+  const handleIntrodrctionChange = (changeIntroduction) => {
+    setIntorduction(changeIntroduction)
+  }
+
+  // modal 點擊儲存
+  const handleSaveClick = () => {
+    const id = localStorage.getItem('id')
+    const authToken = localStorage.getItem('authToken')
+    setUserHead({
+      ...userHead,
+      name: theUserName,
+      inroduction,
+      cover: imageSrc,
+      avatar: modalAvatar
+    })
+    formData.append('name', theUserName)
+    formData.append('introduction', inroduction)
+    formData.append('cover', userCover)
+    formData.append('avatar', userAvatar)
+    console.log(formData)
+    putPersonalInfoAsync(authToken, id, formData)
+  }
+
+  const putPersonalInfoAsync = async (authToken, id, formData) => {
+    try {
+      await putPersonalInfo(authToken, id, formData)
+      console.log('修改完成')
+      location.reload(true)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   // ----------------- OLD
   // show編輯資料modal
   // const [show, setShow] = useState(false)
@@ -150,15 +226,14 @@ const PersonalInfo = () => {
         const id = localStorage.getItem('id')
         const data = await getAccountInfo(authToken, id)
         console.log('成功取得使用者資料')
-        const { cover, avatar } = data
-        localStorage.setItem('modalCover', cover)
-        localStorage.setItem('modalAvatar', avatar)
 
         setUserHead(data)
         setTheUserName(data.name)
         setIntorduction(data.introduction)
         setFollowerCount(data.followerCount)
         setFollowingCount(data.followingCount)
+        setImageSrc(data.cover)
+        setModalAvatar(data.avatar)
       } catch (error) {
         console.error(error)
       }
@@ -200,8 +275,17 @@ const PersonalInfo = () => {
         onClose={handleClose}
         onShow={handleShow}
         imageSrc={imageSrc}
+        modalAvatar={modalAvatar}
         onOnPreview={handleOnPreview}
+        onOnAvatar={handleOnAvatar}
         onDeletePreview={handleDeletePreview}
+        onNameChange={handleNameChange}
+        onIntroductionChange={handleIntrodrctionChange}
+        onSaveClick={handleSaveClick}
+        avatarStatus={avatarStatus}
+        coverStatus={coverStatus}
+        onClickUpload={handleOnClickUpload}
+        inputfileref={inputfileref}
       />
       <TweetSwitchTab
         list={list}

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const baseURL = 'https://arcane-mesa-58606.herokuapp.com/api'
-// const baseURL = 'https://rocky-reef-54442.herokuapp.com/api'
+// const baseURL = 'https://arcane-mesa-58606.herokuapp.com/api'
+const baseURL = 'https://rocky-reef-54442.herokuapp.com/api'
 
 export const getTweets = async (authToken) => {
   try {
@@ -182,11 +182,11 @@ export const getSidebarData = async (authToken) => {
 // -- 個人頁修改 avatar, cover , name , introduction
 export const putPersonalInfo = async (authToken, id, formData) => {
   try {
+    console.log(`${baseURL}/users/${id}`)
     const { data } = await axios.put(`${baseURL}/users/${id}`, formData, {
       headers: {
-        Authorization: 'Bearer ' + authToken,
-        'Content-Type': 'multipart/form-data'
-
+        'Content-Type': 'multipart/form-data',
+        Authorization: 'Bearer ' + authToken
       }
     })
     console.log(data)

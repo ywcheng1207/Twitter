@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const baseURL = 'https://arcane-mesa-58606.herokuapp.com/api'
-// const baseURL = 'https://rocky-reef-54442.herokuapp.com/api'
+// const baseURL = 'https://arcane-mesa-58606.herokuapp.com/api'
+const baseURL = 'https://rocky-reef-54442.herokuapp.com/api'
 
 export const register = async ({ account, name, email, password, checkPassword }) => {
   try {
@@ -14,7 +14,7 @@ export const register = async ({ account, name, email, password, checkPassword }
   } catch (error) {
     console.error(error)
     if (error.response) {
-      return (error.response)
+      return (error.response.data)
     }
   }
 }
