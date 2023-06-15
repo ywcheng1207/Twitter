@@ -4,7 +4,11 @@ import { useEffect } from 'react'
 const HomePage = () => {
   const navigate = useNavigate()
   useEffect(() => {
-    navigate('/login')
+    if (typeof localStorage.getItem('authToken') !== 'undefined') {
+      navigate('/user/home/main')
+    } else {
+      navigate('/login')
+    }
   }, [navigate])
 }
 
