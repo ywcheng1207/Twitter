@@ -5,6 +5,7 @@ import { ReactComponent as Logo } from 'assets/icons/logo.svg'
 import { useState } from 'react'
 import { login } from 'api/auth'
 import { useNavigate, Link } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 const LoginPage = () => {
   const [account, setAccount] = useState('')
@@ -25,6 +26,20 @@ const LoginPage = () => {
       localStorage.setItem('id', data.id)
       localStorage.setItem('avatar', data.avatar)
       navigate('/user/home/main')
+
+      Swal.fire({
+        position: 'top',
+        title: '登入成功！',
+        timer: 1000,
+        // icon: 'success',
+        showConfirmButton: false,
+
+        customClass: {
+          popup: styles.customSwal,
+          title: styles.title,
+          icon: styles.success
+        }
+      })
     } else {
       const updatedErrors = { ...error }
       data.message.forEach((errorMessage) => {
