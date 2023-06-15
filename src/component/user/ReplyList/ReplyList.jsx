@@ -34,6 +34,9 @@ const ReplyListContent = ({ onAvatarClick }) => {
   }
 }
 
+const handleMove = (navigate) => {
+  navigate(-1)
+}
 const ReplyList = () => {
   const { HeaderTweetContainer, PostContentList } = styles
   const navigate = useNavigate()
@@ -52,7 +55,7 @@ const ReplyList = () => {
 
   return (
     <div>
-      <div className={HeaderTweetContainer} onClick={() => navigate(-1)}>
+      <div className={HeaderTweetContainer} onClick={() => handleMove(navigate)}>
         <HeaderTweet />
       </div>
       <PostContentHead/>

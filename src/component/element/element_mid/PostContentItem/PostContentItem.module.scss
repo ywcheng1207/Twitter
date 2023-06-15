@@ -21,7 +21,7 @@
         margin-right: 8px;
 
         display: inline-block;
-        width: 130px;
+        max-width: 130px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -60,7 +60,11 @@
       height: 52px;
       overflow: hidden;
       text-overflow: ellipsis;
+<<<<<<< HEAD
       white-space: nowrap;
+=======
+      overflow-wrap: break-word;
+>>>>>>> d526dd4f2f3ca832d1bec245cc134be61e195029
     }
   }
 }
