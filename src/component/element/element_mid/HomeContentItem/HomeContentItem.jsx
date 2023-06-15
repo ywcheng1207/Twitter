@@ -11,7 +11,7 @@ import { userLikeTweet, userUnLikeTweet } from 'api/user'
 import { useReplyList } from 'contexts/RelyLIstContext'
 import { useUserPostModal, useUserReplyModal } from 'contexts/UserMainPageContext'
 
-const HomeContentItem = ({ TweetId, tweet, id, onPostList, onUserLikeList }) => {
+const HomeContentItem = ({ TweetId, tweet, id, onPostList, onUserLikeList, onAvatarClick }) => {
   // --- style
   const {
     HomeContentItemContainer, HomeContentItemHead, HomeContentItemDescreption,
@@ -74,23 +74,23 @@ const HomeContentItem = ({ TweetId, tweet, id, onPostList, onUserLikeList }) => 
   }
 
   // const setId = useOtherContext().setOtherId
-  const handleAvatarClick = (e) => {
-    console.log(e.target.id)
-    if (e.target.id === localStorage.getItem('otherId')) {
-      return
-    }
-    localStorage.setItem('otherId', e.target.id)
-    if (id === localStorage.getItem('id')) {
-      navigate('/user/personalinfo/main')
-    } else {
-      navigate('/user/other/main')
-    }
-  }
+  // const handleAvatarClick = (e) => {
+  //   console.log(e.target.id)
+  //   if (e.target.id === localStorage.getItem('otherId')) {
+  //     return
+  //   }
+  //   localStorage.setItem('otherId', e.target.id)
+  //   if (id === localStorage.getItem('id')) {
+  //     navigate('/user/personalinfo/main')
+  //   } else {
+  //     navigate('/user/other/main')
+  //   }
+  // }
 
   return (
     <div className={HomeContentItemContainer}>
       <div className={HomeContentItemHead}>
-        <img src={tweet.tweetOwnerAvatar} alt="Image" onClick={handleAvatarClick} id={id}></img>
+        <img src={tweet.tweetOwnerAvatar} alt="Image" onClick={() => onAvatarClick?.(tweet.tweetOwnerId)}></img>
       </div>
       <div className={HomeContentItemDescreption}>
         <div>

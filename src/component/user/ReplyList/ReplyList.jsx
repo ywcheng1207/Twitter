@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { getSingleTweet } from 'api/user'
 import { useEffect, useState } from 'react'
 
-const ReplyListContent = () => {
+const ReplyListContent = ({ onAvatarClick }) => {
   const [replyList, setReplyList] = useState([])
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const ReplyListContent = () => {
   }, [localStorage.getItem('replyListLength')])
 
   if (replyList.length > 0) {
-    return replyList.map((item) => <PostContentItem key={item.replyId} tweet={item} reply='true' />)
+    return replyList.map((item) => <PostContentItem key={item.replyId} tweet={item} reply='true' onAvatarClick={(clickId) => onAvatarClick?.(clickId) } />)
   }
 }
 
@@ -40,14 +40,27 @@ const handleMove = (navigate) => {
 const ReplyList = () => {
   const { HeaderTweetContainer, PostContentList } = styles
   const navigate = useNavigate()
+
+  // 點擊 avatar 至 other 頁面
+  const handleAvatarClick = (clickId) => {
+    console.log(clickId)
+    const userId = localStorage.getItem('id')
+    if (Number(clickId) === Number(userId)) {
+      navigate('/user/personalinfo/main')
+    } else {
+      localStorage.setItem('otherId', clickId)
+      navigate('/user/other/main')
+    }
+  }
+
   return (
     <div>
       <div className={HeaderTweetContainer} onClick={() => handleMove(navigate)}>
         <HeaderTweet />
       </div>
-      <PostContentHead />
+      <PostContentHead/>
       <div className={PostContentList}>
-          <ReplyListContent />
+          <ReplyListContent onAvatarClick={handleAvatarClick} />
       </div>
     </div>
   )

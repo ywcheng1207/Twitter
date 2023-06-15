@@ -2,7 +2,7 @@ import styles from './PostContentItem.module.scss'
 import HoursPassed from 'component/element/element_basic/HoursPassed/HoursPassed'
 // const avatarUrl = 'https://loremflickr.com/320/240/people/?random=7.976051090916994&lock=999'
 
-const PostContentItem = ({ tweet, reply }) => {
+const PostContentItem = ({ tweet, reply, onAvatarClick }) => {
   let Avatar
   let ReplyerName
   let ReplyerAccount
@@ -23,7 +23,7 @@ const PostContentItem = ({ tweet, reply }) => {
 
   return (
     <div className={PostContentItemContainer}>
-      <img src={Avatar} alt="" />
+      <img src={Avatar} alt="" onClick={() => onAvatarClick?.(tweet.replyOwnerId)} />
       <div className={postInfo}>
         <div className={posterInfo}>
           <span className={replyerName}>{ReplyerName}</span>

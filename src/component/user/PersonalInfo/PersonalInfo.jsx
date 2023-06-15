@@ -8,23 +8,23 @@ import { useState, useEffect, useRef } from 'react'
 import { getUserTweets, getUserReplyTweets, getUserLikeTweets, getAccountInfo, putPersonalInfo } from 'api/user'
 import { useNavigate } from 'react-router-dom'
 // putPersonalInfo
-const ContentItem = ({ render, postList, replyList, userLikeList, onPostList, onUserLikeList }) => {
+const ContentItem = ({ render, postList, replyList, userLikeList, onPostList, onUserLikeList, onAvatarClick }) => {
   if (render === '推文') {
     return (
       postList.map((item) => (
-        <HomeContentItem tweet={item} key={item.TweetId} TweetId={item.TweetId} onPostList={onPostList} />
+        <HomeContentItem tweet={item} key={item.TweetId} TweetId={item.TweetId} onPostList={onPostList} onAvatarClick={(clickId) => onAvatarClick?.(clickId)} />
       ))
     )
   } else if (render === '回覆') {
     return (
       replyList.map((item) => (
-        <PostContentItem tweet={item} key={item.reaplyId} />
+        <PostContentItem tweet={item} key={item.reaplyId} onAvatarClick={(clickId) => onAvatarClick?.(clickId)} />
       ))
     )
   } else if (render === '喜歡的內容') {
     return (
       userLikeList.map((item) => (
-        <HomeContentItem tweet={item} key={item.TweetId} TweetId={item.TweetId} onUserLikeList={onUserLikeList} />
+        <HomeContentItem tweet={item} key={item.TweetId} TweetId={item.TweetId} onUserLikeList={onUserLikeList} onAvatarClick={(clickId) => onAvatarClick?.(clickId)} />
       ))
     )
   }
@@ -219,6 +219,19 @@ const PersonalInfo = () => {
       })
     })
   }
+
+  // 點擊 avatar 至 other 頁面
+  const handleAvatarClick = (clickId) => {
+    console.log(clickId)
+    const userId = localStorage.getItem('id')
+    if (Number(clickId) === Number(userId)) {
+      navigate('/user/personalinfo/main')
+    } else {
+      localStorage.setItem('otherId', clickId)
+      navigate('/user/other/main')
+    }
+  }
+
   useEffect(() => {
     const getAccountInfoAsync = async () => {
       try {
@@ -302,6 +315,7 @@ const PersonalInfo = () => {
           userLikeList={userLikeList}
           onPostList={handlePostList}
           onUserLikeList={handleUserLikeList}
+          onAvatarClick={handleAvatarClick}
         />
       </div>
       {/* <PersonInfoModal
