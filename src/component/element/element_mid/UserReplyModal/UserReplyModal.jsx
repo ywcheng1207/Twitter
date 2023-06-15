@@ -8,12 +8,7 @@ const TextWarning = ({ userTextNothing }) => {
   }
 }
 const handleSubmit = ({ onUserReply, onClose, text, onUserTextWarning, tweet }) => {
-<<<<<<< HEAD
   if (text.trim().length > 0) {
-=======
-  if (text.length > 0) {
-    localStorage.setItem('TweetId', tweet.TweetId)
->>>>>>> d526dd4f2f3ca832d1bec245cc134be61e195029
     onUserReply?.({ TweetId: tweet.TweetId, text })
     onClose()
   }
