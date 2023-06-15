@@ -23,6 +23,7 @@ const InfoSetting = () => {
     password: '',
     checkPassword: ''
   })
+  // const inputRef = useRef(null)
   const [error, setError] = useState({
     account: false,
     name: false,
@@ -32,9 +33,11 @@ const InfoSetting = () => {
   })
 
   const handleAccountChange = (value) => {
-    setUserInfo({
-      ...userInfo,
-      account: value
+    setUserInfo(() => {
+      return {
+        ...userInfo,
+        account: value
+      }
     })
   }
   const handleNameChange = (value) => {
