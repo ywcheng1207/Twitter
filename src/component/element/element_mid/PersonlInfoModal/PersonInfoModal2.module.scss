@@ -115,7 +115,6 @@
   width: 639px;
   margin-top: 16px;
   padding: 16px;
-  // outline: 1px solid tomato;
   .nameInputContainer {
     background-color: #f5f8fa;
     padding-top: 2px;
@@ -146,7 +145,7 @@
   .discriptionInputContainer {
     background-color: #f5f8fa;
     padding-top: 2px;
-    margin-top: 32px;
+    margin-top: 8px;
     p {
       margin-top: 2px;
       padding-left: 16px;
@@ -185,4 +184,30 @@
 }
 .overUpload {
   visibility: hidden;
+}
+
+.descriptMessageContainer {
+  display: flex;
+  // outline: 1px solid tomato;
+  .error {
+    flex: 1;
+    //styleName: body/12px/medium;
+    font-family: Noto Sans TC;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0px;
+    color: #fc5a5a;
+  }
+  .count {
+    flex: 1;
+    text-align: end;
+    //styleName: body/12px/medium;
+    font-family: Noto Sans TC;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0px;
+    color: #696974;
+  }
 }
