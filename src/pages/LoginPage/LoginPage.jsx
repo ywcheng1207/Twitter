@@ -7,33 +7,34 @@ import { login } from 'api/auth'
 import { useNavigate, Link } from 'react-router-dom'
 
 const LoginPage = () => {
-  // const [loginStatus, setLoginStatus] = useState('')
-  // const [wrongMessage, setWrongMessage] = useState('')
   const [account, setAccount] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
-  // const [error, setError] = useState({
-  //   account: false,
-  //   password: false
-  // })
+  const [error, setError] = useState({
+    account: false,
+    password: false
+  })
 
   const handleClick = async () => {
     if (account.length === 0 || password.length === 0) {
       return
     }
-    const { success, token, id, avatar } = await login({ account, password })
-    if (success) {
-      localStorage.setItem('authToken', token)
-      localStorage.setItem('id', id)
-      localStorage.setItem('avatar', avatar)
-      console.log('登入成功')
+    const data = await login({ account, password })
+    if (data.success) {
+      localStorage.setItem('authToken', data.token)
+      localStorage.setItem('id', data.id)
+      localStorage.setItem('avatar', data.avatar)
       navigate('/user/home/main')
-      console.log(token)
+    } else {
+      const updatedErrors = { ...error }
+      data.message.forEach((errorMessage) => {
+        updatedErrors[errorMessage.path] = {
+          error: true,
+          message: errorMessage.msg
+        }
+      })
+      setError(updatedErrors)
     }
-    // const { message, status } = await login({ account, password })
-    // setLoginStatus(status)
-    // setWrongMessage(message)
-    // const { data } = await login({ account, password })
   }
 
   return (
@@ -46,7 +47,7 @@ const LoginPage = () => {
              登入 Alphitter
             </h3>
           </div>
-          <div className={styles.inputContainer}>
+         <div div className={styles.inputContainer}>
             <DefaultInputItem
               label={'帳號'}
               placeholder={'請輸入帳號'}
@@ -54,11 +55,12 @@ const LoginPage = () => {
               onChange={(value) => {
                 setAccount(value)
               }}
-              // status={loginStatus}
             />
-            {/* {wrongMessage === '帳號輸入錯誤' &&
-              <span className={styles.wrong}>{wrongMessage}</span>
-            } */}
+            <div className={styles.messageContainer}>
+             {error.account.error &&
+                <span className={styles.error}>{error.account.message}</span>
+              }
+            </div>
           </div>
           <div className={styles.inputContainer}>
             <DefaultInputItem
@@ -69,11 +71,12 @@ const LoginPage = () => {
               onChange={(value) => {
                 setPassword(value)
               }}
-              // status={loginStatus}
             />
-            {/* {wrongMessage === '密碼輸入錯誤' &&
-              <span className={styles.wrong}>{wrongMessage}</span>
-            } */}
+            <div className={styles.messageContainer}>
+              {error.password.error &&
+                <span className={styles.error}>{error.password.message}</span>
+              }
+            </div>
           </div>
 
           <div className={styles.buttonContainer} onClick={handleClick}>
