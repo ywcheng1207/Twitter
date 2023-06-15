@@ -29,7 +29,7 @@ const SignUpPage = () => {
       console.log('註冊成功')
       navigate('/login')
     } else {
-      const { message } = await register({ account, password })
+      const { message } = await register({ account, name, email, password, checkPassword })
       console.log(message)
       const updatedErrors = { ...error }
       message.forEach((errorMessage) => {

@@ -6,6 +6,7 @@ import likeIconClick from 'assets/icons/likeClick.svg'
 import UserReplyModal from 'component/element/element_mid/UserReplyModal/UserReplyModal'
 import { getSingleTweetInfo, userLikeTweet, userUnLikeTweet } from 'api/user'
 import { useUserPostModal, useUserReplyModal } from 'contexts/UserMainPageContext'
+import { useNavigate } from 'react-router-dom'
 
 const PostContentHead = () => {
   const {
@@ -17,6 +18,7 @@ const PostContentHead = () => {
   const [text, setText] = useState('')
   const [tweetOwnerInfo, setTweetOwner] = useState([])
   const [userTextNothing, setUserTextNoting] = useState(false)
+  const navigate = useNavigate()
   //
   const handleClose = () => {
     setShow(false)
@@ -77,10 +79,22 @@ const PostContentHead = () => {
     }
   }, [localStorage.getItem('replyListLength')])
 
+  // 點擊頭像移動
+  const handleAvatarClick = () => {
+    const clickId = tweetOwnerInfo.tweetOwnerId
+    const userId = localStorage.getItem('id')
+    if (Number(clickId) === Number(userId)) {
+      navigate('/user/personalinfo/main')
+    } else {
+      localStorage.setItem('otherId', clickId)
+      navigate('/user/other/main')
+    }
+  }
+
   return (
     <div className={PostContentHeadContainer}>
       <div className={postHead}>
-        <img src={tweetOwnerInfo.tweetOwnerAvatar} alt="" />
+        <img src={tweetOwnerInfo.tweetOwnerAvatar} alt="" onClick={handleAvatarClick}/>
         <div className={info}>
           <div>{tweetOwnerInfo.tweetOwnerName}</div>
           <span>@{tweetOwnerInfo.tweetOwnerAccount}</span>
