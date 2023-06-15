@@ -77,7 +77,6 @@ const PersonalInfo = () => {
        inroduction.length <= 160) {
       handleSaveClick()
       handleClose()
-      location.reload(true)
     }
   }
 
@@ -160,7 +159,7 @@ const PersonalInfo = () => {
     try {
       await putPersonalInfo(authToken, id, formData)
       console.log('修改完成')
-      // location.reload(true)
+      location.reload(true)
     } catch (error) {
       console.error(error)
     }

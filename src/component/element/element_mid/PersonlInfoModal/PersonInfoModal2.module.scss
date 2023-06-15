@@ -67,6 +67,7 @@
       position: absolute;
       top: 96.17px;
       left: 284.14px;
+      cursor: pointer;
     }
     .photoConatiner {
       position: absolute;
@@ -102,11 +103,11 @@
       z-index: -1;
     }
     .photoIcon {
-      background-color: black;
       position: absolute;
       top: 55px;
       right: 60px;
       z-index: 999;
+      cursor: pointer;
     }
   }
 }
