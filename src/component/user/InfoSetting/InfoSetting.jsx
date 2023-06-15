@@ -4,6 +4,12 @@ import { useState, useEffect } from 'react'
 import Button from 'component/element/element_basic/Button/Button'
 import { getAccountInfo, patchAccountInfo } from 'api/user'
 
+const PasswordCount = ({ userInfo }) => {
+  if (typeof userInfo.password !== 'undefined') {
+    return <span>{userInfo.password.length}/20</span>
+  }
+}
+
 const InfoSetting = () => {
   const { container, inputContainer, btnContainer, btn } = styles
   const [userInfo, setUserInfo] = useState({
@@ -12,6 +18,13 @@ const InfoSetting = () => {
     email: '',
     password: '',
     checkPassword: ''
+  })
+  const [error, setError] = useState({
+    account: false,
+    name: false,
+    email: false,
+    password: false,
+    checkPassword: false
   })
 
   const handleAccountChange = (value) => {
@@ -46,17 +59,33 @@ const InfoSetting = () => {
   }
 
   const handleSave = async () => {
+    const authToken = localStorage.getItem('authToken')
+    const id = localStorage.getItem('id')
     try {
-      const authToken = localStorage.getItem('authToken')
-      const id = localStorage.getItem('id')
       const data = await patchAccountInfo(authToken, id, userInfo)
-      console.log(data.message)
-      alert('修改完成')
-      setUserInfo({
-        ...userInfo,
-        password: '',
-        checkPassword: ''
-      })
+      // console.log(data.message)
+
+      if (data.status === 'success') {
+        alert('修改完成')
+        setUserInfo(() => (
+          {
+            ...userInfo,
+            password: '',
+            checkPassword: ''
+          }
+        ))
+        location.reload(true)
+      } else {
+        const updatedErrors = { ...error }
+        data.message.forEach((errorMessage) => {
+          updatedErrors[errorMessage.path] = {
+            error: true,
+            message: errorMessage.msg
+          }
+        })
+
+        setError(updatedErrors)
+      }
     } catch (error) {
       console.error(error)
     }
@@ -68,12 +97,14 @@ const InfoSetting = () => {
         const authToken = localStorage.getItem('authToken')
         const id = localStorage.getItem('id')
         const data = await getAccountInfo(authToken, id)
-        const { account, name, email } = data
+        const { account, name, email, password, checkPassword } = data
         console.log('成功取得使用者資料')
         setUserInfo({
           account,
           name,
-          email
+          email,
+          password,
+          checkPassword
         })
       } catch (error) {
         console.error(error)
@@ -82,6 +113,19 @@ const InfoSetting = () => {
     getAccountInfoAsync()
   }, [])
 
+  const [activeStates, setActiveStates] = useState({
+    account: false,
+    name: false,
+    password: false,
+    checkPassword: false
+  })
+  const handleFocus = (inputName) => {
+    setActiveStates({ ...activeStates, [inputName]: true })
+  }
+
+  const handleBlur = (inputName) => {
+    setActiveStates({ ...activeStates, [inputName]: false })
+  }
   return (
     <div className={container}>
       <header>
@@ -93,14 +137,38 @@ const InfoSetting = () => {
             label={'帳號'}
             defaultValue={userInfo.account}
             onChange={handleAccountChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            inputName='account'
           />
+          <div className={styles.messageContainer}>
+              {error.account.error &&
+                <span className={styles.error}>{error.account.message}</span>
+              }
+              {activeStates.account &&
+                <span className={styles.typeCount}>
+                  {userInfo.account.length}/20
+              </span>}
+          </div>
         </div>
         <div className={inputContainer}>
           <DefaultInputItem
             label={'名稱'}
             defaultValue={userInfo.name}
             onChange={handleNameChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            inputName='name'
           />
+          <div className={styles.messageContainer}>
+            {error.name.error &&
+               <span className={styles.error}>{error.name.message}</span>
+            }
+            {activeStates.name &&
+              <span className={styles.typeCount}>
+                  {userInfo.name.length}/50
+              </span>}
+          </div>
         </div>
         <div className={inputContainer}>
           <DefaultInputItem
@@ -116,7 +184,19 @@ const InfoSetting = () => {
               placeholder={'請設定密碼'}
               defaultValue={userInfo.password}
               onChange={handlePasswordChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              inputName='password'
             />
+            <div className={styles.messageContainer}>
+              {error.password.error &&
+                <span className={styles.error}>{error.password.message}</span>
+              }
+              {activeStates.password &&
+                <span className={styles.typeCount}>
+                  <PasswordCount userInfo={userInfo} />
+                </span>}
+            </div>
         </div>
         <div className={inputContainer}>
           <DefaultInputItem

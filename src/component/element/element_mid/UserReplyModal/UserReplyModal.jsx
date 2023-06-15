@@ -9,6 +9,7 @@ const TextWarning = ({ userTextNothing }) => {
 }
 const handleSubmit = ({ onUserReply, onClose, text, onUserTextWarning, tweet }) => {
   if (text.length > 0) {
+    localStorage.setItem('TweetId', tweet.TweetId)
     onUserReply?.({ TweetId: tweet.TweetId, text })
     onClose()
   }
@@ -23,12 +24,7 @@ function UserReplyModal ({
   children, show, onClose, onShow, text,
   onChange, tweet, onUserReply, userTextNothing, onUserTextWarning
 }) {
-  let avatar
-  if (localStorage.getItem('avatar')) {
-    avatar = localStorage.getItem('avatar')
-  } else {
-    avatar = 'https://loremflickr.com/320/240/people/?random=7.976051090916994&lock=878'
-  }
+  const avatar = localStorage.getItem('avatar')
 
   return (
     <>

@@ -5,6 +5,9 @@ const HomePage = () => {
   const navigate = useNavigate()
   useEffect(() => {
     navigate('/login')
+    if (localStorage.getItem('authToken')) {
+      navigate('/user/home/main')
+    }
   }, [navigate])
 }
 
