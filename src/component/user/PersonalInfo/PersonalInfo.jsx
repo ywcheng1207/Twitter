@@ -106,6 +106,7 @@ const PersonalInfo = () => {
     reader.addEventListener('load', function () {
       // convert image file to base64 string
       setModalAvatar(reader.result)
+      localStorage.setItem('avatar', reader.result)
       setAvatarStatus(true)
     }, false)
 
@@ -247,6 +248,8 @@ const PersonalInfo = () => {
         setFollowingCount(data.followingCount)
         setImageSrc(data.cover)
         setModalAvatar(data.avatar)
+        localStorage.setItem('tweetCount', data.tweetCount)
+        localStorage.setItem('userName', data.name)
       } catch (error) {
         console.error(error)
       }

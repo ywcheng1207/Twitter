@@ -83,6 +83,8 @@ const Other = () => {
         const data = await getAccountInfo(authToken, otherId)
         console.log('用戶資料取得成功')
         setOtherUser(data)
+        localStorage.setItem('tweetCount', data.tweetCount)
+        localStorage.setItem('userName', data.name)
         return data
       } catch (error) {
         console.error(error)

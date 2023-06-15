@@ -50,6 +50,9 @@ const Follow = () => {
   const list = ['追隨者', '正在追隨']
   const navigate = useNavigate()
 
+  const tweetCount = localStorage.getItem('tweetCount')
+  const userName = localStorage.getItem('userName')
+
   const changeUserFollowAsync = async (currentUser, id, authToken) => {
     try {
       if (currentUser.isFollowed) {
@@ -128,8 +131,8 @@ const Follow = () => {
       <header>
         <LeftArrow className={arrow} onClick={() => navigate(-1)}/>
         <div className={headerText}>
-        <h4 className={headerName}>john dopw</h4>
-        <span className={tweetsCount}>25 推文</span>
+        <h4 className={headerName}>{userName}</h4>
+        <span className={tweetsCount}>{tweetCount} 推文</span>
         </div>
       </header>
       <TweetSwitchTab
