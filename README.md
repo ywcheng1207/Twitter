@@ -1,6 +1,6 @@
-# ✨Simple Twitter 協作專案 🚀
+# ✨Simple Twitter 前後端協作專案 🚀
 
-## Simple Twitter [作品連結](https://ywcheng1207.github.io/Twitter/login)
+## [作品連結](https://ywcheng1207.github.io/Twitter/login) [後端連結](https://github.com/tschiang23/twitter-api-2020)
 
 ![](./public/screenshot1.JPG)
 ![](./public/screenshot2.JPG)
