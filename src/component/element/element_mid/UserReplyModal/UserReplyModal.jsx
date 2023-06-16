@@ -11,6 +11,7 @@ const handleSubmit = ({ onUserReply, onClose, text, onUserTextWarning, tweet }) 
   if (text.trim().length > 0) {
     onUserReply?.({ TweetId: tweet.TweetId, text })
     onClose()
+    localStorage.setItem('TweetId', tweet.TweetId)
   }
   if (text.length === 0) {
     onUserTextWarning(true)
