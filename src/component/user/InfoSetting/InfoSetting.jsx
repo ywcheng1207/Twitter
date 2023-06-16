@@ -3,6 +3,9 @@ import DefaultInputItem from 'component/element/element_basic/DefaultInputItem/D
 import { useState, useEffect } from 'react'
 import Button from 'component/element/element_basic/Button/Button'
 import { getAccountInfo, patchAccountInfo } from 'api/user'
+import Swal from 'sweetalert2'
+import checkIcon from 'assets/icons/notiCheck.svg'
+import errorIcon from 'assets/icons/notiError.svg'
 
 const PasswordCount = ({ userInfo }) => {
   if (typeof userInfo.password !== 'undefined') {
@@ -73,7 +76,6 @@ const InfoSetting = () => {
       // console.log(data.message)
 
       if (data.status === 'success') {
-        alert('修改完成')
         setUserInfo(() => (
           {
             ...userInfo,
@@ -81,7 +83,26 @@ const InfoSetting = () => {
             checkPassword: ''
           }
         ))
-        location.reload(true)
+
+        Swal.fire({
+          position: 'top-right',
+          timer: 1000,
+          title: `
+          <div "${styles.customSwal}">
+            <div class="${styles.text}">修改成功！</div>
+            <div class="${styles.successIconContainer}">
+              <img src="${checkIcon}" class="${styles.icon}" alt="Success" />
+            </div>
+          </div>
+        `,
+          showConfirmButton: false,
+          customClass: {
+            popup: styles.customSwal
+          }
+        })
+        setTimeout(function () {
+          location.reload(true)
+        }, 1000)
       } else {
         const updatedErrors = { ...error }
         data.message.forEach((errorMessage) => {
@@ -90,8 +111,24 @@ const InfoSetting = () => {
             message: errorMessage.msg
           }
         })
-
         setError(updatedErrors)
+
+        Swal.fire({
+          position: 'top-right',
+          timer: 1000,
+          title: `
+          <div "${styles.customSwal}">
+            <div class="${styles.text}">修改失敗！</div>
+            <div class="${styles.errorIconContainer}">
+              <img src="${errorIcon}" class="${styles.icon}" alt="Success" />
+            </div>
+          </div>
+        `,
+          showConfirmButton: false,
+          customClass: {
+            popup: styles.customSwal
+          }
+        })
       }
     } catch (error) {
       console.error(error)

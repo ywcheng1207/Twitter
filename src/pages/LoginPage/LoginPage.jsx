@@ -6,6 +6,8 @@ import { useState } from 'react'
 import { login } from 'api/auth'
 import { useNavigate, Link } from 'react-router-dom'
 import Swal from 'sweetalert2'
+import checkIcon from 'assets/icons/notiCheck.svg'
+import errorIcon from 'assets/icons/notiError.svg'
 
 const LoginPage = () => {
   const [account, setAccount] = useState('')
@@ -29,15 +31,18 @@ const LoginPage = () => {
 
       Swal.fire({
         position: 'top',
-        title: '登入成功！',
         timer: 1000,
-        // icon: 'success',
+        title: `
+          <div "${styles.customSwal}">
+            <div class="${styles.text}">登入成功！</div>
+            <div class="${styles.successIconContainer}">
+              <img src="${checkIcon}" class="${styles.icon}" alt="Success" />
+            </div>
+          </div>
+        `,
         showConfirmButton: false,
-
         customClass: {
-          popup: styles.customSwal,
-          title: styles.title,
-          icon: styles.success
+          popup: styles.customSwal
         }
       })
     } else {
@@ -49,6 +54,23 @@ const LoginPage = () => {
         }
       })
       setError(updatedErrors)
+
+      Swal.fire({
+        position: 'top',
+        timer: 1000,
+        title: `
+          <div "${styles.customSwal}">
+            <div class="${styles.text}">登入失敗！</div>
+            <div class="${styles.errorIconContainer}">
+              <img src="${errorIcon}" class="${styles.icon}" alt="Success" />
+            </div>
+          </div>
+        `,
+        showConfirmButton: false,
+        customClass: {
+          popup: styles.customSwal
+        }
+      })
     }
   }
 
