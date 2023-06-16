@@ -1,6 +1,7 @@
 import Modal from 'react-bootstrap/Modal'
 import styles from './UserPostModal.module.scss'
-// import { useState } from 'react'
+import Swal from 'sweetalert2'
+import checkIcon from 'assets/icons/notiCheck.svg'
 
 const TextWarning = ({ text, userTextNothing }) => {
   if (text.length > 140) {
@@ -13,6 +14,25 @@ const handleSubmit = ({ onAddHomeList, onClose, text, onUserTextWarning }) => {
   if (text.trim().length > 0 && text.length <= 140) {
     onAddHomeList(text)
     onClose()
+
+    setTimeout(() => {
+      Swal.fire({
+        position: 'top-right',
+        timer: 1000,
+        title: `
+          <div "${styles.customSwal}">
+            <div class="${styles.text}">推文發送成功</div>
+            <div class="${styles.successIconContainer}">
+              <img src="${checkIcon}" class="${styles.icon}" alt="Success" />
+            </div>
+          </div>
+        `,
+        showConfirmButton: false,
+        customClass: {
+          popup: styles.customSwal
+        }
+      })
+    }, 1000)
   }
   if (text.trim().length === 0) {
     onUserTextWarning(true)
