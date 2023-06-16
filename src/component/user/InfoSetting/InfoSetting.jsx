@@ -37,6 +37,7 @@ const InfoSetting = () => {
     checkPassword: false
   })
   const navigate = useNavigate()
+
   const handleAccountChange = (value) => {
     setUserInfo(() => {
       return {
@@ -157,7 +158,7 @@ const InfoSetting = () => {
       }
     }
     getAccountInfoAsync()
-  }, [])
+  }, [navigate])
 
   const [activeStates, setActiveStates] = useState({
     account: false,
