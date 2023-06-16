@@ -36,10 +36,10 @@ const OtherHead = ({ otherUser, onFollowClick }) => {
                 <div className={btnContainer} >
                     <Mail/>
                     <Bell />
-                    <div className={clsx(btnWidth, { [follow]: otherUser.followed })} onClick={onFollowClick} >
+                    <div className={clsx(btnWidth, { [follow]: otherUser.isFollowed })} onClick={onFollowClick} >
                         <Button
-                            value={ otherUser.followed ? '正在跟隨' : '跟隨'}
-                            type={ otherUser.followed ? 'fullPill' : 'holePill' }
+                            value={ otherUser.isFollowed ? '正在跟隨' : '跟隨'}
+                            type={ otherUser.isFollowed ? 'fullPill' : 'holePill' }
                         />
                     </div>
                 </div>
