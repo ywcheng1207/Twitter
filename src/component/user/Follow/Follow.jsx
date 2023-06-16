@@ -117,15 +117,31 @@ const Follow = () => {
 
   useEffect(() => {
     const authToken = localStorage.getItem('authToken')
+    let renderId = ''
     const id = localStorage.getItem('id')
+    const otherId = localStorage.getItem('otherId')
+    if (id === otherId) {
+      renderId = id
+    } else {
+      renderId = otherId
+    }
+
     const getUserFollowingAsync = async () => {
-      const data = await getUserFollowing(authToken, id)
-      setFollowingData(data)
+      const data = await getUserFollowing(authToken, renderId)
+      if (data.message === '無追蹤其他使用者') {
+        setFollowingData([])
+      } else {
+        setFollowingData(data)
+      }
     }
     const getUserFollowersAsync = async () => {
-      const data = await getUserFollowers(authToken, id)
+      const data = await getUserFollowers(authToken, renderId)
       console.log('追蹤者資料取得成功')
-      setFollowerData(data)
+      if (data.message === '無跟隨者資料') {
+        setFollowerData([])
+      } else {
+        setFollowerData(data)
+      }
     }
     getUserFollowersAsync()
     getUserFollowingAsync()
