@@ -18,6 +18,7 @@ const PasswordCount2 = ({ userInfo }) => {
     return <span>{userInfo.checkPassword.length}/20</span>
   }
 }
+
 const InfoSetting = () => {
   const { container, inputContainer, btnContainer, btn } = styles
   const [userInfo, setUserInfo] = useState({
@@ -103,7 +104,7 @@ const InfoSetting = () => {
           }
         })
         setTimeout(function () {
-          navigate('/user/infosetting/main')
+          navigate(0)
         }, 1000)
       } else {
         const updatedErrors = { ...error }
