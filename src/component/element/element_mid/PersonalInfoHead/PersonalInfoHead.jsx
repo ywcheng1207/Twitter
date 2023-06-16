@@ -7,12 +7,12 @@ import PersonInfoModal2 from 'component/element/element_mid/PersonlInfoModal/Per
 
 const PersonalInfoHead = ({
   userHead, inroduction, theUserName, followerCount,
-  followingCount, onEditClick, onTextClick, show, onShow, onSaveInfo, introduction,
+  followingCount, onEditClick, onTextClick, show, onShow, onSaveInfo,
   onClose, imageSrc, onOnPreview, onDeletePreview, onNameChange, onIntroductionChange, onSaveClick, onOnAvatar, modalAvatar, avatarStatus, coverStatus, onClickUpload, inputfileref
 }) => {
   const {
     container, headerText, selfInfoContainer, backgroundImg,
-    btnContainer, selfInfo, userAvatar, account,
+    btnContainer, selfInfo, userAvatar, account, introduction,
     followContainer, following, follower, tweetsCount, header, userName
   } = styles
   // const navigate = useNavigate()

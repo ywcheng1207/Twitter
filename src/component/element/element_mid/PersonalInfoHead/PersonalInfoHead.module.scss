@@ -85,7 +85,7 @@
     .account {
       font-size: 14px;
       line-height: 22px;
-      margin-bottom: 6px;
+      margin-bottom: 2px;
       color: #6c757d;
       width: 130px;
       overflow: hidden;
@@ -95,13 +95,16 @@
     .introduction {
       font-weight: 400;
       font-size: 14px;
-      outline: 1px solid black;
       width: 604.73px;
+      max-height: 60px;
+      min-height: 36px;
       overflow: hidden;
       text-overflow: ellipsis;
-      white-space: nowrap;
+      word-wrap: break-word;
+      margin-bottom: 8px;
     }
     .followContainer {
+      height: 22px;
       display: flex;
       font-size: 14px;
       font-weight: 400;
