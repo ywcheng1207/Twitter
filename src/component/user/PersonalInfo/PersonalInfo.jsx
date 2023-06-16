@@ -289,13 +289,19 @@ const PersonalInfo = () => {
         const postListData = await getUserTweets(authToken, id)
         const replyListData = await getUserReplyTweets(authToken, id)
         const userLikeListData = await getUserLikeTweets(authToken, id)
-        if (postListData.message === '無推文資料' || replyListData.message === '無回覆資料' || userLikeListData.message === '無Like資料') {
+        if (postListData.message === '無推文資料') {
           setPostList([])
-          setReplyList([])
-          setUserLikeList([])
         } else {
           setPostList(postListData)
+        }
+        if (replyListData.message === '無回覆資料') {
+          setReplyList([])
+        } else {
           setReplyList(replyListData)
+        }
+        if (userLikeListData.message === '無Like資料') {
+          setUserLikeList([])
+        } else {
           setUserLikeList(userLikeListData)
         }
       } catch (error) {
