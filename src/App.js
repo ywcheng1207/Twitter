@@ -1,6 +1,6 @@
 import './reset.css'
 import './App.css'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import AdminTweetListPage from 'pages/AdminTweetListPage/AdminTweetListPage'
 import AdminUsersPage from 'pages/AdminUserPage/AdminUsersPage'
@@ -27,7 +27,6 @@ function App () {
               <Route path='/login' element={<LoginPage />} />
               <Route path='/register' element={<SignUpPage />} />
 
-              <Route path='/user' element={<Navigate to="/user/Home/main" />} />
               <Route path='/user/:page' element={<UserMainPage />}>
                 <Route path="main" element={<Content />} />
               </Route>
