@@ -27,7 +27,7 @@ function App () {
               <Route path='/login' element={<LoginPage />} />
               <Route path='/register' element={<SignUpPage />} />
 
-              <Route path='/user' element={<Navigate to="/user/Home/main" replace />} />
+              <Route path='/user' element={<Navigate to="/user/Home/main" />} />
               <Route path='/user/:page' element={<UserMainPage />}>
                 <Route path="main" element={<Content />} />
               </Route>
