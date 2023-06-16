@@ -18,6 +18,10 @@ const Nav = ({ status, onNavSwitch }) => {
     NavContainer, logoContainer, homeActiveContainer,
     personInfoContainer, settingContainer, postBtn, logoutContainer
   } = styles
+
+  // 取得 Id
+  const id = localStorage.getItem('id')
+
   // state
   const [show, setShow] = useState(false)
   const [text, setText] = useState('')
@@ -59,7 +63,12 @@ const Nav = ({ status, onNavSwitch }) => {
         </Link>
 
         <Link to='/user/personalinfo/main'>
-          <div className={personInfoContainer} onClick={() => onNavSwitch?.('personalinfo')}>
+          <div className={personInfoContainer}
+            onClick={() => {
+              localStorage.setItem('otherId', id)
+              return onNavSwitch?.('personalinfo')
+            }
+          }>
             {status === 'personalinfo' ? <PersonInfoActive /> : <PersonInfo />}
           </div>
         </Link>

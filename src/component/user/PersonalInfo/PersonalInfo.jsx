@@ -66,7 +66,11 @@ const PersonalInfo = () => {
   const [show, setShow] = useState(false)
   const handleClose = () => {
     setShow(false)
-    setIntorduction(userHead.introduction)
+    if (userHead.introduction === null) {
+      setIntorduction('請輸入自我介紹')
+    } else {
+      setIntorduction(userHead.introduction)
+    }
     setTheUserName(userHead.name)
   }
   const handleShow = () => setShow(true)
@@ -254,10 +258,15 @@ const PersonalInfo = () => {
         const id = localStorage.getItem('id')
         const data = await getAccountInfo(authToken, id)
         console.log('成功取得使用者資料')
+        console.log(data)
 
         setUserHead(data)
         setTheUserName(data.name)
-        setIntorduction(data.introduction)
+        if (data.introduction === null) {
+          setIntorduction('請輸入自我介紹')
+        } else {
+          setIntorduction(data.introduction)
+        }
         setFollowerCount(data.followerCount)
         setFollowingCount(data.followingCount)
         setImageSrc(data.cover)
@@ -278,10 +287,15 @@ const PersonalInfo = () => {
         const postListData = await getUserTweets(authToken, id)
         const replyListData = await getUserReplyTweets(authToken, id)
         const userLikeListData = await getUserLikeTweets(authToken, id)
-
-        setPostList(postListData)
-        setReplyList(replyListData)
-        setUserLikeList(userLikeListData)
+        if (postListData.message === '無推文資料' || replyListData.message === '無回覆資料' || userLikeListData.message === '無Like資料') {
+          setPostList([])
+          setReplyList([])
+          setUserLikeList([])
+        } else {
+          setPostList(postListData)
+          setReplyList(replyListData)
+          setUserLikeList(userLikeListData)
+        }
       } catch (error) {
         console.error(error)
       }
