@@ -76,12 +76,12 @@ const Other = () => {
   }
 
   // 點擊追蹤//取消追蹤
-  const handleFollowClick = () => {
+  const handleFollowClick = async () => {
     const authToken = localStorage.getItem('authToken')
-    if (otherUser.followed) {
+    if (otherUser.isFollowed) {
       setOtherUser({
         ...otherUser,
-        followed: !otherUser.followed
+        isFollowed: !otherUser.isFollowed
       })
       const data = deleteUserFollowAsync(authToken, otherUser.id)
       console.log(data)
@@ -89,7 +89,7 @@ const Other = () => {
       const data = postUserFollowAsync(authToken, otherUser.id)
       setOtherUser({
         ...otherUser,
-        followed: !otherUser.followed
+        isFollowed: !otherUser.isFollowed
       })
       console.log(data)
     }

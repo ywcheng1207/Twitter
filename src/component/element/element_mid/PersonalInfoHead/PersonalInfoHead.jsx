@@ -7,12 +7,12 @@ import PersonInfoModal2 from 'component/element/element_mid/PersonlInfoModal/Per
 
 const PersonalInfoHead = ({
   userHead, inroduction, theUserName, followerCount,
-  followingCount, onEditClick, onTextClick, show, onShow, onSaveInfo,
+  followingCount, onEditClick, onTextClick, show, onShow, onSaveInfo, introduction,
   onClose, imageSrc, onOnPreview, onDeletePreview, onNameChange, onIntroductionChange, onSaveClick, onOnAvatar, modalAvatar, avatarStatus, coverStatus, onClickUpload, inputfileref
 }) => {
   const {
     container, headerText, selfInfoContainer, backgroundImg,
-    btnContainer, selfInfo, userAvatar, account, description,
+    btnContainer, selfInfo, userAvatar, account,
     followContainer, following, follower, tweetsCount, header, userName
   } = styles
   // const navigate = useNavigate()
@@ -63,7 +63,7 @@ const PersonalInfoHead = ({
             <div className={selfInfo} >
               <p className={userName}>{userHead.name}</p>
               <p className={account}>{userHead.account}</p>
-              <p className={description} >{userHead.introduction}</p>
+              <p className={introduction} >{userHead.introduction}</p>
               <div className={followContainer} >
                   <p className={following}>
                     <Link to='/user/follow/main'>{followingCount}個</Link> <span>追隨中</span>
