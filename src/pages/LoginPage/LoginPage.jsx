@@ -62,7 +62,7 @@ const LoginPage = () => {
              登入 Alphitter
             </h3>
           </div>
-         <div div className={styles.inputContainer}>
+         <div className={styles.inputContainer}>
             <DefaultInputItem
               label={'帳號'}
               placeholder={'請輸入帳號'}
