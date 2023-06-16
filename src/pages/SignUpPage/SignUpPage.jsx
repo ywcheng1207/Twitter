@@ -5,6 +5,7 @@ import { ReactComponent as Logo } from 'assets/icons/logo.svg'
 import { useState } from 'react'
 import { register } from 'api/auth'
 import { Link, useNavigate } from 'react-router-dom'
+// useNavigate
 import Swal from 'sweetalert2'
 import checkIcon from 'assets/icons/notiCheck.svg'
 import errorIcon from 'assets/icons/notiError.svg'
@@ -24,6 +25,13 @@ const SignUpPage = () => {
     checkPassword: false
   })
   const handleClick = async () => {
+    await setError({
+      account: false,
+      name: false,
+      email: false,
+      password: false,
+      checkPassword: false
+    })
     if (account.length === 0 || name.length === 0 || email.length === 0 || password.length === 0 || checkPassword.length === 0) {
       return
     }
