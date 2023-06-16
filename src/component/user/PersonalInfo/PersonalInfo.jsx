@@ -165,7 +165,7 @@ const PersonalInfo = () => {
     try {
       await putPersonalInfo(authToken, id, formData)
       console.log('修改完成')
-      location.reload(true)
+      navigate(0)
     } catch (error) {
       console.error(error)
     }
