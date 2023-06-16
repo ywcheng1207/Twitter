@@ -99,6 +99,7 @@ const HomeContentItem = ({ TweetId, tweet, id, onPostList, onUserLikeList, onAva
           <span className={postTime}>・<HoursPassed item={tweet.createdAt}/></span>
         </div>
         <p className={postDescription} onClick={() => {
+          // console.log(TweetId)
           handleGoReplyList()
           onTheTweetId(TweetId)
         }

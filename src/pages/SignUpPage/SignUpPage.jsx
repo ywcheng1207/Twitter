@@ -5,6 +5,9 @@ import { ReactComponent as Logo } from 'assets/icons/logo.svg'
 import { useState } from 'react'
 import { register } from 'api/auth'
 import { Link, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
+import checkIcon from 'assets/icons/notiCheck.svg'
+import errorIcon from 'assets/icons/notiError.svg'
 
 const SignUpPage = () => {
   const [account, setAccount] = useState('')
@@ -28,6 +31,23 @@ const SignUpPage = () => {
     if (success) {
       console.log('註冊成功')
       navigate('/login')
+
+      Swal.fire({
+        position: 'top',
+        timer: 1000,
+        title: `
+          <div "${styles.customSwal}">
+            <div class="${styles.text}">註冊成功！</div>
+            <div class="${styles.successIconContainer}">
+              <img src="${checkIcon}" class="${styles.icon}" alt="Success" />
+            </div>
+          </div>
+        `,
+        showConfirmButton: false,
+        customClass: {
+          popup: styles.customSwal
+        }
+      })
     } else {
       const { message } = await register({ account, name, email, password, checkPassword })
       console.log(message)
@@ -39,6 +59,23 @@ const SignUpPage = () => {
         }
       })
       setError(updatedErrors)
+
+      Swal.fire({
+        position: 'top',
+        timer: 1000,
+        title: `
+          <div "${styles.customSwal}">
+            <div class="${styles.text}">註冊失敗！</div>
+            <div class="${styles.errorIconContainer}">
+              <img src="${errorIcon}" class="${styles.icon}" alt="Success" />
+            </div>
+          </div>
+        `,
+        showConfirmButton: false,
+        customClass: {
+          popup: styles.customSwal
+        }
+      })
     }
   }
   const [activeStates, setActiveStates] = useState({
