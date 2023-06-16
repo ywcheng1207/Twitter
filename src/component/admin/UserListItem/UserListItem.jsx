@@ -31,12 +31,12 @@ const Card = ({ item }) => {
                 <div className={styles.followerAndIng}>
                     <div className={styles.following}>
                         <p>
-                            <a href="">{item.following}個</a>跟隨中
+                            <span>{item.following}個</span>跟隨中
                         </p>
                     </div>
                     <div className={styles.follower}>
                         <p>
-                            <a href="">{item.follower}位</a>
+                            <span>{item.follower}位</span>
                             跟隨者
                         </p>
                     </div>

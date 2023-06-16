@@ -6,6 +6,7 @@ import { getAccountInfo, patchAccountInfo } from 'api/user'
 import Swal from 'sweetalert2'
 import checkIcon from 'assets/icons/notiCheck.svg'
 import errorIcon from 'assets/icons/notiError.svg'
+import { useNavigate } from 'react-router-dom'
 
 const PasswordCount = ({ userInfo }) => {
   if (typeof userInfo.password !== 'undefined') {
@@ -34,6 +35,7 @@ const InfoSetting = () => {
     password: false,
     checkPassword: false
   })
+  const navigate = useNavigate()
 
   const handleAccountChange = (value) => {
     setUserInfo(() => {
@@ -101,7 +103,7 @@ const InfoSetting = () => {
           }
         })
         setTimeout(function () {
-          location.reload(true)
+          navigate('/user/infosetting/main')
         }, 1000)
       } else {
         const updatedErrors = { ...error }
@@ -155,7 +157,7 @@ const InfoSetting = () => {
       }
     }
     getAccountInfoAsync()
-  }, [])
+  }, [navigate])
 
   const [activeStates, setActiveStates] = useState({
     account: false,

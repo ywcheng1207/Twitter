@@ -159,13 +159,15 @@ const PersonalInfo = () => {
     formData.append('avatar', userAvatar)
     console.log(formData)
     putPersonalInfoAsync(authToken, id, formData)
+    setTimeout(function () {
+      navigate('/user/personalinfo/main')
+    }, 1000)
   }
 
   const putPersonalInfoAsync = async (authToken, id, formData) => {
     try {
       await putPersonalInfo(authToken, id, formData)
       console.log('修改完成')
-      location.reload(true)
     } catch (error) {
       console.error(error)
     }
@@ -279,7 +281,7 @@ const PersonalInfo = () => {
       }
     }
     getAccountInfoAsync()
-  }, [])
+  }, [navigate])
 
   useEffect(() => {
     const getUserDataAsync = async (authToken, id) => {
@@ -303,7 +305,7 @@ const PersonalInfo = () => {
     if (localStorage.getItem('authToken')) {
       getUserDataAsync(localStorage.getItem('authToken'), localStorage.getItem('id'))
     }
-  }, [render])
+  }, [render, navigate])
   return (
     <div className={container}>
       <PersonalInfoHead
