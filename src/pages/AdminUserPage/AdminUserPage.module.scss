@@ -4,12 +4,14 @@
   display: flex;
   margin: 0 auto;
   .mainContainer {
-    width: 1076px;
+    width: 937px;
     height: 1200px;
     border-left: 1px solid #e6ecf0;
+    flex-direction: column;
     header {
       height: 74px;
       border-bottom: 1px solid #e6ecf0;
+      // width: 80vw;
       display: flex;
       align-items: center;
       h4 {
@@ -17,12 +19,13 @@
       }
     }
     .cardContainer {
+      // outline: 1px solid tomato;
       width: 1000px;
       height: 1125px;
       display: flex;
       flex-wrap: wrap;
-      margin-right: 163px;
       padding: 16px;
+      margin-top: 0;
       gap: 16px;
       overflow-y: scroll;
       &::-webkit-scrollbar {
