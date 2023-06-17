@@ -1,6 +1,8 @@
 # ✨Simple Twitter 前後端協作專案 🚀
 
-## [作品連結](https://ywcheng1207.github.io/Twitter/login) [後端連結](https://github.com/tschiang23/twitter-api-2020)
+## 作品連結：[Simpe Twitter](https://ywcheng1207.github.io/Twitter/login)
+
+## 這邊是前端 repo，後端部分請看：[後端連結](https://github.com/tschiang23/twitter-api-2020)
 
 ![](./public/screenshot1.JPG)
 ![](./public/screenshot2.JPG)
@@ -9,7 +11,11 @@
 
 ## 👋 功能說明
 
-使用者可以註冊/登入帳號、推文、回覆推文、設定帳號資料、編輯個人資訊、跟隨/取消跟隨其他使用者、查看單一偏貼文及該篇文章的回覆內容。
+前台：<br/>
+使用者可以註冊/登入帳號、推文、回覆推文、設定帳號資料、編輯個人資訊、跟隨/取消跟隨其他使用者、查看單一偏貼文及該篇文章的回覆內容。<br/>
+
+後台：<br/>
+管理者可以登入帳號、觀看推文清單及使用者列表、刪除推文。
 
 ## 👋 使用說明
 
