@@ -116,6 +116,7 @@ const InfoSetting = () => {
         })
         setTimeout(function () {
           navigate(0)
+          navigate('/user/infosetting/main')
         }, 1000)
       } else {
         const updatedErrors = { ...error }

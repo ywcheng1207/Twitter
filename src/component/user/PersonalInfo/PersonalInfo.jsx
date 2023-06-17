@@ -169,6 +169,7 @@ const PersonalInfo = () => {
       await putPersonalInfo(authToken, id, formData)
       console.log('修改完成')
       navigate(0)
+      navigate('/user/personalinfo/main')
     } catch (error) {
       console.error(error)
     }
