@@ -10,7 +10,7 @@ const OtherHead = ({ otherUser, onFollowClick }) => {
   const {
     container, headerText, selfInfoContainer, backgroundImg,
     btnContainer, selfInfo, userAvatar, userName, account, description,
-    followContainer, following, follower, tweetsCount, header, follow, btnWidth
+    followContainer, following, follower, tweetsCount, header, follow, btnWidth, Icon
   } = styles
 
   const navigate = useNavigate()
@@ -34,8 +34,8 @@ const OtherHead = ({ otherUser, onFollowClick }) => {
             </div>
             <div className={btnContainer}>
                 <div className={btnContainer} >
-                    <Mail/>
-                    <Bell />
+                    <Mail className={Icon}/>
+                    <Bell className={Icon}/>
                     <div className={clsx(btnWidth, { [follow]: otherUser.isFollowed })} onClick={onFollowClick} >
                         <Button
                             value={ otherUser.isFollowed ? '正在跟隨' : '跟隨'}

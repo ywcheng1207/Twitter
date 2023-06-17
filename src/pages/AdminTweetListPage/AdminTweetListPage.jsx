@@ -15,7 +15,6 @@ const AdminTweetListPage = () => {
     const getUserDataAsync = async (authToken) => {
       try {
         const data = await getTweets(authToken)
-        console.log(data[0])
         setTweetList(data)
       } catch (error) {
         console.error(error)

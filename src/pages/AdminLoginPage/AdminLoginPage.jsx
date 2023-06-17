@@ -5,6 +5,9 @@ import { ReactComponent as Logo } from 'assets/icons/logo.svg'
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { adminLogin } from 'api/auth'
+import Swal from 'sweetalert2'
+import checkIcon from 'assets/icons/notiCheck.svg'
+import errorIcon from 'assets/icons/notiError.svg'
 
 const AdminLoginPage = () => {
   const [account, setAccount] = useState('')
@@ -25,9 +28,25 @@ const AdminLoginPage = () => {
     }
     const { success, token } = await adminLogin({ account, password })
     if (success) {
-      console.log('登入成功')
       localStorage.setItem('authToken', token)
       navigate('/admin/main')
+
+      Swal.fire({
+        position: 'top',
+        timer: 1000,
+        title: `
+          <div "${styles.customSwal}">
+            <div class="${styles.text}">登入成功！</div>
+            <div class="${styles.successIconContainer}">
+              <img src="${checkIcon}" class="${styles.icon}" alt="Success" />
+            </div>
+          </div>
+        `,
+        showConfirmButton: false,
+        customClass: {
+          popup: styles.customSwal
+        }
+      })
     } else {
       console.log('wrong')
       const { message } = await adminLogin({ account, password })
@@ -39,7 +58,22 @@ const AdminLoginPage = () => {
         }
       })
       setError(updatedErrors)
-      console.log(error)
+      Swal.fire({
+        position: 'top',
+        timer: 1000,
+        title: `
+          <div "${styles.customSwal}">
+            <div class="${styles.text}">登入失敗！</div>
+            <div class="${styles.errorIconContainer}">
+              <img src="${errorIcon}" class="${styles.icon}" alt="Success" />
+            </div>
+          </div>
+        `,
+        showConfirmButton: false,
+        customClass: {
+          popup: styles.customSwal
+        }
+      })
     }
   }
   const handleKeyDown = async (e) => {
@@ -91,10 +125,9 @@ const AdminLoginPage = () => {
               }}
               status={error.account ? 'error' : ''}
             />
-             <div className={styles.messageContainer}>
+            <div className={styles.messageContainer}>
               {error.account.error &&
-                  <span className={styles.error}>{error.account.message}</span>
-                }
+              <span className={styles.error}>{error.account.message}</span>}
             </div>
           </div>
           <div className={styles.inputContainer}>
@@ -113,9 +146,8 @@ const AdminLoginPage = () => {
             />
             <div className={styles.messageContainer}>
               {error.password.error &&
-                  <span className={styles.error}>{error.password.message}</span>
-                }
-              </div>
+              <span className={styles.error}>{error.password.message}</span>}
+            </div>
           </div>
 
           <div className={styles.buttonContainer} onClick={handleClick} >

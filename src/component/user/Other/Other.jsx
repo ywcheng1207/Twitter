@@ -10,14 +10,14 @@ import { getAccountInfo, getUserTweets, getUserReplyTweets, getUserLikeTweets, p
 
 import { useState, useEffect } from 'react'
 
-const ContentItem = ({ render, postList, replyList, userLikeList, onAvatarClick }) => {
+const ContentItem = ({ render, postList, replyList, userLikeList, onPostList, onUserLikeList, onAvatarClick }) => {
   if (render === '推文') {
     if (postList.length === 0 || !Array.isArray(postList)) {
       return null
     } else {
       return (
         postList.map((item) => (
-          <HomeContentItem tweet={item} key={item.TweetId} onAvatarClick={(clickId) => onAvatarClick?.(clickId)} />
+          <HomeContentItem tweet={item} key={item.TweetId} TweetId={item.TweetId} onPostList={onPostList} onAvatarClick={(clickId) => onAvatarClick?.(clickId)} />
         ))
       )
     }
@@ -38,7 +38,7 @@ const ContentItem = ({ render, postList, replyList, userLikeList, onAvatarClick 
     } else {
       return (
         userLikeList.map((item) => (
-        <HomeContentItem tweet={item} key={item.TweetId} onAvatarClick={(clickId) => onAvatarClick?.(clickId)} />
+        <HomeContentItem tweet={item} key={item.TweetId} TweetId={item.TweetId} onUserLikeList={onUserLikeList} onAvatarClick={(clickId) => onAvatarClick?.(clickId)} />
         ))
       )
     }
@@ -114,6 +114,31 @@ const Other = () => {
     }
   }
 
+  //
+  const handlePostList = ({ TweetId, count }) => {
+    setPostList(pre => {
+      return pre.map(item => {
+        if (item.TweetId === TweetId) {
+          console.log(item)
+          return { ...item, isLiked: !item.isLiked, likeCount: item.likeCount + count }
+        } else {
+          return item
+        }
+      })
+    })
+  }
+  const handleUserLikeList = ({ TweetId, count }) => {
+    setUserLikeList(pre => {
+      return pre.map(item => {
+        if (item.TweetId === TweetId) {
+          return { ...item, isLiked: !item.isLiked, likeCount: item.likeCount + count }
+        } else {
+          return item
+        }
+      })
+    })
+  }
+
   // render 用戶資料
   useEffect(() => {
     const getAccountInfoAsync = async () => {
@@ -153,7 +178,7 @@ const Other = () => {
     if (localStorage.getItem('authToken')) {
       getUserDataAsync(localStorage.getItem('authToken'), otherId)
     }
-  }, [localStorage.getItem('otherId')])
+  }, [render, localStorage.getItem('otherId')])
   // localStorage.getItem('otherId')
 
   return (
@@ -170,7 +195,15 @@ const Other = () => {
         className={switchTab}
       />
       <div className={contentItemContainer}>
-        <ContentItem render={render} postList={postList} replyList={replyList} userLikeList={userLikeList} onAvatarClick={handleAvatarClick} />
+        <ContentItem
+          render={render}
+          postList={postList}
+          replyList={replyList}
+          userLikeList={userLikeList}
+          onAvatarClick={handleAvatarClick}
+          onPostList={handlePostList}
+          onUserLikeList={handleUserLikeList}
+         />
       </div>
     </div>
   )
