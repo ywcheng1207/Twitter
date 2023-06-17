@@ -27,12 +27,20 @@
     font-size: var(--font-size-large);
   }
 }
-.error {
-  margin-top: 4px;
-  font-size: var(--font-size-small);
-  color: var(--Error);
+.messageContainer {
+  height: 20px;
+  display: flex;
+  align-items: center;
+  .error {
+    color: #fc5a5a;
+    font-family: Noto Sans TC;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0px;
+    text-align: left;
+  }
 }
-
 .customSwal {
   width: 394px !important;
   height: 96px !important;

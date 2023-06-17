@@ -109,9 +109,10 @@ const AdminLoginPage = () => {
               }}
               status={error.account ? 'error' : ''}
             />
-             {error.account.error &&
-            <span className={styles.error}>{error.account.message}</span>
-          }
+            <div className={styles.messageContainer}>
+              {error.account.error &&
+              <span className={styles.error}>{error.account.message}</span>}
+            </div>
           </div>
           <div className={styles.inputContainer}>
             <DefaultInputItem
@@ -125,9 +126,10 @@ const AdminLoginPage = () => {
               }}
               status={error.password ? 'error' : ''}
             />
-             {error.password.error &&
-            <span className={styles.error}>{error.password.message}</span>
-          }
+            <div className={styles.messageContainer}>
+              {error.password.error &&
+              <span className={styles.error}>{error.password.message}</span>}
+            </div>
           </div>
 
           <div className={styles.buttonContainer} onClick={handleClick} >
