@@ -36,9 +36,22 @@ const InfoSetting = () => {
     password: false,
     checkPassword: false
   })
+
+  // reset errorState
+  const resetError = () => {
+    setError({
+      account: false,
+      name: false,
+      email: false,
+      password: false,
+      checkPassword: false
+    })
+  }
+
   const navigate = useNavigate()
 
   const handleAccountChange = (value) => {
+    resetError()
     setUserInfo(() => {
       return {
         ...userInfo,
@@ -47,24 +60,28 @@ const InfoSetting = () => {
     })
   }
   const handleNameChange = (value) => {
+    resetError()
     setUserInfo({
       ...userInfo,
       name: value
     })
   }
   const handleEmailChange = (value) => {
+    resetError()
     setUserInfo({
       ...userInfo,
       email: value
     })
   }
   const handlePasswordChange = (value) => {
+    resetError()
     setUserInfo({
       ...userInfo,
       password: value
     })
   }
   const handlePasswordCheckChange = (value) => {
+    resetError()
     setUserInfo({
       ...userInfo,
       checkPassword: value
