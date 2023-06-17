@@ -122,8 +122,7 @@ const SignUpPage = () => {
               onBlur={handleBlur}
               inputName='account'
             />
-          </div>
-          <div className={styles.messageContainer}>
+            <div className={styles.messageContainer}>
               {error.account.error &&
                 <span className={styles.error}>{error.account.message}</span>
               }
@@ -131,7 +130,9 @@ const SignUpPage = () => {
                 <span className={styles.typeCount}>
                   {account.length}/20
               </span>}
+            </div>
           </div>
+
           <div className={styles.inputContainer}>
             <DefaultInputItem
               label={'名稱'}
@@ -168,9 +169,11 @@ const SignUpPage = () => {
               }}
               status={error.email ? 'error' : ''}
             />
-            {error.email.error &&
-            <span className={styles.error}>{error.email.message}</span>
-            }
+            <div className={styles.messageContainer}>
+              {error.email.error &&
+                <span className={styles.error}>{error.email.message}</span>
+              }
+            </div>
           </div>
           <div className={styles.inputContainer}>
             <DefaultInputItem

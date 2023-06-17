@@ -15,6 +15,10 @@ const AdminLoginPage = () => {
     password: false
   })
 
+  const resetError = (inputName) => {
+    setError({ ...error, [inputName]: false })
+  }
+
   const handleClick = async () => {
     if (account.length === 0 || password.length === 0) {
       return
@@ -46,10 +50,20 @@ const AdminLoginPage = () => {
       const { success, token } = await adminLogin({ account, password })
       if (success) {
         console.log('登入成功')
-        localStorage.setItem('authToken', token)
+        console.log(token)
         navigate('/admin/main')
       } else {
-        console.log('登入失敗')
+        console.log('wrong')
+        const { message } = await adminLogin({ account, password })
+        const updatedErrors = { ...error }
+        message.forEach((errorMessage) => {
+          updatedErrors[errorMessage.path] = {
+            error: true,
+            message: errorMessage.msg
+          }
+        })
+        setError(updatedErrors)
+        console.log(error)
       }
     }
   }
@@ -70,14 +84,18 @@ const AdminLoginPage = () => {
               placeholder={'請輸入帳號'}
               value={account}
               wordLimit={10}
-              onChange={(value) => {
+              inputName='account'
+              onChange={(value, inputName) => {
+                resetError(inputName)
                 setAccount(value)
               }}
               status={error.account ? 'error' : ''}
             />
-             {error.account.error &&
-            <span className={styles.error}>{error.account.message}</span>
-          }
+             <div className={styles.messageContainer}>
+              {error.account.error &&
+                  <span className={styles.error}>{error.account.message}</span>
+                }
+            </div>
           </div>
           <div className={styles.inputContainer}>
             <DefaultInputItem
@@ -86,14 +104,18 @@ const AdminLoginPage = () => {
               value={password}
               type={'password'}
               wordLimit={10}
-              onChange={(value) => {
+              inputName='password'
+              onChange={(value, inputName) => {
+                resetError(inputName)
                 setPassword(value)
               }}
               status={error.password ? 'error' : ''}
             />
-             {error.password.error &&
-            <span className={styles.error}>{error.password.message}</span>
-          }
+            <div className={styles.messageContainer}>
+              {error.password.error &&
+                  <span className={styles.error}>{error.password.message}</span>
+                }
+              </div>
           </div>
 
           <div className={styles.buttonContainer} onClick={handleClick} >
