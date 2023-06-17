@@ -26,7 +26,6 @@ const AdminUsersPage = () => {
     const getUsersAsync = async (authToken) => {
       try {
         const data = await getUsers(authToken)
-        console.log(data[0])
         setUserList(data)
       } catch (error) {
         console.error(error)
