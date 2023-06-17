@@ -13,7 +13,7 @@ const DefaultInputItem = ({ label, value, placeholder, type, onChange, wordLimit
           placeholder={placeholder}
           defaultValue={defaultValue}
           onChange={e => {
-            onChange?.(e.target.value)
+            onChange?.(e.target.value, inputName)
           }}
           onFocus={() => onFocus?.(inputName)}
           onBlur={() => onBlur?.(inputName)}

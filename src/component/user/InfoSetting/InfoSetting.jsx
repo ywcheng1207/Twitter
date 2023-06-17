@@ -36,9 +36,16 @@ const InfoSetting = () => {
     password: false,
     checkPassword: false
   })
+
+  // reset errorState
+  const resetError = (inputName) => {
+    setError({ ...error, [inputName]: false })
+  }
+
   const navigate = useNavigate()
 
-  const handleAccountChange = (value) => {
+  const handleAccountChange = (value, inputName) => {
+    resetError(inputName)
     setUserInfo(() => {
       return {
         ...userInfo,
@@ -46,25 +53,29 @@ const InfoSetting = () => {
       }
     })
   }
-  const handleNameChange = (value) => {
+  const handleNameChange = (value, inputName) => {
+    resetError(inputName)
     setUserInfo({
       ...userInfo,
       name: value
     })
   }
-  const handleEmailChange = (value) => {
+  const handleEmailChange = (value, inputName) => {
+    resetError(inputName)
     setUserInfo({
       ...userInfo,
       email: value
     })
   }
-  const handlePasswordChange = (value) => {
+  const handlePasswordChange = (value, inputName) => {
+    resetError(inputName)
     setUserInfo({
       ...userInfo,
       password: value
     })
   }
-  const handlePasswordCheckChange = (value) => {
+  const handlePasswordCheckChange = (value, inputName) => {
+    resetError(inputName)
     setUserInfo({
       ...userInfo,
       checkPassword: value
@@ -225,6 +236,7 @@ const InfoSetting = () => {
             defaultValue={userInfo.email}
             onChange={handleEmailChange}
             status={error.email ? 'error' : ''}
+            inputName={'email'}
           />
           <div className={styles.messageContainer}>
             {error.email.error &&

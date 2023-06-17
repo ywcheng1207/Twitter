@@ -24,14 +24,13 @@ const SignUpPage = () => {
     password: false,
     checkPassword: false
   })
+
+  const resetError = (inputname) => {
+    setError({ ...error, [inputname]: false })
+  }
+
   const handleClick = async () => {
-    await setError({
-      account: false,
-      name: false,
-      email: false,
-      password: false,
-      checkPassword: false
-    })
+    resetError()
     if (account.length === 0 || name.length === 0 || email.length === 0 || password.length === 0 || checkPassword.length === 0) {
       return
     }
@@ -114,7 +113,10 @@ const SignUpPage = () => {
               label={'帳號'}
               placeholder={'請輸入帳號'}
               value={account}
-              onChange={(value) => setAccount(value)}
+              onChange={(value, inputName) => {
+                resetError(inputName)
+                setAccount(value)
+              }}
               status={error.account ? 'error' : ''}
               onFocus={handleFocus}
               onBlur={handleBlur}
@@ -135,7 +137,10 @@ const SignUpPage = () => {
               label={'名稱'}
               placeholder={'請輸入使用者名稱'}
               value={name}
-              onChange={(value) => setName(value)}
+              onChange={(value, inputName) => {
+                resetError(inputName)
+                setName(value)
+              }}
               status={error.name ? 'error' : ''}
               onFocus={handleFocus}
               onBlur={handleBlur}
@@ -156,7 +161,11 @@ const SignUpPage = () => {
               label={'Email'}
               placeholder={'請輸入 Email'}
               value={email}
-              onChange={(value) => setEmail(value)}
+              inputName='email'
+              onChange={(value, inputName) => {
+                resetError(inputName)
+                setEmail(value)
+              }}
               status={error.email ? 'error' : ''}
             />
             {error.email.error &&
@@ -169,7 +178,10 @@ const SignUpPage = () => {
               placeholder={'請設定密碼'}
               type={'password'}
               value={password}
-              onChange={(value) => setPassword(value)}
+              onChange={(value, inputName) => {
+                resetError(inputName)
+                setPassword(value)
+              }}
               status={error.password ? 'error' : ''}
               onFocus={handleFocus}
               onBlur={handleBlur}
@@ -192,7 +204,10 @@ const SignUpPage = () => {
               type={'password'}
               value={checkPassword}
               wordLimit={10}
-              onChange={(value) => setCheckPassword(value)}
+              onChange={(value, inputName) => {
+                resetError(inputName)
+                setCheckPassword(value)
+              }}
               status={error.checkPassword ? 'error' : ''}
               onFocus={handleFocus}
               onBlur={handleBlur}
