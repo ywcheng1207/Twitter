@@ -18,6 +18,10 @@ const AdminLoginPage = () => {
     password: false
   })
 
+  const resetError = (inputName) => {
+    setError({ ...error, [inputName]: false })
+  }
+
   const handleClick = async () => {
     if (account.length === 0 || password.length === 0) {
       return
@@ -83,7 +87,17 @@ const AdminLoginPage = () => {
         console.log(token)
         navigate('/admin/main')
       } else {
-        console.log('登入失敗')
+        console.log('wrong')
+        const { message } = await adminLogin({ account, password })
+        const updatedErrors = { ...error }
+        message.forEach((errorMessage) => {
+          updatedErrors[errorMessage.path] = {
+            error: true,
+            message: errorMessage.msg
+          }
+        })
+        setError(updatedErrors)
+        console.log(error)
       }
     }
   }
@@ -104,7 +118,9 @@ const AdminLoginPage = () => {
               placeholder={'請輸入帳號'}
               value={account}
               wordLimit={10}
-              onChange={(value) => {
+              inputName='account'
+              onChange={(value, inputName) => {
+                resetError(inputName)
                 setAccount(value)
               }}
               status={error.account ? 'error' : ''}
@@ -121,7 +137,9 @@ const AdminLoginPage = () => {
               value={password}
               type={'password'}
               wordLimit={10}
-              onChange={(value) => {
+              inputName='password'
+              onChange={(value, inputName) => {
+                resetError(inputName)
                 setPassword(value)
               }}
               status={error.password ? 'error' : ''}

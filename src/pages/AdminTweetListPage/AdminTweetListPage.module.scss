@@ -21,6 +21,7 @@
     }
     .tweetListContainer {
       height: 1070px;
+      overflow-x: hidden;
       overflow-y: scroll;
       overflow-x: hidden;
       &::-webkit-scrollbar {

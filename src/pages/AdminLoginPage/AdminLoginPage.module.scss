@@ -13,7 +13,7 @@
     margin-top: 20px;
   }
   .inputContainer {
-    margin-top: 32px;
+    margin-top: 12px;
   }
   .buttonContainer {
     margin-top: 32px;
@@ -76,4 +76,8 @@
   .errorIconContainer {
     border: 2px solid #fc5a5a;
   }
+}
+.messageContainer {
+  height: 20px;
+  line-height: 20px;
 }

@@ -18,6 +18,68 @@ const LoginPage = () => {
     password: false
   })
 
+  const resetError = (inputName) => {
+    setError({ ...error, [inputName]: false })
+  }
+
+  const handleKeyDown = async (e) => {
+    if (account.length === 0 || password.length === 0) {
+      return
+    }
+    if (e.key === 'Enter') {
+      const data = await login({ account, password })
+      if (data.success) {
+        localStorage.setItem('authToken', data.token)
+        localStorage.setItem('id', data.id)
+        localStorage.setItem('avatar', data.avatar)
+        navigate('/user/home/main')
+
+        Swal.fire({
+          position: 'top',
+          timer: 1000,
+          title: `
+          <div "${styles.customSwal}">
+            <div class="${styles.text}">登入成功！</div>
+            <div class="${styles.successIconContainer}">
+              <img src="${checkIcon}" class="${styles.icon}" alt="Success" />
+            </div>
+          </div>
+        `,
+          showConfirmButton: false,
+          customClass: {
+            popup: styles.customSwal
+          }
+        })
+      } else {
+        const updatedErrors = { ...error }
+        data.message.forEach((errorMessage) => {
+          updatedErrors[errorMessage.path] = {
+            error: true,
+            message: errorMessage.msg
+          }
+        })
+        setError(updatedErrors)
+
+        Swal.fire({
+          position: 'top',
+          timer: 1000,
+          title: `
+          <div "${styles.customSwal}">
+            <div class="${styles.text}">登入失敗！</div>
+            <div class="${styles.errorIconContainer}">
+              <img src="${errorIcon}" class="${styles.icon}" alt="Success" />
+            </div>
+          </div>
+        `,
+          showConfirmButton: false,
+          customClass: {
+            popup: styles.customSwal
+          }
+        })
+      }
+    }
+  }
+
   const handleClick = async () => {
     if (account.length === 0 || password.length === 0) {
       return
@@ -75,7 +137,7 @@ const LoginPage = () => {
   }
 
   return (
-        <div className={styles.registerContainer}>
+        <div className={styles.registerContainer} onKeyDown={handleKeyDown} >
           <div className={styles.logoContainer}>
             <Logo />
           </div>
@@ -89,7 +151,9 @@ const LoginPage = () => {
               label={'帳號'}
               placeholder={'請輸入帳號'}
               value={account}
-              onChange={(value) => {
+              inputName={'account'}
+              onChange={(value, inputName) => {
+                resetError(inputName)
                 setAccount(value)
               }}
               status={error.account ? 'error' : ''}
@@ -106,7 +170,9 @@ const LoginPage = () => {
               placeholder={'請輸入密碼'}
               value={password}
               type={'password'}
-              onChange={(value) => {
+              inputName={'password'}
+              onChange={(value, inputName) => {
+                resetError(inputName)
                 setPassword(value)
               }}
               status={error.password ? 'error' : ''}

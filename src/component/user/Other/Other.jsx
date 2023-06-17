@@ -183,7 +183,10 @@ const Other = () => {
 
   return (
     <div className={container}>
-      <OtherHead otherUser={otherUser} onFollowClick={handleFollowClick} />
+      <OtherHead
+        otherUser={otherUser}
+        onFollowClick={handleFollowClick}
+      />
       <TweetSwitchTab
         list={list}
         status={status}
