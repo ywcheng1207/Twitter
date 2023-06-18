@@ -30,12 +30,21 @@
   align-items: center;
   justify-content: center;
   .name {
-    margin-top: 32px;
+    width: 180px;
+    height: 26px;
     font-weight: 700;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: 32px;
+    margin-bottom: 5px;
   }
   .account {
     font-size: var(--font-size-medium);
     color: #6c757d;
+    margin-top: 0;
+    margin-bottom: 19px;
   }
   .tweetsAndLikes {
     display: flex;
