@@ -1,7 +1,5 @@
 import styles from './OtherPostContent.module.scss'
-
 import HoursPassed from 'component/element/element_basic/HoursPassed/HoursPassed'
-// const avatarUrl = 'https://loremflickr.com/320/240/people/?random=7.976051090916994&lock=999'
 
 const OtherPostContent = ({ item }) => {
   const {

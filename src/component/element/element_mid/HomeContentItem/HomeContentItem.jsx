@@ -1,21 +1,45 @@
+// -- import
+// API
+import { userLikeTweet, userUnLikeTweet } from 'api/user'
+// 元件
+import HoursPassed from 'component/element/element_basic/HoursPassed/HoursPassed'
+import UserReplyModal from 'component/element/element_mid/UserReplyModal/UserReplyModal'
+// 樣式/套件
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import {
+  useUserPostModal,
+  useUserReplyModal
+} from 'contexts/UserMainPageContext'
+import { useReplyList } from 'contexts/RelyLIstContext'
 import styles from './HomeContentItem.module.scss'
+// 圖片
 import replyIcon from 'assets/icons/reply.svg'
 import likeIcon from 'assets/icons/like.svg'
 import likeIconClick from 'assets/icons/likeClick.svg'
-import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
-import UserReplyModal from 'component/element/element_mid/UserReplyModal/UserReplyModal'
-import HoursPassed from 'component/element/element_basic/HoursPassed/HoursPassed'
-import { userLikeTweet, userUnLikeTweet } from 'api/user'
-// import { useOtherContext } from 'contexts/OtherContext'
-import { useReplyList } from 'contexts/RelyLIstContext'
-import { useUserPostModal, useUserReplyModal } from 'contexts/UserMainPageContext'
 
-const HomeContentItem = ({ TweetId, tweet, id, onPostList, onUserLikeList, onAvatarClick }) => {
+// -- 元件
+const HomeContentItem = ({
+  TweetId,
+  tweet,
+  id,
+  onPostList,
+  onUserLikeList,
+  onAvatarClick
+}) => {
   // --- style
   const {
-    HomeContentItemContainer, HomeContentItemHead, HomeContentItemDescreption,
-    posterName, posterAccount, postDescription, postIcon, reply, like, likeCount, postTime
+    HomeContentItemContainer,
+    HomeContentItemHead,
+    HomeContentItemDescreption,
+    posterName,
+    posterAccount,
+    postDescription,
+    postIcon,
+    reply,
+    like,
+    likeCount,
+    postTime
   } = styles
 
   // --- state
@@ -33,7 +57,7 @@ const HomeContentItem = ({ TweetId, tweet, id, onPostList, onUserLikeList, onAva
 
   // --- handle
   // like功能：這裡要call api更新該篇tweet的like數據
-  const handleLikeIcon = async (TweetId) => {
+  const handleLikeIcon = async TweetId => {
     const authToken = localStorage.getItem('authToken')
     try {
       if (tweet.isLiked === true) {
@@ -73,37 +97,30 @@ const HomeContentItem = ({ TweetId, tweet, id, onPostList, onUserLikeList, onAva
     setUserTextNoting(value)
   }
 
-  // const setId = useOtherContext().setOtherId
-  // const handleAvatarClick = (e) => {
-  //   console.log(e.target.id)
-  //   if (e.target.id === localStorage.getItem('otherId')) {
-  //     return
-  //   }
-  //   localStorage.setItem('otherId', e.target.id)
-  //   if (id === localStorage.getItem('id')) {
-  //     navigate('/user/personalinfo/main')
-  //   } else {
-  //     navigate('/user/other/main')
-  //   }
-  // }
-
   return (
     <div className={HomeContentItemContainer}>
       <div className={HomeContentItemHead}>
-        <img src={tweet.tweetOwnerAvatar} alt="Image" onClick={() => onAvatarClick?.(tweet.tweetOwnerId)}></img>
+        <img
+          src={tweet.tweetOwnerAvatar}
+          alt='Image'
+          onClick={() => onAvatarClick?.(tweet.tweetOwnerId)}
+        />
       </div>
       <div className={HomeContentItemDescreption}>
         <div>
           <span className={posterName}>{tweet.tweetOwnerName}</span>
           <span className={posterAccount}>@{tweet.tweetOwnerAccount}</span>
-          <span className={postTime}>・<HoursPassed item={tweet.createdAt}/></span>
+          <span className={postTime}>
+            ・<HoursPassed item={tweet.createdAt} />
+          </span>
         </div>
-        <p className={postDescription} onClick={() => {
-          // console.log(TweetId)
-          handleGoReplyList()
-          onTheTweetId(TweetId)
-        }
-        }>
+        <p
+          className={postDescription}
+          onClick={() => {
+            handleGoReplyList()
+            onTheTweetId(TweetId)
+          }}
+        >
           {tweet.description}
         </p>
 
@@ -120,19 +137,15 @@ const HomeContentItem = ({ TweetId, tweet, id, onPostList, onUserLikeList, onAva
             userTextNothing={userTextNothing}
           >
             <div className={reply} onClick={handleShow}>
-              <img src={replyIcon} alt="" />
-              <div>
-                {tweet.replyCount}
-              </div>
+              <img src={replyIcon} alt='' />
+              <div>{tweet.replyCount}</div>
             </div>
           </UserReplyModal>
           <div className={like}>
             <div onClick={() => handleLikeIcon(TweetId)}>
-                {tweet.isLiked ? <img src={likeIconClick} alt="" /> : <img src={likeIcon} alt="" />}
+              {tweet.isLiked ? (<img src={likeIconClick} alt='' />) : (<img src={likeIcon} alt='' />)}
             </div>
-            <div className={likeCount}>
-              {tweet.likeCount}
-            </div>
+            <div className={likeCount}>{tweet.likeCount}</div>
           </div>
         </div>
       </div>

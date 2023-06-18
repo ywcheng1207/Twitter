@@ -1,9 +1,14 @@
-import styles from './SideBar.module.scss'
-import SideBarItem from './SideBarItem'
+// -- import
+// API
 import { getSidebarData, postUserFollow, deleteUserFollow } from 'api/user'
+// 元件
+import SideBarItem from './SideBarItem'
+// 樣式/套件
+import styles from './SideBar.module.scss'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+// -- 元件
 const SideBar = () => {
   const { sideBarContainer, sideBarHead, sideBarList } = styles
   const [sidebarData, setSidebarData] = useState([])
@@ -80,7 +85,14 @@ const SideBar = () => {
         <h4 className='Bold'>推薦跟隨</h4>
       </div>
       <div className={sideBarList} >
-        {sidebarData.map(item => <SideBarItem item={item} key={item.FollowingId} onClick={handleClick} onImgClick={handleImgClick}/>)}
+        {sidebarData.map(item =>
+          <SideBarItem
+            item={item}
+            key={item.FollowingId}
+            onClick={handleClick}
+            onImgClick={handleImgClick}
+          />
+        )}
       </div>
     </div>
   )

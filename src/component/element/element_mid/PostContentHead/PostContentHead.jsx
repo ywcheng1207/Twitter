@@ -1,13 +1,19 @@
+// -- import
+// API
+import { getSingleTweetInfo, userLikeTweet, userUnLikeTweet } from 'api/user'
+// 元件
+import UserReplyModal from 'component/element/element_mid/UserReplyModal/UserReplyModal'
+// 樣式/套件
 import { useState, useEffect } from 'react'
 import styles from './PostContentHead.module.scss'
+import { useUserPostModal, useUserReplyModal } from 'contexts/UserMainPageContext'
+import { useNavigate } from 'react-router-dom'
+// 圖片
 import replyIcon from 'assets/icons/reply.svg'
 import likeIcon from 'assets/icons/like.svg'
 import likeIconClick from 'assets/icons/likeClick.svg'
-import UserReplyModal from 'component/element/element_mid/UserReplyModal/UserReplyModal'
-import { getSingleTweetInfo, userLikeTweet, userUnLikeTweet } from 'api/user'
-import { useUserPostModal, useUserReplyModal } from 'contexts/UserMainPageContext'
-import { useNavigate } from 'react-router-dom'
 
+// -- 元件
 const PostContentHead = () => {
   const {
     PostContentHeadContainer, postHead, info, postDescription,
@@ -136,9 +142,9 @@ const PostContentHead = () => {
           <img className={replyBtn} src={replyIcon} alt="" onClick={handleShow}/>
         </UserReplyModal>
          <div onClick={() => handleLikeIcon()}>
-             {tweetOwnerInfo.isLiked
-               ? <img className={likeBtn} src={likeIconClick} alt="" />
-               : <img className={likeBtn} src={likeIcon} alt="" />}
+            {tweetOwnerInfo.isLiked
+              ? <img className={likeBtn} src={likeIconClick} alt="" />
+              : <img className={likeBtn} src={likeIcon} alt="" />}
          </div>
       </div>
     </div>

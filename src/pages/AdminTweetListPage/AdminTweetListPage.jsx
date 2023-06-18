@@ -1,11 +1,16 @@
-import styles from './AdminTweetListPage.module.scss'
-import AdminNav from 'component/element/element_basic/AdminNav/AdminNav'
-import TweetListCard from 'component/admin/TweetListCard/TweetListCard'
-import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+// -- import
+// API
 import { getTweets } from 'api/user'
 import { deleteTweet } from 'api/admin'
+// 元件
+import AdminNav from 'component/element/element_basic/AdminNav/AdminNav'
+import TweetListCard from 'component/admin/TweetListCard/TweetListCard'
+// 樣式/套件
+import styles from './AdminTweetListPage.module.scss'
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
+// -- 元件
 const AdminTweetListPage = () => {
   const [tweetList, setTweetList] = useState([])
   const [status, setStatus] = useState('tweetList')
@@ -51,23 +56,22 @@ const AdminTweetListPage = () => {
 
   const { container, mainContainer, tweetListContainer } = styles
   return (
-        <div className={container}>
-            <AdminNav
-                status={status}
-                tweetListClick={handleTweetListClick}
-                userListClick={handleUserListClick}
-                logoutClick={handleLogoutClick}
-            />
-
-            <div className={mainContainer}>
-                <header>
-                    <h4 className='Bold'>推文清單</h4>
-                </header>
-                <div className={tweetListContainer}>
-                    <TweetListCard data={tweetList} onDelete={handleDelete}/>
-                </div>
-            </div>
+    <div className={container}>
+      <AdminNav
+        status={status}
+        tweetListClick={handleTweetListClick}
+        userListClick={handleUserListClick}
+        logoutClick={handleLogoutClick}
+      />
+      <div className={mainContainer}>
+        <header>
+          <h4 className='Bold'>推文清單</h4>
+        </header>
+        <div className={tweetListContainer}>
+          <TweetListCard data={tweetList} onDelete={handleDelete}/>
         </div>
+      </div>
+    </div>
   )
 }
 

@@ -7,25 +7,25 @@ const UserFollowItem = ({ item, onClick, render, onAvatarClick }) => {
   const isFollowed = item.isFollowed
 
   return (
-        <div className={followItemContainer}>
-            <img src={item.avatar} alt="avatar" className={avatar} onClick={() => onAvatarClick?.(item.UserId)} />
-            <div className={itemContent}>
-                <div className={nameAndBtn}>
-                    <p className={name}>{item.name}</p>
-                    <div className={clsx(btnContainer, { [follow]: isFollowed })} onClick={() => {
-                      onClick?.(item.UserId)
-                    }} >
-                        <Button
-                            value={ item.isFollowed ? '正在跟隨' : '跟隨'}
-                            type={ item.isFollowed ? 'fullPill' : 'holePill' }
-                        />
-                    </div>
-                </div>
-                <div className={tweet}>
-                    {item.introduction}
-                </div>
+    <div className={followItemContainer}>
+      <img src={item.avatar} alt="avatar" className={avatar} onClick={() => onAvatarClick?.(item.UserId)} />
+      <div className={itemContent}>
+          <div className={nameAndBtn}>
+            <p className={name}>{item.name}</p>
+            <div className={clsx(btnContainer, { [follow]: isFollowed })} onClick={() => {
+              onClick?.(item.UserId)
+            }} >
+            <Button
+              value={ item.isFollowed ? '正在跟隨' : '跟隨'}
+              type={ item.isFollowed ? 'fullPill' : 'holePill' }
+            />
             </div>
-        </div>
+          </div>
+          <div className={tweet}>
+            {item.introduction}
+          </div>
+      </div>
+    </div>
   )
 }
 

@@ -1,12 +1,16 @@
-import { useParams, useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
+// -- import
+// 元件
 import InfoSetting from 'component/user/InfoSetting/InfoSetting'
 import Home from 'component/user/Home/Home'
 import PersonalInfo from 'component/user/PersonalInfo/PersonalInfo'
 import Other from 'component/user/Other/Other'
 import ReplyList from 'component/user/ReplyList/ReplyList'
 import Follow from 'component/user/Follow/Follow'
+// 樣式/套件
+import { useParams, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 
+// -- 元件
 export default function Content () {
   const { page } = useParams()
   const navigate = useNavigate()
