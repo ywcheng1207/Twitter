@@ -35,8 +35,7 @@ const Nav = ({ status, onNavSwitch }) => {
   const { onAddHomeList } = useUserPostModal()
   // handle
   const handleLogout = () => {
-    localStorage.removeItem('authToken')
-    localStorage.removeItem('id')
+    localStorage.clear()
   }
   // modal handle
   const handleClose = () => {

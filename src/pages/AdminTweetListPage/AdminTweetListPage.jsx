@@ -25,8 +25,8 @@ const AdminTweetListPage = () => {
         console.error(error)
       }
     }
-    if (localStorage.getItem('authToken')) {
-      getUserDataAsync(localStorage.getItem('authToken'))
+    if (localStorage.getItem('adminAuthToken')) {
+      getUserDataAsync(localStorage.getItem('adminAuthToken'))
     }
   }, [])
 
@@ -39,13 +39,13 @@ const AdminTweetListPage = () => {
     navigate('/admin/users')
   }
   const handleLogoutClick = () => {
-    localStorage.removeItem('authToken')
+    localStorage.clear()
     navigate('/admin')
   }
 
   const handleDelete = async (id) => {
     try {
-      const authToken = localStorage.getItem('authToken')
+      const authToken = localStorage.getItem('adminAuthToken')
       await deleteTweet(id, authToken)
       console.log('刪除成功')
       setTweetList(tweetList.filter(item => item.TweetId !== id))

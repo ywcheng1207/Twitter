@@ -34,7 +34,7 @@ const AdminLoginPage = () => {
     }
     const { success, token } = await adminLogin({ account, password })
     if (success) {
-      localStorage.setItem('authToken', token)
+      localStorage.setItem('adminAuthToken', token)
       navigate('/admin/main')
 
       Swal.fire({
@@ -89,7 +89,7 @@ const AdminLoginPage = () => {
     if (e.key === 'Enter') {
       const { success, token } = await adminLogin({ account, password })
       if (success) {
-        localStorage.setItem('authToken', token)
+        localStorage.setItem('adminAuthToken', token)
         navigate('/admin/main')
         Swal.fire({
           position: 'top',
