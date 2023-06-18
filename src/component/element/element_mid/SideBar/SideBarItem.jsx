@@ -1,7 +1,6 @@
 import styles from './SideBarItem.module.scss'
 import Button from 'component/element/element_basic/Button/Button'
 import clsx from 'clsx'
-// const avatarUrl = 'https://loremflickr.com/320/240/people/?random=7.976051090916994&lock=987'
 
 const SideBarItem = ({ item, onClick, onImgClick }) => {
   const {

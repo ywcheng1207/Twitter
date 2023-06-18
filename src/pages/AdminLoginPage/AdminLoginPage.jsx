@@ -83,11 +83,25 @@ const AdminLoginPage = () => {
     if (e.key === 'Enter') {
       const { success, token } = await adminLogin({ account, password })
       if (success) {
-        console.log('登入成功')
-        console.log(token)
+        localStorage.setItem('authToken', token)
         navigate('/admin/main')
+        Swal.fire({
+          position: 'top',
+          timer: 1000,
+          title: `
+          <div "${styles.customSwal}">
+            <div class="${styles.text}">登入成功！</div>
+            <div class="${styles.successIconContainer}">
+              <img src="${checkIcon}" class="${styles.icon}" alt="Success" />
+            </div>
+          </div>
+        `,
+          showConfirmButton: false,
+          customClass: {
+            popup: styles.customSwal
+          }
+        })
       } else {
-        console.log('wrong')
         const { message } = await adminLogin({ account, password })
         const updatedErrors = { ...error }
         message.forEach((errorMessage) => {
@@ -97,7 +111,22 @@ const AdminLoginPage = () => {
           }
         })
         setError(updatedErrors)
-        console.log(error)
+        Swal.fire({
+          position: 'top',
+          timer: 1000,
+          title: `
+          <div "${styles.customSwal}">
+            <div class="${styles.text}">登入失敗！</div>
+            <div class="${styles.errorIconContainer}">
+              <img src="${errorIcon}" class="${styles.icon}" alt="Success" />
+            </div>
+          </div>
+        `,
+          showConfirmButton: false,
+          customClass: {
+            popup: styles.customSwal
+          }
+        })
       }
     }
   }

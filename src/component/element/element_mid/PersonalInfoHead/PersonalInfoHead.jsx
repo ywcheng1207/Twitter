@@ -1,9 +1,7 @@
 import styles from './PersonalInfoHead.module.scss'
-// import Button from 'component/element/element_basic/Button/Button'
 import arrow from 'assets/icons/leftArrow.svg'
 import { Link } from 'react-router-dom'
 import PersonInfoModal2 from 'component/element/element_mid/PersonlInfoModal/PersonalInfoModal2'
-// import PersonInfoModal from '../PersonlInfoModal/PersonInfoModal'
 
 const PersonalInfoHead = ({
   userHead, inroduction, theUserName, followerCount,
@@ -15,10 +13,6 @@ const PersonalInfoHead = ({
     btnContainer, selfInfo, userAvatar, account, introduction,
     followContainer, following, follower, tweetsCount, header, userName
   } = styles
-  // const navigate = useNavigate()
-  // const handleClose = () => { setShow(false) }
-  // const handleShow = () => {setShow(true)}
-  // const handleText = () => { navigate(-1) }
 
   return (
     <div className={container}>
@@ -34,9 +28,6 @@ const PersonalInfoHead = ({
               <img src={userHead.cover} alt="" />
             </div>
             <div className={btnContainer} onClick={onEditClick}>
-              {/* <div className={btnWidth}>
-                  <Button value={'編輯個人資料'} type={'holePill'}/>
-              </div> */}
                <PersonInfoModal2
                 userHead={userHead}
                 show={show}
@@ -74,17 +65,6 @@ const PersonalInfoHead = ({
               </div>
             </div>
         </div>
-        {/* <PersonInfoModal
-             show={show}
-             onClose={handleClose}
-             onShow={handleShow}
-             onNameChange={(value) => onNameChange?.(value)}
-             onIntroductionChange={(value) => onIntroductionChange?.(value)}
-             onBtnClick={(image, avatar) => onBtnClick?.(image, avatar)}
-             userHead={userHead}
-             formData={formData}
-        /> */}
-
     </div>
   )
 }

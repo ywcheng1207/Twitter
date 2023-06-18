@@ -87,7 +87,6 @@ const InfoSetting = () => {
     const id = localStorage.getItem('id')
     try {
       const data = await patchAccountInfo(authToken, id, userInfo)
-      // console.log(data.message)
 
       if (data.status === 'success') {
         setUserInfo(() => (
@@ -116,6 +115,7 @@ const InfoSetting = () => {
         })
         setTimeout(function () {
           navigate(0)
+          navigate('/user/infosetting/main')
         }, 1000)
       } else {
         const updatedErrors = { ...error }
@@ -156,7 +156,6 @@ const InfoSetting = () => {
         const id = localStorage.getItem('id')
         const data = await getAccountInfo(authToken, id)
         const { account, name, email, password, checkPassword } = data
-        console.log('成功取得使用者資料')
         setUserInfo({
           account,
           name,

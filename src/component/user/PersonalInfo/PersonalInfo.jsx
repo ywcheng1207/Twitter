@@ -3,7 +3,7 @@ import TweetSwitchTab from 'component/element/element_basic/TweetSwitchTab/Tweet
 import HomeContentItem from 'component/element/element_mid/HomeContentItem/HomeContentItem'
 import PersonalInfoHead from 'component/element/element_mid/PersonalInfoHead/PersonalInfoHead'
 import PostContentItem from 'component/element/element_mid/PostContentItem/PostContentItem'
-// import PersonInfoModal from 'component/element/element_mid/PersonlInfoModal/PersonInfoModal'
+
 import { useState, useEffect, useRef } from 'react'
 import { getUserTweets, getUserReplyTweets, getUserLikeTweets, getAccountInfo, putPersonalInfo } from 'api/user'
 import { useNavigate } from 'react-router-dom'
@@ -157,7 +157,6 @@ const PersonalInfo = () => {
     formData.append('introduction', inroduction)
     formData.append('cover', userCover)
     formData.append('avatar', userAvatar)
-    console.log(formData)
     putPersonalInfoAsync(authToken, id, formData)
     setTimeout(function () {
       navigate('/user/personalinfo/main')
@@ -167,62 +166,17 @@ const PersonalInfo = () => {
   const putPersonalInfoAsync = async (authToken, id, formData) => {
     try {
       await putPersonalInfo(authToken, id, formData)
-      console.log('修改完成')
       navigate(0)
+      navigate('/user/personalinfo/main')
     } catch (error) {
       console.error(error)
     }
   }
 
-  // ----------------- OLD
-  // show編輯資料modal
-  // const [show, setShow] = useState(false)
-  // const formData = new FormData()
-  // const handleClose = () => { setShow(false) }
-  // const handleShow = () => { setShow(true) }
-  // const handleNameChange = (username) => {
-  //   setTheUserName(username)
-  // }
-
-  // const handleIntroductionChange = (introduction) => {
-  //   setIntorduction(introduction)
-  // }
-
-  // const handleBtnClick = (image, avatar) => {
-  //   const id = localStorage.getItem('id')
-  //   const authToken = localStorage.getItem('authToken')
-  //   formData.append('name', theUserName)
-  //   formData.append('introduction', inroduction)
-  //   formData.append('followerCount', followerCount)
-  //   formData.append('followingCount', followingCount)
-  //   setUserHead(() => {
-  //     return {
-  //       ...userHead,
-  //       name: theUserName,
-  //       introduction: inroduction,
-  //       avatar,
-  //       cover: image
-  //     }
-  //   })
-  //   putPersonalInfoAsync(authToken, id, formData)
-  // }
-
-  // const putPersonalInfoAsync = async (authToken, id, formData) => {
-  //   try {
-  //     const data = await putPersonalInfo(authToken, id, formData)
-  //     console.log('修改完成')
-  //     setUserHead(data)
-  //   } catch (error) {
-  //     console.error(error)
-  //   }
-  // }
-  // ----------------- OLD
-
   const handlePostList = ({ TweetId, count }) => {
     setPostList(pre => {
       return pre.map(item => {
         if (item.TweetId === TweetId) {
-          console.log(item)
           return { ...item, isLiked: !item.isLiked, likeCount: item.likeCount + count }
         } else {
           return item
@@ -244,7 +198,6 @@ const PersonalInfo = () => {
 
   // 點擊 avatar 至 other 頁面
   const handleAvatarClick = (clickId) => {
-    console.log(clickId)
     const userId = localStorage.getItem('id')
     if (Number(clickId) === Number(userId)) {
       navigate('/user/personalinfo/main')
@@ -260,8 +213,6 @@ const PersonalInfo = () => {
         const authToken = localStorage.getItem('authToken')
         const id = localStorage.getItem('id')
         const data = await getAccountInfo(authToken, id)
-        console.log('成功取得使用者資料')
-        console.log(data)
 
         setUserHead(data)
         setTheUserName(data.name)
@@ -318,7 +269,6 @@ const PersonalInfo = () => {
       <PersonalInfoHead
         userHead={userHead}
         theUserName={theUserName}
-        // onEditClick={handleShow}
         inroduction={inroduction}
         followerCount={followerCount}
         followingCount={followingCount}
@@ -359,17 +309,6 @@ const PersonalInfo = () => {
           onAvatarClick={handleAvatarClick}
         />
       </div>
-      {/* <PersonInfoModal
-        show={show}
-        onClose={handleClose}
-        onShow={handleShow}
-        onNameChange={handleNameChange}
-        onIntroductionChange={handleIntroductionChange}
-        onBtnClick={handleBtnClick}
-        userHead={userHead}
-        formData={formData}
-        onTextClick={handleText}
-        /> */}
     </div>
 
   )
