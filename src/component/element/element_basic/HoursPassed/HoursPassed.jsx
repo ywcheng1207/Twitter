@@ -8,12 +8,12 @@ const HoursPassed = ({ item }) => {
   const dayPassed = Math.floor(hoursPassed / 24)
 
   return (
-          <span>
-            {timeDiff < 60000 && '剛剛'}
-            { minutesPassed >= 1 && minutesPassed < 60 && `${minutesPassed}分鐘` }
-            {hoursPassed >= 1 && hoursPassed < 24 && `${hoursPassed}小時`}
-            {dayPassed > 0 && `${dayPassed}天`}
-          </span>
+    <span>
+      {timeDiff < 60000 && '剛剛'}
+      { minutesPassed >= 1 && minutesPassed < 60 && `${minutesPassed}分鐘` }
+      {hoursPassed >= 1 && hoursPassed < 24 && `${hoursPassed}小時`}
+      {dayPassed > 0 && `${dayPassed}天`}
+    </span>
   )
 }
 

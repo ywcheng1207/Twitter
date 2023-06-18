@@ -1,13 +1,18 @@
-import styles from './PersonInfo.module.scss'
+// -- import
+// API
+import { getUserTweets, getUserReplyTweets, getUserLikeTweets, getAccountInfo, putPersonalInfo } from 'api/user'
+// 元件
 import TweetSwitchTab from 'component/element/element_basic/TweetSwitchTab/TweetSwitchTab'
 import HomeContentItem from 'component/element/element_mid/HomeContentItem/HomeContentItem'
 import PersonalInfoHead from 'component/element/element_mid/PersonalInfoHead/PersonalInfoHead'
 import PostContentItem from 'component/element/element_mid/PostContentItem/PostContentItem'
-
+// 樣式/套件
+import styles from './PersonInfo.module.scss'
 import { useState, useEffect, useRef } from 'react'
-import { getUserTweets, getUserReplyTweets, getUserLikeTweets, getAccountInfo, putPersonalInfo } from 'api/user'
 import { useNavigate } from 'react-router-dom'
-// putPersonalInfo
+
+// -- 元件
+// PersonalInfo 下方內容元件
 const ContentItem = ({ render, postList, replyList, userLikeList, onPostList, onUserLikeList, onAvatarClick }) => {
   if (render === '推文') {
     return (
@@ -55,13 +60,16 @@ const PersonalInfo = () => {
 
   const navigate = useNavigate()
   const list = ['推文', '回覆', '喜歡的內容']
+
   // head回到上一頁按鈕
   const handleText = () => { navigate(-1) }
+
   // 個資頁面底下切換tab功能
   const handleClick = (index, item) => {
     setStatus(index)
     setRender(item)
   }
+
   // 呼叫編輯modal
   const [show, setShow] = useState(false)
   const handleClose = () => {
@@ -172,7 +180,7 @@ const PersonalInfo = () => {
       console.error(error)
     }
   }
-
+  // 取得 回覆列表
   const handlePostList = ({ TweetId, count }) => {
     setPostList(pre => {
       return pre.map(item => {
@@ -184,6 +192,7 @@ const PersonalInfo = () => {
       })
     })
   }
+  // 取得 喜歡的內容列表
   const handleUserLikeList = ({ TweetId, count }) => {
     setUserLikeList(pre => {
       return pre.map(item => {
@@ -207,6 +216,7 @@ const PersonalInfo = () => {
     }
   }
 
+  // 渲染 HEAD
   useEffect(() => {
     const getAccountInfoAsync = async () => {
       try {
@@ -235,6 +245,7 @@ const PersonalInfo = () => {
     getAccountInfoAsync()
   }, [navigate])
 
+  // 渲染 BODY
   useEffect(() => {
     const getUserDataAsync = async (authToken, id) => {
       try {

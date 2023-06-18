@@ -1,15 +1,18 @@
-import styles from './Other.module.scss'
+// -- import
+// API
+import { getAccountInfo, getUserTweets, getUserReplyTweets, getUserLikeTweets, postUserFollow, deleteUserFollow } from 'api/user'
+// 元件
 import TweetSwitchTab from 'component/element/element_basic/TweetSwitchTab/TweetSwitchTab'
 import HomeContentItem from 'component/element/element_mid/HomeContentItem/HomeContentItem'
-// import PostContentItem from 'component/element/element_mid/PostContentItem/PostContentItem'
 import OtherPostContent from 'component/element/element_mid/OtherPostContent/OtherPostContent'
 import OtherHead from 'component/element/element_mid/OtherHead/OtherHead'
+// 樣式/套件
+import styles from './Other.module.scss'
 import { useNavigate } from 'react-router-dom'
-import { getAccountInfo, getUserTweets, getUserReplyTweets, getUserLikeTweets, postUserFollow, deleteUserFollow } from 'api/user'
-// import { useOtherContext } from 'contexts/OtherContext'
-
 import { useState, useEffect } from 'react'
 
+// -- 元件
+// other 下方內容渲染元件
 const ContentItem = ({ render, postList, replyList, userLikeList, onPostList, onUserLikeList, onAvatarClick }) => {
   if (render === '推文') {
     if (postList.length === 0 || !Array.isArray(postList)) {
@@ -45,6 +48,7 @@ const ContentItem = ({ render, postList, replyList, userLikeList, onPostList, on
   }
 }
 
+// 主元件
 const Other = () => {
   const { container, contentItemContainer, switchTab } = styles
   const [status, setStatus] = useState(0)
@@ -55,9 +59,9 @@ const Other = () => {
   const [otherUser, setOtherUser] = useState([])
   const otherId = localStorage.getItem('otherId')
   const navigate = useNavigate()
-
   const list = ['推文', '回覆', '喜歡的內容']
 
+  // 推文、回覆、喜歡切換
   const handleClick = (index, item) => {
     setStatus(index)
     setRender(item)
@@ -82,22 +86,19 @@ const Other = () => {
         ...otherUser,
         isFollowed: !otherUser.isFollowed
       })
-      const data = deleteUserFollowAsync(authToken, otherUser.id)
-      console.log(data)
+      deleteUserFollowAsync(authToken, otherUser.id)
     } else {
-      const data = postUserFollowAsync(authToken, otherUser.id)
+      postUserFollowAsync(authToken, otherUser.id)
       setOtherUser({
         ...otherUser,
         isFollowed: !otherUser.isFollowed
       })
-      console.log(data)
     }
   }
 
   const postUserFollowAsync = async (authToken, id) => {
     try {
       const data = await postUserFollow(authToken, id)
-      console.log(data)
       return data
     } catch (error) {
       console.error(error)
@@ -106,19 +107,17 @@ const Other = () => {
   const deleteUserFollowAsync = async (authToken, id) => {
     try {
       const data = await deleteUserFollow(authToken, id)
-      console.log(data)
       return data
     } catch (error) {
       console.error(error)
     }
   }
 
-  //
+  // render 回覆
   const handlePostList = ({ TweetId, count }) => {
     setPostList(pre => {
       return pre.map(item => {
         if (item.TweetId === TweetId) {
-          console.log(item)
           return { ...item, isLiked: !item.isLiked, likeCount: item.likeCount + count }
         } else {
           return item
@@ -126,6 +125,7 @@ const Other = () => {
       })
     })
   }
+  // render 喜歡的內容
   const handleUserLikeList = ({ TweetId, count }) => {
     setUserLikeList(pre => {
       return pre.map(item => {

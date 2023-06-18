@@ -1,24 +1,32 @@
-import styles from './InfoSetting.module.scss'
-import DefaultInputItem from 'component/element/element_basic/DefaultInputItem/DefaultInputItem'
-import { useState, useEffect } from 'react'
-import Button from 'component/element/element_basic/Button/Button'
+// -- import
+// API
 import { getAccountInfo, patchAccountInfo } from 'api/user'
+// 元件
+import DefaultInputItem from 'component/element/element_basic/DefaultInputItem/DefaultInputItem'
+import Button from 'component/element/element_basic/Button/Button'
+// 樣式/套件
+import styles from './InfoSetting.module.scss'
+import { useState, useEffect } from 'react'
 import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom'
+// 圖片
 import checkIcon from 'assets/icons/notiCheck.svg'
 import errorIcon from 'assets/icons/notiError.svg'
-import { useNavigate } from 'react-router-dom'
 
+// -- 元件
+// 字數元件1
 const PasswordCount = ({ userInfo }) => {
   if (typeof userInfo.password !== 'undefined') {
     return <span>{userInfo.password.length}/20</span>
   }
 }
+// 字數元件2
 const PasswordCount2 = ({ userInfo }) => {
   if (typeof userInfo.checkPassword !== 'undefined') {
     return <span>{userInfo.checkPassword.length}/20</span>
   }
 }
-
+// 主元件
 const InfoSetting = () => {
   const { container, inputContainer, btnContainer, btn } = styles
   const [userInfo, setUserInfo] = useState({
@@ -28,7 +36,6 @@ const InfoSetting = () => {
     password: '',
     checkPassword: ''
   })
-  // const inputRef = useRef(null)
   const [error, setError] = useState({
     account: false,
     name: false,
@@ -87,7 +94,6 @@ const InfoSetting = () => {
     const id = localStorage.getItem('id')
     try {
       const data = await patchAccountInfo(authToken, id, userInfo)
-
       if (data.status === 'success') {
         setUserInfo(() => (
           {
@@ -96,7 +102,7 @@ const InfoSetting = () => {
             checkPassword: ''
           }
         ))
-
+        // 提示彈窗
         Swal.fire({
           position: 'top-right',
           timer: 1000,
@@ -118,6 +124,7 @@ const InfoSetting = () => {
           navigate('/user/infosetting/main')
         }, 1000)
       } else {
+        // 錯誤訊息
         const updatedErrors = { ...error }
         data.message.forEach((errorMessage) => {
           updatedErrors[errorMessage.path] = {
@@ -126,18 +133,18 @@ const InfoSetting = () => {
           }
         })
         setError(updatedErrors)
-
+        // 提示彈窗
         Swal.fire({
           position: 'top-right',
           timer: 1000,
           title: `
-          <div "${styles.customSwal}">
-            <div class="${styles.text}">修改失敗！</div>
-            <div class="${styles.errorIconContainer}">
-              <img src="${errorIcon}" class="${styles.icon}" alt="Success" />
+            <div "${styles.customSwal}">
+              <div class="${styles.text}">修改失敗！</div>
+              <div class="${styles.errorIconContainer}">
+                <img src="${errorIcon}" class="${styles.icon}" alt="Success" />
+              </div>
             </div>
-          </div>
-        `,
+          `,
           showConfirmButton: false,
           customClass: {
             popup: styles.customSwal
@@ -206,7 +213,8 @@ const InfoSetting = () => {
               {activeStates.account &&
                 <span className={styles.typeCount}>
                   {userInfo.account.length}/20
-              </span>}
+                </span>
+              }
           </div>
         </div>
         <div className={inputContainer}>
@@ -226,7 +234,8 @@ const InfoSetting = () => {
             {activeStates.name &&
               <span className={styles.typeCount}>
                   {userInfo.name.length}/50
-              </span>}
+              </span>
+            }
           </div>
         </div>
         <div className={inputContainer}>
@@ -246,46 +255,48 @@ const InfoSetting = () => {
         <div className={inputContainer}>
           <DefaultInputItem
             label={'密碼'}
-              type={'password'}
-              placeholder={'請設定密碼'}
-              defaultValue={userInfo.password}
-              onChange={handlePasswordChange}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
-              inputName='password'
-              status={error.password ? 'error' : ''}
-            />
-            <div className={styles.messageContainer}>
-              {error.password.error &&
-                <span className={styles.error}>{error.password.message}</span>
-              }
-              {activeStates.password &&
-                <span className={styles.typeCount}>
-                  <PasswordCount userInfo={userInfo} />
-                </span>}
-            </div>
+            type={'password'}
+            placeholder={'請設定密碼'}
+            defaultValue={userInfo.password}
+            onChange={handlePasswordChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            inputName='password'
+            status={error.password ? 'error' : ''}
+          />
+          <div className={styles.messageContainer}>
+            {error.password.error &&
+              <span className={styles.error}>{error.password.message}</span>
+            }
+            {activeStates.password &&
+              <span className={styles.typeCount}>
+                <PasswordCount userInfo={userInfo} />
+              </span>
+            }
+          </div>
         </div>
         <div className={inputContainer}>
-            <DefaultInputItem
-              label={'密碼再確認'}
-              type={'password'}
-              placeholder={'請再次輸入密碼'}
-              defaultValue={userInfo.checkPassword}
-              onChange={handlePasswordCheckChange}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
-              inputName='checkPassword'
-              status={error.checkPassword ? 'error' : ''}
-            />
-            <div className={styles.messageContainer}>
-              {error.checkPassword.error &&
-                <span className={styles.error}>{error.checkPassword.message}</span>
-              }
-              {activeStates.checkPassword &&
-                <span className={styles.typeCount}>
-                  <PasswordCount2 userInfo={userInfo} />
-                </span>}
-            </div>
+          <DefaultInputItem
+            label={'密碼再確認'}
+            type={'password'}
+            placeholder={'請再次輸入密碼'}
+            defaultValue={userInfo.checkPassword}
+            onChange={handlePasswordCheckChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            inputName='checkPassword'
+            status={error.checkPassword ? 'error' : ''}
+          />
+          <div className={styles.messageContainer}>
+            {error.checkPassword.error &&
+              <span className={styles.error}>{error.checkPassword.message}</span>
+            }
+            {activeStates.checkPassword &&
+              <span className={styles.typeCount}>
+                <PasswordCount2 userInfo={userInfo} />
+              </span>
+            }
+          </div>
         </div>
         <div className={btnContainer}>
           <div className={btn} onClick={handleSave}>
@@ -296,7 +307,6 @@ const InfoSetting = () => {
           </div>
         </div>
       </main>
-
     </div>
   )
 }
