@@ -1,10 +1,15 @@
-import styles from './AdminUserPage.module.scss'
+// -- import
+// API
+import { getUsers } from 'api/admin'
+// 元件
 import AdminNav from 'component/element/element_basic/AdminNav/AdminNav'
 import UserListItem from 'component/admin/UserListItem/UserListItem'
+// 樣式/套件
+import styles from './AdminUserPage.module.scss'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getUsers } from 'api/admin'
 
+// -- 元件
 const AdminUsersPage = () => {
   const [status, setStatus] = useState('userList')
   const [userList, setUserList] = useState([])
@@ -45,7 +50,6 @@ const AdminUsersPage = () => {
         userListClick={handleUserListClick}
         logoutClick={handleLogoutClick}
       />
-
       <div className={mainContainer}>
         <header>
           <h4 className='Bold'>使用者列表</h4>

@@ -1,10 +1,14 @@
+// -- import
+// 樣式/套件
 import { useRef } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import styles from './PersonInfoModal2.module.scss'
+import clsx from 'clsx'
+// 圖片
 import { ReactComponent as Photo } from 'assets/icons/photo.svg'
 import { ReactComponent as PhotoX } from 'assets/icons/photoX.svg'
-import clsx from 'clsx'
 
+// -- 元件
 function Example ({
   userHead, show, onShow, theUserName, inroduction, onSaveInfo,
   onClose, imageSrc, onOnPreview, onDeletePreview, onNameChange, onIntroductionChange, onSaveClick, onOnAvatar, modalAvatar, coverStatus, avatarStatus, onClickUpload, inputfileref
@@ -27,8 +31,8 @@ function Example ({
         </Modal.Header>
         <Modal.Body className={styles.modalBodyContainer}>
           <div className={styles.modalBody}>
-              <div className={styles.bodyCover}>
-                <img className={clsx(defaultCover, { [overUpload]: coverStatus })} src={userHead.cover} alt="" />
+            <div className={styles.bodyCover}>
+              <img className={clsx(defaultCover, { [overUpload]: coverStatus })} src={userHead.cover} alt="" />
                 <input
                   type="file"
                   accept="image/*"
@@ -46,21 +50,21 @@ function Example ({
                     <PhotoX onClick={onDeletePreview}/>
                   </div>
                 </div>
+            </div>
+            <div className={styles.bodyAvatar}>
+              <img src={userHead.avatar} alt="" className={clsx(defaultAvatar, { [overUpload]: avatarStatus })} />
+              <img src={modalAvatar} alt="" className={upAvatar} />
+              <input
+                type="file"
+                accept="image/*"
+                className={styles.coverInput}
+                onChange={onOnAvatar}
+                ref={avatarRef}
+              />
+              <div className={styles.photoIcon}>
+                <Photo onClick={handleOnAvatarUpload} />
               </div>
-              <div className={styles.bodyAvatar}>
-                <img src={userHead.avatar} alt="" className={clsx(defaultAvatar, { [overUpload]: avatarStatus })} />
-                <img src={modalAvatar} alt="" className={upAvatar} />
-                <input
-                  type="file"
-                  accept="image/*"
-                  className={styles.coverInput}
-                  onChange={onOnAvatar}
-                  ref={avatarRef}
-                />
-                <div className={styles.photoIcon}>
-                  <Photo onClick={handleOnAvatarUpload} />
-                </div>
-              </div>
+            </div>
           </div>
           <div className={styles.modalFooter}>
             <div className={styles.nameInputContainer}>
@@ -69,7 +73,7 @@ function Example ({
                   className={styles.nameInput}
                   defaultValue={theUserName}
                   onChange={(event) => onNameChange?.(event.target.value)}
-                  />
+                />
             </div>
             <div className={styles.descriptMessageContainer}>
               {theUserName.length > 50 && <span className={styles.error}>字數超出上限！</span>}

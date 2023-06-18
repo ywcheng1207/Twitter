@@ -1,12 +1,16 @@
-import styles from './UserMainPage.module.scss'
+// -- import
+// 元件
 import Nav from 'component/element/element_mid/Nav/Nav'
 import SideBar from 'component/element/element_mid/SideBar/SideBar'
+// 樣式/套件
+import styles from './UserMainPage.module.scss'
 import { Outlet, useParams, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useNavSwitch } from 'contexts/NavContext'
 import { UserPostModalContextProvider, UserReplyModalContextProvider } from 'contexts/UserMainPageContext'
 import { ReplyListContextProvider } from 'contexts/RelyLIstContext'
 
+// -- 元件
 const UserMainPage = () => {
   const { UserMainPageContainer, contentContainer, settingContentContainer } = styles
   const { status, onNavSwitch } = useNavSwitch()

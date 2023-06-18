@@ -15,23 +15,29 @@ import { useNavigate } from 'react-router-dom'
 // PersonalInfo 下方內容元件
 const ContentItem = ({ render, postList, replyList, userLikeList, onPostList, onUserLikeList, onAvatarClick }) => {
   if (render === '推文') {
-    return (
-      postList.map((item) => (
-        <HomeContentItem tweet={item} key={item.TweetId} TweetId={item.TweetId} onPostList={onPostList} onAvatarClick={(clickId) => onAvatarClick?.(clickId)} />
-      ))
-    )
+    return postList.map(item => (
+      <HomeContentItem
+        tweet={item}
+        key={item.TweetId}
+        TweetId={item.TweetId}
+        onPostList={onPostList}
+        onAvatarClick={clickId => onAvatarClick?.(clickId)}
+      />
+    ))
   } else if (render === '回覆') {
-    return (
-      replyList.map((item) => (
-        <PostContentItem tweet={item} key={item.reaplyId} />
-      ))
-    )
+    return replyList.map(item => (
+      <PostContentItem tweet={item} key={item.reaplyId} />
+    ))
   } else if (render === '喜歡的內容') {
-    return (
-      userLikeList.map((item) => (
-        <HomeContentItem tweet={item} key={item.TweetId} TweetId={item.TweetId} onUserLikeList={onUserLikeList} onAvatarClick={(clickId) => onAvatarClick?.(clickId)} />
-      ))
-    )
+    return userLikeList.map(item => (
+      <HomeContentItem
+        tweet={item}
+        key={item.TweetId}
+        TweetId={item.TweetId}
+        onUserLikeList={onUserLikeList}
+        onAvatarClick={clickId => onAvatarClick?.(clickId)}
+      />
+    ))
   }
 }
 
@@ -62,8 +68,9 @@ const PersonalInfo = () => {
   const list = ['推文', '回覆', '喜歡的內容']
 
   // head回到上一頁按鈕
-  const handleText = () => { navigate(-1) }
-
+  const handleText = () => {
+    navigate(-1)
+  }
   // 個資頁面底下切換tab功能
   const handleClick = (index, item) => {
     setStatus(index)
@@ -83,10 +90,12 @@ const PersonalInfo = () => {
   }
   const handleShow = () => setShow(true)
   const handleSaveInfo = () => {
-    if (theUserName.length > 0 &&
+    if (
+      theUserName.length > 0 &&
       inroduction.length > 0 &&
-       theUserName.length <= 50 &&
-       inroduction.length <= 160) {
+      theUserName.length <= 50 &&
+      inroduction.length <= 160
+    ) {
       handleSaveClick()
       handleClose()
     }
@@ -98,15 +107,19 @@ const PersonalInfo = () => {
     inputfileref.current.click()
   }
   const [imageSrc, setImageSrc] = useState('')
-  const handleOnPreview = (event) => {
+  const handleOnPreview = event => {
     const file = event.target.files[0]
     setUserCover(file)
     const reader = new FileReader()
 
-    reader.addEventListener('load', function () {
-      // convert image file to base64 string
-      setImageSrc(reader.result)
-    }, false)
+    reader.addEventListener(
+      'load',
+      function () {
+        // convert image file to base64 string
+        setImageSrc(reader.result)
+      },
+      false
+    )
     setCoverStatus(true)
 
     if (file) {
@@ -125,16 +138,20 @@ const PersonalInfo = () => {
 
   // 上傳 avatar 功能
   const [modalAvatar, setModalAvatar] = useState('')
-  const handleOnAvatar = (event) => {
+  const handleOnAvatar = event => {
     const file = event.target.files[0]
     setUserAvatar(file)
     const reader = new FileReader()
-    reader.addEventListener('load', function () {
-      // convert image file to base64 string
-      setModalAvatar(reader.result)
-      localStorage.setItem('avatar', reader.result)
-      setAvatarStatus(true)
-    }, false)
+    reader.addEventListener(
+      'load',
+      function () {
+        // convert image file to base64 string
+        setModalAvatar(reader.result)
+        localStorage.setItem('avatar', reader.result)
+        setAvatarStatus(true)
+      },
+      false
+    )
 
     if (file) {
       reader.readAsDataURL(file)
@@ -142,11 +159,11 @@ const PersonalInfo = () => {
   }
 
   // modal 更換名字與介紹
-  const handleNameChange = (changeName) => {
+  const handleNameChange = changeName => {
     setTheUserName(changeName)
   }
 
-  const handleIntrodrctionChange = (changeIntroduction) => {
+  const handleIntrodrctionChange = changeIntroduction => {
     setIntorduction(changeIntroduction)
   }
 
@@ -175,7 +192,6 @@ const PersonalInfo = () => {
     try {
       await putPersonalInfo(authToken, id, formData)
       navigate(0)
-      navigate('/user/personalinfo/main')
     } catch (error) {
       console.error(error)
     }
@@ -185,7 +201,11 @@ const PersonalInfo = () => {
     setPostList(pre => {
       return pre.map(item => {
         if (item.TweetId === TweetId) {
-          return { ...item, isLiked: !item.isLiked, likeCount: item.likeCount + count }
+          return {
+            ...item,
+            isLiked: !item.isLiked,
+            likeCount: item.likeCount + count
+          }
         } else {
           return item
         }
@@ -197,7 +217,11 @@ const PersonalInfo = () => {
     setUserLikeList(pre => {
       return pre.map(item => {
         if (item.TweetId === TweetId) {
-          return { ...item, isLiked: !item.isLiked, likeCount: item.likeCount + count }
+          return {
+            ...item,
+            isLiked: !item.isLiked,
+            likeCount: item.likeCount + count
+          }
         } else {
           return item
         }
@@ -206,7 +230,7 @@ const PersonalInfo = () => {
   }
 
   // 點擊 avatar 至 other 頁面
-  const handleAvatarClick = (clickId) => {
+  const handleAvatarClick = clickId => {
     const userId = localStorage.getItem('id')
     if (Number(clickId) === Number(userId)) {
       navigate('/user/personalinfo/main')
@@ -272,7 +296,10 @@ const PersonalInfo = () => {
       }
     }
     if (localStorage.getItem('authToken')) {
-      getUserDataAsync(localStorage.getItem('authToken'), localStorage.getItem('id'))
+      getUserDataAsync(
+        localStorage.getItem('authToken'),
+        localStorage.getItem('id')
+      )
     }
   }, [render, navigate])
   return (
@@ -284,7 +311,6 @@ const PersonalInfo = () => {
         followerCount={followerCount}
         followingCount={followingCount}
         onTextClick={handleText}
-
         show={show}
         onClose={handleClose}
         onShow={handleShow}
@@ -321,7 +347,6 @@ const PersonalInfo = () => {
         />
       </div>
     </div>
-
   )
 }
 

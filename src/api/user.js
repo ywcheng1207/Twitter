@@ -186,14 +186,12 @@ export const getSidebarData = async (authToken) => {
 // -- 個人頁修改 avatar, cover , name , introduction
 export const putPersonalInfo = async (authToken, id, formData) => {
   try {
-    console.log(`${baseURL}/users/${id}`)
     const { data } = await axios.put(`${baseURL}/users/${id}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
         Authorization: 'Bearer ' + authToken
       }
     })
-    console.log(data)
     return data
   } catch (error) {
     console.error('[putPersonalInfo failed]', error)

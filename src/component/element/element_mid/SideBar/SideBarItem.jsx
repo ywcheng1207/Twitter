@@ -14,9 +14,9 @@ const SideBarItem = ({ item, onClick, onImgClick }) => {
   return (
     <div className={ SideBarItem }>
       <div className={ SideBarItemHead }>
-         <img src={item.FollowingAvatar} alt="Image" onClick={() => {
-           onImgClick?.(id)
-         }}/>
+        <img src={item.FollowingAvatar} alt="Image" onClick={() => {
+          onImgClick?.(id)
+        }}/>
       </div>
       <div className={ SideBarItemDescription }>
         <div className={ SideBarItemDescriptionName }>{item.FollowingName}</div>
