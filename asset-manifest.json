@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Twitter/static/css/main.c556e0e2.css",
-    "main.js": "/Twitter/static/js/main.25a87151.js",
+    "main.css": "/Twitter/static/css/main.87d28153.css",
+    "main.js": "/Twitter/static/js/main.8d608c23.js",
     "static/media/setting.svg": "/Twitter/static/media/setting.b053f7bf262c516311133e15552c7aa3.svg",
     "static/media/adminUserList.svg": "/Twitter/static/media/adminUserList.3a3e5f7494dc9b69836dafcee872065c.svg",
     "static/media/personInfo.svg": "/Twitter/static/media/personInfo.42faca7333cf8737563033ec2563cf7b.svg",
@@ -27,11 +27,11 @@
     "static/media/leftArrow.svg": "/Twitter/static/media/leftArrow.63d98c23bea39a0db0b533c711a4dc4f.svg",
     "static/media/likeClick.svg": "/Twitter/static/media/likeClick.93d616ecb141abdca126e74e0a411a37.svg",
     "static/media/notiCheck.svg": "/Twitter/static/media/notiCheck.6999c0c5e54e85ec78455abf382d9427.svg",
-    "main.c556e0e2.css.map": "/Twitter/static/css/main.c556e0e2.css.map",
-    "main.25a87151.js.map": "/Twitter/static/js/main.25a87151.js.map"
+    "main.87d28153.css.map": "/Twitter/static/css/main.87d28153.css.map",
+    "main.8d608c23.js.map": "/Twitter/static/js/main.8d608c23.js.map"
   },
   "entrypoints": [
-    "static/css/main.c556e0e2.css",
-    "static/js/main.25a87151.js"
+    "static/css/main.87d28153.css",
+    "static/js/main.8d608c23.js"
   ]
 }
