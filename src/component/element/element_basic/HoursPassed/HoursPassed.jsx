@@ -11,7 +11,7 @@ const HoursPassed = ({ item }) => {
             {dayPassed > 0
               ? ` ${dayPassed}天`
               : `${hoursPassed}小時`
-          }
+            }
           </span>
   )
 }
