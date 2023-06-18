@@ -65,7 +65,6 @@ const Other = () => {
 
   // 點擊 avatar 至 other 頁面
   const handleAvatarClick = (clickId) => {
-    console.log(clickId)
     const userId = localStorage.getItem('id')
     if (Number(clickId) === Number(userId)) {
       navigate('/user/personalinfo/main')
@@ -145,7 +144,6 @@ const Other = () => {
       try {
         const authToken = localStorage.getItem('authToken')
         const data = await getAccountInfo(authToken, otherId)
-        console.log('用戶資料取得成功')
         setOtherUser(data)
         localStorage.setItem('tweetCount', data.tweetCount)
         localStorage.setItem('userName', data.name)
@@ -164,10 +162,6 @@ const Other = () => {
         const postListData = await getUserTweets(authToken, id)
         const replyListData = await getUserReplyTweets(authToken, id)
         const userLikeListData = await getUserLikeTweets(authToken, id)
-        console.log('成功取得 other 頁的個人推文串')
-        console.log('成功取得 other 頁的回覆推文串')
-        console.log('成功取得 other 頁的Like推文串')
-
         setPostList(postListData)
         setReplyList(replyListData)
         setUserLikeList(userLikeListData)
@@ -179,7 +173,6 @@ const Other = () => {
       getUserDataAsync(localStorage.getItem('authToken'), otherId)
     }
   }, [render, localStorage.getItem('otherId')])
-  // localStorage.getItem('otherId')
 
   return (
     <div className={container}>

@@ -1,5 +1,4 @@
 import { useRef } from 'react'
-// import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import styles from './PersonInfoModal2.module.scss'
 import { ReactComponent as Photo } from 'assets/icons/photo.svg'
@@ -12,32 +11,13 @@ function Example ({
 }) {
   const { btn, closeBtn, headerTitle, saveBtn, defaultAvatar, upAvatar, defaultCover, overUpload, photoContainer, photoXContainer } = styles
 
-  // 上傳圖片
-  // const inputFileRef = useRef()
-
-  // const handleOnClickUpload = () => {
-  //   inputFileRef.current.click()
-  // }
   const avatarRef = useRef()
 
   const handleOnAvatarUpload = () => {
     avatarRef.current.click()
   }
-
-  // const handleSaveInfo = () => {
-  //   if (theUserName.length > 0 &&
-  //     inroduction.length > 0 &&
-  //      theUserName.length <= 50 &&
-  //      inroduction.length <= 160) {
-  //     onSaveClick()
-  //     onClose()
-  //   }
-  // }
   return (
     <>
-      {/* <Button variant="primary" onClick={onShow}>
-        編輯個人資料
-      </Button> */}
       <button className={`rounded-pill ${btn}`} onClick={onShow}>編輯個人資料</button>
       <Modal contentClassName={styles.modalContainer} show={show} onHide={onClose} animation={false}>
         <Modal.Header className={styles.modalHeaderContainer} >

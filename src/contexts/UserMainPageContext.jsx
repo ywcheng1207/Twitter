@@ -78,7 +78,6 @@ export const UserPostModalContextProvider = ({ children }) => {
 export const UserReplyModalContextProvider = ({ children }) => {
   const navigate = useNavigate()
   const handleUserReply = async ({ TweetId, text }) => {
-    console.log({ TweetId, text })
     try {
       await userReplyTweets({ TweetId, comment: text })
       navigate('/user/replylist/main')
