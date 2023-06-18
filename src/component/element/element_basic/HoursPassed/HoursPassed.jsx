@@ -4,9 +4,15 @@ const HoursPassed = ({ item }) => {
 
   const timeDiff = Math.abs(currentTime - pastTime)
   const hoursPassed = Math.floor(timeDiff / (1000 * 60 * 60))
+  const dayPassed = Math.floor(hoursPassed / 24)
 
   return (
-          <span>{hoursPassed}小時</span>
+          <span>
+            {dayPassed > 0
+              ? ` ${dayPassed}天`
+              : `${hoursPassed}小時`
+          }
+          </span>
   )
 }
 
