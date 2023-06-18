@@ -1,4 +1,7 @@
+// -- import
+// 樣式
 import styles from './Button.module.scss'
+// bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 const Button = ({ value, type }) => {

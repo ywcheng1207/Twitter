@@ -28,7 +28,7 @@ const AdminUsersPage = () => {
   }
 
   useEffect(() => {
-    const getUsersAsync = async (authToken) => {
+    const getUsersAsync = async authToken => {
       try {
         const data = await getUsers(authToken)
         setUserList(data)

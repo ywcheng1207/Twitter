@@ -1,18 +1,23 @@
+// -- import
+// API
+import { getSingleTweet } from 'api/user'
+// 元件
 import HeaderTweet from 'component/element/element_basic/HeaderTweet/HeaderTweet'
 import PostContentHead from 'component/element/element_mid/PostContentHead/PostContentHead'
 import PostContentItem from 'component/element/element_mid/PostContentItem/PostContentItem'
+// 樣式/套件
 import styles from './ReplyList.module.scss'
 import { useNavigate } from 'react-router-dom'
-import { getSingleTweet } from 'api/user'
 import { useEffect, useState } from 'react'
 
+// -- 元件
+// 內容副元件
 const ReplyListContent = ({ onAvatarClick }) => {
   const [replyList, setReplyList] = useState([])
 
   useEffect(() => {
     const authToken = localStorage.getItem('authToken')
     const TweetId = localStorage.getItem('TweetId')
-
     const getUserDataAsync = async ({ authToken, TweetId }) => {
       try {
         const data = await getSingleTweet({ authToken, TweetId })
@@ -37,6 +42,8 @@ const ReplyListContent = ({ onAvatarClick }) => {
 const handleMove = (navigate) => {
   navigate(-1)
 }
+
+// 主元件
 const ReplyList = () => {
   const { HeaderTweetContainer, PostContentList } = styles
   const navigate = useNavigate()
