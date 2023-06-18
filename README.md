@@ -3,7 +3,7 @@
 ## 作品連結：[Simpe Twitter](https://ywcheng1207.github.io/Twitter/login)
 
 ## 這邊是前端 repo，後端部分請看：[後端連結](https://github.com/tschiang23/twitter-api-2020)
-
+## 頁面截圖：
 ![](./public/screenshot1.JPG)
 ![](./public/screenshot2.JPG)
 ![](./public/screenshot3.JPG)
