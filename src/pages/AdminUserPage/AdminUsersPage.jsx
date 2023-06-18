@@ -23,7 +23,7 @@ const AdminUsersPage = () => {
     setStatus('userList')
   }
   const handleLogoutClick = () => {
-    localStorage.removeItem('authToken')
+    localStorage.removeItem('adminAuthToken')
     navigate('/admin')
   }
 
@@ -36,8 +36,8 @@ const AdminUsersPage = () => {
         console.error(error)
       }
     }
-    if (localStorage.getItem('authToken')) {
-      getUsersAsync(localStorage.getItem('authToken'))
+    if (localStorage.getItem('adminAuthToken')) {
+      getUsersAsync(localStorage.getItem('adminAuthToken'))
     }
   }, [])
 
