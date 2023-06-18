@@ -23,6 +23,13 @@
   transform: translate(-40%) !important;
 }
 
+@media (max-width: 1199px) {
+  .modalContainer {
+    left: 35% !important;
+    transform: translate(-37%) !important;
+  }
+}
+
 .bodyContainer {
   margin: 0;
   display: flex;
