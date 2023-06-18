@@ -192,7 +192,6 @@ const PersonalInfo = () => {
     try {
       await putPersonalInfo(authToken, id, formData)
       navigate(0)
-      navigate('/user/personalinfo/main')
     } catch (error) {
       console.error(error)
     }
