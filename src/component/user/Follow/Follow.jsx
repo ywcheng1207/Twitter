@@ -1,12 +1,19 @@
+// -- import
+// API
+import { getUserFollowers, getUserFollowing, postUserFollow, deleteUserFollow } from 'api/user'
+// 元件
 import UserFollowItem from 'component/element/element_mid/UserFollowItem/UserFollowItem'
-import styles from './Follow.module.scss'
-import { ReactComponent as LeftArrow } from 'assets/icons/leftArrow.svg'
 import TweetSwitchTab from 'component/element/element_basic/TweetSwitchTab/TweetSwitchTab'
+// 樣式/套件
+import styles from './Follow.module.scss'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getUserFollowers, getUserFollowing, postUserFollow, deleteUserFollow } from 'api/user'
+// 圖片
+import { ReactComponent as LeftArrow } from 'assets/icons/leftArrow.svg'
 
+// -- 元件
 const ContentItem = ({ render, onClick, followerData, followingData, onAvatarClick }) => {
+  // render 跟隨或正在追隨
   if (render === '追隨者') {
     if (followerData.length === 0) {
       return null
@@ -41,7 +48,7 @@ const ContentItem = ({ render, onClick, followerData, followingData, onAvatarCli
     }
   }
 }
-
+// -- 元件
 const Follow = () => {
   const { container, headerText, tweetsCount, headerName, tweetsContainer, arrow } = styles
   const [status, setStatus] = useState(0)
@@ -50,7 +57,6 @@ const Follow = () => {
   const [followingData, setFollowingData] = useState([])
   const list = ['追隨者', '正在追隨']
   const navigate = useNavigate()
-
   const tweetCount = localStorage.getItem('tweetCount')
   const userName = localStorage.getItem('userName')
 
@@ -58,11 +64,9 @@ const Follow = () => {
   const changeUserFollowAsync = async (currentUser, id, authToken) => {
     try {
       if (currentUser.isFollowed) {
-        const res = await deleteUserFollow(authToken, id)
-        console.log(res)
+        await deleteUserFollow(authToken, id)
       } else if (!currentUser.isFollowed) {
-        const res = await postUserFollow(authToken, id)
-        console.log(res)
+        await postUserFollow(authToken, id)
       }
     } catch (error) {
       console.error(error)
@@ -73,7 +77,6 @@ const Follow = () => {
   const handleClick = (id) => {
     const authToken = localStorage.getItem('authToken')
     if (render === '追隨者') {
-      console.log('123')
       setFollowerData(followerData.map(item => {
         if (item.UserId === id) {
           return {
@@ -97,12 +100,11 @@ const Follow = () => {
           return item
         }
       }))
-      console.log('123')
       const currentUser = followingData.find(item => item.UserId === id)
       changeUserFollowAsync(currentUser, id, authToken)
     }
   }
-
+  // 點擊後切換 tab
   const handleSwitchClick = (index, item) => {
     setStatus(index)
     setRender(item)
@@ -110,11 +112,31 @@ const Follow = () => {
 
   // 點擊頭像切換至 other
   const handleAvatarClick = (id) => {
-    console.log(id)
     localStorage.setItem('otherId', id)
     navigate('/user/other/main')
   }
 
+  // 摳 api 取得 following array
+  const getUserFollowingAsync = async (authToken, renderId) => {
+    const data = await getUserFollowing(authToken, renderId)
+    if (data.message === '無追蹤其他使用者') {
+      setFollowingData([])
+    } else {
+      setFollowingData(data)
+    }
+  }
+
+  // 摳 api 取得 follower array
+  const getUserFollowersAsync = async (authToken, renderId) => {
+    const data = await getUserFollowers(authToken, renderId)
+    if (data.message === '無跟隨者資料') {
+      setFollowerData([])
+    } else {
+      setFollowerData(data)
+    }
+  }
+
+  // 渲染畫面
   useEffect(() => {
     const authToken = localStorage.getItem('authToken')
     let renderId = ''
@@ -125,26 +147,8 @@ const Follow = () => {
     } else {
       renderId = otherId
     }
-
-    const getUserFollowingAsync = async () => {
-      const data = await getUserFollowing(authToken, renderId)
-      if (data.message === '無追蹤其他使用者') {
-        setFollowingData([])
-      } else {
-        setFollowingData(data)
-      }
-    }
-    const getUserFollowersAsync = async () => {
-      const data = await getUserFollowers(authToken, renderId)
-      console.log('追蹤者資料取得成功')
-      if (data.message === '無跟隨者資料') {
-        setFollowerData([])
-      } else {
-        setFollowerData(data)
-      }
-    }
-    getUserFollowersAsync()
-    getUserFollowingAsync()
+    getUserFollowersAsync(authToken, renderId)
+    getUserFollowingAsync(authToken, renderId)
   }, [render])
 
   return (
@@ -163,16 +167,6 @@ const Follow = () => {
         render={render}
       />
       <div className={tweetsContainer}>
-        {/* {render === '追隨者' &&
-           followerData.map((item) => (
-            <UserFollowItem key={item.UserId} item={item} onClick={handleClick} render={render}/>
-           ))
-        }
-        {render === '正在追隨' &&
-           followingData.map((item) => (
-            <UserFollowItem key={item.UserId} item={item} onClick={handleClick} render={render}/>
-           ))
-        } */}
         <ContentItem
           render={render}
           onClick={handleClick}
@@ -181,7 +175,6 @@ const Follow = () => {
           onAvatarClick={handleAvatarClick}
         />
       </div>
-
     </div>
   )
 }

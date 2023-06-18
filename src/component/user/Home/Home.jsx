@@ -1,15 +1,21 @@
-import styles from './Home.module.scss'
+// -- import
+// API
+import { getTweets } from 'api/user'
+// 元件
 import HomeContentHead from 'component/element/element_mid/HomeContentHead/HomeContentHead'
 import HomeContentItem from 'component/element/element_mid/HomeContentItem/HomeContentItem'
+// 樣式/套件
+import styles from './Home.module.scss'
 import { useEffect } from 'react'
-import { getTweets } from 'api/user'
 import { useUserPostModal } from 'contexts/UserMainPageContext'
 import { useNavigate } from 'react-router-dom'
 
+// -- 元件
 const Home = () => {
   const { contentContainer, HomeContentItemList } = styles
   const { homeList, onHomeList, onAddHomeList } = useUserPostModal()
   const navigate = useNavigate()
+  // 渲染畫面
   useEffect(() => {
     const getUserDataAsync = async (authToken) => {
       try {
@@ -23,9 +29,8 @@ const Home = () => {
       getUserDataAsync(localStorage.getItem('authToken'))
     }
   }, [])
-
+  // 點擊 avatar 後移至 other
   const handleAvatarClick = (clickId) => {
-    console.log(clickId)
     const userId = localStorage.getItem('id')
     if (Number(clickId) === Number(userId)) {
       navigate('/user/personalinfo/main')

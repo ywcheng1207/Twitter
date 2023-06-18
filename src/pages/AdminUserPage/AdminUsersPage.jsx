@@ -23,7 +23,7 @@ const AdminUsersPage = () => {
   }
 
   useEffect(() => {
-    const getUsersAsync = async (authToken) => {
+    const getUsersAsync = async authToken => {
       try {
         const data = await getUsers(authToken)
         setUserList(data)
@@ -38,23 +38,23 @@ const AdminUsersPage = () => {
 
   const { container, mainContainer, cardContainer } = styles
   return (
-        <div className={container}>
-            <AdminNav
-                status={status}
-                tweetListClick={handleTweetListClick}
-                userListClick={handleUserListClick}
-                logoutClick={handleLogoutClick}
-            />
+    <div className={container}>
+      <AdminNav
+        status={status}
+        tweetListClick={handleTweetListClick}
+        userListClick={handleUserListClick}
+        logoutClick={handleLogoutClick}
+      />
 
-            <div className={mainContainer}>
-                <header>
-                    <h4 className='Bold'>使用者列表</h4>
-                </header>
-                <main className={cardContainer}>
-                  <UserListItem data={userList} />
-                </main>
-            </div>
-        </div>
+      <div className={mainContainer}>
+        <header>
+          <h4 className='Bold'>使用者列表</h4>
+        </header>
+        <main className={cardContainer}>
+          <UserListItem data={userList} />
+        </main>
+      </div>
+    </div>
   )
 }
 export default AdminUsersPage

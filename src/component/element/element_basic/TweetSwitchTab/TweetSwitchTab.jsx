@@ -6,17 +6,16 @@ const TweetSwitchTab = ({ list, status, onClick }) => {
 
   return (
     <div className={styles.TweetSwitchTabContainer}>
-        {list.map((item, index) => {
-          return (
-            <div
-              key={index}
-              className={clsx(switchBox, { [active]: status === index })}
-              onClick={() => { onClick?.(index, item) }
-            }>
-              {item}
-            </div>
-          )
-        })}
+      {list.map((item, index) => {
+        return (
+          <div
+            key={index}
+            className={clsx(switchBox, { [active]: status === index })}
+            onClick={() => { onClick?.(index, item) }}>
+            {item}
+          </div>
+        )
+      })}
     </div>
   )
 }

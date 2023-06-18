@@ -1,13 +1,18 @@
-import { createContext, useState, useContext } from 'react'
+// -- import
+// API
 import { userAddTweets, userReplyTweets } from 'api/user'
+// 樣式/套件
+import { createContext, useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+// -- 元件
 const userPostModalContext = createContext('')
 const userReplyModalContext = createContext('')
 
 export const useUserPostModal = () => useContext(userPostModalContext)
 export const useUserReplyModal = () => useContext(userReplyModalContext)
 
+// UserPostModel
 export const UserPostModalContextProvider = ({ children }) => {
   const [homeList, setHomeList] = useState([])
 
@@ -15,6 +20,7 @@ export const UserPostModalContextProvider = ({ children }) => {
     setHomeList(data)
   }
 
+  // 點擊愛心+1
   const handleLike = (TweetId) => {
     setHomeList((pre) => {
       return pre.map((item) => {
@@ -26,7 +32,7 @@ export const UserPostModalContextProvider = ({ children }) => {
       })
     })
   }
-
+  // 點擊愛心-1
   const handleUnLike = (TweetId) => {
     setHomeList((pre) => {
       return pre.map((item) => {
@@ -44,7 +50,6 @@ export const UserPostModalContextProvider = ({ children }) => {
       return
     }
     const data = await userAddTweets({ description: text })
-
     setHomeList((preHomeList) => {
       return [{
         TweetId: data.TweetId,
@@ -75,6 +80,7 @@ export const UserPostModalContextProvider = ({ children }) => {
   )
 }
 
+// UserReplyModel
 export const UserReplyModalContextProvider = ({ children }) => {
   const navigate = useNavigate()
   const handleUserReply = async ({ TweetId, text }) => {

@@ -11,7 +11,6 @@ import UserMainPage from 'pages/UserMainPage/UserMainPage'
 import Content from 'pages/UserMainPage/Content'
 import HomePage from 'pages/HomePage/HomePage'
 import { SwitchCotextProvider } from 'contexts/NavContext'
-import { OtherProvider } from 'contexts/OtherContext'
 import { ReplyListContextProvider } from 'contexts/RelyLIstContext'
 
 const basename = process.env.PUBLIC_URL
@@ -19,7 +18,6 @@ const basename = process.env.PUBLIC_URL
 function App () {
   return (
   <SwitchCotextProvider>
-    <OtherProvider>
       <ReplyListContextProvider>
         <div className="App">
           <BrowserRouter basename={basename}>
@@ -40,7 +38,6 @@ function App () {
           </BrowserRouter>
         </div>
       </ReplyListContextProvider>
-    </OtherProvider>
    </SwitchCotextProvider>
   )
 }
