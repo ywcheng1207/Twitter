@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const baseURL = 'https://arcane-mesa-58606.herokuapp.com/api'
-
+// const baseURL = 'https://arcane-mesa-58606.herokuapp.com/api'
+const baseURL = 'https://tschiang23.alwaysdata.net/api'
 export const register = async ({ account, name, email, password, checkPassword }) => {
   try {
     const { data } = await axios.post(`${baseURL}/users`, { account, name, email, password, checkPassword })

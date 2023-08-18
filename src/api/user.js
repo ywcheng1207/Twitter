@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const baseURL = 'https://arcane-mesa-58606.herokuapp.com/api'
-
+// const baseURL = 'https://arcane-mesa-58606.herokuapp.com/api'
+const baseURL = 'https://tschiang23.alwaysdata.net/api'
 export const getTweets = async (authToken) => {
   try {
     const res = await axios.get(`${baseURL}/tweets`, { headers: { Authorization: 'Bearer ' + authToken } })
